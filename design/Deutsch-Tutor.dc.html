@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #EDE6D6; }
+  ::-webkit-scrollbar { width: 0; height: 0; }
+  input::placeholder { color: #A79E8E; }
+</style>
+</helmet>
+
+<div style="min-height:100vh; background:#EDE6D6; display:flex; justify-content:center; font-family:'Work Sans',sans-serif; color:#22281F;">
+<div style="width:100%; max-width:480px; min-height:100vh; background:#F6F1E7; display:flex; flex-direction:column; position:relative; box-shadow:0 0 40px rgba(0,0,0,0.08);">
+
+  <div style="flex:1; overflow-y:auto; padding:24px 20px 24px;">
+
+    <!-- HOME -->
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:22px;">
+          <div>
+            <div style="font-size:13px; color:#8A8072; letter-spacing:0.04em;">Martedì, 9 settembre</div>
+            <div style="font-family:'Newsreader',serif; font-size:28px; font-weight:600; margin-top:2px;">Ciao, {{ userName }}</div>
+          </div>
+          <div style="background:#2A3324; color:#F6F1E7; border-radius:20px; padding:8px 14px; font-size:13px; font-weight:600; white-space:nowrap;">Serie: {{ streakCount }} lezioni</div>
+        </div>
+
+        <div style="background:#22281F; border-radius:20px; padding:22px; color:#F6F1E7; position:relative; overflow:hidden;">
+          <div style="font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:#C7BFAD;">Prossima lezione · Tipo base</div>
+          <div style="font-family:'Newsreader',serif; font-size:24px; font-weight:600; margin-top:8px;">Im Supermarkt</div>
+          <div style="font-size:14px; color:#C7BFAD; margin-top:2px;">Al supermercato</div>
+          <div style="display:flex; gap:8px; margin-top:16px;">
+            <div style="background:rgba(246,241,231,0.12); border-radius:10px; padding:6px 10px; font-size:12px;">30 minuti</div>
+            <div style="background:rgba(246,241,231,0.12); border-radius:10px; padding:6px 10px; font-size:12px;">5 fasi</div>
+          </div>
+          <button onclick="{{ startLesson }}" style="margin-top:18px; width:100%; background:{{ accentColor }}; color:#F6F1E7; border:none; border-radius:12px; padding:14px; font-size:15px; font-weight:600; font-family:'Work Sans',sans-serif; cursor:pointer;">Inizia la lezione</button>
+        </div>
+
+        <div style="margin-top:26px;">
+          <div style="font-family:'Newsreader',serif; font-size:18px; font-weight:600; margin-bottom:10px;">Parole in scadenza oggi</div>
+          <div style="background:#FFFFFF; border:1px solid #E7DFD0; border-radius:16px; padding:16px; display:flex; align-items:center; justify-content:space-between;">
+            <div>
+              <div style="font-size:30px; font-weight:700; font-family:'Newsreader',serif;">{{ dueToday }}</div>
+              <div style="font-size:13px; color:#8A8072;">parole da ripassare</div>
+            </div>
+            <div style="display:flex; gap:6px; flex-wrap:wrap; max-width:220px; justify-content:flex-end;">
+              <sc-for list="{{ dueWords }}" as="w" hint-placeholder-count="3">
+                <div style="background:#EFE6D8; color:#8A6A2E; border-radius:8px; padding:5px 9px; font-size:12px; font-weight:600;">{{ w }}</div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:26px;">
+          <div style="font-family:'Newsreader',serif; font-size:18px; font-weight:600; margin-bottom:10px;">Il tuo percorso</div>
+          <div style="background:#FFFFFF; border:1px solid #E7DFD0; border-radius:16px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; font-size:13px; color:#6E6559; margin-bottom:8px;">
+              <div>Settimana 1 di 12</div>
+              <div>Im Supermarkt</div>
+            </div>
+            <div style="height:8px; background:#EFE6D8; border-radius:6px; overflow:hidden;">
+              <div style="height:100%; width:8%; background:{{ accentColor }}; border-radius:6px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- LESSON -->
+    <sc-if value="{{ isLesson }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+          <button onclick="{{ goHome }}" style="background:none; border:none; padding:6px; cursor:pointer; display:flex;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22281F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </button>
+          <div>
+            <div style="font-family:'Newsreader',serif; font-size:18px; font-weight:600;">Im Supermarkt</div>
+            <div style="font-size:12px; color:#8A8072;">Lezione base · Scenario 1</div>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:6px; margin-bottom:22px;">
+          <sc-for list="{{ phaseDots }}" as="dot" hint-placeholder-count="5">
+            <div onclick="{{ dot.onClick }}" style="flex:1; cursor:pointer;">
+              <div style="height:6px; border-radius:4px; background:{{ dot.barColor }};"></div>
+              <div style="font-size:10px; margin-top:5px; text-align:center; color:{{ dot.textColor }}; font-weight:{{ dot.weight }};">{{ dot.label }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- Phase 0: Aufwärmen -->
+        <sc-if value="{{ isWarmup }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <div style="font-family:'Newsreader',serif; font-size:20px; font-weight:600;">Aufwärmen</div>
+            <div style="font-size:13px; color:#8A8072; margin-bottom:16px;">Riscaldamento · scrivi una frase per ogni parola</div>
+            <sc-for list="{{ warmupWords }}" as="w" hint-placeholder-count="8">
+              <div style="background:#FFFFFF; border:1px solid #E7DFD0; border-radius:14px; padding:14px; margin-bottom:10px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                  <div>
+                    <span style="font-family:'Newsreader',serif; font-size:16px; font-weight:600;">{{ w.de }}</span>
+                    <span style="font-size:13px; color:#8A8072; margin-left:8px;">{{ w.it }}</span>
+                  </div>
+                  <div style="background:{{ w.badgeBg }}; color:{{ w.badgeText }}; font-size:11px; font-weight:600; border-radius:8px; padding:3px 8px;">{{ w.badgeLabel }}</div>
+                </div>
+                <input type="text" placeholder="Scrivi una frase in tedesco..." style="width:100%; box-sizing:border-box; border:1px solid #E7DFD0; border-radius:10px; padding:10px 12px; font-size:14px; font-family:'Work Sans',sans-serif; background:#FBF8F2;"/>
+                <sc-if value="{{ w.feedback }}" hint-placeholder-val="{{ false }}">
+                  <div style="margin-top:8px; font-size:12px; color:#5F8B7A; background:#E3EEEA; border-radius:8px; padding:6px 10px;">{{ w.feedback }}</div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <!-- Phase 1: Vorbereitung -->
+        <sc-if value="{{ isPrep }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <div style="font-family:'Newsreader',serif; font-size:20px; font-weight:600;">Vorbereitung</div>
+            <div style="font-size:13px; color:#8A8072; margin-bottom:16px;">Preparazione · le espressioni chiave dello scenario</div>
+            <sc-for list="{{ keyPhrases }}" as="kp" hint-placeholder-count="8">
+              <div style="background:#FFFFFF; border:1px solid #E7DFD0; border-radius:14px; padding:14px; margin-bottom:10px;">
+                <div style="display:flex; justify-content:space-between;">
+                  <div style="font-family:'Newsreader',serif; font-size:16px; font-weight:600;">{{ kp.de }}</div>
+                  <div style="font-size:13px; color:#8A8072;">{{ kp.it }}</div>
+                </div>
+                <div style="font-size:13px; color:#6E6559; font-style:italic; margin-top:6px;">„{{ kp.example }}"</div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <!-- Phase 2: Rollenspiel -->
+        <sc-if value="{{ isRoleplay }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <div style="font-family:'Newsreader',serif; font-size:20px; font-weight:600;">Rollenspiel</div>
+            <div style="font-size:13px; color:#8A8072; margin-bottom:16px;">Gioco di ruolo · Verkäuferin al Supermarkt</div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <sc-for list="{{ roleplayMessages }}" as="msg" hint-placeholder-count="6">
+                <div style="display:flex; flex-direction:column; align-items:{{ msg.align }};">
+                  <sc-if value="{{ msg.tag }}" hint-placeholder-val="{{ false }}">
+                    <div style="font-size:10px; color:#8A6A2E; background:#EFE6D8; border-radius:6px; padding:2px 7px; margin-bottom:4px; font-weight:600;">{{ msg.tag }}</div>
+                  </sc-if>
+                  <div style="max-width:80%; background:{{ msg.bg }}; color:{{ msg.color }}; border-radius:14px; padding:10px 14px; font-size:14px;">{{ msg.text }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top:16px; display:flex; gap:8px;">
+              <input type="text" placeholder="Scrivi in tedesco. Usa [parola] se ti manca..." style="flex:1; box-sizing:border-box; border:1px solid #E7DFD0; border-radius:12px; padding:12px 14px; font-size:14px; font-family:'Work Sans',sans-serif; background:#FFFFFF;"/>
+              <button style="background:{{ accentColor }}; border:none; border-radius:12px; padding:0 16px; color:#F6F1E7; font-weight:600; cursor:pointer;">→</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- Phase 3: Wortschatz-Ernte -->
+        <sc-if value="{{ isHarvest }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <div style="font-family:'Newsreader',serif; font-size:20px; font-weight:600;">Wortschatz-Ernte</div>
+            <div style="font-size:13px; color:#8A8072; margin-bottom:16px;">Raccolta vocaboli · deseleziona quelle che già conosci</div>
+            <sc-for list="{{ harvestRows }}" as="row" hint-placeholder-count="5">
+              <div onclick="{{ row.toggle }}" style="display:flex; align-items:center; gap:12px; background:#FFFFFF; border:1px solid #E7DFD0; border-radius:14px; padding:12px 14px; margin-bottom:8px; cursor:pointer;">
+                <div style="width:20px; height:20px; border-radius:6px; border:2px solid {{ row.checkBorder }}; background:{{ row.checkBg }}; flex-shrink:0; display:flex; align-items:center; justify-content:center;">
+                  <sc-if value="{{ row.checked }}" hint-placeholder-val="{{ true }}">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F6F1E7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                  </sc-if>
+                </div>
+                <div style="flex:1;">
+                  <div style="font-family:'Newsreader',serif; font-size:15px; font-weight:600;">{{ row.de }}<span style="font-family:'Work Sans',sans-serif; font-size:13px; color:#8A8072; font-weight:400;"> — {{ row.it }}</span></div>
+                </div>
+                <div style="background:{{ row.tagBg }}; color:{{ row.tagText }}; font-size:11px; font-weight:600; border-radius:8px; padding:3px 8px; white-space:nowrap;">{{ row.tagLabel }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <!-- Phase 4: Schweizerdeutsch -->
+        <sc-if value="{{ isSwiss }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <div style="font-family:'Newsreader',serif; font-size:20px; font-weight:600;">Schweizerdeutsch-Ecke</div>
+            <div style="font-size:13px; color:#8A8072; margin-bottom:16px;">L'angolo svizzero tedesco</div>
+            <sc-for list="{{ swissVariants }}" as="sv" hint-placeholder-count="3">
+              <div style="background:#FFFFFF; border:1px solid #E7DFD0; border-radius:14px; padding:14px; margin-bottom:10px;">
+                <div style="font-size:13px; color:#8A8072; text-decoration:line-through;">{{ sv.standard }}</div>
+                <div style="font-family:'Newsreader',serif; font-size:17px; font-weight:600; color:#2E6B58; margin-top:4px;">{{ sv.swiss }}</div>
+                <div style="font-size:13px; color:#6E6559; margin-top:4px;">{{ sv.it }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <div style="display:flex; gap:10px; margin-top:24px;">
+          <button onclick="{{ prevPhase }}" disabled="{{ isFirstPhase }}" style="flex:1; background:#FFFFFF; border:1px solid #E7DFD0; border-radius:12px; padding:13px; font-size:14px; font-weight:600; font-family:'Work Sans',sans-serif; color:{{ prevColor }}; cursor:pointer;">Indietro</button>
+          <button onclick="{{ nextPhase }}" style="flex:2; background:{{ accentColor }}; border:none; border-radius:12px; padding:13px; font-size:14px; font-weight:600; font-family:'Work Sans',sans-serif; color:#F6F1E7; cursor:pointer;">{{ nextLabel }}</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- VOCAB -->
+    <sc-if value="{{ isVocab }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <div style="font-family:'Newsreader',serif; font-size:24px; font-weight:600; margin-bottom:14px;">Vocabolario</div>
+
+        <div style="display:flex; background:#EFE6D8; border-radius:12px; padding:4px; margin-bottom:18px;">
+          <div onclick="{{ showReviewTab }}" style="flex:1; text-align:center; padding:9px; border-radius:9px; font-size:13px; font-weight:600; cursor:pointer; background:{{ reviewTabBg }}; color:{{ reviewTabColor }};">Ripassa</div>
+          <div onclick="{{ showListTab }}" style="flex:1; text-align:center; padding:9px; border-radius:9px; font-size:13px; font-weight:600; cursor:pointer; background:{{ listTabBg }}; color:{{ listTabColor }};">Elenco</div>
+        </div>
+
+        <!-- Review (Anki-style flashcards) -->
+        <sc-if value="{{ isReviewTab }}" hint-placeholder-val="{{ true }}">
+          <div>
+            <sc-if value="{{ reviewDone }}" hint-placeholder-val="{{ false }}">
+              <div style="text-align:center; padding:60px 20px; background:#FFFFFF; border:1px solid #E7DFD0; border-radius:16px;">
+                <div style="font-family:'Newsreader',serif; font-size:20px; font-weight:600; margin-bottom:8px;">Ripasso completato</div>
+                <div style="font-size:13px; color:#8A8072; margin-bottom:18px;">Hai rivisto tutte le {{ reviewTotal }} parole di oggi.</div>
+                <button onclick="{{ restartReview }}" style="background:#2A3324; color:#F6F1E7; border:none; border-radius:12px; padding:12px 20px; font-size:14px; font-weight:600; font-family:'Work Sans',sans-serif; cursor:pointer;">Ricomincia</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{ reviewActive }}" hint-placeholder-val="{{ true }}">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; color:#8A8072; margin-bottom:8px;">
+                  <div>Carta {{ reviewPosition }} di {{ reviewTotal }}</div>
+                  <div>{{ reviewCard.badgeLabel }}</div>
+                </div>
+                <div style="height:6px; background:#EFE6D8; border-radius:4px; overflow:hidden; margin-bottom:16px;">
+                  <div style="height:100%; width:{{ reviewProgressPct }}%; background:{{ accentColor }}; border-radius:4px;"></div>
+                </div>
+                <div onclick="{{ flipCard }}" style="perspective:1200px; cursor:pointer; margin-bottom:18px;">
+                  <div style="position:relative; min-height:220px; transform-style:preserve-3d; transition:transform 0.45s ease; transform:{{ cardFlipTransform }};">
+                    <div style="position:absolute; inset:0; backface-visibility:hidden; background:#FFFFFF; border:1px solid #E7DFD0; border-radius:18px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; text-align:center;">
+                      <div style="font-family:'Newsreader',serif; font-size:30px; font-weight:600;">{{ reviewCard.de }}</div>
+                      <div style="font-size:12px; color:#A79E8E; margin-top:16px;">Tocca per girare</div>
+                    </div>
+                    <div style="position:absolute; inset:0; backface-visibility:hidden; transform:rotateY(180deg); background:#22281F; color:#F6F1E7; border-radius:18px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; text-align:center; gap:10px;">
+                      <div style="font-family:'Newsreader',serif; font-size:22px; font-weight:600;">{{ reviewCard.it }}</div>
+                      <div style="font-size:13px; color:#C7BFAD; font-style:italic;">„{{ reviewCard.example }}"</div>
+                    </div>
+                  </div>
+                </div>
+                <sc-if value="{{ flipped }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex; gap:10px;">
+                    <button onclick="{{ answerWrong }}" style="flex:1; background:#F3E3DE; color:#A0452E; border:none; border-radius:12px; padding:14px; font-size:14px; font-weight:600; font-family:'Work Sans',sans-serif; cursor:pointer;">Non la so</button>
+                    <button onclick="{{ answerRight }}" style="flex:1; background:#E3EEEA; color:#2E6B58; border:none; border-radius:12px; padding:14px; font-size:14px; font-weight:600; font-family:'Work Sans',sans-serif; cursor:pointer;">La so</button>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <!-- List -->
+        <sc-if value="{{ isListTab }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <input type="text" placeholder="Cerca una parola..." style="width:100%; box-sizing:border-box; border:1px solid #E7DFD0; border-radius:12px; padding:12px 14px; font-size:14px; font-family:'Work Sans',sans-serif; background:#FFFFFF; margin-bottom:14px;"/>
+            <div style="display:flex; gap:8px; overflow-x:auto; margin-bottom:16px; padding-bottom:4px;">
+              <sc-for list="{{ vocabFilters }}" as="f" hint-placeholder-count="5">
+                <div onclick="{{ f.onClick }}" style="white-space:nowrap; padding:8px 14px; border-radius:20px; font-size:13px; font-weight:600; cursor:pointer; background:{{ f.bg }}; color:{{ f.color }};">{{ f.label }}</div>
+              </sc-for>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <sc-for list="{{ filteredVocab }}" as="v" hint-placeholder-count="8">
+                <div style="display:flex; justify-content:space-between; align-items:center; background:#FFFFFF; border:1px solid #E7DFD0; border-radius:14px; padding:12px 14px;">
+                  <div>
+                    <div style="font-family:'Newsreader',serif; font-size:15px; font-weight:600;">{{ v.de }}</div>
+                    <div style="font-size:12px; color:#8A8072;">{{ v.it }}</div>
+                  </div>
+                  <div style="background:{{ v.badgeBg }}; color:{{ v.badgeText }}; font-size:11px; font-weight:600; border-radius:8px; padding:4px 9px;">{{ v.badgeLabel }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <!-- PROGRESS -->
+    <sc-if value="{{ isProgress }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <div style="font-family:'Newsreader',serif; font-size:24px; font-weight:600; margin-bottom:16px;">Progresso</div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px;">
+          <div style="background:#FFFFFF; border:1px solid #E7DFD0; border-radius:14px; padding:14px;">
+            <div style="font-size:26px; font-weight:700; font-family:'Newsreader',serif;">{{ totalVocab }}</div>
+            <div style="font-size:12px; color:#8A8072;">parole totali</div>
+          </div>
+          <div style="background:#FFFFFF; border:1px solid #E7DFD0; border-radius:14px; padding:14px;">
+            <div style="font-size:26px; font-weight:700; font-family:'Newsreader',serif;">{{ consolidatedCount }}</div>
+            <div style="font-size:12px; color:#8A8072;">consolidate</div>
+          </div>
+          <div style="background:#FFFFFF; border:1px solid #E7DFD0; border-radius:14px; padding:14px;">
+            <div style="font-size:26px; font-weight:700; font-family:'Newsreader',serif;">7</div>
+            <div style="font-size:12px; color:#8A8072;">lezioni completate</div>
+          </div>
+          <div style="background:#FFFFFF; border:1px solid #E7DFD0; border-radius:14px; padding:14px;">
+            <div style="font-size:26px; font-weight:700; font-family:'Newsreader',serif;">{{ streakCount }}</div>
+            <div style="font-size:12px; color:#8A8072;">serie attuale</div>
+          </div>
+        </div>
+
+        <div style="font-family:'Newsreader',serif; font-size:18px; font-weight:600; margin-bottom:10px;">Parole per stato</div>
+        <div style="height:14px; border-radius:8px; overflow:hidden; display:flex; margin-bottom:10px;">
+          <div style="width:{{ pctNew }}%; background:#C99A3E;"></div>
+          <div style="width:{{ pctSeen }}%; background:#7C9473;"></div>
+          <div style="width:{{ pctUsed }}%; background:#5F8B7A;"></div>
+          <div style="width:{{ pctConsolidated }}%; background:#2A3324;"></div>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:12px; font-size:12px; color:#6E6559; margin-bottom:24px;">
+          <div><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#C99A3E;margin-right:5px;"></span>Nuovo ({{ countNew }})</div>
+          <div><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#7C9473;margin-right:5px;"></span>Visto ({{ countSeen }})</div>
+          <div><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#5F8B7A;margin-right:5px;"></span>Usato ({{ countUsed }})</div>
+          <div><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2A3324;margin-right:5px;"></span>Consolidato ({{ countConsolidated }})</div>
+        </div>
+
+        <div style="font-family:'Newsreader',serif; font-size:18px; font-weight:600; margin-bottom:10px;">Percorso · 12 settimane</div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <sc-for list="{{ scenarioPath }}" as="sc" hint-placeholder-count="6">
+            <div style="display:flex; align-items:center; gap:12px; background:#FFFFFF; border:1px solid #E7DFD0; border-radius:12px; padding:11px 14px; opacity:{{ sc.opacity }};">
+              <div style="width:26px; height:26px; border-radius:50%; background:{{ sc.dotBg }}; color:{{ sc.dotText }}; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0;">{{ sc.week }}</div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:600;">{{ sc.title }}</div>
+                <div style="font-size:12px; color:#8A8072;">{{ sc.subtitle }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+  </div>
+
+  <div style="display:flex; border-top:1px solid #E7DFD0; background:#FBF8F2; padding:10px 8px calc(10px + env(safe-area-inset-bottom)); position:sticky; bottom:0;">
+    <button onclick="{{ goHome }}" style="flex:1; background:none; border:none; display:flex; flex-direction:column; align-items:center; gap:4px; padding:6px; cursor:pointer;">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="{{ navColorHome }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+      <span style="font-size:10px; font-weight:600; color:{{ navColorHome }};">Home</span>
+    </button>
+    <button onclick="{{ startLesson }}" style="flex:1; background:none; border:none; display:flex; flex-direction:column; align-items:center; gap:4px; padding:6px; cursor:pointer;">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="{{ navColorLesson }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <span style="font-size:10px; font-weight:600; color:{{ navColorLesson }};">Lezione</span>
+    </button>
+    <button onclick="{{ goVocab }}" style="flex:1; background:none; border:none; display:flex; flex-direction:column; align-items:center; gap:4px; padding:6px; cursor:pointer;">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="{{ navColorVocab }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      <span style="font-size:10px; font-weight:600; color:{{ navColorVocab }};">Vocabolario</span>
+    </button>
+    <button onclick="{{ goProgress }}" style="flex:1; background:none; border:none; display:flex; flex-direction:column; align-items:center; gap:4px; padding:6px; cursor:pointer;">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="{{ navColorProgress }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      <span style="font-size:10px; font-weight:600; color:{{ navColorProgress }};">Progresso</span>
+    </button>
+  </div>
+
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:480,&quot;height&quot;:900},&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#5F8B7A&quot;,&quot;options&quot;:[&quot;#C1622D&quot;,&quot;#5F8B7A&quot;,&quot;#8A6A2E&quot;,&quot;#4A5A7A&quot;],&quot;tsType&quot;:&quot;string&quot;},&quot;userName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Gianmichele&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = {
+    screen: 'home',
+    phase: 0,
+    harvest: { h1: true, h2: true, h3: true, h4: true, h5: true },
+    vocabFilter: 'all',
+    vocabTab: 'review',
+    reviewIndex: 0,
+    flipped: false,
+  };
+
+  vocabItems = [
+    { id: 1, de: 'der Einkaufswagen', it: 'il carrello', st: 'consolidated' },
+    { id: 2, de: 'die Kasse', it: 'la cassa', st: 'consolidated' },
+    { id: 3, de: 'das Regal', it: 'lo scaffale', st: 'used' },
+    { id: 4, de: 'abwiegen', it: 'pesare (separabile)', st: 'used' },
+    { id: 5, de: 'im Angebot', it: 'in offerta', st: 'seen' },
+    { id: 6, de: 'die Quittung', it: 'lo scontrino', st: 'seen' },
+    { id: 7, de: 'ausverkauft', it: 'esaurito', st: 'new' },
+    { id: 8, de: 'Hätten Sie…?', it: 'Avrebbe…?', st: 'new' },
+    { id: 9, de: 'sechs Eier', it: 'sei uova', st: 'consolidated' },
+    { id: 10, de: 'brauchen', it: 'avere bisogno', st: 'used' },
+    { id: 11, de: 'das Frühstück', it: 'la colazione', st: 'seen' },
+    { id: 12, de: 'der Zopf', it: 'la treccia di pane', st: 'new' },
+    { id: 13, de: 'die Mischung', it: 'il misto', st: 'new' },
+    { id: 14, de: 'einpacken', it: 'imballare (separabile)', st: 'used' },
+    { id: 15, de: 'sammeln', it: 'raccogliere', st: 'seen' },
+    { id: 16, de: 'das Bargeld / bar', it: 'i contanti / in contanti', st: 'used' },
+    { id: 17, de: 'zurück', it: 'indietro / il resto', st: 'new' },
+    { id: 18, de: 'gleich da drüben', it: 'proprio lì', st: 'seen' },
+    { id: 19, de: 'das Bier', it: 'la birra', st: 'consolidated' },
+    { id: 20, de: 'die Äpfel', it: 'le mele', st: 'consolidated' },
+  ];
+
+  keyPhrases = [
+    { de: 'Ich hätte gern…', it: 'Vorrei…', example: 'Ich hätte gern sechs Eier.' },
+    { de: 'Hätten Sie…?', it: 'Avrebbe…?', example: 'Hätten Sie noch frische Äpfel?' },
+    { de: 'im Angebot', it: 'in offerta', example: 'Die Äpfel sind diese Woche im Angebot.' },
+    { de: 'Brauchen Sie eine Tüte?', it: 'Le serve un sacchetto?', example: 'Brauchen Sie noch eine Tüte?' },
+    { de: 'Zahlen Sie bar oder mit Karte?', it: 'Paga in contanti o con carta?', example: 'Zahlen Sie bar oder mit Karte?' },
+    { de: 'gleich da drüben', it: 'proprio lì', example: 'Die Kasse ist gleich da drüben.' },
+    { de: 'ausverkauft', it: 'esaurito', example: 'Der Zopf ist leider ausverkauft.' },
+    { de: 'Das macht…', it: 'Fa (in totale)…', example: 'Das macht zusammen zwölf Franken.' },
+  ];
+
+  roleplayMessages = [
+    { role: 'agent', text: 'Grüezi! Kann ich Ihnen helfen?' },
+    { role: 'user', text: 'Grüezi, ich suche [uova].', tag: 'Parola richiesta con [ ]' },
+    { role: 'agent', text: 'Ach, Sie meinen Eier? Die Eier sind da drüben beim Regal.', tag: 'Recast' },
+    { role: 'user', text: 'Danke. Ich brauche auch Brot.' },
+    { role: 'agent', text: 'Der Zopf ist heute leider ausverkauft, aber wir haben frisches Baguette.' },
+    { role: 'user', text: 'Gut, ich nehme das Baguette.' },
+    { role: 'agent', text: 'Perfekt, das macht zusammen acht Franken fünfzig. Zahlen Sie bar oder mit Karte?' },
+    { role: 'user', text: 'Ich zahle bar.' },
+  ];
+
+  harvestWords = [
+    { id: 'h1', de: 'Eier', it: 'le uova', src: 'requested' },
+    { id: 'h2', de: 'die Banane', it: 'la banana', src: 'error' },
+    { id: 'h3', de: 'das Baguette', it: 'la baguette', src: 'agent' },
+    { id: 'h4', de: 'ausverkauft', it: 'esaurito', src: 'agent' },
+    { id: 'h5', de: 'zahlen', it: 'pagare', src: 'agent' },
+  ];
+
+  swissVariants = [
+    { standard: 'Guten Tag!', swiss: 'Grüezi!', it: 'Buongiorno (saluto svizzero)' },
+    { standard: 'Auf Wiedersehen.', swiss: 'Uf Wiederluege.', it: 'Arrivederci.' },
+    { standard: 'zwanzig Franken', swiss: 'zwänzg Stutz', it: 'venti franchi (colloquiale)' },
+  ];
+
+  scenarioPathData = [
+    { week: 1, title: 'Im Supermarkt', subtitle: 'Al supermercato · in corso' },
+    { week: 2, title: 'Zuhause und Nachbarn', subtitle: 'Casa e vicini' },
+    { week: 3, title: 'Beim Arzt', subtitle: 'Dal medico' },
+    { week: 4, title: 'Öffentlicher Verkehr', subtitle: 'Trasporti pubblici' },
+    { week: 5, title: 'Im Restaurant', subtitle: 'Al ristorante' },
+  ];
+
+  badgeMap = {
+    new: { bg: '#EFE6D8', text: '#8A6A2E', label: 'Nuovo' },
+    seen: { bg: '#E9EFE3', text: '#55694A', label: 'Visto' },
+    used: { bg: '#E3EEEA', text: '#2E6B58', label: 'Usato' },
+    consolidated: { bg: '#2A3324', text: '#F6F1E7', label: 'Consolidato' },
+  };
+
+  phaseDefs = [
+    { key: 'warmup', label: 'Aufwärmen' },
+    { key: 'prep', label: 'Vorbereitung' },
+    { key: 'roleplay', label: 'Rollenspiel' },
+    { key: 'harvest', label: 'Ernte' },
+    { key: 'swiss', label: 'Schweiz' },
+  ];
+
+  setScreen = (s) => this.setState({ screen: s, vocabFilter: 'all' });
+  startLesson = () => this.setState({ screen: 'lesson', phase: 0 });
+  goHome = () => this.setState({ screen: 'home' });
+  goVocab = () => this.setState({ screen: 'vocab', vocabFilter: 'all' });
+  goProgress = () => this.setState({ screen: 'progress' });
+  prevPhase = () => { if (this.state.phase > 0) this.setState({ phase: this.state.phase - 1 }); else this.setState({ screen: 'home' }); };
+  nextPhase = () => { if (this.state.phase < 4) this.setState({ phase: this.state.phase + 1 }); else this.setState({ screen: 'home' }); };
+  toggleHarvest = (id) => this.setState((s) => ({ harvest: { ...s.harvest, [id]: !s.harvest[id] } }));
+  setVocabFilter = (f) => this.setState({ vocabFilter: f });
+  showReviewTab = () => this.setState({ vocabTab: 'review' });
+  showListTab = () => this.setState({ vocabTab: 'list' });
+  flipCard = () => this.setState((s) => ({ flipped: !s.flipped }));
+  restartReview = () => this.setState({ reviewIndex: 0, flipped: false });
+  answerCard = () => this.setState((s) => ({ reviewIndex: s.reviewIndex + 1, flipped: false }));
+
+  renderVals() {
+    const accentColor = this.props.accentColor ?? '#C1622D';
+    const userName = this.props.userName ?? 'Marco';
+    const { screen, phase, harvest, vocabFilter, vocabTab, reviewIndex, flipped } = this.state;
+
+    const phaseDots = this.phaseDefs.map((p, i) => ({
+      label: p.label,
+      onClick: () => this.setState({ phase: i }),
+      barColor: i === phase ? accentColor : (i < phase ? '#2A3324' : '#E7DFD0'),
+      textColor: i === phase ? '#22281F' : '#A79E8E',
+      weight: i === phase ? 700 : 500,
+    }));
+
+    const warmupBadge = (isNew) => isNew
+      ? { badgeBg: '#EFE6D8', badgeText: '#8A6A2E', badgeLabel: 'Nuova' }
+      : { badgeBg: '#E9EFE3', badgeText: '#55694A', badgeLabel: 'Ripasso' };
+
+    const reviewWords = ['der Einkaufswagen', 'die Kasse', 'sechs Eier', 'das Bier', 'die Äpfel'];
+    const findVocab = (de) => this.vocabItems.find(v => v.de === de) || { it: '' };
+    const warmupWords = [
+      ...reviewWords.map(de => ({ de, it: findVocab(de).it, ...warmupBadge(false) })),
+      { de: 'ausverkauft', it: 'esaurito', ...warmupBadge(true), feedback: 'Ottimo, frase corretta e naturale.' },
+      { de: 'Hätten Sie…?', it: 'Avrebbe…?', ...warmupBadge(true) },
+      { de: 'der Zopf', it: 'la treccia di pane', ...warmupBadge(true) },
+    ];
+
+    const roleplayMessages = this.roleplayMessages.map(m => ({
+      ...m,
+      align: m.role === 'user' ? 'flex-end' : 'flex-start',
+      bg: m.role === 'user' ? accentColor : '#FFFFFF',
+      color: m.role === 'user' ? '#F6F1E7' : '#22281F',
+    }));
+
+    const harvestSrcTag = { requested: { bg: '#EFE6D8', text: '#8A6A2E', label: 'Chiesta' }, error: { bg: '#F3E3DE', text: '#A0452E', label: 'Errore' }, agent: { bg: '#E3EEEA', text: '#2E6B58', label: 'Usata dall\u2019agente' } };
+    const harvestRows = this.harvestWords.map(h => {
+      const checked = !!harvest[h.id];
+      const tag = harvestSrcTag[h.src];
+      return {
+        ...h, checked,
+        toggle: () => this.toggleHarvest(h.id),
+        checkBg: checked ? '#2A3324' : '#FFFFFF',
+        checkBorder: checked ? '#2A3324' : '#D8CFBD',
+        tagBg: tag.bg, tagText: tag.text, tagLabel: tag.label,
+      };
+    });
+
+    const vocabFilters = [
+      { key: 'all', label: 'Tutte' },
+      { key: 'new', label: 'Nuovo' },
+      { key: 'seen', label: 'Visto' },
+      { key: 'used', label: 'Usato' },
+      { key: 'consolidated', label: 'Consolidato' },
+    ].map(f => ({
+      ...f,
+      onClick: () => this.setVocabFilter(f.key),
+      bg: vocabFilter === f.key ? '#2A3324' : '#FFFFFF',
+      color: vocabFilter === f.key ? '#F6F1E7' : '#6E6559',
+    }));
+
+    const filteredVocab = this.vocabItems
+      .filter(v => vocabFilter === 'all' || v.st === vocabFilter)
+      .map(v => ({ ...v, badgeBg: this.badgeMap[v.st].bg, badgeText: this.badgeMap[v.st].text, badgeLabel: this.badgeMap[v.st].label }));
+
+    const exampleFor = (de) => (this.keyPhrases.find(k => k.de === de) || {}).example || 'Usa questa parola in una frase tua.';
+    const reviewQueueData = this.vocabItems.filter(v => v.st !== 'consolidated').slice(0, 6);
+    const reviewQueue = reviewQueueData.map(v => ({
+      de: v.de, it: v.it, example: exampleFor(v.de),
+      badgeLabel: this.badgeMap[v.st].label,
+    }));
+    const reviewTotal = reviewQueue.length;
+    const reviewDone = reviewIndex >= reviewTotal;
+    const reviewCard = reviewDone ? { de: '', it: '', example: '', badgeLabel: '' } : reviewQueue[reviewIndex];
+
+    const counts = { new: 0, seen: 0, used: 0, consolidated: 0 };
+    this.vocabItems.forEach(v => counts[v.st]++);
+    const total = this.vocabItems.length;
+    const pct = (n) => Math.round((n / total) * 1000) / 10;
+
+    const scenarioPath = this.scenarioPathData.map((s, i) => ({
+      ...s,
+      opacity: i === 0 ? 1 : 0.55,
+      dotBg: i === 0 ? accentColor : '#E7DFD0',
+      dotText: i === 0 ? '#F6F1E7' : '#8A8072',
+    }));
+
+    return {
+      accentColor, userName,
+      isHome: screen === 'home', isLesson: screen === 'lesson', isVocab: screen === 'vocab', isProgress: screen === 'progress',
+      isWarmup: phase === 0, isPrep: phase === 1, isRoleplay: phase === 2, isHarvest: phase === 3, isSwiss: phase === 4,
+      isFirstPhase: false,
+      prevColor: '#22281F',
+      nextLabel: phase === 4 ? 'Termina lezione' : 'Avanti',
+      streakCount: 5, dueToday: 6, dueWords: ['ausverkauft', 'der Zopf', 'die Mischung'],
+      phaseDots, warmupWords, keyPhrases: this.keyPhrases, roleplayMessages, harvestRows,
+      swissVariants: this.swissVariants, vocabFilters, filteredVocab,
+      totalVocab: total, consolidatedCount: counts.consolidated,
+      countNew: counts.new, countSeen: counts.seen, countUsed: counts.used, countConsolidated: counts.consolidated,
+      pctNew: pct(counts.new), pctSeen: pct(counts.seen), pctUsed: pct(counts.used), pctConsolidated: pct(counts.consolidated),
+      scenarioPath,
+      isReviewTab: vocabTab === 'review', isListTab: vocabTab === 'list',
+      reviewTabBg: vocabTab === 'review' ? '#FFFFFF' : 'transparent',
+      reviewTabColor: vocabTab === 'review' ? '#22281F' : '#8A8072',
+      listTabBg: vocabTab === 'list' ? '#FFFFFF' : 'transparent',
+      listTabColor: vocabTab === 'list' ? '#22281F' : '#8A8072',
+      reviewQueue, reviewTotal, reviewDone, reviewActive: !reviewDone,
+      reviewCard, reviewPosition: Math.min(reviewIndex + 1, reviewTotal),
+      reviewProgressPct: reviewTotal ? Math.round((reviewIndex / reviewTotal) * 100) : 0,
+      flipped, cardFlipTransform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+      flipCard: this.flipCard, restartReview: this.restartReview,
+      answerWrong: this.answerCard, answerRight: this.answerCard,
+      showReviewTab: this.showReviewTab, showListTab: this.showListTab,
+      goHome: this.goHome, goVocab: this.goVocab, goProgress: this.goProgress, startLesson: this.startLesson,
+      prevPhase: this.prevPhase, nextPhase: this.nextPhase,
+      navColorHome: screen === 'home' ? accentColor : '#A79E8E',
+      navColorLesson: screen === 'lesson' ? accentColor : '#A79E8E',
+      navColorVocab: screen === 'vocab' ? accentColor : '#A79E8E',
+      navColorProgress: screen === 'progress' ? accentColor : '#A79E8E',
+    };
+  }
+}
+</script>
+</body>
+</html>
