@@ -46,6 +46,7 @@ Verifiche:
 | `make down` | ferma lo stack |
 | `make migrate` | `alembic upgrade head` nel container `api` |
 | `make seed` | seed idempotente del DB |
+| `make seed-update` | seed + sovrascrive i contenuti degli scenari esistenti (per il Planer) |
 | `make test` | test unitari (senza DB) |
 | `make test-integration` | test su DB reale (richiede `make migrate`) |
 | `make reset` | ricostruisce da zero, **cancellando i dati** (volume) |

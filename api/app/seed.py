@@ -1,7 +1,10 @@
 """Seed idempotente del database.
 
-Uso: ``python -m app.seed`` (o ``make seed``).
+Uso:
+- ``python -m app.seed``            → crea le righe mancanti (idempotente)
+- ``python -m app.seed --update``   → crea + sovrascrive i contenuti degli scenari esistenti
 """
+import argparse
 import asyncio
 
 from sqlalchemy import select
@@ -11,16 +14,31 @@ from app.db import SessionLocal
 from app.models import Scenario, VocabItem, VocabProgress, VocabSource, VocabState
 from app.seed_data import SCENARIOS, VOCAB
 
+# Campi di contenuto dello scenario sovrascritti da --update (slug e week_number sono identità).
+CONTENT_FIELDS = (
+    "title_de",
+    "title_it",
+    "description",
+    "role_label",
+    "key_phrases",
+    "swiss_variants",
+    "imprevisti",
+    "goals",
+)
+
 
 async def run_seed(
     session_factory: async_sessionmaker[AsyncSession] = SessionLocal,
+    update: bool = False,
 ) -> dict[str, int]:
-    """Esegue il seed in modo idempotente; ritorna i conteggi inseriti.
+    """Esegue il seed in modo idempotente; ritorna i conteggi.
 
-    Non aggiorna le righe già esistenti: l'idempotenza è garantita dal
-    controllo per-chiave (slug per gli scenari, ``de``+``scenario_id`` per i vocaboli).
+    - Scenari: check-by-``slug``; con ``update=True`` i campi di contenuto degli
+      scenari esistenti vengono sovrascritti (per il Planer, task 3.4).
+    - Vocaboli: check-by-(``de``, ``scenario_id``); mai sovrascritti.
     """
     created_scenarios = 0
+    updated_scenarios = 0
     created_vocab = 0
 
     async with session_factory() as session:
@@ -29,6 +47,10 @@ async def run_seed(
             if existing is None:
                 session.add(Scenario(**s_data))
                 created_scenarios += 1
+            elif update:
+                for field in CONTENT_FIELDS:
+                    setattr(existing, field, s_data[field])
+                updated_scenarios += 1
         await session.commit()
 
         scenario_ids: dict[str, int] = {}
@@ -62,14 +84,26 @@ async def run_seed(
                 created_vocab += 1
         await session.commit()
 
-    return {"scenarios": created_scenarios, "vocab": created_vocab}
+    return {
+        "scenarios": created_scenarios,
+        "scenarios_updated": updated_scenarios,
+        "vocab": created_vocab,
+    }
 
 
 async def main() -> None:
-    counts = await run_seed()
+    parser = argparse.ArgumentParser(description="Seed del database Deutsch-Tutor")
+    parser.add_argument(
+        "--update",
+        action="store_true",
+        help="sovrascrive key_phrases/swiss_variants/imprevisti/goals degli scenari esistenti",
+    )
+    args = parser.parse_args()
+
+    counts = await run_seed(update=args.update)
     print(
         f"Seed completato: {counts['scenarios']} scenari creati, "
-        f"{counts['vocab']} vocaboli creati."
+        f"{counts['scenarios_updated']} aggiornati, {counts['vocab']} vocaboli creati."
     )
 
 

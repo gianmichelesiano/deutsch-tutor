@@ -21,6 +21,9 @@ migrate: ## Applica le migrazioni Alembic
 seed: ## Popola il DB (idempotente)
 	$(COMPOSE) exec api python -m app.seed
 
+seed-update: ## Seed + sovrascrive i contenuti degli scenari esistenti
+	$(COMPOSE) exec api python -m app.seed --update
+
 test: ## Test unitari (senza DB)
 	$(COMPOSE) exec api pytest -m "not integration"
 
