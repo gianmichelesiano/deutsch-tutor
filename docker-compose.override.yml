@@ -1,0 +1,10 @@
+# Overlay di sviluppo: monta il codice sorgente nel container api e attiva il reload.
+# Caricato automaticamente da `docker compose` quando presente nella root.
+services:
+  api:
+    volumes:
+      - ./api/app:/app/app
+      - ./api/tests:/app/tests
+      - ./api/alembic:/app/alembic
+      - ./api/alembic.ini:/app/alembic.ini
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
