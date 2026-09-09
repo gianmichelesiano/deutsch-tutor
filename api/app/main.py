@@ -1,15 +1,15 @@
-from fastapi import APIRouter, FastAPI
+from fastapi import FastAPI
 
 from app.config import settings
+from app.routers import lessons, progress, vocab
 
-app = FastAPI(title="Deutsch-Tutor API", version="0.1.0")
+app = FastAPI(title="Deutsch-Tutor API", version="0.2.0")
 
-router = APIRouter(prefix=settings.api_prefix)
+app.include_router(lessons.router)
+app.include_router(vocab.router)
+app.include_router(progress.router)
 
 
-@router.get("/health")
+@app.get(f"{settings.api_prefix}/health")
 async def health() -> dict[str, str]:
     return {"status": "ok"}
-
-
-app.include_router(router)

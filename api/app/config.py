@@ -6,6 +6,7 @@ class Settings(BaseSettings):
 
     database_url: str = "postgresql+asyncpg://deutsch:deutsch@localhost:5433/deutsch_tutor"
     api_prefix: str = "/api"
+    timezone: str = "Europe/Zurich"
 
 
 settings = Settings()
