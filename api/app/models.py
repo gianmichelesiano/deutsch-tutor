@@ -142,6 +142,9 @@ class Lesson(Base):
     lesson_type: Mapped[LessonType] = mapped_column(
         Enum(LessonType, name="lesson_type_enum", native_enum=True)
     )
+    current_phase: Mapped[LessonPhase | None] = mapped_column(
+        Enum(LessonPhase, name="lesson_phase_enum", native_enum=True), nullable=True
+    )
     started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     ended_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     status: Mapped[LessonStatus] = mapped_column(
