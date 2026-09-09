@@ -1,0 +1,22 @@
+# OS / editor
+.DS_Store
+
+# Env & secrets
+.env
+*.local
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# Node / Next
+web/node_modules/
+web/.next/
+web/out/
+
+# Build artifacts
+*.log
