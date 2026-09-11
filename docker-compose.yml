@@ -23,6 +23,15 @@ services:
     restart: unless-stopped
     environment:
       DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-deutsch}:${POSTGRES_PASSWORD:-deutsch}@db:5432/${POSTGRES_DB:-deutsch_tutor}
+      LOCAL_LLM_BASE_URL: ${LOCAL_LLM_BASE_URL:-https://api.deepseek.com}
+      LOCAL_LLM_API_KEY: ${LOCAL_LLM_API_KEY:-}
+      LOCAL_LLM_MODEL: ${LOCAL_LLM_MODEL:-deepseek-flash}
+      LOCAL_LLM_THINKING_DISABLED: ${LOCAL_LLM_THINKING_DISABLED:-true}
+      LOCAL_LLM_REPEAT_PENALTY: ${LOCAL_LLM_REPEAT_PENALTY:-0}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      ANTHROPIC_MODEL: ${ANTHROPIC_MODEL:-claude-sonnet-4-5}
+      LLM_PROVIDER_MODE: ${LLM_PROVIDER_MODE:-auto}
+      USER_NAME: ${USER_NAME:-Gianmichele}
     depends_on:
       db:
         condition: service_healthy
@@ -43,7 +52,7 @@ services:
     depends_on:
       - api
     ports:
-      - "3000:3000"
+      - "${WEB_PORT:-3100}:3000"
 
 volumes:
   db_data:

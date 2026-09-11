@@ -1,0 +1,408 @@
+{
+  "role_label": "Bürokollege",
+  "key_phrases": [
+    {
+      "de": "Sorry, war das zu laut gestern?",
+      "it": "Scusa, era troppo rumoroso ieri?",
+      "example": "Am nächsten Morgen im Büro."
+    },
+    {
+      "de": "Chasch mer chli Papier us em Schrank hole?",
+      "it": "Puoi prendermi un po' di carta dall'armadio?",
+      "example": "Wenn du im Kopierraum bist."
+    },
+    {
+      "de": "Hesch chli Zyt für en Kafi?",
+      "it": "Hai un po' di tempo per un caffè?",
+      "example": "Pausa am Nachmittag."
+    },
+    {
+      "de": "Ich gang grad go Lunch hole, wotsch au öppis?",
+      "it": "Vado a prendere il pranzo, vuoi anche qualcosa?",
+      "example": "Mittagspause im Büro."
+    },
+    {
+      "de": "Chönntsch du das no churz googl-e?",
+      "it": "Puoi cercarlo brevemente su Google?",
+      "example": "Wenn du eine Frage hast."
+    },
+    {
+      "de": "Das isch en guete Punkt, aber mir händ en Termin.",
+      "it": "È un buon punto, ma abbiamo una scadenza.",
+      "example": "Besprechung."
+    },
+    {
+      "de": "Sorry, ich bi chli im Stress hüt.",
+      "it": "Scusa, sono un po' stressato oggi.",
+      "example": "Wenn du gestresst bist."
+    },
+    {
+      "de": "Chönntsch du das no churz googl-e?",
+      "it": "Puoi cercarlo brevemente su Google?",
+      "example": "Wenn du eine Frage hast."
+    },
+    {
+      "de": "Das isch en guete Punkt, aber mir händ en Termin.",
+      "it": "È un buon punto, ma abbiamo una scadenza.",
+      "example": "Besprechung."
+    },
+    {
+      "de": "Sorry, ich bi chli im Stress hüt.",
+      "it": "Scusa, sono un po' stressato oggi.",
+      "example": "Wenn du gestresst bist."
+    }
+  ],
+  "vocab": [
+    {
+      "de": "der Büro",
+      "it": "ufficio",
+      "gender": "der",
+      "plural": "die Büros",
+      "separable": false,
+      "example_de": "Ich arbeite im Büro."
+    },
+    {
+      "de": "der Kollege",
+      "it": "collega",
+      "gender": "der",
+      "plural": "die Kollegen",
+      "separable": false,
+      "example_de": "Mein Kollege ist nett."
+    },
+    {
+      "de": "die Pause",
+      "it": "pausa",
+      "gender": "die",
+      "plural": "die Pausen",
+      "separable": false,
+      "example_de": "Wir haben eine Pause."
+    },
+    {
+      "de": "der Kaffee",
+      "it": "caffè",
+      "gender": "der",
+      "plural": "die Kaffees",
+      "separable": false,
+      "example_de": "Ich trinke Kaffee."
+    },
+    {
+      "de": "der Lunch",
+      "it": "pranzo",
+      "gender": "der",
+      "plural": "die Lunches",
+      "separable": false,
+      "example_de": "Wo ist der Lunch?"
+    },
+    {
+      "de": "das Papier",
+      "it": "carta",
+      "gender": "das",
+      "plural": "die Papiere",
+      "separable": false,
+      "example_de": "Hast du Papier?"
+    },
+    {
+      "de": "der Termin",
+      "it": "appuntamento",
+      "gender": "der",
+      "plural": "die Termine",
+      "separable": false,
+      "example_de": "Ich habe einen Termin."
+    },
+    {
+      "de": "der Stress",
+      "it": "stress",
+      "gender": "der",
+      "plural": null,
+      "separable": false,
+      "example_de": "Ich habe Stress."
+    },
+    {
+      "de": "die Besprechung",
+      "it": "riunione",
+      "gender": "die",
+      "plural": "die Besprechungen",
+      "separable": false,
+      "example_de": "Die Besprechung ist lang."
+    },
+    {
+      "de": "das Telefon",
+      "it": "telefono",
+      "gender": "das",
+      "plural": "die Telefone",
+      "separable": false,
+      "example_de": "Das Telefon klingelt."
+    },
+    {
+      "de": "der Computer",
+      "it": "computer",
+      "gender": "der",
+      "plural": "die Computer",
+      "separable": false,
+      "example_de": "Mein Computer ist langsam."
+    },
+    {
+      "de": "das Handy",
+      "it": "cellulare",
+      "gender": "das",
+      "plural": "die Handys",
+      "separable": false,
+      "example_de": "Ich habe mein Handy vergessen."
+    },
+    {
+      "de": "die E-Mail",
+      "it": "email",
+      "gender": "die",
+      "plural": "die E-Mails",
+      "separable": false,
+      "example_de": "Ich schreibe eine E-Mail."
+    },
+    {
+      "de": "der Drucker",
+      "it": "stampante",
+      "gender": "der",
+      "plural": "die Drucker",
+      "separable": false,
+      "example_de": "Der Drucker ist kaputt."
+    },
+    {
+      "de": "der Kopierraum",
+      "it": "stanza delle fotocopie",
+      "gender": "der",
+      "plural": "die Kopierräume",
+      "separable": false,
+      "example_de": "Im Kopierraum ist Papier."
+    },
+    {
+      "de": "der Schrank",
+      "it": "armadio",
+      "gender": "der",
+      "plural": "die Schränke",
+      "separable": false,
+      "example_de": "Der Schrank ist voll."
+    },
+    {
+      "de": "das Fenster",
+      "it": "finestra",
+      "gender": "das",
+      "plural": "die Fenster",
+      "separable": false,
+      "example_de": "Öffne das Fenster."
+    },
+    {
+      "de": "die Tür",
+      "it": "porta",
+      "gender": "die",
+      "plural": "die Türen",
+      "separable": false,
+      "example_de": "Die Tür ist zu."
+    },
+    {
+      "de": "der Tisch",
+      "it": "tavolo",
+      "gender": "der",
+      "plural": "die Tische",
+      "separable": false,
+      "example_de": "Der Tisch ist gross."
+    },
+    {
+      "de": "der Stuhl",
+      "it": "sedia",
+      "gender": "der",
+      "plural": "die Stühle",
+      "separable": false,
+      "example_de": "Der Stuhl ist bequem."
+    },
+    {
+      "de": "der Bildschirm",
+      "it": "schermo",
+      "gender": "der",
+      "plural": "die Bildschirme",
+      "separable": false,
+      "example_de": "Der Bildschirm ist hell."
+    },
+    {
+      "de": "die Tastatur",
+      "it": "tastiera",
+      "gender": "die",
+      "plural": "die Tastaturen",
+      "separable": false,
+      "example_de": "Die Tastatur ist neu."
+    },
+    {
+      "de": "die Maus",
+      "it": "mouse",
+      "gender": "die",
+      "plural": "die Mäuse",
+      "separable": false,
+      "example_de": "Die Maus funktioniert nicht."
+    },
+    {
+      "de": "das Notizbuch",
+      "it": "quaderno",
+      "gender": "das",
+      "plural": "die Notizbücher",
+      "separable": false,
+      "example_de": "Ich schreibe ins Notizbuch."
+    },
+    {
+      "de": "der Stift",
+      "it": "penna",
+      "gender": "der",
+      "plural": "die Stifte",
+      "separable": false,
+      "example_de": "Hast du einen Stift?"
+    },
+    {
+      "de": "die Besprechung",
+      "it": "riunione",
+      "gender": "die",
+      "plural": "die Besprechungen",
+      "separable": false,
+      "example_de": "Wir haben eine Besprechung."
+    },
+    {
+      "de": "der Feierabend",
+      "it": "fine del lavoro",
+      "gender": "der",
+      "plural": "die Feierabende",
+      "separable": false,
+      "example_de": "Feierabend um fünf."
+    },
+    {
+      "de": "die Mittagspause",
+      "it": "pausa pranzo",
+      "gender": "die",
+      "plural": "die Mittagspausen",
+      "separable": false,
+      "example_de": "Mittagspause von zwölf bis eins."
+    },
+    {
+      "de": "der Arbeitskollege",
+      "it": "collega di lavoro",
+      "gender": "der",
+      "plural": "die Arbeitskollegen",
+      "separable": false,
+      "example_de": "Mein Arbeitskollege ist hilfreich."
+    },
+    {
+      "de": "die Chefin",
+      "it": "capo (femminile)",
+      "gender": "die",
+      "plural": "die Chefinnen",
+      "separable": false,
+      "example_de": "Die Chefin ist streng."
+    },
+    {
+      "de": "der Chef",
+      "it": "capo",
+      "gender": "der",
+      "plural": "die Chefs",
+      "separable": false,
+      "example_de": "Der Chef ist weg."
+    },
+    {
+      "de": "das Team",
+      "it": "team",
+      "gender": "das",
+      "plural": "die Teams",
+      "separable": false,
+      "example_de": "Das Team ist gut."
+    },
+    {
+      "de": "die Aufgabe",
+      "it": "compito",
+      "gender": "die",
+      "plural": "die Aufgaben",
+      "separable": false,
+      "example_de": "Die Aufgabe ist schwer."
+    },
+    {
+      "de": "das Projekt",
+      "it": "progetto",
+      "gender": "das",
+      "plural": "die Projekte",
+      "separable": false,
+      "example_de": "Das Projekt ist neu."
+    },
+    {
+      "de": "die Frist",
+      "it": "scadenza",
+      "gender": "die",
+      "plural": "die Fristen",
+      "separable": false,
+      "example_de": "Die Frist ist morgen."
+    },
+    {
+      "de": "der Bericht",
+      "it": "rapporto",
+      "gender": "der",
+      "plural": "die Berichte",
+      "separable": false,
+      "example_de": "Ich schreibe einen Bericht."
+    },
+    {
+      "de": "die Präsentation",
+      "it": "presentazione",
+      "gender": "die",
+      "plural": "die Präsentationen",
+      "separable": false,
+      "example_de": "Die Präsentation ist gut."
+    },
+    {
+      "de": "das Meeting",
+      "it": "riunione",
+      "gender": "das",
+      "plural": "die Meetings",
+      "separable": false,
+      "example_de": "Das Meeting ist um zehn."
+    },
+    {
+      "de": "der Terminkalender",
+      "it": "agenda",
+      "gender": "der",
+      "plural": "die Terminkalender",
+      "separable": false,
+      "example_de": "Ich habe einen Terminkalender."
+    },
+    {
+      "de": "die Kaffeepause",
+      "it": "pausa caffè",
+      "gender": "die",
+      "plural": "die Kaffeepausen",
+      "separable": false,
+      "example_de": "Kaffeepause um drei."
+    }
+  ],
+  "imprevisti": [
+    "Der Drucker ist kaputt und du musst dringend etwas ausdrucken.",
+    "Die Chefin kommt unerwartet ins Büro und fragt nach dem Bericht.",
+    "Das Telefon klingelt während du mit einem Kollegen sprichst.",
+    "Der Kollege hat schlechte Laune und antwortet kurz.",
+    "Du verschüttest Kaffee auf dem Tisch und musst dich entschuldigen."
+  ],
+  "swiss_variants": [
+    {
+      "standard": "Grüezi, wie geht es Ihnen?",
+      "swiss": "Grüezi, wie gaht's?",
+      "it": "Salve, come va?"
+    },
+    {
+      "standard": "Entschuldigung, war das zu laut?",
+      "swiss": "Sorry, isch das z lut?",
+      "it": "Scusa, era troppo rumoroso?"
+    },
+    {
+      "standard": "Können Sie mir bitte helfen?",
+      "swiss": "Chönntet ihr mir bitte hälfe?",
+      "it": "Potete aiutarmi per favore?"
+    }
+  ],
+  "goals": [
+    "Small Talk auf Schweizerdeutsch führen",
+    "Büroalltag besprechen",
+    "Höflich um Hilfe bitten",
+    "Auf unerwartete Situationen reagieren",
+    "Pausen und Termine koordinieren"
+  ]
+}

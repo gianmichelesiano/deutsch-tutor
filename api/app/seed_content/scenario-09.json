@@ -1,0 +1,394 @@
+{
+  "slug": "im-restaurant",
+  "week_number": 9,
+  "role_label": "Kellnerin",
+  "key_phrases": [
+    {
+      "de": "Grüezi, haben Sie einen Tisch reserviert?",
+      "it": "Buongiorno, avete prenotato un tavolo?",
+      "example": "Die Kellnerin begrüsst dich an der Tür: «Grüezi, haben Sie einen Tisch reserviert?»"
+    },
+    {
+      "de": "Ich hätte gern die Speisekarte, bitte.",
+      "it": "Vorrei il menù, per favore.",
+      "example": "Du setzt dich hin und fragst: «Ich hätte gern die Speisekarte, bitte.»"
+    },
+    {
+      "de": "Was können Sie empfehlen?",
+      "it": "Cosa può consigliare?",
+      "example": "Du weisst nicht, was gut ist, und fragst: «Was können Sie empfehlen?»"
+    },
+    {
+      "de": "Ich nehme das Tagesmenü, bitte.",
+      "it": "Prendo il menù del giorno, per favore.",
+      "example": "Die Kellnerin nennt das Tagesmenü, du sagst: «Ich nehme das Tagesmenü, bitte.»"
+    },
+    {
+      "de": "Könnte ich das ohne Zwiebeln haben?",
+      "it": "Potrei averlo senza cipolla?",
+      "example": "Du magst keine Zwiebeln und fragst: «Könnte ich das ohne Zwiebeln haben?»"
+    },
+    {
+      "de": "Zusammen oder getrennt?",
+      "it": "Insieme o separatamente?",
+      "example": "Die Kellnerin fragt am Ende: «Zusammen oder getrennt?»"
+    },
+    {
+      "de": "Die Rechnung, bitte.",
+      "it": "Il conto, per favore.",
+      "example": "Du bist fertig und sagst: «Die Rechnung, bitte.»"
+    },
+    {
+      "de": "Hat es noch Platz draussen?",
+      "it": "C'è ancora posto fuori?",
+      "example": "Es ist schönes Wetter und du fragst: «Hat es noch Platz draussen?»"
+    },
+    {
+      "de": "Das habe ich nicht bestellt.",
+      "it": "Questo non l'ho ordinato.",
+      "example": "Die Kellnerin bringt das falsche Gericht, du sagst: «Das habe ich nicht bestellt.»"
+    },
+    {
+      "de": "Es hat sehr gut geschmeckt, danke.",
+      "it": "Era molto buono, grazie.",
+      "example": "Beim Bezahlen sagst du: «Es hat sehr gut geschmeckt, danke.»"
+    }
+  ],
+  "imprevisti": [
+    "Das Gericht ist ausverkauft.",
+    "Die Kellnerin bringt das falsche Essen.",
+    "Die Suppe ist kalt.",
+    "Die Rechnung stimmt nicht.",
+    "Du hast kein Bargeld dabei und die Karte funktioniert nicht."
+  ],
+  "swiss_variants": [
+    {
+      "standard": "Die Rechnung, bitte.",
+      "swiss": "D'Rächnig, bitte.",
+      "it": "Il conto, per favore."
+    },
+    {
+      "standard": "Hat es noch Platz draussen?",
+      "swiss": "Hät's na Platz dusse?",
+      "it": "C'è ancora posto fuori?"
+    },
+    {
+      "standard": "Ich nehme das Tagesmenü.",
+      "swiss": "Ich nimm s'Tagesmenü.",
+      "it": "Prendo il menù del giorno."
+    }
+  ],
+  "goals": [
+    "Einen Tisch reservieren oder einen Platz bekommen.",
+    "Essen und Getränke bestellen.",
+    "Nachfragen, was ein Gericht enthält oder was zu empfehlen ist.",
+    "Probleme mit dem Essen oder der Rechnung ansprechen.",
+    "Die Rechnung verlangen und bezahlen."
+  ],
+  "vocab": [
+    {
+      "de": "die Speisekarte",
+      "it": "il menù",
+      "gender": "die",
+      "plural": "die Speisekarten",
+      "separable": false,
+      "example_de": "Kann ich bitte die Speisekarte haben?"
+    },
+    {
+      "de": "das Menü",
+      "it": "il menù (fisso)",
+      "gender": "das",
+      "plural": "die Menüs",
+      "separable": false,
+      "example_de": "Das Menü des Tages kostet 25 Franken."
+    },
+    {
+      "de": "bestellen",
+      "it": "ordinare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Ich möchte eine Pizza bestellen."
+    },
+    {
+      "de": "die Rechnung",
+      "it": "il conto",
+      "gender": "die",
+      "plural": "die Rechnungen",
+      "separable": false,
+      "example_de": "Die Rechnung, bitte!"
+    },
+    {
+      "de": "zahlen",
+      "it": "pagare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Wir möchten getrennt zahlen."
+    },
+    {
+      "de": "das Trinkgeld",
+      "it": "la mancia",
+      "gender": "das",
+      "plural": "die Trinkgelder",
+      "separable": false,
+      "example_de": "Wir lassen 5 Franken Trinkgeld."
+    },
+    {
+      "de": "der Kellner",
+      "it": "il cameriere",
+      "gender": "der",
+      "plural": "die Kellner",
+      "separable": false,
+      "example_de": "Der Kellner bringt die Getränke."
+    },
+    {
+      "de": "die Kellnerin",
+      "it": "la cameriera",
+      "gender": "die",
+      "plural": "die Kellnerinnen",
+      "separable": false,
+      "example_de": "Die Kellnerin ist sehr freundlich."
+    },
+    {
+      "de": "das Tagesmenü",
+      "it": "il menù del giorno",
+      "gender": "das",
+      "plural": "die Tagesmenüs",
+      "separable": false,
+      "example_de": "Was ist das Tagesmenü?"
+    },
+    {
+      "de": "die Vorspeise",
+      "it": "l'antipasto",
+      "gender": "die",
+      "plural": "die Vorspeisen",
+      "separable": false,
+      "example_de": "Als Vorspeise nehme ich die Suppe."
+    },
+    {
+      "de": "das Hauptgericht",
+      "it": "il piatto principale",
+      "gender": "das",
+      "plural": "die Hauptgerichte",
+      "separable": false,
+      "example_de": "Das Hauptgericht war sehr lecker."
+    },
+    {
+      "de": "der Nachtisch",
+      "it": "il dessert",
+      "gender": "der",
+      "plural": "die Nachtische",
+      "separable": false,
+      "example_de": "Möchtest du einen Nachtisch?"
+    },
+    {
+      "de": "das Getränk",
+      "it": "la bevanda",
+      "gender": "das",
+      "plural": "die Getränke",
+      "separable": false,
+      "example_de": "Welche Getränke habt ihr?"
+    },
+    {
+      "de": "das Wasser",
+      "it": "l'acqua",
+      "gender": "das",
+      "plural": "die Wasser",
+      "separable": false,
+      "example_de": "Ein Glas Wasser, bitte."
+    },
+    {
+      "de": "der Wein",
+      "it": "il vino",
+      "gender": "der",
+      "plural": "die Weine",
+      "separable": false,
+      "example_de": "Ein Glas Rotwein, bitte."
+    },
+    {
+      "de": "das Bier",
+      "it": "la birra",
+      "gender": "das",
+      "plural": "die Biere",
+      "separable": false,
+      "example_de": "Ich nehme ein Bier."
+    },
+    {
+      "de": "der Kaffee",
+      "it": "il caffè",
+      "gender": "der",
+      "plural": "die Kaffees",
+      "separable": false,
+      "example_de": "Nach dem Essen trinke ich einen Kaffee."
+    },
+    {
+      "de": "die Serviette",
+      "it": "il tovagliolo",
+      "gender": "die",
+      "plural": "die Servietten",
+      "separable": false,
+      "example_de": "Die Serviette ist auf den Boden gefallen."
+    },
+    {
+      "de": "das Besteck",
+      "it": "le posate",
+      "gender": "das",
+      "plural": "die Bestecke",
+      "separable": false,
+      "example_de": "Das Besteck ist nicht sauber."
+    },
+    {
+      "de": "die Reklamation",
+      "it": "il reclamo",
+      "gender": "die",
+      "plural": "die Reklamationen",
+      "separable": false,
+      "example_de": "Ich möchte eine Reklamation machen."
+    },
+    {
+      "de": "der Tisch",
+      "it": "il tavolo",
+      "gender": "der",
+      "plural": "die Tische",
+      "separable": false,
+      "example_de": "Ist dieser Tisch noch frei?"
+    },
+    {
+      "de": "der Stuhl",
+      "it": "la sedia",
+      "gender": "der",
+      "plural": "die Stühle",
+      "separable": false,
+      "example_de": "Kann ich den Stuhl hier nehmen?"
+    },
+    {
+      "de": "die Karte",
+      "it": "il menù",
+      "gender": "die",
+      "plural": "die Karten",
+      "separable": false,
+      "example_de": "Können wir bitte die Karte haben?"
+    },
+    {
+      "de": "das Glas",
+      "it": "il bicchiere",
+      "gender": "das",
+      "plural": "die Gläser",
+      "separable": false,
+      "example_de": "Ein Glas Rotwein, bitte."
+    },
+    {
+      "de": "die Flasche",
+      "it": "la bottiglia",
+      "gender": "die",
+      "plural": "die Flaschen",
+      "separable": false,
+      "example_de": "Eine Flasche Mineralwasser, bitte."
+    },
+    {
+      "de": "der Teller",
+      "it": "il piatto",
+      "gender": "der",
+      "plural": "die Teller",
+      "separable": false,
+      "example_de": "Der Teller ist noch nicht sauber."
+    },
+    {
+      "de": "die Gabel",
+      "it": "la forchetta",
+      "gender": "die",
+      "plural": "die Gabeln",
+      "separable": false,
+      "example_de": "Ich brauche noch eine Gabel."
+    },
+    {
+      "de": "das Messer",
+      "it": "il coltello",
+      "gender": "das",
+      "plural": "die Messer",
+      "separable": false,
+      "example_de": "Das Messer schneidet nicht gut."
+    },
+    {
+      "de": "der Löffel",
+      "it": "il cucchiaio",
+      "gender": "der",
+      "plural": "die Löffel",
+      "separable": false,
+      "example_de": "Ein Löffel für die Suppe, bitte."
+    },
+    {
+      "de": "die Suppe",
+      "it": "la zuppa",
+      "gender": "die",
+      "plural": "die Suppen",
+      "separable": false,
+      "example_de": "Die Suppe ist zu heiss."
+    },
+    {
+      "de": "der Salat",
+      "it": "l'insalata",
+      "gender": "der",
+      "plural": "die Salate",
+      "separable": false,
+      "example_de": "Ich nehme einen gemischten Salat."
+    },
+    {
+      "de": "die Pizza",
+      "it": "la pizza",
+      "gender": "die",
+      "plural": "die Pizzas",
+      "separable": false,
+      "example_de": "Eine Pizza Margherita, bitte."
+    },
+    {
+      "de": "die Pasta",
+      "it": "la pasta",
+      "gender": "die",
+      "plural": "die Pastas",
+      "separable": false,
+      "example_de": "Die Pasta ist heute frisch gemacht."
+    },
+    {
+      "de": "das Fleisch",
+      "it": "la carne",
+      "gender": "das",
+      "plural": "die Fleisch",
+      "separable": false,
+      "example_de": "Das Fleisch ist zart und gut."
+    },
+    {
+      "de": "der Fisch",
+      "it": "il pesce",
+      "gender": "der",
+      "plural": "die Fische",
+      "separable": false,
+      "example_de": "Der Fisch ist heute frisch."
+    },
+    {
+      "de": "die Pommes",
+      "it": "le patatine fritte",
+      "gender": "die",
+      "plural": "die Pommes",
+      "separable": false,
+      "example_de": "Eine Portion Pommes, bitte."
+    },
+    {
+      "de": "die Toilette",
+      "it": "il bagno",
+      "gender": "die",
+      "plural": "die Toiletten",
+      "separable": false,
+      "example_de": "Wo ist die Toilette, bitte?"
+    },
+    {
+      "de": "bezahlen",
+      "it": "pagare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Wir möchten bitte bezahlen."
+    }
+  ]
+}

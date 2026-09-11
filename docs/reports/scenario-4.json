@@ -1,0 +1,416 @@
+{
+  "role_label": "Freundin",
+  "key_phrases": [
+    {
+      "de": "Hey, sorry, war das zu laut gestern?",
+      "it": "Ehi, scusa, era troppo forte ieri?",
+      "example": "Du fragst deine Nachbarin, ob die Party zu laut war."
+    },
+    {
+      "de": "Hast du am Samstag Zeit?",
+      "it": "Hai tempo sabato?",
+      "example": "Du fragst einen Freund, ob er am Wochenende Zeit hat."
+    },
+    {
+      "de": "Was sollen wir am Wochenende machen?",
+      "it": "Cosa facciamo nel weekend?",
+      "example": "Du schlägst vor, Pläne zu besprechen."
+    },
+    {
+      "de": "Ich habe eine Idee: Wir könnten in den Zoo gehen.",
+      "it": "Ho un'idea: potremmo andare allo zoo.",
+      "example": "Du machst einen Vorschlag für den Samstagnachmittag."
+    },
+    {
+      "de": "Das ist eine gute Idee, aber vielleicht ist es zu teuer.",
+      "it": "È una buona idea, ma forse è troppo caro.",
+      "example": "Du zweifelst wegen des Preises."
+    },
+    {
+      "de": "Kein Problem, wir können auch einfach spazieren gehen.",
+      "it": "Nessun problema, possiamo anche semplicemente fare una passeggiata.",
+      "example": "Du schlägst eine günstige Alternative vor."
+    },
+    {
+      "de": "Sollen wir etwas zu essen mitnehmen?",
+      "it": "Dobbiamo portare qualcosa da mangiare?",
+      "example": "Du fragst, ob ihr einen Picknickkorb vorbereiten sollt."
+    },
+    {
+      "de": "Ja, ich kann einen Salat machen.",
+      "it": "Sì, posso fare un'insalata.",
+      "example": "Du bietest an, etwas vorzubereiten."
+    },
+    {
+      "de": "Wann treffen wir uns?",
+      "it": "Quando ci incontriamo?",
+      "example": "Du fragst nach der Uhrzeit."
+    },
+    {
+      "de": "Um zehn am Bahnhof, oder?",
+      "it": "Alle dieci alla stazione, vero?",
+      "example": "Du schlägst einen Treffpunkt vor."
+    }
+  ],
+  "vocab": [
+    {
+      "de": "das Wochenende",
+      "it": "il fine settimana",
+      "gender": "das",
+      "plural": "die Wochenenden",
+      "separable": false,
+      "example_de": "Am Wochenende gehen wir in den Zoo."
+    },
+    {
+      "de": "der Freund",
+      "it": "l'amico",
+      "gender": "der",
+      "plural": "die Freunde",
+      "separable": false,
+      "example_de": "Mein Freund kommt am Samstag."
+    },
+    {
+      "de": "die Idee",
+      "it": "l'idea",
+      "gender": "die",
+      "plural": "die Ideen",
+      "separable": false,
+      "example_de": "Ich habe eine Idee für das Wochenende."
+    },
+    {
+      "de": "der Vorschlag",
+      "it": "la proposta",
+      "gender": "der",
+      "plural": "die Vorschläge",
+      "separable": false,
+      "example_de": "Das ist ein guter Vorschlag."
+    },
+    {
+      "de": "der Plan",
+      "it": "il piano",
+      "gender": "der",
+      "plural": "die Pläne",
+      "separable": false,
+      "example_de": "Wir machen einen Plan für Samstag."
+    },
+    {
+      "de": "der Zoo",
+      "it": "lo zoo",
+      "gender": "der",
+      "plural": "die Zoos",
+      "separable": false,
+      "example_de": "Der Zoo ist am Samstag geöffnet."
+    },
+    {
+      "de": "der Spaziergang",
+      "it": "la passeggiata",
+      "gender": "der",
+      "plural": "die Spaziergänge",
+      "separable": false,
+      "example_de": "Wir machen einen Spaziergang am See."
+    },
+    {
+      "de": "das Picknick",
+      "it": "il picnic",
+      "gender": "das",
+      "plural": "die Picknicks",
+      "separable": false,
+      "example_de": "Wir machen ein Picknick im Park."
+    },
+    {
+      "de": "der Salat",
+      "it": "l'insalata",
+      "gender": "der",
+      "plural": "die Salate",
+      "separable": false,
+      "example_de": "Ich mache einen Salat für das Picknick."
+    },
+    {
+      "de": "das Treffen",
+      "it": "l'incontro",
+      "gender": "das",
+      "plural": "die Treffen",
+      "separable": false,
+      "example_de": "Das Treffen ist um zehn."
+    },
+    {
+      "de": "der Bahnhof",
+      "it": "la stazione",
+      "gender": "der",
+      "plural": "die Bahnhöfe",
+      "separable": false,
+      "example_de": "Wir treffen uns am Bahnhof."
+    },
+    {
+      "de": "die Zeit",
+      "it": "il tempo",
+      "gender": "die",
+      "plural": "die Zeiten",
+      "separable": false,
+      "example_de": "Hast du Zeit am Samstag?"
+    },
+    {
+      "de": "der Samstag",
+      "it": "sabato",
+      "gender": "der",
+      "plural": "die Samstage",
+      "separable": false,
+      "example_de": "Am Samstag haben wir frei."
+    },
+    {
+      "de": "der Sonntag",
+      "it": "domenica",
+      "gender": "der",
+      "plural": "die Sonntage",
+      "separable": false,
+      "example_de": "Am Sonntag machen wir nichts."
+    },
+    {
+      "de": "gehen",
+      "it": "andare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Wir gehen in den Zoo."
+    },
+    {
+      "de": "machen",
+      "it": "fare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Was machen wir am Wochenende?"
+    },
+    {
+      "de": "treffen",
+      "it": "incontrare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Wir treffen uns am Bahnhof."
+    },
+    {
+      "de": "vorschlagen",
+      "it": "proporre",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Ich schlage vor, in den Zoo zu gehen."
+    },
+    {
+      "de": "mitnehmen",
+      "it": "portare con sé",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Wir nehmen etwas zu essen mit."
+    },
+    {
+      "de": "vorbereiten",
+      "it": "preparare",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Ich bereite den Salat vor."
+    },
+    {
+      "de": "spazieren gehen",
+      "it": "fare una passeggiata",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Wir gehen am See spazieren."
+    },
+    {
+      "de": "kosten",
+      "it": "costare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Der Zoo kostet 20 Franken."
+    },
+    {
+      "de": "bezahlen",
+      "it": "pagare",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Ich bezahle für das Picknick."
+    },
+    {
+      "de": "das Geld",
+      "it": "il denaro",
+      "gender": "das",
+      "plural": "die Gelder",
+      "separable": false,
+      "example_de": "Ich habe nicht viel Geld."
+    },
+    {
+      "de": "der Franken",
+      "it": "il franco",
+      "gender": "der",
+      "plural": "die Franken",
+      "separable": false,
+      "example_de": "Das kostet 10 Franken."
+    },
+    {
+      "de": "die Migros",
+      "it": "Migros (supermercato)",
+      "gender": "die",
+      "plural": "die Migros",
+      "separable": false,
+      "example_de": "Wir kaufen bei der Migros ein."
+    },
+    {
+      "de": "der Coop",
+      "it": "Coop (supermercato)",
+      "gender": "der",
+      "plural": "die Coops",
+      "separable": false,
+      "example_de": "Der Coop ist neben dem Bahnhof."
+    },
+    {
+      "de": "einkaufen",
+      "it": "fare la spesa",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Wir kaufen am Samstag ein."
+    },
+    {
+      "de": "das Säckli",
+      "it": "sacchetto (di plastica)",
+      "gender": "das",
+      "plural": "die Säckli",
+      "separable": false,
+      "example_de": "Hast du ein Säckli für den Salat?"
+    },
+    {
+      "de": "die Tüte",
+      "it": "sacchetto (standard)",
+      "gender": "die",
+      "plural": "die Tüten",
+      "separable": false,
+      "example_de": "Ich brauche eine Tüte für das Gemüse."
+    },
+    {
+      "de": "der Kehricht",
+      "it": "spazzatura",
+      "gender": "der",
+      "plural": "die Kehricht",
+      "separable": false,
+      "example_de": "Wir müssen den Kehricht rausbringen."
+    },
+    {
+      "de": "der Kehrichtsack",
+      "it": "sacco della spazzatura",
+      "gender": "der",
+      "plural": "die Kehrichtsäcke",
+      "separable": false,
+      "example_de": "Der Kehrichtsack ist voll."
+    },
+    {
+      "de": "das Velo",
+      "it": "bicicletta",
+      "gender": "das",
+      "plural": "die Velos",
+      "separable": false,
+      "example_de": "Wir fahren mit dem Velo zum See."
+    },
+    {
+      "de": "das Treppenhaus",
+      "it": "scale (condominio)",
+      "gender": "das",
+      "plural": "die Treppenhäuser",
+      "separable": false,
+      "example_de": "Das Velo steht im Treppenhaus."
+    },
+    {
+      "de": "die Nachtruhe",
+      "it": "riposo notturno",
+      "gender": "die",
+      "plural": "die Nachtruhen",
+      "separable": false,
+      "example_de": "Ab 22 Uhr ist Nachtruhe."
+    },
+    {
+      "de": "die Party",
+      "it": "la festa",
+      "gender": "die",
+      "plural": "die Partys",
+      "separable": false,
+      "example_de": "Wir feiern eine Party am Samstag."
+    },
+    {
+      "de": "feiern",
+      "it": "festeggiare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Wir feiern bis spät."
+    },
+    {
+      "de": "laut",
+      "it": "forte (rumore)",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Die Musik war zu laut."
+    },
+    {
+      "de": "ruhig",
+      "it": "tranquillo",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Bitte sei ruhig."
+    },
+    {
+      "de": "der Nachbar",
+      "it": "il vicino",
+      "gender": "der",
+      "plural": "die Nachbarn",
+      "separable": false,
+      "example_de": "Der Nachbar hat sich beschwert."
+    },
+    {
+      "de": "das Paket",
+      "it": "il pacco",
+      "gender": "das",
+      "plural": "die Pakete",
+      "separable": false,
+      "example_de": "Das Paket ist für dich."
+    }
+  ],
+  "imprevisti": [
+    "Die Migros ist am Sonntag geschlossen.",
+    "Der Zoo ist wegen Regen geschlossen.",
+    "Dein Velo hat einen Platten.",
+    "Die Nachbarin beschwert sich über die laute Musik.",
+    "Das Picknick wird wegen Gewitter abgesagt."
+  ],
+  "swiss_variants": [
+    {
+      "standard": "Grüezi, wie geht's?",
+      "swiss": "Grüezi, wie gaht's?",
+      "it": "Ciao, come va?"
+    },
+    {
+      "standard": "Hast du ein Säckli?",
+      "swiss": "Hesch es Säckli?",
+      "it": "Hai un sacchetto?"
+    },
+    {
+      "standard": "Das kostet 20 Franken.",
+      "swiss": "Das kostet 20 Franke.",
+      "it": "Costa 20 franchi."
+    }
+  ],
+  "goals": [
+    "Gemeinsam einen Plan für das Wochenende machen.",
+    "Sich auf einen Treffpunkt und eine Uhrzeit einigen.",
+    "Entscheiden, was man unternehmen möchte (z.B. Zoo oder Spaziergang).",
+    "Essen und Getränke für das Picknick organisieren.",
+    "Auf unerwartete Probleme reagieren (z.B. Regen, Lärmbeschwerde)."
+  ]
+}

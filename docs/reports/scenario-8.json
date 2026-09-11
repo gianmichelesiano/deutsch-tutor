@@ -1,0 +1,440 @@
+{
+  "role_label": "Nachbarin",
+  "key_phrases": [
+    {
+      "de": "Hey, sorry, war das zu laut gestern?",
+      "it": "Ehi, scusa, era troppo forte ieri?",
+      "example": "Nach der Party fragst du deine Nachbarin."
+    },
+    {
+      "de": "Chunsch au zu mim Geburtstag?",
+      "it": "Vieni anche al mio compleanno?",
+      "example": "Einladung zum Geburtstag."
+    },
+    {
+      "de": "Was söll ich mitbringe?",
+      "it": "Cosa devo portare?",
+      "example": "Frage, was du zur Party mitbringen sollst."
+    },
+    {
+      "de": "Ich bring en Salat und en Guetzli mit.",
+      "it": "Porto un'insalata e dei biscotti.",
+      "example": "Du sagst, was du mitbringst."
+    },
+    {
+      "de": "Hesch du en Guetsli?",
+      "it": "Hai un regalo?",
+      "example": "Frage nach einem Geschenk."
+    },
+    {
+      "de": "Das isch en schöne Bluestrauss für dich.",
+      "it": "Questo è un bel mazzo di fiori per te.",
+      "example": "Du gibst deiner Nachbarin Blumen."
+    },
+    {
+      "de": "Merci vilmal für d'Yladig!",
+      "it": "Grazie mille per l'invito!",
+      "example": "Du bedankst dich für die Einladung."
+    },
+    {
+      "de": "Söll ich öppis us de Migro mitbringe?",
+      "it": "Devo portare qualcosa dal Migros?",
+      "example": "Du fragst, ob du etwas einkaufen sollst."
+    },
+    {
+      "de": "Es isch e gueti Idee, wenn mir um 8i aafönd.",
+      "it": "È una buona idea iniziare alle 8.",
+      "example": "Du schlägst eine Uhrzeit vor."
+    },
+    {
+      "de": "Sorry, ich cha leider nöd cho, ich ha scho öppis vor.",
+      "it": "Scusa, purtroppo non posso venire, ho già un impegno.",
+      "example": "Du sagst ab."
+    }
+  ],
+  "vocab": [
+    {
+      "de": "das Fest",
+      "it": "festa",
+      "gender": "das",
+      "plural": "die Feste",
+      "separable": false,
+      "example_de": "Am Samstag isch es Fest bi mir."
+    },
+    {
+      "de": "die Party",
+      "it": "festa (party)",
+      "gender": "die",
+      "plural": "die Partys",
+      "separable": false,
+      "example_de": "Mir gönd hüt uf e Party."
+    },
+    {
+      "de": "die Einladung",
+      "it": "invito",
+      "gender": "die",
+      "plural": "die Einladungen",
+      "separable": false,
+      "example_de": "Ich han e Einladung übercho."
+    },
+    {
+      "de": "das Geschenk",
+      "it": "regalo",
+      "gender": "das",
+      "plural": "die Geschenke",
+      "separable": false,
+      "example_de": "Was für es Geschenk chaufsch du?"
+    },
+    {
+      "de": "der Geburtstag",
+      "it": "compleanno",
+      "gender": "der",
+      "plural": "die Geburtstage",
+      "separable": false,
+      "example_de": "Am 15. isch min Geburtstag."
+    },
+    {
+      "de": "die Überraschung",
+      "it": "sorpresa",
+      "gender": "die",
+      "plural": "die Überraschungen",
+      "separable": false,
+      "example_de": "Mir mached en Überraschig für dich."
+    },
+    {
+      "de": "der Gast",
+      "it": "ospite",
+      "gender": "der",
+      "plural": "die Gäste",
+      "separable": false,
+      "example_de": "Wie vill Gäste chömed?"
+    },
+    {
+      "de": "der Gastgeber",
+      "it": "padrone di casa",
+      "gender": "der",
+      "plural": "die Gastgeber",
+      "separable": false,
+      "example_de": "Dr Gastgeber isch sehr freudig."
+    },
+    {
+      "de": "die Feier",
+      "it": "celebrazione",
+      "gender": "die",
+      "plural": "die Feiern",
+      "separable": false,
+      "example_de": "D'Feier isch im Garte."
+    },
+    {
+      "de": "der Blumenstrauss",
+      "it": "mazzo di fiori",
+      "gender": "der",
+      "plural": "die Blumensträusse",
+      "separable": false,
+      "example_de": "Ich bring en Blumenstrauss mit."
+    },
+    {
+      "de": "die Flasche",
+      "it": "bottiglia",
+      "gender": "die",
+      "plural": "die Flaschen",
+      "separable": false,
+      "example_de": "Chaufsch du no es Fläsche Wii?"
+    },
+    {
+      "de": "der Kuchen",
+      "it": "torta",
+      "gender": "der",
+      "plural": "die Kuchen",
+      "separable": false,
+      "example_de": "Dr Kuchen isch vo Migro."
+    },
+    {
+      "de": "die Torte",
+      "it": "torta (elaborata)",
+      "gender": "die",
+      "plural": "die Torten",
+      "separable": false,
+      "example_de": "D'Torte isch sehr schön."
+    },
+    {
+      "de": "die Kerze",
+      "it": "candela",
+      "gender": "die",
+      "plural": "die Kerzen",
+      "separable": false,
+      "example_de": "Mir gönd d'Chärze aazünde."
+    },
+    {
+      "de": "das Geburtstagsgeschenk",
+      "it": "regalo di compleanno",
+      "gender": "das",
+      "plural": "die Geburtstagsgeschenke",
+      "separable": false,
+      "example_de": "Ich han es Geburtstagsgeschenk für dich."
+    },
+    {
+      "de": "die Dankeskarte",
+      "it": "biglietto di ringraziamento",
+      "gender": "die",
+      "plural": "die Dankeskarten",
+      "separable": false,
+      "example_de": "Ich schrib en Dankeskarte."
+    },
+    {
+      "de": "der Glückwunsch",
+      "it": "augurio",
+      "gender": "der",
+      "plural": "die Glückwünsche",
+      "separable": false,
+      "example_de": "Vil Glückwünsch zum Geburtstag!"
+    },
+    {
+      "de": "die Feierlaune",
+      "it": "voglia di festeggiare",
+      "gender": "die",
+      "plural": "—",
+      "separable": false,
+      "example_de": "D'Feierlaune isch guet."
+    },
+    {
+      "de": "der Säckli",
+      "it": "sacchetto (borsa)",
+      "gender": "der",
+      "plural": "die Säckli",
+      "separable": false,
+      "example_de": "Chaufsch du es Säckli mit Guezli?"
+    },
+    {
+      "de": "die Migros",
+      "it": "Migros (supermercato)",
+      "gender": "die",
+      "plural": "—",
+      "separable": false,
+      "example_de": "Ich gang go Migro ychaufe."
+    },
+    {
+      "de": "die Coop",
+      "it": "Coop (supermercato)",
+      "gender": "die",
+      "plural": "—",
+      "separable": false,
+      "example_de": "D'Coop het gueti Aabot."
+    },
+    {
+      "de": "der Kehricht",
+      "it": "spazzatura",
+      "gender": "der",
+      "plural": "—",
+      "separable": false,
+      "example_de": "Dr Kehricht müend mir use stelle."
+    },
+    {
+      "de": "das Velo",
+      "it": "bicicletta",
+      "gender": "das",
+      "plural": "die Velos",
+      "separable": false,
+      "example_de": "Ich chum mit em Velo."
+    },
+    {
+      "de": "das Treppenhaus",
+      "it": "scale (vano scale)",
+      "gender": "das",
+      "plural": "die Treppenhäuser",
+      "separable": false,
+      "example_de": "S'Velo stoht im Treppehuus."
+    },
+    {
+      "de": "die Nachtruhe",
+      "it": "riposo notturno",
+      "gender": "die",
+      "plural": "—",
+      "separable": false,
+      "example_de": "Bitte d'Nachtruhe ab 22i."
+    },
+    {
+      "de": "die Nachbarin",
+      "it": "vicina di casa",
+      "gender": "die",
+      "plural": "die Nachbarinnen",
+      "separable": false,
+      "example_de": "Mini Nachbarin isch sehr hilfsbereit."
+    },
+    {
+      "de": "der Nachbar",
+      "it": "vicino di casa",
+      "gender": "der",
+      "plural": "die Nachbarn",
+      "separable": false,
+      "example_de": "Dr Nachbar het es Gärtli."
+    },
+    {
+      "de": "die Ruhe",
+      "it": "tranquillità",
+      "gender": "die",
+      "plural": "—",
+      "separable": false,
+      "example_de": "Ich bruche Ruhe zum Schaffe."
+    },
+    {
+      "de": "der Lärm",
+      "it": "rumore",
+      "gender": "der",
+      "plural": "—",
+      "separable": false,
+      "example_de": "Dr Lärm vo de Party isch z gross."
+    },
+    {
+      "de": "die Musik",
+      "it": "musica",
+      "gender": "die",
+      "plural": "—",
+      "separable": false,
+      "example_de": "D'Musik isch sehr guet."
+    },
+    {
+      "de": "der Tanz",
+      "it": "ballo",
+      "gender": "der",
+      "plural": "die Tänze",
+      "separable": false,
+      "example_de": "Mir gönd go Tanze."
+    },
+    {
+      "de": "das Spiel",
+      "it": "gioco",
+      "gender": "das",
+      "plural": "die Spiele",
+      "separable": false,
+      "example_de": "Mir spiled es Spiel."
+    },
+    {
+      "de": "das Glas",
+      "it": "bicchiere",
+      "gender": "das",
+      "plural": "die Gläser",
+      "separable": false,
+      "example_de": "Ich bruche es Glas."
+    },
+    {
+      "de": "der Teller",
+      "it": "piatto",
+      "gender": "der",
+      "plural": "die Teller",
+      "separable": false,
+      "example_de": "Wo isch de Teller?"
+    },
+    {
+      "de": "die Serviette",
+      "it": "tovagliolo",
+      "gender": "die",
+      "plural": "die Servietten",
+      "separable": false,
+      "example_de": "Chaufsch du Serviette?"
+    },
+    {
+      "de": "die Deko",
+      "it": "decorazione",
+      "gender": "die",
+      "plural": "—",
+      "separable": false,
+      "example_de": "D'Deko isch schön."
+    },
+    {
+      "de": "der Ballon",
+      "it": "palloncino",
+      "gender": "der",
+      "plural": "die Ballons",
+      "separable": false,
+      "example_de": "Mir gönd Ballons ufblose."
+    },
+    {
+      "de": "das Konfetti",
+      "it": "coriandoli",
+      "gender": "das",
+      "plural": "—",
+      "separable": false,
+      "example_de": "S'Konfetti isch überall."
+    },
+    {
+      "de": "die Überraschungsparty",
+      "it": "festa a sorpresa",
+      "gender": "die",
+      "plural": "die Überraschungspartys",
+      "separable": false,
+      "example_de": "Mir mached en Überraschigsparty."
+    },
+    {
+      "de": "einladen",
+      "it": "invitare",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Ich lad dich zu mim Fest ii."
+    },
+    {
+      "de": "mitbringen",
+      "it": "portare con sé",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Was bringsch du mit?"
+    },
+    {
+      "de": "feiern",
+      "it": "festeggiare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Mir fiired hüt."
+    },
+    {
+      "de": "schenken",
+      "it": "regalare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Ich schenk dir es Buech."
+    },
+    {
+      "de": "bedanken",
+      "it": "ringraziare",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Ich bedanke mich für d'Yladig."
+    }
+  ],
+  "imprevisti": [
+    "Die Nachbarin beschwert sich über den Lärm nach 22 Uhr.",
+    "Der Kuchen ist in der Migros nicht mehr verfügbar, du musst improvisieren.",
+    "Ein Gast bringt eine unerwartete +1 Person mit.",
+    "Das Velo blockiert das Treppenhaus und muss weggeräumt werden.",
+    "Der Kehrichtsack ist voll und muss vor der Party entsorgt werden."
+  ],
+  "swiss_variants": [
+    {
+      "standard": "Grüezi, wie geht es dir?",
+      "swiss": "Grüezi, wie gaht's dir?",
+      "it": "Ciao, come stai?"
+    },
+    {
+      "standard": "Ich bringe eine Tüte mit.",
+      "swiss": "Ich bring es Säckli mit.",
+      "it": "Porto un sacchetto."
+    },
+    {
+      "standard": "Entschuldigung, das war zu laut.",
+      "swiss": "Sorry, das isch z luut gsi.",
+      "it": "Scusa, era troppo forte."
+    }
+  ],
+  "goals": [
+    "Eine Einladung aussprechen und annehmen oder ablehnen.",
+    "Über Mitbringsel und Geschenke sprechen.",
+    "Eine Party planen (Zeit, Ort, Deko).",
+    "Sich bei Nachbarn für Lärm entschuldigen.",
+    "Schweizer Begriffe wie Säckli, Migros, Kehricht verwenden."
+  ]
+}

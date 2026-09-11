@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app import services
 from app.config import settings
 from app.db import get_session
-from app.models import ReviewResult, ReviewSource, VocabItem, VocabProgress
+from app.models import ReviewResult, ReviewSource, UserSentence, VocabItem, VocabProgress
 from app.schemas import ReviewIn, ReviewOut, ReviewQueueItem, VocabItemOut
 
 router = APIRouter(prefix=settings.api_prefix, tags=["vocab"])
@@ -40,6 +40,37 @@ async def list_vocab(session: AsyncSession = Depends(get_session)):
 async def review_queue(session: AsyncSession = Depends(get_session)):
     words = await services.pick_flashcard_queue(session, limit=20)
     return [ReviewQueueItem(**w) for w in words]
+
+
+@router.get("/vocab/{vocab_id}")
+async def get_vocab(vocab_id: int, session: AsyncSession = Depends(get_session)):
+    vocab = await session.get(VocabItem, vocab_id)
+    if vocab is None:
+        raise HTTPException(status_code=404, detail="vocabolo non trovato")
+    progress = await session.get(VocabProgress, vocab_id)
+    sentences = (
+        await session.scalars(
+            select(UserSentence)
+            .where(UserSentence.vocab_item_id == vocab_id)
+            .order_by(UserSentence.created_at.desc())
+            .limit(10)
+        )
+    ).all()
+    return {
+        "id": vocab.id,
+        "de": vocab.de,
+        "it": vocab.it,
+        "gender": vocab.gender,
+        "plural": vocab.plural,
+        "separable": vocab.separable,
+        "example_de": vocab.example_de,
+        "state": progress.state.value if progress else "new",
+        "next_review_at": progress.next_review_at if progress else None,
+        "user_sentences": [
+            {"sentence": s.sentence, "is_correct": s.is_correct, "feedback": s.feedback}
+            for s in sentences
+        ],
+    }
 
 
 @router.post("/vocab/{vocab_id}/review", response_model=ReviewOut)

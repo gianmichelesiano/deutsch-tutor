@@ -1,0 +1,402 @@
+{
+  "slug": "wochenende-mit-freunden",
+  "week_number": 4,
+  "role_label": "Freund",
+  "key_phrases": [
+    {
+      "de": "Hast du am Wochenende schon etwas vor?",
+      "it": "Hai già programmi per il fine settimana?",
+      "example": "Am Donnerstag fragst du deinen Freund, ob er Zeit hat."
+    },
+    {
+      "de": "Wollen wir am Samstag etwas unternehmen?",
+      "it": "Vogliamo fare qualcosa sabato?",
+      "example": "Du möchtest mit deinem Freund etwas planen."
+    },
+    {
+      "de": "Ich habe am Samstag noch nichts vor.",
+      "it": "Sabato non ho ancora programmi.",
+      "example": "Du antwortest auf die Frage, ob du Zeit hast."
+    },
+    {
+      "de": "Hast du Lust, ins Kino zu gehen?",
+      "it": "Ti va di andare al cinema?",
+      "example": "Du machst einen Vorschlag für eine Aktivität."
+    },
+    {
+      "de": "Treffen wir uns um sieben Uhr?",
+      "it": "Ci vediamo alle sette?",
+      "example": "Du schlägst eine Uhrzeit für das Treffen vor."
+    },
+    {
+      "de": "Wo wollen wir uns treffen?",
+      "it": "Dove vogliamo incontrarci?",
+      "example": "Du fragst nach dem Treffpunkt."
+    },
+    {
+      "de": "Ich freue mich schon auf das Wochenende.",
+      "it": "Non vedo l'ora che arrivi il fine settimana.",
+      "example": "Du drückst deine Vorfreude aus."
+    },
+    {
+      "de": "Was hältst du von einem Ausflug an den Zürichsee?",
+      "it": "Che ne pensi di una gita al lago di Zurigo?",
+      "example": "Du machst einen Vorschlag für einen Ausflug."
+    },
+    {
+      "de": "Sollen wir noch jemanden einladen?",
+      "it": "Dobbiamo invitare qualcun altro?",
+      "example": "Du fragst, ob weitere Freunde mitkommen sollen."
+    },
+    {
+      "de": "Ich muss leider absagen, mir ist etwas dazwischengekommen.",
+      "it": "Purtroppo devo disdire, mi è sorto un imprevisto.",
+      "example": "Du musst eine Verabredung kurzfristig absagen."
+    }
+  ],
+  "imprevisti": [
+    "Der Freund sagt kurzfristig ab, weil er krank geworden ist.",
+    "Das Wetter spielt nicht mit: Es regnet in Strömen, und der geplante Ausflug fällt ins Wasser.",
+    "Das Restaurant, das ihr ausgewählt habt, ist ausgebucht.",
+    "Der Zug fällt aus, und ihr müsst auf den Bus umsteigen.",
+    "Ein Freund hat vergessen, dass ihr euch verabredet habt, und ist nicht erreichbar."
+  ],
+  "swiss_variants": [
+    {
+      "standard": "Fahrrad",
+      "swiss": "Velo",
+      "it": "bicicletta"
+    },
+    {
+      "standard": "Guten Tag",
+      "swiss": "Grüezi",
+      "it": "buongiorno"
+    },
+    {
+      "standard": "Schweizer Franken",
+      "swiss": "Franken",
+      "it": "franchi svizzeri"
+    }
+  ],
+  "goals": [
+    "Verabredungen für das Wochenende treffen.",
+    "Vorschläge für gemeinsame Aktivitäten machen und darauf reagieren.",
+    "Uhrzeit und Treffpunkt absprechen.",
+    "Pläne ändern oder absagen, wenn etwas dazwischenkommt.",
+    "Sich über die Wochenendpläne austauschen und Vorfreude ausdrücken."
+  ],
+  "vocab": [
+    {
+      "de": "das Wochenende",
+      "it": "il fine settimana",
+      "gender": "das",
+      "plural": "die Wochenenden",
+      "separable": false,
+      "example_de": "Am Wochenende schlafe ich lange."
+    },
+    {
+      "de": "der Freund",
+      "it": "l'amico",
+      "gender": "der",
+      "plural": "die Freunde",
+      "separable": false,
+      "example_de": "Mein Freund kommt am Samstag zu Besuch."
+    },
+    {
+      "de": "die Freundin",
+      "it": "l'amica",
+      "gender": "die",
+      "plural": "die Freundinnen",
+      "separable": false,
+      "example_de": "Meine Freundin und ich gehen zusammen ins Kino."
+    },
+    {
+      "de": "ausgehen",
+      "it": "uscire",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Am Freitagabend gehen wir oft aus."
+    },
+    {
+      "de": "sich treffen",
+      "it": "incontrarsi",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Wir treffen uns um 18 Uhr am Bahnhof."
+    },
+    {
+      "de": "das Velo",
+      "it": "la bicicletta",
+      "gender": "das",
+      "plural": "die Velos",
+      "separable": false,
+      "example_de": "Ich fahre mit dem Velo zum See."
+    },
+    {
+      "de": "der Znüni",
+      "it": "la merenda del mattino",
+      "gender": "der",
+      "plural": "die Znüni",
+      "separable": false,
+      "example_de": "Wir machen eine Pause und essen einen Znüni."
+    },
+    {
+      "de": "das Bier",
+      "it": "la birra",
+      "gender": "das",
+      "plural": "die Biere",
+      "separable": false,
+      "example_de": "Im Ausgang trinken wir ein Bier."
+    },
+    {
+      "de": "der Ausgang",
+      "it": "la serata in giro",
+      "gender": "der",
+      "plural": "die Ausgänge",
+      "separable": false,
+      "example_de": "Am Samstag gehen wir in den Ausgang."
+    },
+    {
+      "de": "grillieren",
+      "it": "grigliare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Bei schönem Wetter grillieren wir im Park."
+    },
+    {
+      "de": "das Feuer",
+      "it": "il fuoco",
+      "gender": "das",
+      "plural": "die Feuer",
+      "separable": false,
+      "example_de": "Wir machen ein Feuer am See."
+    },
+    {
+      "de": "die Wurst",
+      "it": "la salsiccia",
+      "gender": "die",
+      "plural": "die Würste",
+      "separable": false,
+      "example_de": "Ich bringe Würste zum Grillieren mit."
+    },
+    {
+      "de": "der Salat",
+      "it": "l'insalata",
+      "gender": "der",
+      "plural": "die Salate",
+      "separable": false,
+      "example_de": "Wir machen einen Salat als Beilage."
+    },
+    {
+      "de": "mitbringen",
+      "it": "portare con sé",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Kannst du etwas zu trinken mitbringen?"
+    },
+    {
+      "de": "abholen",
+      "it": "andare a prendere",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Ich hole dich um 19 Uhr ab."
+    },
+    {
+      "de": "zusammen",
+      "it": "insieme",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Wir machen das Wochenende zusammen."
+    },
+    {
+      "de": "der Film",
+      "it": "il film",
+      "gender": "der",
+      "plural": "die Filme",
+      "separable": false,
+      "example_de": "Wir schauen einen Film im Kino."
+    },
+    {
+      "de": "das Kino",
+      "it": "il cinema",
+      "gender": "das",
+      "plural": "die Kinos",
+      "separable": false,
+      "example_de": "Gehen wir ins Kino?"
+    },
+    {
+      "de": "spazieren",
+      "it": "passeggiare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Wir gehen am Sonntag spazieren."
+    },
+    {
+      "de": "das Picknick",
+      "it": "il picnic",
+      "gender": "das",
+      "plural": "die Picknicke",
+      "separable": false,
+      "example_de": "Wir machen ein Picknick im Park."
+    },
+    {
+      "de": "die Party",
+      "it": "la festa",
+      "gender": "die",
+      "plural": "die Partys",
+      "separable": false,
+      "example_de": "Am Samstag gehe ich an eine Party."
+    },
+    {
+      "de": "der Brunch",
+      "it": "il brunch",
+      "gender": "der",
+      "plural": "die Brunches",
+      "separable": false,
+      "example_de": "Wir machen am Sonntag einen Brunch."
+    },
+    {
+      "de": "das Fest",
+      "it": "la festa",
+      "gender": "das",
+      "plural": "die Feste",
+      "separable": false,
+      "example_de": "Das Fest im Quartier war super."
+    },
+    {
+      "de": "die Wanderung",
+      "it": "l'escursione",
+      "gender": "die",
+      "plural": "die Wanderungen",
+      "separable": false,
+      "example_de": "Die Wanderung auf den Berg war anstrengend."
+    },
+    {
+      "de": "der Ausflug",
+      "it": "la gita",
+      "gender": "der",
+      "plural": "die Ausflüge",
+      "separable": false,
+      "example_de": "Wir planen einen Ausflug an den See."
+    },
+    {
+      "de": "das Konzert",
+      "it": "il concerto",
+      "gender": "das",
+      "plural": "die Konzerte",
+      "separable": false,
+      "example_de": "Das Konzert am Freitag war ausverkauft."
+    },
+    {
+      "de": "die Bar",
+      "it": "il bar",
+      "gender": "die",
+      "plural": "die Bars",
+      "separable": false,
+      "example_de": "Wir treffen uns in einer Bar."
+    },
+    {
+      "de": "das Restaurant",
+      "it": "il ristorante",
+      "gender": "das",
+      "plural": "die Restaurants",
+      "separable": false,
+      "example_de": "Wir gehen am Abend ins Restaurant."
+    },
+    {
+      "de": "der Kaffee",
+      "it": "il caffè",
+      "gender": "der",
+      "plural": "die Kaffees",
+      "separable": false,
+      "example_de": "Trinken wir einen Kaffee zusammen?"
+    },
+    {
+      "de": "das Znüni",
+      "it": "la merenda del mattino",
+      "gender": "das",
+      "plural": "die Znüni",
+      "separable": false,
+      "example_de": "Nimm ein Znüni mit für die Wanderung."
+    },
+    {
+      "de": "das Zvieri",
+      "it": "la merenda del pomeriggio",
+      "gender": "das",
+      "plural": "die Zvieri",
+      "separable": false,
+      "example_de": "Nach der Wanderung gibt es ein Zvieri."
+    },
+    {
+      "de": "die Badi",
+      "it": "il bagno pubblico",
+      "gender": "die",
+      "plural": "die Badis",
+      "separable": false,
+      "example_de": "Bei schönem Wetter gehen wir in die Badi."
+    },
+    {
+      "de": "der See",
+      "it": "il lago",
+      "gender": "der",
+      "plural": "die Seen",
+      "separable": false,
+      "example_de": "Wir sitzen am See und geniessen die Sonne."
+    },
+    {
+      "de": "der Berg",
+      "it": "la montagna",
+      "gender": "der",
+      "plural": "die Berge",
+      "separable": false,
+      "example_de": "Am Wochenende fahren wir in die Berge."
+    },
+    {
+      "de": "die Hütte",
+      "it": "la baita",
+      "gender": "die",
+      "plural": "die Hütten",
+      "separable": false,
+      "example_de": "Wir übernachten in einer Hütte."
+    },
+    {
+      "de": "das Zelt",
+      "it": "la tenda",
+      "gender": "das",
+      "plural": "die Zelte",
+      "separable": false,
+      "example_de": "Wir stellen das Zelt am See auf."
+    },
+    {
+      "de": "die Decke",
+      "it": "la coperta",
+      "gender": "die",
+      "plural": "die Decken",
+      "separable": false,
+      "example_de": "Nimm eine Decke für das Picknick mit."
+    },
+    {
+      "de": "der Kuchen",
+      "it": "la torta",
+      "gender": "der",
+      "plural": "die Kuchen",
+      "separable": false,
+      "example_de": "Ich backe einen Kuchen für die Party."
+    },
+    {
+      "de": "das Spiel",
+      "it": "il gioco",
+      "gender": "das",
+      "plural": "die Spiele",
+      "separable": false,
+      "example_de": "Wir spielen ein Spiel zusammen."
+    }
+  ]
+}

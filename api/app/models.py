@@ -58,6 +58,7 @@ class LessonPhase(str, enum.Enum):
     roleplay = "roleplay"
     harvest = "harvest"
     swiss = "swiss"
+    test = "test"
 
 
 class MessageRole(str, enum.Enum):
@@ -187,4 +188,21 @@ class UserSentence(Base):
     sentence: Mapped[str] = mapped_column(Text)
     is_correct: Mapped[bool] = mapped_column(Boolean, default=False, server_default=text("false"))
     feedback: Mapped[str] = mapped_column(Text, default="", server_default=text("''"))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
+class LlmCall(Base):
+    """Log di una chiamata LLM (task 3.1): task, provider, modello, token, latenza."""
+
+    __tablename__ = "llm_calls"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    task: Mapped[str] = mapped_column(String(50), index=True)
+    provider: Mapped[str] = mapped_column(String(20))
+    model: Mapped[str] = mapped_column(String(200))
+    prompt_tokens: Mapped[int] = mapped_column(Integer, default=0, server_default=text("0"))
+    completion_tokens: Mapped[int] = mapped_column(Integer, default=0, server_default=text("0"))
+    latency_ms: Mapped[int] = mapped_column(Integer, default=0, server_default=text("0"))
+    ok: Mapped[bool] = mapped_column(Boolean, default=True, server_default=text("true"))
+    error: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())

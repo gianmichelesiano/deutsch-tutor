@@ -1,0 +1,410 @@
+{
+  "slug": "probleme-reklamation-reparatur-hausverwaltung",
+  "week_number": 10,
+  "role_label": "Hausverwaltung",
+  "key_phrases": [
+    {
+      "de": "Ich möchte eine Reklamation anmelden.",
+      "it": "Vorrei presentare un reclamo.",
+      "example": "Guten Tag, ich möchte eine Reklamation anmelden. In meiner Wohnung ist die Heizung kaputt."
+    },
+    {
+      "de": "Die Heizung funktioniert nicht mehr.",
+      "it": "Il riscaldamento non funziona più.",
+      "example": "Seit gestern Abend funktioniert die Heizung nicht mehr. Können Sie jemanden schicken?"
+    },
+    {
+      "de": "Können Sie das bitte reparieren lassen?",
+      "it": "Può farlo riparare, per favore?",
+      "example": "Der Wasserhahn tropft. Können Sie das bitte reparieren lassen?"
+    },
+    {
+      "de": "Wann kommt der Handwerker?",
+      "it": "Quando arriva l'artigiano?",
+      "example": "Ich habe den Schaden gemeldet. Wann kommt der Handwerker?"
+    },
+    {
+      "de": "Das ist schon zum zweiten Mal.",
+      "it": "È già la seconda volta.",
+      "example": "Das ist schon zum zweiten Mal, dass die Heizung ausfällt. Das kann nicht so weitergehen."
+    },
+    {
+      "de": "Ich habe eine Frist gesetzt.",
+      "it": "Ho fissato una scadenza.",
+      "example": "Ich habe eine Frist gesetzt: Bis Ende Woche muss das repariert sein."
+    },
+    {
+      "de": "Ich möchte eine Mietzinsreduktion beantragen.",
+      "it": "Vorrei richiedere una riduzione dell'affitto.",
+      "example": "Wenn der Mangel nicht behoben wird, möchte ich eine Mietzinsreduktion beantragen."
+    },
+    {
+      "de": "Können Sie mir das schriftlich bestätigen?",
+      "it": "Può confermarmelo per iscritto?",
+      "example": "Sie sagen, der Handwerker kommt morgen. Können Sie mir das schriftlich bestätigen?"
+    },
+    {
+      "de": "Ich habe Fotos vom Schaden gemacht.",
+      "it": "Ho fatto delle foto al danno.",
+      "example": "Ich habe Fotos vom Schaden gemacht. Möchten Sie sie sehen?"
+    },
+    {
+      "de": "Wo muss ich das melden?",
+      "it": "Dove devo segnalarlo?",
+      "example": "Es gibt einen Wasserschaden im Keller. Wo muss ich das melden?"
+    }
+  ],
+  "imprevisti": [
+    "Der Hauswart ist nicht erreichbar.",
+    "Die Verwaltung sagt, es sei nicht ihr Zuständigkeitsbereich.",
+    "Der Handwerker kommt nicht zum vereinbarten Termin.",
+    "Sie müssen die Reparatur selbst bezahlen, obwohl Sie nicht schuld sind.",
+    "Die Verwaltung verlangt eine schriftliche Meldung mit Formular."
+  ],
+  "swiss_variants": [
+    {
+      "standard": "Ich möchte eine Reklamation anmelden.",
+      "swiss": "Ich möcht e Reklamation mache.",
+      "it": "Vorrei presentare un reclamo."
+    },
+    {
+      "standard": "Können Sie das bitte reparieren lassen?",
+      "swiss": "Chönd Sie das bitte repariere la?",
+      "it": "Può farlo riparare, per favore?"
+    },
+    {
+      "standard": "Wann kommt der Handwerker?",
+      "swiss": "Wänn chunt de Handwerker?",
+      "it": "Quando arriva l'artigiano?"
+    }
+  ],
+  "goals": [
+    "Einen Mangel in der Wohnung klar beschreiben.",
+    "Eine Reparatur oder einen Termin vereinbaren.",
+    "Nachfragen, wer für die Reparatur zuständig ist.",
+    "Eine schriftliche Bestätigung verlangen.",
+    "Sich über die nächsten Schritte informieren."
+  ],
+  "vocab": [
+    {
+      "de": "die Reklamation",
+      "it": "il reclamo",
+      "gender": "die",
+      "plural": "die Reklamationen",
+      "separable": false,
+      "example_de": "Ich habe eine Reklamation wegen der kaputten Heizung."
+    },
+    {
+      "de": "reklamieren",
+      "it": "reclamare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Ich möchte den defekten Kühlschrank reklamieren."
+    },
+    {
+      "de": "die Reparatur",
+      "it": "la riparazione",
+      "gender": "die",
+      "plural": "die Reparaturen",
+      "separable": false,
+      "example_de": "Die Reparatur des Lifts dauert zwei Tage."
+    },
+    {
+      "de": "reparieren",
+      "it": "riparare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Können Sie das Velo bis morgen reparieren?"
+    },
+    {
+      "de": "der Hauswart",
+      "it": "il custode",
+      "gender": "der",
+      "plural": "die Hauswarte",
+      "separable": false,
+      "example_de": "Der Hauswart kümmert sich um die Reparaturen im Gebäude."
+    },
+    {
+      "de": "die Hausverwaltung",
+      "it": "l'amministrazione dello stabile",
+      "gender": "die",
+      "plural": "die Hausverwaltungen",
+      "separable": false,
+      "example_de": "Die Hausverwaltung ist für die Nebenkosten zuständig."
+    },
+    {
+      "de": "der Vermieter",
+      "it": "il locatore",
+      "gender": "der",
+      "plural": "die Vermieter",
+      "separable": false,
+      "example_de": "Der Vermieter muss die Reparatur bezahlen."
+    },
+    {
+      "de": "die Mieterin",
+      "it": "l'inquilina",
+      "gender": "die",
+      "plural": "die Mieterinnen",
+      "separable": false,
+      "example_de": "Die Mieterin beschwert sich über den Lärm."
+    },
+    {
+      "de": "der Mangel",
+      "it": "il difetto",
+      "gender": "der",
+      "plural": "die Mängel",
+      "separable": false,
+      "example_de": "Es gibt mehrere Mängel in der Wohnung."
+    },
+    {
+      "de": "der Schaden",
+      "it": "il danno",
+      "gender": "der",
+      "plural": "die Schäden",
+      "separable": false,
+      "example_de": "Der Schaden am Dach muss sofort behoben werden."
+    },
+    {
+      "de": "beheben",
+      "it": "eliminare, riparare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Wir werden den Mangel so schnell wie möglich beheben."
+    },
+    {
+      "de": "die Frist",
+      "it": "il termine",
+      "gender": "die",
+      "plural": "die Fristen",
+      "separable": false,
+      "example_de": "Ich setze Ihnen eine Frist von zwei Wochen."
+    },
+    {
+      "de": "die Miete",
+      "it": "l'affitto",
+      "gender": "die",
+      "plural": "die Mieten",
+      "separable": false,
+      "example_de": "Die Miete wird jeden Monat überwiesen."
+    },
+    {
+      "de": "die Nebenkosten",
+      "it": "le spese accessorie",
+      "gender": "die",
+      "plural": "die Nebenkosten",
+      "separable": false,
+      "example_de": "Die Nebenkosten sind in der Miete nicht enthalten."
+    },
+    {
+      "de": "die Kaution",
+      "it": "la cauzione",
+      "gender": "die",
+      "plural": "die Kautionen",
+      "separable": false,
+      "example_de": "Die Kaution beträgt drei Monatsmieten."
+    },
+    {
+      "de": "der Mietvertrag",
+      "it": "il contratto d'affitto",
+      "gender": "der",
+      "plural": "die Mietverträge",
+      "separable": false,
+      "example_de": "Im Mietvertrag steht, dass der Mieter kleine Reparaturen selbst zahlt."
+    },
+    {
+      "de": "kündigen",
+      "it": "disdire, licenziare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Ich möchte die Wohnung auf Ende Monat kündigen."
+    },
+    {
+      "de": "die Kündigung",
+      "it": "la disdetta",
+      "gender": "die",
+      "plural": "die Kündigungen",
+      "separable": false,
+      "example_de": "Die Kündigung muss schriftlich erfolgen."
+    },
+    {
+      "de": "die Beschwerde",
+      "it": "il reclamo",
+      "gender": "die",
+      "plural": "die Beschwerden",
+      "separable": false,
+      "example_de": "Ich habe eine Beschwerde bei der Hausverwaltung eingereicht."
+    },
+    {
+      "de": "sich beschweren",
+      "it": "lamentarsi",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Ich beschwere mich beim Hauswart über den Lärm."
+    },
+    {
+      "de": "der Abwart",
+      "it": "il custode",
+      "gender": "der",
+      "plural": "die Abwarte",
+      "separable": false,
+      "example_de": "Der Abwart repariert den Lift."
+    },
+    {
+      "de": "die Liegenschaft",
+      "it": "la proprietà immobiliare",
+      "gender": "die",
+      "plural": "die Liegenschaften",
+      "separable": false,
+      "example_de": "Die Liegenschaft gehört einer Versicherung."
+    },
+    {
+      "de": "die Verwaltung",
+      "it": "l'amministrazione",
+      "gender": "die",
+      "plural": "die Verwaltungen",
+      "separable": false,
+      "example_de": "Die Verwaltung schickt die Rechnung."
+    },
+    {
+      "de": "der Unterhalt",
+      "it": "la manutenzione",
+      "gender": "der",
+      "plural": "die Unterhalte",
+      "separable": false,
+      "example_de": "Der Unterhalt des Gebäudes ist teuer."
+    },
+    {
+      "de": "die Instandhaltung",
+      "it": "la manutenzione",
+      "gender": "die",
+      "plural": "die Instandhaltungen",
+      "separable": false,
+      "example_de": "Die Instandhaltung muss regelmässig erfolgen."
+    },
+    {
+      "de": "der Handwerker",
+      "it": "l'artigiano",
+      "gender": "der",
+      "plural": "die Handwerker",
+      "separable": false,
+      "example_de": "Der Handwerker kommt morgen."
+    },
+    {
+      "de": "der Sanitär",
+      "it": "l'idraulico",
+      "gender": "der",
+      "plural": "die Sanitäre",
+      "separable": false,
+      "example_de": "Der Sanitär repariert den Wasserhahn."
+    },
+    {
+      "de": "der Elektriker",
+      "it": "l'elettricista",
+      "gender": "der",
+      "plural": "die Elektriker",
+      "separable": false,
+      "example_de": "Der Elektriker prüft die Leitungen."
+    },
+    {
+      "de": "der Maler",
+      "it": "l'imbianchino",
+      "gender": "der",
+      "plural": "die Maler",
+      "separable": false,
+      "example_de": "Der Maler streicht die Wände."
+    },
+    {
+      "de": "der Schlosser",
+      "it": "il fabbro",
+      "gender": "der",
+      "plural": "die Schlosser",
+      "separable": false,
+      "example_de": "Der Schlosser öffnet die Tür."
+    },
+    {
+      "de": "die Heizung",
+      "it": "il riscaldamento",
+      "gender": "die",
+      "plural": "die Heizungen",
+      "separable": false,
+      "example_de": "Die Heizung funktioniert nicht."
+    },
+    {
+      "de": "das Wasserhahn",
+      "it": "il rubinetto",
+      "gender": "das",
+      "plural": "die Wasserhähne",
+      "separable": false,
+      "example_de": "Der Wasserhahn tropft."
+    },
+    {
+      "de": "der Abfluss",
+      "it": "lo scarico",
+      "gender": "der",
+      "plural": "die Abflüsse",
+      "separable": false,
+      "example_de": "Der Abfluss ist verstopft."
+    },
+    {
+      "de": "die Steckdose",
+      "it": "la presa elettrica",
+      "gender": "die",
+      "plural": "die Steckdosen",
+      "separable": false,
+      "example_de": "Die Steckdose ist kaputt."
+    },
+    {
+      "de": "der Lift",
+      "it": "l'ascensore",
+      "gender": "der",
+      "plural": "die Lifte",
+      "separable": false,
+      "example_de": "Der Lift steckt fest."
+    },
+    {
+      "de": "das Fenster",
+      "it": "la finestra",
+      "gender": "das",
+      "plural": "die Fenster",
+      "separable": false,
+      "example_de": "Das Fenster schliesst nicht richtig."
+    },
+    {
+      "de": "die Tür",
+      "it": "la porta",
+      "gender": "die",
+      "plural": "die Türen",
+      "separable": false,
+      "example_de": "Die Tür quietscht."
+    },
+    {
+      "de": "der Boden",
+      "it": "il pavimento",
+      "gender": "der",
+      "plural": "die Böden",
+      "separable": false,
+      "example_de": "Der Boden ist beschädigt."
+    },
+    {
+      "de": "die Wand",
+      "it": "il muro",
+      "gender": "die",
+      "plural": "die Wände",
+      "separable": false,
+      "example_de": "Die Wand hat einen Riss."
+    },
+    {
+      "de": "die Decke",
+      "it": "il soffitto",
+      "gender": "die",
+      "plural": "die Decken",
+      "separable": false,
+      "example_de": "Die Decke ist undicht."
+    }
+  ]
+}

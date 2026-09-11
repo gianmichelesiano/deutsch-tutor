@@ -1,0 +1,424 @@
+{
+  "role_label": "Kellnerin",
+  "key_phrases": [
+    {
+      "de": "Hallo, was darf ich Ihnen bringen?",
+      "it": "Buongiorno, cosa posso portarle?",
+      "example": "Kellnerin: Hallo, was darf ich Ihnen bringen?"
+    },
+    {
+      "de": "Ich hätte gern den Salat und ein Wasser, bitte.",
+      "it": "Vorrei l'insalata e un'acqua, per favore.",
+      "example": "Gast: Ich hätte gern den Salat und ein Wasser, bitte."
+    },
+    {
+      "de": "Entschuldigung, das war nicht bestellt.",
+      "it": "Scusi, non era ordinato.",
+      "example": "Gast: Entschuldigung, das war nicht bestellt."
+    },
+    {
+      "de": "Können Sie mir bitte die Rechnung bringen?",
+      "it": "Mi può portare il conto, per favore?",
+      "example": "Gast: Können Sie mir bitte die Rechnung bringen?"
+    },
+    {
+      "de": "Stimmt so.",
+      "it": "Tenga il resto.",
+      "example": "Gast: Stimmt so."
+    },
+    {
+      "de": "Das Essen war sehr gut, danke.",
+      "it": "Il cibo era molto buono, grazie.",
+      "example": "Gast: Das Essen war sehr gut, danke."
+    },
+    {
+      "de": "Ich habe eine Allergie gegen Nüsse.",
+      "it": "Sono allergico/a alle noci.",
+      "example": "Gast: Ich habe eine Allergie gegen Nüsse."
+    },
+    {
+      "de": "Entschuldigung, ich habe den Wein nicht bestellt.",
+      "it": "Scusi, non ho ordinato il vino.",
+      "example": "Gast: Entschuldigung, ich habe den Wein nicht bestellt."
+    },
+    {
+      "de": "Können wir noch einen Moment haben?",
+      "it": "Possiamo avere ancora un momento?",
+      "example": "Gast: Können wir noch einen Moment haben?"
+    },
+    {
+      "de": "Zahlen bitte, mit Karte.",
+      "it": "Il conto, per favore, con carta.",
+      "example": "Gast: Zahlen bitte, mit Karte."
+    }
+  ],
+  "vocab": [
+    {
+      "de": "der Tisch",
+      "it": "tavolo",
+      "gender": "der",
+      "plural": "die Tische",
+      "separable": false,
+      "example_de": "Wir möchten einen Tisch für zwei."
+    },
+    {
+      "de": "die Speisekarte",
+      "it": "menu",
+      "gender": "die",
+      "plural": "die Speisekarten",
+      "separable": false,
+      "example_de": "Kann ich bitte die Speisekarte haben?"
+    },
+    {
+      "de": "das Menü",
+      "it": "menu fisso",
+      "gender": "das",
+      "plural": "die Menüs",
+      "separable": false,
+      "example_de": "Was ist das Menü heute?"
+    },
+    {
+      "de": "die Vorspeise",
+      "it": "antipasto",
+      "gender": "die",
+      "plural": "die Vorspeisen",
+      "separable": false,
+      "example_de": "Ich nehme eine Vorspeise."
+    },
+    {
+      "de": "die Hauptspeise",
+      "it": "piatto principale",
+      "gender": "die",
+      "plural": "die Hauptspeisen",
+      "separable": false,
+      "example_de": "Die Hauptspeise ist sehr gut."
+    },
+    {
+      "de": "der Nachtisch",
+      "it": "dessert",
+      "gender": "der",
+      "plural": "die Nachtische",
+      "separable": false,
+      "example_de": "Zum Nachtisch möchte ich ein Eis."
+    },
+    {
+      "de": "das Getränk",
+      "it": "bevanda",
+      "gender": "das",
+      "plural": "die Getränke",
+      "separable": false,
+      "example_de": "Was möchten Sie als Getränk?"
+    },
+    {
+      "de": "das Wasser",
+      "it": "acqua",
+      "gender": "das",
+      "plural": "die Wasser",
+      "separable": false,
+      "example_de": "Ein Wasser ohne Kohlensäure, bitte."
+    },
+    {
+      "de": "der Kaffee",
+      "it": "caffè",
+      "gender": "der",
+      "plural": "die Kaffees",
+      "separable": false,
+      "example_de": "Einen Kaffee, bitte."
+    },
+    {
+      "de": "der Tee",
+      "it": "tè",
+      "gender": "der",
+      "plural": "die Tees",
+      "separable": false,
+      "example_de": "Ich hätte gern einen Tee."
+    },
+    {
+      "de": "das Bier",
+      "it": "birra",
+      "gender": "das",
+      "plural": "die Biere",
+      "separable": false,
+      "example_de": "Ein Bier, bitte."
+    },
+    {
+      "de": "der Wein",
+      "it": "vino",
+      "gender": "der",
+      "plural": "die Weine",
+      "separable": false,
+      "example_de": "Ein Glas Rotwein, bitte."
+    },
+    {
+      "de": "die Rechnung",
+      "it": "conto",
+      "gender": "die",
+      "plural": "die Rechnungen",
+      "separable": false,
+      "example_de": "Die Rechnung, bitte."
+    },
+    {
+      "de": "das Trinkgeld",
+      "it": "mancia",
+      "gender": "das",
+      "plural": "die Trinkgelder",
+      "separable": false,
+      "example_de": "Das Trinkgeld ist inklusive."
+    },
+    {
+      "de": "die Allergie",
+      "it": "allergia",
+      "gender": "die",
+      "plural": "die Allergien",
+      "separable": false,
+      "example_de": "Ich habe eine Allergie gegen Erdnüsse."
+    },
+    {
+      "de": "die Zutat",
+      "it": "ingrediente",
+      "gender": "die",
+      "plural": "die Zutaten",
+      "separable": false,
+      "example_de": "Welche Zutaten sind in dem Salat?"
+    },
+    {
+      "de": "der Kellner",
+      "it": "cameriere",
+      "gender": "der",
+      "plural": "die Kellner",
+      "separable": false,
+      "example_de": "Der Kellner war sehr freundlich."
+    },
+    {
+      "de": "die Kellnerin",
+      "it": "cameriera",
+      "gender": "die",
+      "plural": "die Kellnerinnen",
+      "separable": false,
+      "example_de": "Die Kellnerin bringt das Essen."
+    },
+    {
+      "de": "die Küche",
+      "it": "cucina",
+      "gender": "die",
+      "plural": "die Küchen",
+      "separable": false,
+      "example_de": "Die Küche ist bis 22 Uhr offen."
+    },
+    {
+      "de": "die Bestellung",
+      "it": "ordinazione",
+      "gender": "die",
+      "plural": "die Bestellungen",
+      "separable": false,
+      "example_de": "Ich möchte meine Bestellung ändern."
+    },
+    {
+      "de": "das Essen",
+      "it": "cibo",
+      "gender": "das",
+      "plural": "die Essen",
+      "separable": false,
+      "example_de": "Das Essen ist sehr gut."
+    },
+    {
+      "de": "das Salz",
+      "it": "sale",
+      "gender": "das",
+      "plural": "die Salze",
+      "separable": false,
+      "example_de": "Kann ich bitte das Salz haben?"
+    },
+    {
+      "de": "der Pfeffer",
+      "it": "pepe",
+      "gender": "der",
+      "plural": "die Pfeffer",
+      "separable": false,
+      "example_de": "Der Pfeffer fehlt auf dem Tisch."
+    },
+    {
+      "de": "das Brot",
+      "it": "pane",
+      "gender": "das",
+      "plural": "die Brote",
+      "separable": false,
+      "example_de": "Brot zum Essen, bitte."
+    },
+    {
+      "de": "die Butter",
+      "it": "burro",
+      "gender": "die",
+      "plural": "die Buttersorten",
+      "separable": false,
+      "example_de": "Ich hätte gern Butter zum Brot."
+    },
+    {
+      "de": "das Öl",
+      "it": "olio",
+      "gender": "das",
+      "plural": "die Öle",
+      "separable": false,
+      "example_de": "Ist Olivenöl im Salat?"
+    },
+    {
+      "de": "der Essig",
+      "it": "aceto",
+      "gender": "der",
+      "plural": "die Essige",
+      "separable": false,
+      "example_de": "Essig und Öl, bitte."
+    },
+    {
+      "de": "die Soße",
+      "it": "salsa",
+      "gender": "die",
+      "plural": "die Soßen",
+      "separable": false,
+      "example_de": "Die Soße ist sehr lecker."
+    },
+    {
+      "de": "die Karte",
+      "it": "carta (bancomat)",
+      "gender": "die",
+      "plural": "die Karten",
+      "separable": false,
+      "example_de": "Zahlen mit Karte, bitte."
+    },
+    {
+      "de": "das Bargeld",
+      "it": "contanti",
+      "gender": "das",
+      "plural": "die Bargelder",
+      "separable": false,
+      "example_de": "Ich habe kein Bargeld."
+    },
+    {
+      "de": "der Franken",
+      "it": "franco svizzero",
+      "gender": "der",
+      "plural": "die Franken",
+      "separable": false,
+      "example_de": "Das kostet 25 Franken."
+    },
+    {
+      "de": "das Rappen",
+      "it": "centesimo",
+      "gender": "das",
+      "plural": "die Rappen",
+      "separable": false,
+      "example_de": "Das macht 80 Rappen."
+    },
+    {
+      "de": "die Bestellung aufgeben",
+      "it": "fare l'ordinazione",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Ich möchte die Bestellung aufgeben."
+    },
+    {
+      "de": "bestellen",
+      "it": "ordinare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Wir möchten bestellen."
+    },
+    {
+      "de": "bringen",
+      "it": "portare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Können Sie mir das bringen?"
+    },
+    {
+      "de": "zahlen",
+      "it": "pagare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Wir möchten zahlen."
+    },
+    {
+      "de": "bezahlen",
+      "it": "pagare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Ich bezahle mit Karte."
+    },
+    {
+      "de": "probieren",
+      "it": "assaggiare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Darf ich probieren?"
+    },
+    {
+      "de": "empfehlen",
+      "it": "raccomandare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Was empfehlen Sie?"
+    },
+    {
+      "de": "warten",
+      "it": "aspettare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Wir warten auf das Essen."
+    },
+    {
+      "de": "sich entschuldigen",
+      "it": "scusarsi",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Ich möchte mich entschuldigen."
+    },
+    {
+      "de": "stimmen",
+      "it": "essere giusto",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Stimmt so."
+    }
+  ],
+  "imprevisti": [
+    "Das Restaurant ist voll, Sie müssen 10 Minuten warten.",
+    "Der Gast hat eine Allergie gegen Nüsse, aber der Salat enthält Nüsse.",
+    "Die Karte zahlt nicht, der Gast hat nur Bargeld.",
+    "Der Kellner bringt das falsche Getränk.",
+    "Ein Gast hat sein Handy im Restaurant vergessen."
+  ],
+  "swiss_variants": [
+    {
+      "standard": "Grüezi, was darf ich Ihnen bringen?",
+      "swiss": "Grüezi, was darf i Ihne bringe?",
+      "it": "Buongiorno, cosa posso portarle?"
+    },
+    {
+      "standard": "Entschuldigung, das war nicht bestellt.",
+      "swiss": "Entschuldigung, das isch nöd bstellt gsi.",
+      "it": "Scusi, non era ordinato."
+    },
+    {
+      "standard": "Zahlen bitte, mit Karte.",
+      "swiss": "Zahle bitte, mit de Charte.",
+      "it": "Il conto, per favore, con carta."
+    }
+  ],
+  "goals": [
+    "Essen und Getränke bestellen können.",
+    "Auf Allergien und Unverträglichkeiten hinweisen.",
+    "Die Rechnung anfordern und bezahlen.",
+    "Kleine Probleme beim Essen lösen (z.B. falsche Bestellung).",
+    "Sich höflich bedanken und Trinkgeld geben."
+  ]
+}

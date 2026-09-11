@@ -3,9 +3,16 @@
 Uso:
 - ``python -m app.seed``            → crea le righe mancanti (idempotente)
 - ``python -m app.seed --update``   → crea + sovrascrive i contenuti degli scenari esistenti
+
+Fonti dei contenuti:
+- ``seed_data.SCENARIOS`` / ``seed_data.VOCAB``: scenari 1–2 curati a mano.
+- ``seed_content/scenario-NN.json``: scenari 3–12 generati con ``app.content_gen``
+  e rivisti; stesso formato dell'output del generatore più ``slug``/``week_number``.
 """
 import argparse
 import asyncio
+import json
+from pathlib import Path
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
@@ -25,6 +32,22 @@ CONTENT_FIELDS = (
     "imprevisti",
     "goals",
 )
+# Campi forniti dai JSON generati (non toccano titoli/descrizione del seed).
+GENERATED_FIELDS = ("role_label", "key_phrases", "swiss_variants", "imprevisti", "goals")
+
+SEED_CONTENT_DIR = Path(__file__).parent / "seed_content"
+
+
+def load_seed_content(directory: Path = SEED_CONTENT_DIR) -> list[dict]:
+    """Carica i JSON ``scenario-NN.json`` (ordinati per nome)."""
+    return [
+        json.loads(path.read_text(encoding="utf-8"))
+        for path in sorted(directory.glob("scenario-*.json"))
+    ]
+
+
+def _has_content(scenario: Scenario) -> bool:
+    return bool(scenario.key_phrases or scenario.goals or scenario.imprevisti)
 
 
 async def run_seed(
@@ -53,13 +76,28 @@ async def run_seed(
                 updated_scenarios += 1
         await session.commit()
 
+        # Contenuti generati (scenari 3–12): applicati se lo scenario è ancora vuoto
+        # oppure con --update.
+        generated = load_seed_content()
+        vocab_rows = list(VOCAB)
+        for content in generated:
+            scenario = await session.scalar(select(Scenario).where(Scenario.slug == content["slug"]))
+            if scenario is None:
+                continue
+            if update or not _has_content(scenario):
+                for field in GENERATED_FIELDS:
+                    setattr(scenario, field, content.get(field))
+                updated_scenarios += 1
+            vocab_rows.extend({"scenario_slug": content["slug"], **v} for v in content.get("vocab", []))
+        await session.commit()
+
         scenario_ids: dict[str, int] = {}
-        for slug in {v["scenario_slug"] for v in VOCAB}:
+        for slug in {v["scenario_slug"] for v in vocab_rows}:
             scenario_ids[slug] = await session.scalar(
                 select(Scenario.id).where(Scenario.slug == slug)
             )
 
-        for v_data in VOCAB:
+        for v_data in vocab_rows:
             scenario_id = scenario_ids[v_data["scenario_slug"]]
             existing = await session.scalar(
                 select(VocabItem).where(

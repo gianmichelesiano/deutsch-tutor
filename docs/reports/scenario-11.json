@@ -1,0 +1,408 @@
+{
+  "role_label": "Nachbarin",
+  "key_phrases": [
+    {
+      "de": "Sorry, war das zu laut gestern?",
+      "it": "Scusa, era troppo forte ieri?",
+      "example": "Sorry, war das zu laut gestern? Ich hab's erst am Morgen gemerkt."
+    },
+    {
+      "de": "Ich finde, das ist eine super Idee.",
+      "it": "Penso che sia un'ottima idea.",
+      "example": "Ich finde, das ist eine super Idee, lass uns das machen."
+    },
+    {
+      "de": "Meiner Meinung nach ist das nicht so gut.",
+      "it": "Secondo me non è così buono.",
+      "example": "Meiner Meinung nach ist das nicht so gut, aber du entscheidest."
+    },
+    {
+      "de": "Was denkst du darüber?",
+      "it": "Cosa ne pensi?",
+      "example": "Was denkst du darüber? Ich bin unsicher."
+    },
+    {
+      "de": "Das finde ich auch.",
+      "it": "La penso anche io.",
+      "example": "Das finde ich auch, total."
+    },
+    {
+      "de": "Ich hab da so meine Zweifel.",
+      "it": "Ho i miei dubbi.",
+      "example": "Ich hab da so meine Zweifel, ob das klappt."
+    },
+    {
+      "de": "Erzähl mir mehr davon!",
+      "it": "Raccontami di più!",
+      "example": "Erzähl mir mehr davon! Wie war das genau?"
+    },
+    {
+      "de": "Das ist mir echt passiert, gell?",
+      "it": "Mi è successo davvero, vero?",
+      "example": "Das ist mir echt passiert, gell? Gestern in der Migros."
+    },
+    {
+      "de": "Ich bin nicht sicher, ob das stimmt.",
+      "it": "Non sono sicuro che sia vero.",
+      "example": "Ich bin nicht sicher, ob das stimmt, aber vielleicht."
+    },
+    {
+      "de": "Kannst du mir das nochmal erklären?",
+      "it": "Puoi spiegarmelo di nuovo?",
+      "example": "Kannst du mir das nochmal erklären? Ich hab's nicht ganz verstanden."
+    }
+  ],
+  "vocab": [
+    {
+      "de": "die Meinung",
+      "it": "opinione",
+      "gender": "die",
+      "plural": "Meinungen",
+      "separable": false,
+      "example_de": "Was ist deine Meinung dazu?"
+    },
+    {
+      "de": "die Idee",
+      "it": "idea",
+      "gender": "die",
+      "plural": "Ideen",
+      "separable": false,
+      "example_de": "Das ist eine gute Idee."
+    },
+    {
+      "de": "der Vorschlag",
+      "it": "proposta",
+      "gender": "der",
+      "plural": "Vorschläge",
+      "separable": false,
+      "example_de": "Hast du einen Vorschlag?"
+    },
+    {
+      "de": "die Erfahrung",
+      "it": "esperienza",
+      "gender": "die",
+      "plural": "Erfahrungen",
+      "separable": false,
+      "example_de": "Ich habe viele Erfahrungen gesammelt."
+    },
+    {
+      "de": "die Geschichte",
+      "it": "storia",
+      "gender": "die",
+      "plural": "Geschichten",
+      "separable": false,
+      "example_de": "Erzähl mir eine Geschichte."
+    },
+    {
+      "de": "das Erlebnis",
+      "it": "avventura/esperienza",
+      "gender": "das",
+      "plural": "Erlebnisse",
+      "separable": false,
+      "example_de": "Das war ein komisches Erlebnis."
+    },
+    {
+      "de": "der Alltag",
+      "it": "vita quotidiana",
+      "gender": "der",
+      "plural": "Alltage",
+      "separable": false,
+      "example_de": "Im Alltag passiert viel."
+    },
+    {
+      "de": "das Problem",
+      "it": "problema",
+      "gender": "das",
+      "plural": "Probleme",
+      "separable": false,
+      "example_de": "Wir haben ein Problem."
+    },
+    {
+      "de": "die Lösung",
+      "it": "soluzione",
+      "gender": "die",
+      "plural": "Lösungen",
+      "separable": false,
+      "example_de": "Ich suche eine Lösung."
+    },
+    {
+      "de": "der Grund",
+      "it": "motivo",
+      "gender": "der",
+      "plural": "Gründe",
+      "separable": false,
+      "example_de": "Was ist der Grund?"
+    },
+    {
+      "de": "die Sache",
+      "it": "cosa",
+      "gender": "die",
+      "plural": "Sachen",
+      "separable": false,
+      "example_de": "Das ist eine komplizierte Sache."
+    },
+    {
+      "de": "das Gefühl",
+      "it": "sentimento",
+      "gender": "das",
+      "plural": "Gefühle",
+      "separable": false,
+      "example_de": "Ich habe ein gutes Gefühl."
+    },
+    {
+      "de": "denken",
+      "it": "pensare",
+      "gender": null,
+      "plural": "",
+      "separable": false,
+      "example_de": "Ich denke, das ist richtig."
+    },
+    {
+      "de": "finden",
+      "it": "trovare/pensare",
+      "gender": null,
+      "plural": "",
+      "separable": false,
+      "example_de": "Ich finde das toll."
+    },
+    {
+      "de": "glauben",
+      "it": "credere",
+      "gender": null,
+      "plural": "",
+      "separable": false,
+      "example_de": "Ich glaube dir."
+    },
+    {
+      "de": "meinen",
+      "it": "pensare/credere",
+      "gender": null,
+      "plural": "",
+      "separable": false,
+      "example_de": "Was meinst du?"
+    },
+    {
+      "de": "erzählen",
+      "it": "raccontare",
+      "gender": null,
+      "plural": "",
+      "separable": false,
+      "example_de": "Erzähl mir von deinem Tag."
+    },
+    {
+      "de": "berichten",
+      "it": "riferire",
+      "gender": null,
+      "plural": "",
+      "separable": false,
+      "example_de": "Kannst du mir berichten?"
+    },
+    {
+      "de": "passieren",
+      "it": "succedere",
+      "gender": null,
+      "plural": "",
+      "separable": false,
+      "example_de": "Was ist passiert?"
+    },
+    {
+      "de": "erleben",
+      "it": "vivere/sperimentare",
+      "gender": null,
+      "plural": "",
+      "separable": false,
+      "example_de": "Ich habe etwas erlebt."
+    },
+    {
+      "de": "vorschlagen",
+      "it": "proporre",
+      "gender": null,
+      "plural": "",
+      "separable": true,
+      "example_de": "Ich schlage vor, wir gehen."
+    },
+    {
+      "de": "zustimmen",
+      "it": "essere d'accordo",
+      "gender": null,
+      "plural": "",
+      "separable": true,
+      "example_de": "Ich stimme dir zu."
+    },
+    {
+      "de": "ablehnen",
+      "it": "rifiutare",
+      "gender": null,
+      "plural": "",
+      "separable": true,
+      "example_de": "Ich lehne das ab."
+    },
+    {
+      "de": "entscheiden",
+      "it": "decidere",
+      "gender": null,
+      "plural": "",
+      "separable": false,
+      "example_de": "Wir müssen entscheiden."
+    },
+    {
+      "de": "überlegen",
+      "it": "considerare",
+      "gender": null,
+      "plural": "",
+      "separable": true,
+      "example_de": "Ich überlege mir das."
+    },
+    {
+      "de": "erklären",
+      "it": "spiegare",
+      "gender": null,
+      "plural": "",
+      "separable": false,
+      "example_de": "Kannst du das erklären?"
+    },
+    {
+      "de": "verstehen",
+      "it": "capire",
+      "gender": null,
+      "plural": "",
+      "separable": false,
+      "example_de": "Ich verstehe dich."
+    },
+    {
+      "de": "zweifeln",
+      "it": "dubitare",
+      "gender": null,
+      "plural": "",
+      "separable": false,
+      "example_de": "Ich zweifle daran."
+    },
+    {
+      "de": "hoffen",
+      "it": "sperare",
+      "gender": null,
+      "plural": "",
+      "separable": false,
+      "example_de": "Ich hoffe, es klappt."
+    },
+    {
+      "de": "sich freuen",
+      "it": "rallegrarsi",
+      "gender": null,
+      "plural": "",
+      "separable": true,
+      "example_de": "Ich freue mich auf das Fest."
+    },
+    {
+      "de": "sich ärgern",
+      "it": "arrabbiarsi",
+      "gender": null,
+      "plural": "",
+      "separable": true,
+      "example_de": "Ich ärgere mich über das."
+    },
+    {
+      "de": "sich wundern",
+      "it": "meravigliarsi",
+      "gender": null,
+      "plural": "",
+      "separable": true,
+      "example_de": "Ich wundere mich darüber."
+    },
+    {
+      "de": "sich erinnern",
+      "it": "ricordare",
+      "gender": null,
+      "plural": "",
+      "separable": true,
+      "example_de": "Ich erinnere mich gut."
+    },
+    {
+      "de": "sich vorstellen",
+      "it": "immaginare",
+      "gender": null,
+      "plural": "",
+      "separable": true,
+      "example_de": "Stell dir vor, was passiert."
+    },
+    {
+      "de": "sich entschuldigen",
+      "it": "scusarsi",
+      "gender": null,
+      "plural": "",
+      "separable": true,
+      "example_de": "Ich entschuldige mich."
+    },
+    {
+      "de": "sich bedanken",
+      "it": "ringraziare",
+      "gender": null,
+      "plural": "",
+      "separable": true,
+      "example_de": "Ich bedanke mich bei dir."
+    },
+    {
+      "de": "sich treffen",
+      "it": "incontrarsi",
+      "gender": null,
+      "plural": "",
+      "separable": true,
+      "example_de": "Wir treffen uns am Samstag."
+    },
+    {
+      "de": "sich unterhalten",
+      "it": "conversare",
+      "gender": null,
+      "plural": "",
+      "separable": true,
+      "example_de": "Wir unterhalten uns über alles."
+    },
+    {
+      "de": "sich einigen",
+      "it": "mettersi d'accordo",
+      "gender": null,
+      "plural": "",
+      "separable": true,
+      "example_de": "Wir einigen uns schnell."
+    },
+    {
+      "de": "sich streiten",
+      "it": "litigare",
+      "gender": null,
+      "plural": "",
+      "separable": true,
+      "example_de": "Sie streiten sich oft."
+    }
+  ],
+  "imprevisti": [
+    "Die Waschmaschine im Keller ist schon wieder besetzt.",
+    "Der Kehrichtsack ist zu voll und reisst.",
+    "Nach 22 Uhr gibt es Lärm von der Party im zweiten Stock.",
+    "Ein Paket für den Nachbarn wurde vor deine Tür gelegt.",
+    "Ein Velo steht im Treppenhaus und blockiert den Weg."
+  ],
+  "swiss_variants": [
+    {
+      "standard": "Grüezi, wie geht es Ihnen?",
+      "swiss": "Grüezi, wie gaht's?",
+      "it": "Salve, come va?"
+    },
+    {
+      "standard": "Entschuldigung, das war nicht so gemeint.",
+      "swiss": "Sorry, das isch nöd so gmeint gsi.",
+      "it": "Scusa, non era inteso così."
+    },
+    {
+      "standard": "Können Sie mir bitte helfen?",
+      "swiss": "Chönd Sie mir bitte hälfe?",
+      "it": "Può aiutarmi per favore?"
+    }
+  ],
+  "goals": [
+    "Eine Meinung zu einem Thema äussern und begründen.",
+    "Eine persönliche Erfahrung oder Geschichte erzählen.",
+    "Auf die Meinung der anderen reagieren und nachfragen.",
+    "Gemeinsam eine Lösung oder Entscheidung finden.",
+    "Sich in einem alltäglichen Gespräch auf Schweizerdeutsch verständigen."
+  ]
+}

@@ -8,6 +8,7 @@ WORKDIR /app
 
 COPY pyproject.toml ./
 COPY app ./app
+COPY prompts ./prompts
 RUN pip install ".[dev]"
 
 COPY alembic.ini ./

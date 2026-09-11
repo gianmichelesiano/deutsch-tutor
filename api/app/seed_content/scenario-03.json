@@ -1,0 +1,394 @@
+{
+  "slug": "schule-elternabend-und-lehrpersonen",
+  "week_number": 3,
+  "role_label": "Lehrperson",
+  "key_phrases": [
+    {
+      "de": "Grüezi, ich bin hier für das Elterngespräch angemeldet.",
+      "it": "Buongiorno, sono qui per il colloquio genitori-insegnanti.",
+      "example": "Am Empfang der Schule: «Grüezi, ich bin hier für das Elterngespräch angemeldet.»"
+    },
+    {
+      "de": "Können Sie mir sagen, wie es meinem Kind in der Schule geht?",
+      "it": "Può dirmi come va mio figlio a scuola?",
+      "example": "Zu Beginn des Gesprächs: «Können Sie mir sagen, wie es meinem Kind in der Schule geht?»"
+    },
+    {
+      "de": "In welchen Fächern hat mein Kind Schwierigkeiten?",
+      "it": "In quali materie mio figlio ha difficoltà?",
+      "example": "Nach der allgemeinen Einschätzung: «In welchen Fächern hat mein Kind Schwierigkeiten?»"
+    },
+    {
+      "de": "Was können wir zu Hause tun, um zu helfen?",
+      "it": "Cosa possiamo fare a casa per aiutare?",
+      "example": "Wenn es um Unterstützung geht: «Was können wir zu Hause tun, um zu helfen?»"
+    },
+    {
+      "de": "Gibt es Hausaufgabenhilfe oder Förderkurse?",
+      "it": "Ci sono aiuti per i compiti o corsi di recupero?",
+      "example": "Bei Bedarf nach zusätzlicher Unterstützung: «Gibt es Hausaufgabenhilfe oder Förderkurse?»"
+    },
+    {
+      "de": "Wie verhält sich mein Kind in der Klasse?",
+      "it": "Come si comporta mio figlio in classe?",
+      "example": "Zum Sozialverhalten: «Wie verhält sich mein Kind in der Klasse?»"
+    },
+    {
+      "de": "Können wir einen Termin für ein weiteres Gespräch vereinbaren?",
+      "it": "Possiamo fissare un altro appuntamento?",
+      "example": "Am Ende des Gesprächs: «Können wir einen Termin für ein weiteres Gespräch vereinbaren?»"
+    },
+    {
+      "de": "Vielen Dank für Ihre Zeit und die Informationen.",
+      "it": "Grazie per il suo tempo e le informazioni.",
+      "example": "Zum Abschied: «Vielen Dank für Ihre Zeit und die Informationen.»"
+    },
+    {
+      "de": "Entschuldigung, ich habe noch eine Frage.",
+      "it": "Scusi, avrei ancora una domanda.",
+      "example": "Wenn man etwas vergessen hat: «Entschuldigung, ich habe noch eine Frage.»"
+    },
+    {
+      "de": "Können Sie das bitte noch einmal erklären?",
+      "it": "Può spiegarlo di nuovo, per favore?",
+      "example": "Wenn man etwas nicht verstanden hat: «Können Sie das bitte noch einmal erklären?»"
+    }
+  ],
+  "imprevisti": [
+    "Die Lehrperson ist krank und wird durch eine Kollegin vertreten.",
+    "Das Gespräch beginnt 15 Minuten später, weil die Lehrperson noch eine dringende Aufgabe hat.",
+    "Sie haben den Termin verwechselt und sind eine Stunde zu früh dran.",
+    "Die Lehrperson spricht sehr schnell und Sie verstehen nur die Hälfte.",
+    "Ihr Kind hat eine schlechte Note in Mathematik, aber Sie hatten nichts davon gehört."
+  ],
+  "swiss_variants": [
+    {
+      "standard": "Guten Tag, ich bin hier für das Elterngespräch.",
+      "swiss": "Grüezi, ich bi do für s Elteregespräch.",
+      "it": "Buongiorno, sono qui per il colloquio genitori-insegnanti."
+    },
+    {
+      "standard": "Entschuldigung, ich habe noch eine Frage.",
+      "swiss": "Exgüsi, ich ha no e Frag.",
+      "it": "Scusi, avrei ancora una domanda."
+    },
+    {
+      "standard": "Vielen Dank für Ihre Zeit.",
+      "swiss": "Merci vilmal für Ihri Ziit.",
+      "it": "Grazie mille per il suo tempo."
+    }
+  ],
+  "goals": [
+    "Sich für das Gespräch anmelden und vorstellen.",
+    "Fragen zum Lernstand und Verhalten des Kindes stellen.",
+    "Nach Unterstützungsmöglichkeiten fragen.",
+    "Einen weiteren Termin vereinbaren.",
+    "Sich für das Gespräch bedanken."
+  ],
+  "vocab": [
+    {
+      "de": "der Elternabend",
+      "it": "la serata dei genitori",
+      "gender": "der",
+      "plural": "die Elternabende",
+      "separable": false,
+      "example_de": "Am Elternabend sprechen die Lehrpersonen über das Schuljahr."
+    },
+    {
+      "de": "die Lehrperson",
+      "it": "l'insegnante",
+      "gender": "die",
+      "plural": "die Lehrpersonen",
+      "separable": false,
+      "example_de": "Die Lehrperson erklärt den Eltern den Lehrplan."
+    },
+    {
+      "de": "der Lehrer",
+      "it": "l'insegnante (uomo)",
+      "gender": "der",
+      "plural": "die Lehrer",
+      "separable": false,
+      "example_de": "Der Lehrer gibt uns viele Hausaufgaben."
+    },
+    {
+      "de": "die Lehrerin",
+      "it": "l'insegnante (donna)",
+      "gender": "die",
+      "plural": "die Lehrerinnen",
+      "separable": false,
+      "example_de": "Die Lehrerin ist sehr nett zu den Kindern."
+    },
+    {
+      "de": "das Gespräch",
+      "it": "il colloquio",
+      "gender": "das",
+      "plural": "die Gespräche",
+      "separable": false,
+      "example_de": "Das Gespräch mit der Lehrerin war sehr hilfreich."
+    },
+    {
+      "de": "der Termin",
+      "it": "l'appuntamento",
+      "gender": "der",
+      "plural": "die Termine",
+      "separable": false,
+      "example_de": "Ich habe einen Termin für das Elterngespräch vereinbart."
+    },
+    {
+      "de": "die Note",
+      "it": "il voto",
+      "gender": "die",
+      "plural": "die Noten",
+      "separable": false,
+      "example_de": "Mein Sohn hat gute Noten in Mathematik."
+    },
+    {
+      "de": "das Zeugnis",
+      "it": "la pagella",
+      "gender": "das",
+      "plural": "die Zeugnisse",
+      "separable": false,
+      "example_de": "Am Ende des Semesters bekommen die Kinder das Zeugnis."
+    },
+    {
+      "de": "die Hausaufgabe",
+      "it": "il compito a casa",
+      "gender": "die",
+      "plural": "die Hausaufgaben",
+      "separable": false,
+      "example_de": "Die Hausaufgaben müssen bis morgen erledigt sein."
+    },
+    {
+      "de": "der Stundenplan",
+      "it": "l'orario scolastico",
+      "gender": "der",
+      "plural": "die Stundenpläne",
+      "separable": false,
+      "example_de": "Der Stundenplan hängt im Klassenzimmer."
+    },
+    {
+      "de": "das Fach",
+      "it": "la materia",
+      "gender": "das",
+      "plural": "die Fächer",
+      "separable": false,
+      "example_de": "Welches Fach magst du am liebsten?"
+    },
+    {
+      "de": "die Pause",
+      "it": "la pausa",
+      "gender": "die",
+      "plural": "die Pausen",
+      "separable": false,
+      "example_de": "In der Pause spielen die Kinder auf dem Pausenplatz."
+    },
+    {
+      "de": "die Klasse",
+      "it": "la classe",
+      "gender": "die",
+      "plural": "die Klassen",
+      "separable": false,
+      "example_de": "Meine Tochter geht in die dritte Klasse."
+    },
+    {
+      "de": "der Schüler",
+      "it": "l'alunno",
+      "gender": "der",
+      "plural": "die Schüler",
+      "separable": false,
+      "example_de": "Der Schüler meldet sich, wenn er eine Frage hat."
+    },
+    {
+      "de": "die Schülerin",
+      "it": "l'alunna",
+      "gender": "die",
+      "plural": "die Schülerinnen",
+      "separable": false,
+      "example_de": "Die Schülerin hat ihre Hausaufgaben vergessen."
+    },
+    {
+      "de": "der Schulleiter",
+      "it": "il direttore scolastico",
+      "gender": "der",
+      "plural": "die Schulleiter",
+      "separable": false,
+      "example_de": "Der Schulleiter begrüsst die Eltern am Elternabend."
+    },
+    {
+      "de": "die Schulleitung",
+      "it": "la direzione scolastica",
+      "gender": "die",
+      "plural": "die Schulleitungen",
+      "separable": false,
+      "example_de": "Die Schulleitung informiert über wichtige Änderungen."
+    },
+    {
+      "de": "das Elterngespräch",
+      "it": "il colloquio con i genitori",
+      "gender": "das",
+      "plural": "die Elterngespräche",
+      "separable": false,
+      "example_de": "Das Elterngespräch findet nächste Woche statt."
+    },
+    {
+      "de": "die Sprechstunde",
+      "it": "l'ora di ricevimento",
+      "gender": "die",
+      "plural": "die Sprechstunden",
+      "separable": false,
+      "example_de": "Die Sprechstunde der Lehrerin ist am Dienstag von 14 bis 15 Uhr."
+    },
+    {
+      "de": "die Elternvertretung",
+      "it": "la rappresentanza dei genitori",
+      "gender": "die",
+      "plural": "die Elternvertretungen",
+      "separable": false,
+      "example_de": "Die Elternvertretung organisiert den nächsten Elternabend."
+    },
+    {
+      "de": "der Elternrat",
+      "it": "il consiglio dei genitori",
+      "gender": "der",
+      "plural": "die Elternräte",
+      "separable": false,
+      "example_de": "Der Elternrat trifft sich einmal pro Quartal."
+    },
+    {
+      "de": "die Schulpflege",
+      "it": "il consiglio scolastico",
+      "gender": "die",
+      "plural": "die Schulpflegen",
+      "separable": false,
+      "example_de": "Die Schulpflege entscheidet über wichtige Angelegenheiten der Schule."
+    },
+    {
+      "de": "das Schulhaus",
+      "it": "l'edificio scolastico",
+      "gender": "das",
+      "plural": "die Schulhäuser",
+      "separable": false,
+      "example_de": "Das Schulhaus wird nächstes Jahr renoviert."
+    },
+    {
+      "de": "der Pausenplatz",
+      "it": "il cortile della ricreazione",
+      "gender": "der",
+      "plural": "die Pausenplätze",
+      "separable": false,
+      "example_de": "Auf dem Pausenplatz spielen die Kinder Fussball."
+    },
+    {
+      "de": "die Aula",
+      "it": "l'aula magna",
+      "gender": "die",
+      "plural": "die Aulen",
+      "separable": false,
+      "example_de": "Der Vortrag findet in der Aula statt."
+    },
+    {
+      "de": "das Sekretariat",
+      "it": "la segreteria",
+      "gender": "das",
+      "plural": "die Sekretariate",
+      "separable": false,
+      "example_de": "Im Sekretariat kann man sich für den Elternabend anmelden."
+    },
+    {
+      "de": "die Hausordnung",
+      "it": "il regolamento interno",
+      "gender": "die",
+      "plural": "die Hausordnungen",
+      "separable": false,
+      "example_de": "Die Hausordnung hängt im Eingangsbereich."
+    },
+    {
+      "de": "der Schulweg",
+      "it": "il tragitto per andare a scuola",
+      "gender": "der",
+      "plural": "die Schulwege",
+      "separable": false,
+      "example_de": "Der Schulweg ist für viele Kinder zu Fuss machbar."
+    },
+    {
+      "de": "die Schulreise",
+      "it": "la gita scolastica",
+      "gender": "die",
+      "plural": "die Schulreisen",
+      "separable": false,
+      "example_de": "Die Schulreise geht dieses Jahr in den Zoo."
+    },
+    {
+      "de": "das Lager",
+      "it": "il campo scuola",
+      "gender": "das",
+      "plural": "die Lager",
+      "separable": false,
+      "example_de": "Das Lager findet im Sommer statt."
+    },
+    {
+      "de": "die Projektwoche",
+      "it": "la settimana progettuale",
+      "gender": "die",
+      "plural": "die Projektwochen",
+      "separable": false,
+      "example_de": "In der Projektwoche arbeiten die Schüler in Gruppen."
+    },
+    {
+      "de": "der Sporttag",
+      "it": "la giornata sportiva",
+      "gender": "der",
+      "plural": "die Sporttage",
+      "separable": false,
+      "example_de": "Beim Sporttag machen alle Kinder mit."
+    },
+    {
+      "de": "die Schulbibliothek",
+      "it": "la biblioteca scolastica",
+      "gender": "die",
+      "plural": "die Schulbibliotheken",
+      "separable": false,
+      "example_de": "In der Schulbibliothek kann man Bücher ausleihen."
+    },
+    {
+      "de": "der Mittagstisch",
+      "it": "il pranzo scolastico",
+      "gender": "der",
+      "plural": "die Mittagstische",
+      "separable": false,
+      "example_de": "Der Mittagstisch bietet eine warme Mahlzeit an."
+    },
+    {
+      "de": "die Nachmittagsbetreuung",
+      "it": "l'assistenza pomeridiana",
+      "gender": "die",
+      "plural": "die Nachmittagsbetreuungen",
+      "separable": false,
+      "example_de": "Die Nachmittagsbetreuung ist für berufstätige Eltern wichtig."
+    },
+    {
+      "de": "der Förderunterricht",
+      "it": "il sostegno scolastico",
+      "gender": "der",
+      "plural": "die Förderunterrichte",
+      "separable": false,
+      "example_de": "Der Förderunterricht hilft Kindern mit Lernschwierigkeiten."
+    },
+    {
+      "de": "die Begabtenförderung",
+      "it": "il sostegno per gli alunni dotati",
+      "gender": "die",
+      "plural": "die Begabtenförderungen",
+      "separable": false,
+      "example_de": "Die Begabtenförderung bietet zusätzliche Kurse für schnelle Lernende."
+    },
+    {
+      "de": "das Schulsozialarbeit",
+      "it": "il servizio sociale scolastico",
+      "gender": "das",
+      "plural": "die Schulsozialarbeiten",
+      "separable": false,
+      "example_de": "Die Schulsozialarbeit unterstützt Schüler bei Problemen."
+    }
+  ]
+}

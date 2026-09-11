@@ -4,6 +4,7 @@ services:
   api:
     volumes:
       - ./api/app:/app/app
+      - ./api/prompts:/app/prompts
       - ./api/tests:/app/tests
       - ./api/alembic:/app/alembic
       - ./api/alembic.ini:/app/alembic.ini

@@ -1,0 +1,410 @@
+{
+  "slug": "beim-arzt-und-in-der-apotheke",
+  "week_number": 5,
+  "role_label": "Ärztin",
+  "key_phrases": [
+    {
+      "de": "Grüezi, ich habe einen Termin um zehn Uhr.",
+      "it": "Buongiorno, ho un appuntamento alle dieci.",
+      "example": "Sie kommen in die Praxis und sagen das der Empfang."
+    },
+    {
+      "de": "Mir ist seit gestern schlecht und ich habe Kopfschmerzen.",
+      "it": "Da ieri mi sento male e ho mal di testa.",
+      "example": "Sie beschreiben der Ärztin Ihre Symptome."
+    },
+    {
+      "de": "Haben Sie Fieber gemessen?",
+      "it": "Ha misurato la febbre?",
+      "example": "Die Ärztin fragt Sie nach Ihrem Zustand."
+    },
+    {
+      "de": "Tut es hier weh, wenn ich drücke?",
+      "it": "Fa male qui quando premo?",
+      "example": "Die Ärztin untersucht Ihren Bauch."
+    },
+    {
+      "de": "Ich brauche ein Rezept für ein Antibiotikum.",
+      "it": "Ho bisogno di una ricetta per un antibiotico.",
+      "example": "Sie bitten die Ärztin um ein Rezept."
+    },
+    {
+      "de": "Nehmen Sie die Tabletten dreimal täglich nach dem Essen.",
+      "it": "Prenda le compresse tre volte al giorno dopo i pasti.",
+      "example": "Die Ärztin erklärt Ihnen die Dosierung."
+    },
+    {
+      "de": "Gibt es das auch als Generikum?",
+      "it": "C'è anche come generico?",
+      "example": "Sie fragen in der Apotheke nach einer günstigeren Alternative."
+    },
+    {
+      "de": "Ich hätte gerne etwas gegen Halsschmerzen.",
+      "it": "Vorrei qualcosa per il mal di gola.",
+      "example": "Sie sprechen mit dem Apotheker."
+    },
+    {
+      "de": "Muss ich einen Termin vereinbaren?",
+      "it": "Devo prendere un appuntamento?",
+      "example": "Sie fragen am Empfang, ob Sie einen Termin brauchen."
+    },
+    {
+      "de": "Können Sie mir das aufschreiben?",
+      "it": "Me lo può scrivere?",
+      "example": "Sie verstehen die Anweisung nicht und bitten um Notiz."
+    }
+  ],
+  "imprevisti": [
+    "Die Krankenkassenkarte fehlt.",
+    "Die Apotheke hat das Medikament nicht vorrätig.",
+    "Die Ärztin ist wegen eines Notfalls in Verzug.",
+    "Sie haben die Überweisung vergessen.",
+    "Das Rezept ist abgelaufen."
+  ],
+  "swiss_variants": [
+    {
+      "standard": "Ich habe Fieber.",
+      "swiss": "Ich ha Fieber.",
+      "it": "Ho la febbre."
+    },
+    {
+      "standard": "Ich gehe zum Arzt.",
+      "swiss": "Ich gang zum Doktor.",
+      "it": "Vado dal medico."
+    },
+    {
+      "standard": "Die Apotheke ist geschlossen.",
+      "swiss": "D'Apotheke isch zue.",
+      "it": "La farmacia è chiusa."
+    }
+  ],
+  "goals": [
+    "Symptome klar beschreiben",
+    "Nach Medikamenten fragen",
+    "Termin vereinbaren",
+    "Rezept verstehen",
+    "Nach Alternativen fragen"
+  ],
+  "vocab": [
+    {
+      "de": "der Arzt",
+      "it": "il medico",
+      "gender": "der",
+      "plural": "die Ärzte",
+      "separable": false,
+      "example_de": "Ich muss zum Arzt gehen."
+    },
+    {
+      "de": "die Ärztin",
+      "it": "la dottoressa",
+      "gender": "die",
+      "plural": "die Ärztinnen",
+      "separable": false,
+      "example_de": "Die Ärztin hat mich untersucht."
+    },
+    {
+      "de": "die Apotheke",
+      "it": "la farmacia",
+      "gender": "die",
+      "plural": "die Apotheken",
+      "separable": false,
+      "example_de": "Die Apotheke ist heute geschlossen."
+    },
+    {
+      "de": "das Medikament",
+      "it": "il medicamento",
+      "gender": "das",
+      "plural": "die Medikamente",
+      "separable": false,
+      "example_de": "Ich nehme das Medikament dreimal täglich."
+    },
+    {
+      "de": "die Tablette",
+      "it": "la compressa",
+      "gender": "die",
+      "plural": "die Tabletten",
+      "separable": false,
+      "example_de": "Nimm eine Tablette nach dem Essen."
+    },
+    {
+      "de": "die Salbe",
+      "it": "la pomata",
+      "gender": "die",
+      "plural": "die Salben",
+      "separable": false,
+      "example_de": "Die Salbe hilft gegen den Ausschlag."
+    },
+    {
+      "de": "der Hustensaft",
+      "it": "lo sciroppo per la tosse",
+      "gender": "der",
+      "plural": "die Hustensäfte",
+      "separable": false,
+      "example_de": "Der Hustensaft schmeckt bitter."
+    },
+    {
+      "de": "die Kopfschmerzen",
+      "it": "il mal di testa",
+      "gender": "die",
+      "plural": "die Kopfschmerzen",
+      "separable": false,
+      "example_de": "Ich habe starke Kopfschmerzen."
+    },
+    {
+      "de": "die Bauchschmerzen",
+      "it": "il mal di pancia",
+      "gender": "die",
+      "plural": "die Bauchschmerzen",
+      "separable": false,
+      "example_de": "Die Bauchschmerzen sind seit gestern da."
+    },
+    {
+      "de": "das Fieber",
+      "it": "la febbre",
+      "gender": "das",
+      "plural": "die Fieber",
+      "separable": false,
+      "example_de": "Ich habe Fieber, 38 Grad."
+    },
+    {
+      "de": "der Husten",
+      "it": "la tosse",
+      "gender": "der",
+      "plural": "die Husten",
+      "separable": false,
+      "example_de": "Der Husten wird nicht besser."
+    },
+    {
+      "de": "der Schnupfen",
+      "it": "il raffreddore",
+      "gender": "der",
+      "plural": "die Schnupfen",
+      "separable": false,
+      "example_de": "Ich habe Schnupfen und Niesen."
+    },
+    {
+      "de": "die Grippe",
+      "it": "l'influenza",
+      "gender": "die",
+      "plural": "die Grippen",
+      "separable": false,
+      "example_de": "Ich glaube, ich habe die Grippe."
+    },
+    {
+      "de": "die Erkältung",
+      "it": "il raffreddore",
+      "gender": "die",
+      "plural": "die Erkältungen",
+      "separable": false,
+      "example_de": "Eine Erkältung dauert oft eine Woche."
+    },
+    {
+      "de": "der Termin",
+      "it": "l'appuntamento",
+      "gender": "der",
+      "plural": "die Termine",
+      "separable": false,
+      "example_de": "Ich möchte einen Termin beim Arzt machen."
+    },
+    {
+      "de": "die Praxis",
+      "it": "lo studio medico",
+      "gender": "die",
+      "plural": "die Praxen",
+      "separable": false,
+      "example_de": "Die Praxis ist am Montag geschlossen."
+    },
+    {
+      "de": "die Krankenkasse",
+      "it": "la cassa malati",
+      "gender": "die",
+      "plural": "die Krankenkassen",
+      "separable": false,
+      "example_de": "Die Krankenkasse bezahlt die Behandlung."
+    },
+    {
+      "de": "das Rezept",
+      "it": "la ricetta",
+      "gender": "das",
+      "plural": "die Rezepte",
+      "separable": false,
+      "example_de": "Der Arzt gibt mir ein Rezept für Antibiotika."
+    },
+    {
+      "de": "die Krankschreibung",
+      "it": "il certificato medico",
+      "gender": "die",
+      "plural": "die Krankschreibungen",
+      "separable": false,
+      "example_de": "Ich brauche eine Krankschreibung für den Arbeitgeber."
+    },
+    {
+      "de": "die Notfallapotheke",
+      "it": "la farmacia di turno",
+      "gender": "die",
+      "plural": "die Notfallapotheken",
+      "separable": false,
+      "example_de": "Am Sonntag ist die Notfallapotheke geöffnet."
+    },
+    {
+      "de": "der Hausarzt",
+      "it": "il medico di famiglia",
+      "gender": "der",
+      "plural": "die Hausärzte",
+      "separable": false,
+      "example_de": "Ich gehe morgen zum Hausarzt."
+    },
+    {
+      "de": "die Hausärztin",
+      "it": "la dottoressa di famiglia",
+      "gender": "die",
+      "plural": "die Hausärztinnen",
+      "separable": false,
+      "example_de": "Meine Hausärztin hat heute geöffnet."
+    },
+    {
+      "de": "die Schmerzen",
+      "it": "i dolori",
+      "gender": "die",
+      "plural": "die Schmerzen",
+      "separable": false,
+      "example_de": "Ich habe starke Schmerzen im Rücken."
+    },
+    {
+      "de": "weh tun",
+      "it": "fare male",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Mein Hals tut weh."
+    },
+    {
+      "de": "die Halsschmerzen",
+      "it": "il mal di gola",
+      "gender": "die",
+      "plural": "die Halsschmerzen",
+      "separable": false,
+      "example_de": "Ich habe Halsschmerzen und kann schlecht schlucken."
+    },
+    {
+      "de": "die Ohrenschmerzen",
+      "it": "il mal d'orecchi",
+      "gender": "die",
+      "plural": "die Ohrenschmerzen",
+      "separable": false,
+      "example_de": "Das Kind hat Ohrenschmerzen."
+    },
+    {
+      "de": "die Zahnschmerzen",
+      "it": "il mal di denti",
+      "gender": "die",
+      "plural": "die Zahnschmerzen",
+      "separable": false,
+      "example_de": "Ich habe Zahnschmerzen, ich muss zum Zahnarzt."
+    },
+    {
+      "de": "die Rückenschmerzen",
+      "it": "il mal di schiena",
+      "gender": "die",
+      "plural": "die Rückenschmerzen",
+      "separable": false,
+      "example_de": "Nach dem Heben habe ich Rückenschmerzen."
+    },
+    {
+      "de": "die Übelkeit",
+      "it": "la nausea",
+      "gender": "die",
+      "plural": null,
+      "separable": false,
+      "example_de": "Mir ist übel, ich habe Übelkeit."
+    },
+    {
+      "de": "der Durchfall",
+      "it": "la diarrea",
+      "gender": "der",
+      "plural": null,
+      "separable": false,
+      "example_de": "Ich habe seit gestern Durchfall."
+    },
+    {
+      "de": "die Verstopfung",
+      "it": "la stitichezza",
+      "gender": "die",
+      "plural": "die Verstopfungen",
+      "separable": false,
+      "example_de": "Bei Verstopfung hilft viel Wasser trinken."
+    },
+    {
+      "de": "der Ausschlag",
+      "it": "l'eruzione cutanea",
+      "gender": "der",
+      "plural": "die Ausschläge",
+      "separable": false,
+      "example_de": "Ich habe einen roten Ausschlag am Arm."
+    },
+    {
+      "de": "die Allergie",
+      "it": "l'allergia",
+      "gender": "die",
+      "plural": "die Allergien",
+      "separable": false,
+      "example_de": "Ich habe eine Allergie gegen Penicillin."
+    },
+    {
+      "de": "der Blutdruck",
+      "it": "la pressione sanguigna",
+      "gender": "der",
+      "plural": "die Blutdrücke",
+      "separable": false,
+      "example_de": "Der Arzt misst meinen Blutdruck."
+    },
+    {
+      "de": "die Spritze",
+      "it": "l'iniezione",
+      "gender": "die",
+      "plural": "die Spritzen",
+      "separable": false,
+      "example_de": "Ich bekomme eine Spritze gegen die Schmerzen."
+    },
+    {
+      "de": "die Tropfen",
+      "it": "le gocce",
+      "gender": "die",
+      "plural": "die Tropfen",
+      "separable": false,
+      "example_de": "Nehmen Sie dreimal täglich zehn Tropfen."
+    },
+    {
+      "de": "die Kapsel",
+      "it": "la capsula",
+      "gender": "die",
+      "plural": "die Kapseln",
+      "separable": false,
+      "example_de": "Schlucken Sie die Kapsel mit Wasser."
+    },
+    {
+      "de": "das Pflaster",
+      "it": "il cerotto",
+      "gender": "das",
+      "plural": "die Pflaster",
+      "separable": false,
+      "example_de": "Ich brauche ein Pflaster für die Wunde."
+    },
+    {
+      "de": "die Binde",
+      "it": "la benda",
+      "gender": "die",
+      "plural": "die Binden",
+      "separable": false,
+      "example_de": "Die Wunde ist verbunden mit einer Binde."
+    },
+    {
+      "de": "der Verband",
+      "it": "la fasciatura",
+      "gender": "der",
+      "plural": "die Verbände",
+      "separable": false,
+      "example_de": "Der Verband muss täglich gewechselt werden."
+    }
+  ]
+}

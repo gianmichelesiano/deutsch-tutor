@@ -1,0 +1,560 @@
+{
+  "role_label": "Lehrperson",
+  "key_phrases": [
+    {
+      "de": "Grüezi, ich bin die Klassenlehrerin.",
+      "it": "Buongiorno, sono l'insegnante di classe.",
+      "example": "Grüezi, ich bin die Klassenlehrerin. Schön, dass Sie da sind."
+    },
+    {
+      "de": "Wie geht's Ihrem Sohn in der Schule?",
+      "it": "Come va suo figlio a scuola?",
+      "example": "Wie geht's Ihrem Sohn in der Schule? Er macht Fortschritte."
+    },
+    {
+      "de": "Er ist ein bisschen unruhig im Unterricht.",
+      "it": "È un po' irrequieto durante la lezione.",
+      "example": "Er ist ein bisschen unruhig im Unterricht, aber sonst nett."
+    },
+    {
+      "de": "Können wir das zusammen anschauen?",
+      "it": "Possiamo guardarlo insieme?",
+      "example": "Können wir das zusammen anschauen? Ich habe die Noten hier."
+    },
+    {
+      "de": "Was kann ich zu Hause machen?",
+      "it": "Cosa posso fare a casa?",
+      "example": "Was kann ich zu Hause machen? Soll ich mehr üben?"
+    },
+    {
+      "de": "Sorry, war das zu laut gestern?",
+      "it": "Scusa, era troppo rumoroso ieri?",
+      "example": "Sorry, war das zu laut gestern? Wir haben es gehört."
+    },
+    {
+      "de": "Das ist kein Problem, wir finden eine Lösung.",
+      "it": "Non è un problema, troviamo una soluzione.",
+      "example": "Das ist kein Problem, wir finden eine Lösung. Zum Beispiel mehr Pausen."
+    },
+    {
+      "de": "Danke für das Gespräch.",
+      "it": "Grazie per la conversazione.",
+      "example": "Danke für das Gespräch. Bis zum nächsten Mal."
+    },
+    {
+      "de": "Ich melde mich nächste Woche.",
+      "it": "Ti contatto la prossima settimana.",
+      "example": "Ich melde mich nächste Woche, wenn es etwas Neues gibt."
+    },
+    {
+      "de": "Schönen Abend noch.",
+      "it": "Buona serata.",
+      "example": "Schönen Abend noch. Auf Wiedersehen."
+    }
+  ],
+  "vocab": [
+    {
+      "de": "der Elternabend",
+      "it": "la serata dei genitori",
+      "gender": "der",
+      "plural": "die Elternabende",
+      "separable": false,
+      "example_de": "Der Elternabend ist am Mittwoch."
+    },
+    {
+      "de": "die Lehrperson",
+      "it": "l'insegnante",
+      "gender": "die",
+      "plural": "die Lehrpersonen",
+      "separable": false,
+      "example_de": "Die Lehrperson ist sehr nett."
+    },
+    {
+      "de": "die Klasse",
+      "it": "la classe",
+      "gender": "die",
+      "plural": "die Klassen",
+      "separable": false,
+      "example_de": "Unsere Klasse hat 20 Kinder."
+    },
+    {
+      "de": "der Schüler",
+      "it": "lo studente",
+      "gender": "der",
+      "plural": "die Schüler",
+      "separable": false,
+      "example_de": "Der Schüler ist fleissig."
+    },
+    {
+      "de": "die Note",
+      "it": "il voto",
+      "gender": "die",
+      "plural": "die Noten",
+      "separable": false,
+      "example_de": "Die Note in Mathe ist gut."
+    },
+    {
+      "de": "das Zeugnis",
+      "it": "la pagella",
+      "gender": "das",
+      "plural": "die Zeugnisse",
+      "separable": false,
+      "example_de": "Das Zeugnis gibt es im Juli."
+    },
+    {
+      "de": "das Fach",
+      "it": "la materia",
+      "gender": "das",
+      "plural": "die Fächer",
+      "separable": false,
+      "example_de": "Deutsch ist mein Lieblingsfach."
+    },
+    {
+      "de": "die Hausaufgaben",
+      "it": "i compiti",
+      "gender": "die",
+      "plural": "die Hausaufgaben",
+      "separable": false,
+      "example_de": "Die Hausaufgaben sind schwer."
+    },
+    {
+      "de": "das Problem",
+      "it": "il problema",
+      "gender": "das",
+      "plural": "die Probleme",
+      "separable": false,
+      "example_de": "Wir haben ein Problem mit dem Verhalten."
+    },
+    {
+      "de": "die Lösung",
+      "it": "la soluzione",
+      "gender": "die",
+      "plural": "die Lösungen",
+      "separable": false,
+      "example_de": "Die Lösung ist einfach."
+    },
+    {
+      "de": "das Gespräch",
+      "it": "il colloquio",
+      "gender": "das",
+      "plural": "die Gespräche",
+      "separable": false,
+      "example_de": "Das Gespräch war hilfreich."
+    },
+    {
+      "de": "die Unterstützung",
+      "it": "il supporto",
+      "gender": "die",
+      "plural": "die Unterstützungen",
+      "separable": false,
+      "example_de": "Danke für die Unterstützung."
+    },
+    {
+      "de": "der Termin",
+      "it": "l'appuntamento",
+      "gender": "der",
+      "plural": "die Termine",
+      "separable": false,
+      "example_de": "Der Termin ist um 18 Uhr."
+    },
+    {
+      "de": "die Anmeldung",
+      "it": "la registrazione",
+      "gender": "die",
+      "plural": "die Anmeldungen",
+      "separable": false,
+      "example_de": "Die Anmeldung ist online."
+    },
+    {
+      "de": "die Abmeldung",
+      "it": "la disdetta",
+      "gender": "die",
+      "plural": "die Abmeldungen",
+      "separable": false,
+      "example_de": "Die Abmeldung muss schriftlich sein."
+    },
+    {
+      "de": "der Unterricht",
+      "it": "la lezione",
+      "gender": "der",
+      "plural": "die Unterrichte",
+      "separable": false,
+      "example_de": "Der Unterricht beginnt um 8 Uhr."
+    },
+    {
+      "de": "die Pause",
+      "it": "la pausa",
+      "gender": "die",
+      "plural": "die Pausen",
+      "separable": false,
+      "example_de": "In der Pause spielen wir."
+    },
+    {
+      "de": "das Verhalten",
+      "it": "il comportamento",
+      "gender": "das",
+      "plural": "die Verhalten",
+      "separable": false,
+      "example_de": "Sein Verhalten ist besser geworden."
+    },
+    {
+      "de": "die Konzentration",
+      "it": "la concentrazione",
+      "gender": "die",
+      "plural": "die Konzentrationen",
+      "separable": false,
+      "example_de": "Die Konzentration ist wichtig."
+    },
+    {
+      "de": "die Motivation",
+      "it": "la motivazione",
+      "gender": "die",
+      "plural": "die Motivationen",
+      "separable": false,
+      "example_de": "Die Motivation ist hoch."
+    },
+    {
+      "de": "der Fortschritt",
+      "it": "il progresso",
+      "gender": "der",
+      "plural": "die Fortschritte",
+      "separable": false,
+      "example_de": "Er macht gute Fortschritte."
+    },
+    {
+      "de": "die Schwierigkeit",
+      "it": "la difficoltà",
+      "gender": "die",
+      "plural": "die Schwierigkeiten",
+      "separable": false,
+      "example_de": "Die Schwierigkeit ist beim Lesen."
+    },
+    {
+      "de": "die Förderung",
+      "it": "il sostegno",
+      "gender": "die",
+      "plural": "die Förderungen",
+      "separable": false,
+      "example_de": "Die Förderung ist kostenlos."
+    },
+    {
+      "de": "die Nachhilfe",
+      "it": "il doposcuola",
+      "gender": "die",
+      "plural": "die Nachhilfen",
+      "separable": false,
+      "example_de": "Die Nachhilfe hilft viel."
+    },
+    {
+      "de": "der Elternrat",
+      "it": "il consiglio dei genitori",
+      "gender": "der",
+      "plural": "die Elternräte",
+      "separable": false,
+      "example_de": "Der Elternrat trifft sich monatlich."
+    },
+    {
+      "de": "die Schulleitung",
+      "it": "la direzione scolastica",
+      "gender": "die",
+      "plural": "die Schulleitungen",
+      "separable": false,
+      "example_de": "Die Schulleitung hat informiert."
+    },
+    {
+      "de": "das Schuljahr",
+      "it": "l'anno scolastico",
+      "gender": "das",
+      "plural": "die Schuljahre",
+      "separable": false,
+      "example_de": "Das Schuljahr endet im Sommer."
+    },
+    {
+      "de": "das Semester",
+      "it": "il semestre",
+      "gender": "das",
+      "plural": "die Semester",
+      "separable": false,
+      "example_de": "Das Semester beginnt im Februar."
+    },
+    {
+      "de": "die Prüfung",
+      "it": "l'esame",
+      "gender": "die",
+      "plural": "die Prüfungen",
+      "separable": false,
+      "example_de": "Die Prüfung ist nächste Woche."
+    },
+    {
+      "de": "der Test",
+      "it": "il test",
+      "gender": "der",
+      "plural": "die Tests",
+      "separable": false,
+      "example_de": "Der Test war einfach."
+    },
+    {
+      "de": "die Aufgabe",
+      "it": "il compito",
+      "gender": "die",
+      "plural": "die Aufgaben",
+      "separable": false,
+      "example_de": "Die Aufgabe ist klar."
+    },
+    {
+      "de": "das Projekt",
+      "it": "il progetto",
+      "gender": "das",
+      "plural": "die Projekte",
+      "separable": false,
+      "example_de": "Das Projekt ist spannend."
+    },
+    {
+      "de": "die Gruppe",
+      "it": "il gruppo",
+      "gender": "die",
+      "plural": "die Gruppen",
+      "separable": false,
+      "example_de": "Die Gruppe arbeitet gut."
+    },
+    {
+      "de": "der Partner",
+      "it": "il partner",
+      "gender": "der",
+      "plural": "die Partner",
+      "separable": false,
+      "example_de": "Mein Partner ist krank."
+    },
+    {
+      "de": "die Zusammenarbeit",
+      "it": "la collaborazione",
+      "gender": "die",
+      "plural": "die Zusammenarbeiten",
+      "separable": false,
+      "example_de": "Die Zusammenarbeit klappt."
+    },
+    {
+      "de": "die Kommunikation",
+      "it": "la comunicazione",
+      "gender": "die",
+      "plural": "die Kommunikationen",
+      "separable": false,
+      "example_de": "Die Kommunikation ist wichtig."
+    },
+    {
+      "de": "die Rückmeldung",
+      "it": "il feedback",
+      "gender": "die",
+      "plural": "die Rückmeldungen",
+      "separable": false,
+      "example_de": "Die Rückmeldung war positiv."
+    },
+    {
+      "de": "die Anwesenheit",
+      "it": "la presenza",
+      "gender": "die",
+      "plural": "die Anwesenheiten",
+      "separable": false,
+      "example_de": "Die Anwesenheit ist gut."
+    },
+    {
+      "de": "die Verspätung",
+      "it": "il ritardo",
+      "gender": "die",
+      "plural": "die Verspätungen",
+      "separable": false,
+      "example_de": "Die Verspätung ist entschuldigt."
+    },
+    {
+      "de": "die Entschuldigung",
+      "it": "la scusa",
+      "gender": "die",
+      "plural": "die Entschuldigungen",
+      "separable": false,
+      "example_de": "Die Entschuldigung ist akzeptiert."
+    },
+    {
+      "de": "das Gespräch führen",
+      "it": "condurre una conversazione",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Wir führen ein Gespräch über die Noten."
+    },
+    {
+      "de": "sich anmelden",
+      "it": "registrarsi",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Ich melde mich für den Elternabend an."
+    },
+    {
+      "de": "sich abmelden",
+      "it": "disdire",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Sie müssen sich abmelden."
+    },
+    {
+      "de": "besprechen",
+      "it": "discutere",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Wir besprechen das Problem."
+    },
+    {
+      "de": "unterstützen",
+      "it": "sostenere",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Die Eltern unterstützen das Kind."
+    },
+    {
+      "de": "fördern",
+      "it": "promuovere",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Die Schule fördert die Schüler."
+    },
+    {
+      "de": "üben",
+      "it": "esercitarsi",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Wir üben Deutsch."
+    },
+    {
+      "de": "lernen",
+      "it": "imparare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Die Kinder lernen viel."
+    },
+    {
+      "de": "erklären",
+      "it": "spiegare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Können Sie das erklären?"
+    },
+    {
+      "de": "fragen",
+      "it": "chiedere",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Ich frage die Lehrerin."
+    },
+    {
+      "de": "antworten",
+      "it": "rispondere",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Sie antwortet schnell."
+    },
+    {
+      "de": "helfen",
+      "it": "aiutare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Kannst du mir helfen?"
+    },
+    {
+      "de": "planen",
+      "it": "pianificare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Wir planen den Termin."
+    },
+    {
+      "de": "organisieren",
+      "it": "organizzare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Ich organisiere die Unterlagen."
+    },
+    {
+      "de": "teilnehmen",
+      "it": "partecipare",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Ich nehme am Elternabend teil."
+    },
+    {
+      "de": "stattfinden",
+      "it": "avere luogo",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Der Elternabend findet statt."
+    },
+    {
+      "de": "absprechen",
+      "it": "concordare",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Wir sprechen das ab."
+    },
+    {
+      "de": "einladen",
+      "it": "invitare",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Die Schule lädt ein."
+    },
+    {
+      "de": "entschuldigen",
+      "it": "scusare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Bitte entschuldigen Sie die Verspätung."
+    }
+  ],
+  "imprevisti": [
+    "Der Elternabend beginnt 15 Minuten später, weil die Lehrerin noch ein Gespräch hat.",
+    "Ein Elternteil spricht nur Schweizerdeutsch, und Sie verstehen es nicht ganz.",
+    "Die Noten Ihres Kindes sind schlechter als erwartet, und Sie sind überrascht.",
+    "Ein anderer Elternteil ist sehr aufgebracht und unterbricht das Gespräch.",
+    "Das Kind hat das Handy in der Schule vergessen und es ist nicht im Fundbüro."
+  ],
+  "swiss_variants": [
+    {
+      "standard": "Grüezi",
+      "swiss": "Grüezi",
+      "it": "Buongiorno (saluto svizzero)"
+    },
+    {
+      "standard": "Tschüss",
+      "swiss": "Tschüss",
+      "it": "Ciao (arrivederci)"
+    },
+    {
+      "standard": "Säckli",
+      "swiss": "Säckli",
+      "it": "sacchetto (di plastica)"
+    }
+  ],
+  "goals": [
+    "Sich für den Elternabend anmelden und den Termin bestätigen.",
+    "Über den Fortschritt und die Noten des Kindes sprechen.",
+    "Eine Lösung für ein Problem im Unterricht besprechen.",
+    "Die nächsten Schritte und Unterstützungsmöglichkeiten vereinbaren.",
+    "Sich höflich verabschieden und einen Folgetermin planen."
+  ]
+}

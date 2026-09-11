@@ -1,11 +1,13 @@
 """Servizi DB-backed (Fase 2). Delegano la logica SRS pura a ``app.srs``."""
 from __future__ import annotations
 
+import random
+import re
 from datetime import date, datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
 from fastapi import HTTPException
-from sqlalchemy import func, select
+from sqlalchemy import and_, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app import lesson_state
@@ -32,6 +34,16 @@ from app.srs import Candidate, Progress, apply_review, pick_due
 
 def utcnow() -> datetime:
     return datetime.now(timezone.utc)
+
+
+def is_placeholder_de(vocab: VocabItem) -> bool:
+    """True se ``de`` è un placeholder (il termine tedesco non è ancora noto).
+
+    Le parole richieste via ``[ ]`` nascono con ``de == it`` (placeholder) in attesa
+    che l'agente fornisca il termine tedesco (Fase 3). Finché è placeholder non può
+    essere confermata in harvest né entrare in alcuna coda di ripasso.
+    """
+    return not vocab.de or vocab.de == vocab.it
 
 
 def _local_date(dt: datetime) -> date:
@@ -173,12 +185,34 @@ async def apply_review_event(
     return progress
 
 
+async def downgrade_consolidated_on_error(
+    session: AsyncSession,
+    vocab_item_id: int,
+    now: datetime,
+) -> VocabProgress | None:
+    """Regola Fase 3: una parola ``consolidated`` che compare in un errore del
+    Korrektor torna a ``used`` con ``next_review_at`` a 1 giorno e ``lapses += 1``.
+
+    Ritorna il progress aggiornato, o ``None`` se la parola non era consolidated.
+    """
+    progress = await get_or_create_progress(session, vocab_item_id)
+    if progress.state != VocabState.consolidated:
+        return None
+    progress.state = VocabState.used
+    progress.lapses += 1
+    progress.interval_days = 1
+    progress.last_reviewed_at = now
+    progress.next_review_at = now + timedelta(days=1)
+    return progress
+
+
 async def pick_warmup_words(
     session: AsyncSession,
     scenario_id: int,
     n_review: int = 5,
     n_new: int = 3,
     now: datetime | None = None,
+    rng: random.Random | None = None,
 ) -> list[dict]:
     """8 parole del warm-up: ``n_review`` in ripasso + ``n_new`` nuove dello scenario.
 
@@ -192,9 +226,15 @@ async def pick_warmup_words(
             select(VocabItem, VocabProgress)
             .join(VocabProgress, VocabProgress.vocab_item_id == VocabItem.id)
             .where(
-                VocabProgress.state.in_([VocabState.seen, VocabState.used]),
-                VocabProgress.next_review_at.is_not(None),
-                VocabProgress.next_review_at <= now,
+                VocabItem.de != VocabItem.it,  # esclude i placeholder
+                or_(
+                    and_(
+                        VocabProgress.state.in_([VocabState.seen, VocabState.used]),
+                        VocabProgress.next_review_at.is_not(None),
+                        VocabProgress.next_review_at <= now,
+                    ),
+                    VocabProgress.state == VocabState.consolidated,
+                ),
             )
         )
     ).all()
@@ -209,7 +249,7 @@ async def pick_warmup_words(
         )
         for vi, vp in review_rows
     ]
-    review_pick = pick_due(review_candidates, now, n_review)
+    review_pick = pick_due(review_candidates, now, n_review, rng=rng)
 
     new_rows = (
         await session.execute(
@@ -254,17 +294,25 @@ async def pick_flashcard_queue(
     session: AsyncSession,
     limit: int = 20,
     now: datetime | None = None,
+    rng: random.Random | None = None,
 ) -> list[dict]:
-    """Coda flashcard: parole viste/usate con ``next_review_at`` scaduto, per priorità."""
+    """Coda flashcard: parole viste/usate con ``next_review_at`` scaduto + ripescaggio
+    casuale delle consolidate, per priorità."""
     now = now or utcnow()
     rows = (
         await session.execute(
             select(VocabItem, VocabProgress)
             .join(VocabProgress, VocabProgress.vocab_item_id == VocabItem.id)
             .where(
-                VocabProgress.state.in_([VocabState.seen, VocabState.used]),
-                VocabProgress.next_review_at.is_not(None),
-                VocabProgress.next_review_at <= now,
+                VocabItem.de != VocabItem.it,  # esclude i placeholder
+                or_(
+                    and_(
+                        VocabProgress.state.in_([VocabState.seen, VocabState.used]),
+                        VocabProgress.next_review_at.is_not(None),
+                        VocabProgress.next_review_at <= now,
+                    ),
+                    VocabProgress.state == VocabState.consolidated,
+                ),
             )
         )
     ).all()
@@ -279,7 +327,7 @@ async def pick_flashcard_queue(
         )
         for vi, vp in rows
     ]
-    picked = pick_due(candidates, now, limit)
+    picked = pick_due(candidates, now, limit, rng=rng)
     by_id = {vi.id: (vi, vp) for vi, vp in rows}
     return [
         {
@@ -296,6 +344,97 @@ async def pick_flashcard_queue(
     ]
 
 
+async def pick_test_words(
+    session: AsyncSession,
+    scenario_id: int,
+    n: int = 15,
+    now: datetime | None = None,
+) -> list[dict]:
+    """Parole del test della lezione ``review``: ``n`` vocaboli con ``example_de``.
+
+    Priorità alle parole in scadenza (viste/usate), poi alle parole dello scenario,
+    in ordine deterministico (stabile tra richieste successive).
+    """
+    now = now or utcnow()
+    due_rows = (
+        await session.execute(
+            select(VocabItem, VocabProgress)
+            .join(VocabProgress, VocabProgress.vocab_item_id == VocabItem.id)
+            .where(
+                VocabItem.de != VocabItem.it,
+                VocabItem.example_de != "",
+                VocabProgress.state.in_([VocabState.seen, VocabState.used]),
+                VocabProgress.next_review_at.is_not(None),
+                VocabProgress.next_review_at <= now,
+            )
+            .order_by(VocabProgress.next_review_at, VocabItem.id)
+        )
+    ).all()
+    scenario_rows = (
+        await session.scalars(
+            select(VocabItem)
+            .where(
+                VocabItem.scenario_id == scenario_id,
+                VocabItem.de != VocabItem.it,
+                VocabItem.example_de != "",
+            )
+            .order_by(VocabItem.id)
+        )
+    ).all()
+
+    words: list[dict] = []
+    seen: set[int] = set()
+    for vi, _ in due_rows:
+        if vi.id in seen:
+            continue
+        seen.add(vi.id)
+        words.append({"vocab_item_id": vi.id, "de": vi.de, "it": vi.it, "example_de": vi.example_de})
+        if len(words) >= n:
+            return words
+    for vi in scenario_rows:
+        if vi.id in seen:
+            continue
+        seen.add(vi.id)
+        words.append({"vocab_item_id": vi.id, "de": vi.de, "it": vi.it, "example_de": vi.example_de})
+        if len(words) >= n:
+            break
+    return words
+
+
+async def get_test_harvest_words(session: AsyncSession, lesson_id: int) -> list[dict]:
+    """Parole dell'Ernte per la lezione ``review``: quelle sbagliate nel test."""
+    rows = (
+        await session.scalars(
+            select(VocabItem)
+            .join(ReviewEvent, ReviewEvent.vocab_item_id == VocabItem.id)
+            .where(
+                ReviewEvent.lesson_id == lesson_id,
+                ReviewEvent.source == ReviewSource.test,
+                ReviewEvent.result == ReviewResult.wrong,
+            )
+            .order_by(VocabItem.id)
+        )
+    ).all()
+    words = [
+        {
+            "de": vi.de,
+            "it": vi.it,
+            "source": "error",
+            "vocab_item_id": vi.id,
+        }
+        for vi in rows
+    ]
+    # deduplica per vocab_item_id (eventi multipli sullo stesso vocab)
+    deduped: list[dict] = []
+    seen: set[int] = set()
+    for w in words:
+        if w["vocab_item_id"] in seen:
+            continue
+        seen.add(w["vocab_item_id"])
+        deduped.append(w)
+    return deduped
+
+
 async def roleplay_history(session: AsyncSession, lesson_id: int) -> list[dict]:
     msgs = (
         await session.scalars(
@@ -310,47 +449,173 @@ async def roleplay_history(session: AsyncSession, lesson_id: int) -> list[dict]:
 async def get_or_create_requested_vocab(
     session: AsyncSession, scenario_id: int, term: str
 ) -> VocabItem:
-    """Crea il vocabolo richiesto via ``[ ]`` (source=requested).
+    """Crea/ritrova il vocabolo richiesto via ``[ ]`` (source=requested).
 
-    Fase 2: il termine tedesco è un placeholder (= termine italiano); in Fase 3
-    arriverà dall'agente LLM.
+    Il termine tedesco nasce come placeholder (= termine italiano); in Fase 3
+    l'agente fornisce il termine tedesco e lo sostituisce. La chiave di ricerca è
+    ``it`` (stabile anche dopo la sostituzione di ``de``).
     """
-    de = term
     item = await session.scalar(
-        select(VocabItem).where(VocabItem.de == de, VocabItem.scenario_id == scenario_id)
+        select(VocabItem).where(
+            VocabItem.it == term,
+            VocabItem.source == VocabSource.requested,
+            VocabItem.scenario_id == scenario_id,
+        )
     )
     if item is None:
-        item = VocabItem(de=de, it=term, scenario_id=scenario_id, source=VocabSource.requested)
+        item = VocabItem(de=term, it=term, scenario_id=scenario_id, source=VocabSource.requested)
         session.add(item)
         await session.flush()
         session.add(VocabProgress(vocab_item_id=item.id, state=VocabState.new))
     return item
 
 
+async def get_or_create_agent_used_vocab(
+    session: AsyncSession, scenario_id: int, de: str, it: str
+) -> VocabItem:
+    """Crea/ritrova un vocabolo "usato dall'agente" (source=agent_used) per l'Ernte."""
+    de = (de or "").strip()
+    it = (it or "").strip()
+    if not de:
+        raise ValueError("agent_used vocab senza termine tedesco")
+    item = await session.scalar(
+        select(VocabItem).where(
+            VocabItem.de == de,
+            VocabItem.source == VocabSource.agent_used,
+            VocabItem.scenario_id == scenario_id,
+        )
+    )
+    if item is None:
+        item = VocabItem(de=de, it=it or de, scenario_id=scenario_id, source=VocabSource.agent_used)
+        session.add(item)
+        await session.flush()
+        session.add(VocabProgress(vocab_item_id=item.id, state=VocabState.new))
+    return item
+
+
+_ARTICLE_RE = re.compile(r"^(der|die|das)\s+", re.IGNORECASE)
+
+
+def lemma_of(de: str) -> str:
+    """Lemma normalizzato: toglie l'articolo e minuscolizza (per il matching)."""
+    return _ARTICLE_RE.sub("", (de or "").strip()).strip().lower()
+
+
+async def match_error_vocab(
+    session: AsyncSession, fix: str
+) -> tuple[int | None, VocabItem | None]:
+    """Trova il vocabolo corrispondente alla correzione ``fix`` (matching per lemma)."""
+    target = lemma_of(fix)
+    if not target:
+        return None, None
+    rows = (await session.scalars(select(VocabItem))).all()
+    for vi in rows:
+        if lemma_of(vi.de) == target:
+            return vi.id, vi
+    return None, None
+
+
+async def last_user_incomprehensible(session: AsyncSession, lesson_id: int) -> bool:
+    """True se l'ultimo messaggio utente del roleplay è stato marcato non comprensibile."""
+    last = await session.scalar(
+        select(Message)
+        .where(Message.lesson_id == lesson_id, Message.phase == LessonPhase.roleplay, Message.role == MessageRole.user)
+        .order_by(Message.id.desc())
+        .limit(1)
+    )
+    if last is None or not last.corrections:
+        return False
+    return last.corrections.get("comprehensible") is False
+
+
 async def get_harvest_words(session: AsyncSession, lesson_id: int) -> list[dict]:
-    """Parole dell'Ernte. Fase 2: solo le richieste via ``[ ]`` (errori e parole
-    usate dall'agente arrivano in Fase 3 con Korrektor/harvest LLM)."""
-    rows = (
+    """Parole dell'Ernte: richieste via ``[ ]``, errori del Korrektor e parole usate
+    dall'agente (tutte già materializzate come ``vocab_items`` durante il roleplay)."""
+    msgs = (
         await session.scalars(
-            select(Message.requested_words).where(
-                Message.lesson_id == lesson_id,
-                Message.role == MessageRole.user,
-                Message.requested_words.is_not(None),
-            )
+            select(Message)
+            .where(Message.lesson_id == lesson_id, Message.phase == LessonPhase.roleplay)
+            .order_by(Message.id)
         )
     ).all()
     words: list[dict] = []
-    for rw in rows:
-        for w in rw or []:
-            words.append(
+    for m in msgs:
+        for w in m.requested_words or []:
+            if w.get("vocab_item_id"):
+                words.append(
+                    {
+                        "de": w.get("de"),
+                        "it": w.get("it"),
+                        "source": "requested",
+                        "vocab_item_id": w.get("vocab_item_id"),
+                    }
+                )
+        if m.role == MessageRole.user and m.corrections:
+            for e in m.corrections.get("errors", []):
+                if e.get("vocab_item_id"):
+                    words.append(
+                        {
+                            "de": e.get("fix"),
+                            "it": e.get("it"),
+                            "source": "error",
+                            "vocab_item_id": e.get("vocab_item_id"),
+                        }
+                    )
+            for nw in m.corrections.get("new_words_from_agent", []):
+                if nw.get("vocab_item_id"):
+                    words.append(
+                        {
+                            "de": nw.get("de"),
+                            "it": nw.get("it"),
+                            "source": "agent_used",
+                            "vocab_item_id": nw.get("vocab_item_id"),
+                        }
+                    )
+    return words
+
+
+async def get_harvest_corrections(session: AsyncSession, lesson_id: int, limit: int = 3) -> list[dict]:
+    """Blocco "Correzioni" dell'Ernte: al massimo ``limit`` errori del Korrektor."""
+    msgs = (
+        await session.scalars(
+            select(Message)
+            .where(
+                Message.lesson_id == lesson_id,
+                Message.phase == LessonPhase.roleplay,
+                Message.role == MessageRole.user,
+                Message.corrections.is_not(None),
+            )
+            .order_by(Message.id)
+        )
+    ).all()
+    corrections: list[dict] = []
+    for m in msgs:
+        for e in (m.corrections or {}).get("errors", []):
+            corrections.append(
                 {
-                    "de": w.get("de"),
-                    "it": w.get("it"),
-                    "source": "requested",
-                    "vocab_item_id": w.get("vocab_item_id"),
+                    "sentence": e.get("span"),
+                    "corrected": e.get("fix"),
+                    "rule_it": e.get("rule_it"),
                 }
             )
-    return words
+            if len(corrections) >= limit:
+                return corrections
+    return corrections
+
+
+async def gather_planner_data(session: AsyncSession, lesson_id: int) -> dict:
+    """Dati per il Planer: parole richieste/errate/usate e correzioni della lezione."""
+    words = await get_harvest_words(session, lesson_id)
+    requested = [w["de"] for w in words if w["source"] == "requested"]
+    error_words = [w["de"] for w in words if w["source"] == "error"]
+    agent_words = [w["de"] for w in words if w["source"] == "agent_used"]
+    corrections = [c["rule_it"] for c in await get_harvest_corrections(session, lesson_id)]
+    return {
+        "requested": requested,
+        "error_words": error_words,
+        "agent_words": agent_words,
+        "corrections": corrections,
+    }
 
 
 async def build_lesson_detail(session: AsyncSession, lesson: Lesson) -> dict:
@@ -366,9 +631,17 @@ async def build_lesson_detail(session: AsyncSession, lesson: Lesson) -> dict:
     warmup_words = None
     if lesson.current_phase == LessonPhase.warmup:
         warmup_words = await pick_warmup_words(session, lesson.scenario_id)
+    test_words = None
+    if lesson.lesson_type == LessonType.review and lesson.current_phase == LessonPhase.test:
+        test_words = await pick_test_words(session, lesson.scenario_id)
     harvest_words = None
+    harvest_corrections = None
     if lesson.current_phase == LessonPhase.harvest:
-        harvest_words = await get_harvest_words(session, lesson.id)
+        if lesson.lesson_type == LessonType.review:
+            harvest_words = await get_test_harvest_words(session, lesson.id)
+        else:
+            harvest_words = await get_harvest_words(session, lesson.id)
+            harvest_corrections = await get_harvest_corrections(session, lesson.id)
     dialogue_closed = bool((lesson.summary or {}).get("dialogue_closed"))
     return {
         "id": lesson.id,
@@ -387,7 +660,9 @@ async def build_lesson_detail(session: AsyncSession, lesson: Lesson) -> dict:
         "roleplay_messages": roleplay_messages,
         "dialogue_closed": dialogue_closed,
         "harvest_words": harvest_words,
+        "harvest_corrections": harvest_corrections,
         "requested_words_count": await count_requested_words(session, lesson.id),
+        "test_words": test_words,
     }
 
 
@@ -481,6 +756,7 @@ async def compute_home(session: AsyncSession, now: datetime) -> dict:
     scenario, planned_type = await plan_next_lesson(session)
     due_queue = await pick_flashcard_queue(session, limit=100, now=now)
     return {
+        "user_name": settings.user_name,
         "resume_lesson_id": current_lesson.id if current_lesson else None,
         "next_scenario": {
             "id": scenario.id,

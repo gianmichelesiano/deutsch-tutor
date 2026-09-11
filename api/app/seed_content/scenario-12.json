@@ -1,0 +1,386 @@
+{
+  "slug": "wiederholung",
+  "week_number": 12,
+  "role_label": "Gesprächspartner",
+  "key_phrases": [
+    {
+      "de": "Kannst du das noch einmal erklären?",
+      "it": "Puoi spiegarlo di nuovo?",
+      "example": "Wenn du etwas nicht verstanden hast, fragst du nach."
+    },
+    {
+      "de": "Wie sagt man das auf Deutsch?",
+      "it": "Come si dice in tedesco?",
+      "example": "Du suchst ein Wort und fragst dein Gegenüber."
+    },
+    {
+      "de": "Was bedeutet das?",
+      "it": "Cosa significa?",
+      "example": "Du liest ein Wort und kennst die Bedeutung nicht."
+    },
+    {
+      "de": "Kannst du das bitte wiederholen?",
+      "it": "Puoi ripetere per favore?",
+      "example": "Du hast etwas akustisch nicht verstanden."
+    },
+    {
+      "de": "Ich habe das nicht ganz verstanden.",
+      "it": "Non ho capito bene.",
+      "example": "Du möchtest höflich sagen, dass du etwas nicht verstanden hast."
+    },
+    {
+      "de": "Wie schreibt man das?",
+      "it": "Come si scrive?",
+      "example": "Du möchtest ein Wort richtig schreiben lernen."
+    },
+    {
+      "de": "Kannst du mir ein Beispiel geben?",
+      "it": "Puoi farmi un esempio?",
+      "example": "Du möchtest den Gebrauch eines Wortes verstehen."
+    },
+    {
+      "de": "Ich übe noch, bitte sprich langsam.",
+      "it": "Sto ancora esercitandomi, per favore parla lentamente.",
+      "example": "Du bittest dein Gegenüber, langsamer zu sprechen."
+    },
+    {
+      "de": "Das habe ich schon gelernt.",
+      "it": "Questo l'ho già imparato.",
+      "example": "Du erkennst einen Ausdruck aus einer früheren Lektion."
+    },
+    {
+      "de": "Können wir das noch einmal durchgehen?",
+      "it": "Possiamo ripassarlo ancora una volta?",
+      "example": "Du möchtest eine Übung wiederholen."
+    }
+  ],
+  "imprevisti": [
+    "Du hast eine Vokabel vergessen und musst sie umschreiben.",
+    "Dein Gesprächspartner spricht zu schnell.",
+    "Du verwechselst zwei ähnliche Wörter.",
+    "Du verstehst eine Redewendung nicht.",
+    "Du kannst dich nicht an die richtige Präposition erinnern."
+  ],
+  "swiss_variants": [
+    {
+      "standard": "Ich habe es nicht verstanden.",
+      "swiss": "Ich han es nöd verstande.",
+      "it": "Non l'ho capito."
+    },
+    {
+      "standard": "Kannst du das wiederholen?",
+      "swiss": "Chasch das wiederhole?",
+      "it": "Puoi ripeterlo?"
+    },
+    {
+      "standard": "Wie sagt man das?",
+      "swiss": "Wie seit man das?",
+      "it": "Come si dice?"
+    }
+  ],
+  "goals": [
+    "Unbekannte Wörter erfragen und erklären lassen.",
+    "Sätze wiederholen und nachsprechen.",
+    "Gelernte Ausdrücke aus früheren Szenarien anwenden.",
+    "Missverständnisse klären und um Wiederholung bitten.",
+    "Sich an neue Vokabeln erinnern und sie benutzen."
+  ],
+  "vocab": [
+    {
+      "de": "die Matura",
+      "it": "la maturità",
+      "gender": "die",
+      "plural": "die Matura",
+      "separable": false,
+      "example_de": "Nach der Matura studiert sie Medizin."
+    },
+    {
+      "de": "der Lehrling",
+      "it": "l'apprendista",
+      "gender": "der",
+      "plural": "die Lehrlinge",
+      "separable": false,
+      "example_de": "Der Lehrling lernt im Betrieb."
+    },
+    {
+      "de": "die SBB",
+      "it": "le FFS (Ferrovie Federali Svizzere)",
+      "gender": "die",
+      "plural": null,
+      "separable": false,
+      "example_de": "Die SBB fährt pünktlich."
+    },
+    {
+      "de": "das Billett",
+      "it": "il biglietto",
+      "gender": "das",
+      "plural": "die Billette",
+      "separable": false,
+      "example_de": "Ich kaufe ein Billett für den Zug."
+    },
+    {
+      "de": "die AHV",
+      "it": "l'AVS (Assicurazione vecchiaia e superstiti)",
+      "gender": "die",
+      "plural": null,
+      "separable": false,
+      "example_de": "Die AHV zahlt die Rente aus."
+    },
+    {
+      "de": "das Natel",
+      "it": "il cellulare",
+      "gender": "das",
+      "plural": "die Natels",
+      "separable": false,
+      "example_de": "Mein Natel ist leer."
+    },
+    {
+      "de": "der Coiffeur",
+      "it": "il parrucchiere",
+      "gender": "der",
+      "plural": "die Coiffeure",
+      "separable": false,
+      "example_de": "Ich gehe morgen zum Coiffeur."
+    },
+    {
+      "de": "die Apotheke",
+      "it": "la farmacia",
+      "gender": "die",
+      "plural": "die Apotheken",
+      "separable": false,
+      "example_de": "Die Apotheke ist am Sonntag geschlossen."
+    },
+    {
+      "de": "der Hausarzt",
+      "it": "il medico di famiglia",
+      "gender": "der",
+      "plural": "die Hausärzte",
+      "separable": false,
+      "example_de": "Ich habe einen Termin beim Hausarzt."
+    },
+    {
+      "de": "die Krankenkasse",
+      "it": "la cassa malati",
+      "gender": "die",
+      "plural": "die Krankenkassen",
+      "separable": false,
+      "example_de": "Die Krankenkasse bezahlt die Arztkosten."
+    },
+    {
+      "de": "das Trottoir",
+      "it": "il marciapiede",
+      "gender": "das",
+      "plural": "die Trottoirs",
+      "separable": false,
+      "example_de": "Geh auf dem Trottoir!"
+    },
+    {
+      "de": "der Parkplatz",
+      "it": "il parcheggio",
+      "gender": "der",
+      "plural": "die Parkplätze",
+      "separable": false,
+      "example_de": "Ich suche einen Parkplatz."
+    },
+    {
+      "de": "die Migros",
+      "it": "la Migros (catena di supermercati)",
+      "gender": "die",
+      "plural": "die Migros",
+      "separable": false,
+      "example_de": "Ich gehe zur Migros einkaufen."
+    },
+    {
+      "de": "der Coop",
+      "it": "la Coop (catena di supermercati)",
+      "gender": "der",
+      "plural": "die Coop",
+      "separable": false,
+      "example_de": "Der Coop hat frische Produkte."
+    },
+    {
+      "de": "das Rüebli",
+      "it": "la carota",
+      "gender": "das",
+      "plural": "die Rüebli",
+      "separable": false,
+      "example_de": "Ich esse gern Rüebli."
+    },
+    {
+      "de": "die Peperoni",
+      "it": "il peperone",
+      "gender": "die",
+      "plural": "die Peperoni",
+      "separable": false,
+      "example_de": "Die Peperoni sind rot und süss."
+    },
+    {
+      "de": "der Poulet",
+      "it": "il pollo",
+      "gender": "der",
+      "plural": "die Poulets",
+      "separable": false,
+      "example_de": "Heute gibt es Poulet mit Reis."
+    },
+    {
+      "de": "der ÖV",
+      "it": "il trasporto pubblico",
+      "gender": "der",
+      "plural": "die ÖV",
+      "separable": false,
+      "example_de": "Ich benutze den ÖV, um zur Arbeit zu fahren."
+    },
+    {
+      "de": "das Abo",
+      "it": "l'abbonamento",
+      "gender": "das",
+      "plural": "die Abos",
+      "separable": false,
+      "example_de": "Ich habe ein Abo für den Zug."
+    },
+    {
+      "de": "die Haltestelle",
+      "it": "la fermata",
+      "gender": "die",
+      "plural": "die Haltestellen",
+      "separable": false,
+      "example_de": "Die Haltestelle ist gleich um die Ecke."
+    },
+    {
+      "de": "der Fahrplan",
+      "it": "l'orario",
+      "gender": "der",
+      "plural": "die Fahrpläne",
+      "separable": false,
+      "example_de": "Ich schaue schnell den Fahrplan an."
+    },
+    {
+      "de": "die Verspätung",
+      "it": "il ritardo",
+      "gender": "die",
+      "plural": "die Verspätungen",
+      "separable": false,
+      "example_de": "Der Zug hat 10 Minuten Verspätung."
+    },
+    {
+      "de": "der Anschluss",
+      "it": "la coincidenza",
+      "gender": "der",
+      "plural": "die Anschlüsse",
+      "separable": false,
+      "example_de": "Ich habe den Anschluss verpasst."
+    },
+    {
+      "de": "die Rechnung",
+      "it": "la fattura",
+      "gender": "die",
+      "plural": "die Rechnungen",
+      "separable": false,
+      "example_de": "Die Rechnung muss bis Ende Monat bezahlt werden."
+    },
+    {
+      "de": "die Überweisung",
+      "it": "il bonifico",
+      "gender": "die",
+      "plural": "die Überweisungen",
+      "separable": false,
+      "example_de": "Ich mache die Überweisung online."
+    },
+    {
+      "de": "das Konto",
+      "it": "il conto",
+      "gender": "das",
+      "plural": "die Konten",
+      "separable": false,
+      "example_de": "Ich habe ein Konto bei der Bank."
+    },
+    {
+      "de": "die Steuererklärung",
+      "it": "la dichiarazione dei redditi",
+      "gender": "die",
+      "plural": "die Steuererklärungen",
+      "separable": false,
+      "example_de": "Die Steuererklärung muss ich noch ausfüllen."
+    },
+    {
+      "de": "die Bewerbung",
+      "it": "la candidatura",
+      "gender": "die",
+      "plural": "die Bewerbungen",
+      "separable": false,
+      "example_de": "Ich habe meine Bewerbung abgeschickt."
+    },
+    {
+      "de": "das Vorstellungsgespräch",
+      "it": "il colloquio di lavoro",
+      "gender": "das",
+      "plural": "die Vorstellungsgespräche",
+      "separable": false,
+      "example_de": "Das Vorstellungsgespräch war erfolgreich."
+    },
+    {
+      "de": "die Stelle",
+      "it": "il posto di lavoro",
+      "gender": "die",
+      "plural": "die Stellen",
+      "separable": false,
+      "example_de": "Ich suche eine neue Stelle."
+    },
+    {
+      "de": "der Lohn",
+      "it": "lo stipendio",
+      "gender": "der",
+      "plural": "die Löhne",
+      "separable": false,
+      "example_de": "Der Lohn wird am Ende des Monats überwiesen."
+    },
+    {
+      "de": "die Pause",
+      "it": "la pausa",
+      "gender": "die",
+      "plural": "die Pausen",
+      "separable": false,
+      "example_de": "Wir machen eine kurze Pause."
+    },
+    {
+      "de": "der Termin",
+      "it": "l'appuntamento",
+      "gender": "der",
+      "plural": "die Termine",
+      "separable": false,
+      "example_de": "Ich habe morgen einen Termin beim Arzt."
+    },
+    {
+      "de": "die Unterschrift",
+      "it": "la firma",
+      "gender": "die",
+      "plural": "die Unterschriften",
+      "separable": false,
+      "example_de": "Bitte hier unterschreiben, ich brauche Ihre Unterschrift."
+    },
+    {
+      "de": "das Formular",
+      "it": "il modulo",
+      "gender": "das",
+      "plural": "die Formulare",
+      "separable": false,
+      "example_de": "Füllen Sie bitte das Formular aus."
+    },
+    {
+      "de": "die Anmeldung",
+      "it": "l'iscrizione",
+      "gender": "die",
+      "plural": "die Anmeldungen",
+      "separable": false,
+      "example_de": "Die Anmeldung für den Kurs ist online möglich."
+    },
+    {
+      "de": "die Kündigung",
+      "it": "la disdetta",
+      "gender": "die",
+      "plural": "die Kündigungen",
+      "separable": false,
+      "example_de": "Ich muss die Kündigung fristgerecht einreichen."
+    }
+  ]
+}

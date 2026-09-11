@@ -6,12 +6,14 @@ i ``Candidate``/``Progress`` e chiama queste funzioni.
 """
 from __future__ import annotations
 
+import random
 from dataclasses import dataclass, replace
 from datetime import datetime, timedelta
 
 # Intervalli in giorni: 1 -> 3 -> 7 -> 21 (capped a 21).
 INTERVALS: tuple[int, ...] = (1, 3, 7, 21)
 CONSOLIDATION_THRESHOLD = 3
+RESCUE_RATIO = 0.1  # frazione di consolidate ripescate casualmente nel ripasso
 
 
 @dataclass(frozen=True)
@@ -117,7 +119,38 @@ def rank(candidates: list[Candidate], now: datetime) -> list[Candidate]:
     return sorted(candidates, key=lambda c: priority_key(c, now))
 
 
-def pick_due(candidates: list[Candidate], now: datetime, limit: int) -> list[Candidate]:
-    """Candidati dovuti, ordinati per priorità, fino a ``limit``."""
-    due = [c for c in candidates if is_due(c.next_review_at, now)]
-    return rank(due, now)[:limit]
+def rescue_consolidated(
+    candidates: list[Candidate],
+    rng: random.Random | None = None,
+    ratio: float = RESCUE_RATIO,
+) -> list[Candidate]:
+    """Ripescaggio casuale di una frazione ``ratio`` delle parole consolidate.
+
+    Il ripasso normale esclude le consolidate; questa funzione ne recupera un
+    campione casuale (10% di default) per evitare che le parole "imparate"
+    vengano dimenticate del tutto. ``rng`` è iniettabile per la testabilità.
+    """
+    consolidated = [c for c in candidates if c.state == "consolidated"]
+    if not consolidated:
+        return []
+    _rng = rng if rng is not None else random
+    n = max(1, round(len(consolidated) * ratio))
+    return _rng.sample(consolidated, k=min(n, len(consolidated)))
+
+
+def pick_due(
+    candidates: list[Candidate],
+    now: datetime,
+    limit: int,
+    rng: random.Random | None = None,
+    rescue_ratio: float = RESCUE_RATIO,
+) -> list[Candidate]:
+    """Candidati dovuti + ripescaggio casuale delle consolidate, ordinati per priorità.
+
+    I candidati consolidati non sono mai "dovuti" in senso SRS (sono fuori dal
+    ripasso); entrano solo tramite il ripescaggio casuale. ``rng`` seedabile nei
+    test; in produzione è il ``random`` di modulo.
+    """
+    due = [c for c in candidates if c.state != "consolidated" and is_due(c.next_review_at, now)]
+    rescued = rescue_consolidated(candidates, rng, rescue_ratio)
+    return rank(due + rescued, now)[:limit]

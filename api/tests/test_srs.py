@@ -1,3 +1,4 @@
+import random
 from datetime import datetime, timedelta
 
 from app.srs import (
@@ -8,6 +9,7 @@ from app.srs import (
     next_interval,
     pick_due,
     rank,
+    rescue_consolidated,
     should_consolidate,
 )
 
@@ -90,4 +92,53 @@ def test_pick_due_filters_not_due() -> None:
     due = Candidate(1, "seen", 0, NOW - timedelta(days=1), "curated", NOW)
     not_due = Candidate(2, "seen", 0, NOW + timedelta(days=1), "curated", NOW)
     picked = pick_due([due, not_due], NOW, limit=10)
+    assert [c.id for c in picked] == [1]
+
+
+def _consolidated(id_: int, reviewed: datetime = NOW) -> Candidate:
+    return Candidate(id_, "consolidated", 0, reviewed, "curated", NOW)
+
+
+def test_rescue_consolidated_returns_ten_percent() -> None:
+    consolidated = [_consolidated(i) for i in range(10)]
+    rng = random.Random(42)
+    rescued = rescue_consolidated(consolidated, rng, ratio=0.1)
+    assert len(rescued) == 1  # 10% di 10 = 1
+    assert rescued[0].state == "consolidated"
+
+
+def test_rescue_consolidated_minimum_one() -> None:
+    consolidated = [_consolidated(1), _consolidated(2), _consolidated(3)]
+    rng = random.Random(7)
+    rescued = rescue_consolidated(consolidated, rng, ratio=0.1)
+    assert len(rescued) == 1  # round(0.3)=0 → minimo 1
+
+
+def test_rescue_consolidated_empty_when_no_consolidated() -> None:
+    due = Candidate(1, "seen", 0, NOW - timedelta(days=1), "curated", NOW)
+    assert rescue_consolidated([due], random.Random(1)) == []
+
+
+def test_pick_due_includes_rescued_consolidated() -> None:
+    due = Candidate(1, "seen", 0, NOW - timedelta(days=1), "curated", NOW)
+    consolidated = [_consolidated(i) for i in range(10)]
+    rng = random.Random(123)
+    picked = pick_due([due] + consolidated, NOW, limit=10, rng=rng)
+    ids = [c.id for c in picked]
+    assert 1 in ids  # il dovuto c'è sempre
+    # una consolidata ripescata è inclusa
+    assert any(c.state == "consolidated" for c in picked)
+
+
+def test_pick_due_rescue_is_deterministic_with_seed() -> None:
+    due = Candidate(1, "seen", 0, NOW - timedelta(days=1), "curated", NOW)
+    consolidated = [_consolidated(i) for i in range(20)]
+    a = pick_due([due] + consolidated, NOW, limit=10, rng=random.Random(99))
+    b = pick_due([due] + consolidated, NOW, limit=10, rng=random.Random(99))
+    assert [c.id for c in a] == [c.id for c in b]
+
+
+def test_pick_due_no_consolidated_without_rescue_pool() -> None:
+    due = Candidate(1, "seen", 0, NOW - timedelta(days=1), "curated", NOW)
+    picked = pick_due([due], NOW, limit=10, rng=random.Random(0))
     assert [c.id for c in picked] == [1]

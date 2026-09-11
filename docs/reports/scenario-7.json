@@ -1,0 +1,424 @@
+{
+  "role_label": "SBB-Schalterangestellte",
+  "key_phrases": [
+    {
+      "de": "Grüezi, was chan i für Sie tue?",
+      "it": "Buongiorno, cosa posso fare per lei?",
+      "example": "Am Schalter: Grüezi, was chan i für Sie tue?"
+    },
+    {
+      "de": "Händ Sie scho es Billett?",
+      "it": "Ha già un biglietto?",
+      "example": "Händ Sie scho es Billett? Suscht chönd Sie eis am Automat lösse."
+    },
+    {
+      "de": "Wänn gönd Sie?",
+      "it": "Quando parte?",
+      "example": "Wänn gönd Sie? De Zug fahrt um 14:35 ab."
+    },
+    {
+      "de": "Wänn isch die nögscht Verbindig?",
+      "it": "Quando è la prossima coincidenza?",
+      "example": "Wänn isch die nögscht Verbindig? I ha kei Zyt."
+    },
+    {
+      "de": "Müend Sie umstigge?",
+      "it": "Deve cambiare treno?",
+      "example": "Müend Sie umstigge? Ja, z Züri uf de SBB."
+    },
+    {
+      "de": "Das Billett isch ab Züri gültig.",
+      "it": "Il biglietto è valido da Zurigo.",
+      "example": "Das Billett isch ab Züri gültig, nöd ab em Start."
+    },
+    {
+      "de": "Chönd Sie das bitte am Automat lösse?",
+      "it": "Può comprarlo al distributore, per favore?",
+      "example": "Chönd Sie das bitte am Automat lösse? De Schalter isch zue."
+    },
+    {
+      "de": "Es het e Verspätig vo 10 Minute.",
+      "it": "C'è un ritardo di 10 minuti.",
+      "example": "Es het e Verspätig vo 10 Minute. De Aaschluss goht no."
+    },
+    {
+      "de": "Wänn isch de letschte Zug?",
+      "it": "Quando è l'ultimo treno?",
+      "example": "Wänn isch de letschte Zug? I muess no hei."
+    },
+    {
+      "de": "Danke villmal und en guete Tag!",
+      "it": "Grazie mille e buona giornata!",
+      "example": "Danke villmal und en guete Tag! Uf Widerluege."
+    }
+  ],
+  "vocab": [
+    {
+      "de": "das Billett",
+      "it": "biglietto",
+      "gender": "das",
+      "plural": "Billetts",
+      "separable": false,
+      "example_de": "Ich brauche ein Billett nach Bern."
+    },
+    {
+      "de": "der Schalter",
+      "it": "sportello",
+      "gender": "der",
+      "plural": "Schalter",
+      "separable": false,
+      "example_de": "Am Schalter kann man Fragen stellen."
+    },
+    {
+      "de": "der Automat",
+      "it": "distributore automatico",
+      "gender": "der",
+      "plural": "Automaten",
+      "separable": false,
+      "example_de": "Am Automat gibt es alle Billetts."
+    },
+    {
+      "de": "der Zug",
+      "it": "treno",
+      "gender": "der",
+      "plural": "Züge",
+      "separable": false,
+      "example_de": "Der Zug fährt um 14:35 ab."
+    },
+    {
+      "de": "die Abfahrt",
+      "it": "partenza",
+      "gender": "die",
+      "plural": "Abfahrten",
+      "separable": false,
+      "example_de": "Die Abfahrt ist auf Gleis 3."
+    },
+    {
+      "de": "die Ankunft",
+      "it": "arrivo",
+      "gender": "die",
+      "plural": "Ankünfte",
+      "separable": false,
+      "example_de": "Die Ankunft ist um 15:20."
+    },
+    {
+      "de": "die Verspätung",
+      "it": "ritardo",
+      "gender": "die",
+      "plural": "Verspätungen",
+      "separable": false,
+      "example_de": "Wegen einer Verspätung kommen wir später an."
+    },
+    {
+      "de": "der Anschluss",
+      "it": "coincidenza",
+      "gender": "der",
+      "plural": "Anschlüsse",
+      "separable": false,
+      "example_de": "Der Anschluss nach Luzern ist da."
+    },
+    {
+      "de": "das Gleis",
+      "it": "binario",
+      "gender": "das",
+      "plural": "Gleise",
+      "separable": false,
+      "example_de": "Der Zug fährt auf Gleis 4."
+    },
+    {
+      "de": "die Fahrkarte",
+      "it": "biglietto (corsia)",
+      "gender": "die",
+      "plural": "Fahrkarten",
+      "separable": false,
+      "example_de": "Die Fahrkarte kostet 50 Franken."
+    },
+    {
+      "de": "der Fahrplan",
+      "it": "orario",
+      "gender": "der",
+      "plural": "Fahrpläne",
+      "separable": false,
+      "example_de": "Schau im Fahrplan nach der Abfahrt."
+    },
+    {
+      "de": "die SBB",
+      "it": "Ferrovie Federali Svizzere",
+      "gender": "die",
+      "plural": null,
+      "separable": false,
+      "example_de": "Die SBB fährt pünktlich."
+    },
+    {
+      "de": "der Zugverkehr",
+      "it": "traffico ferroviario",
+      "gender": "der",
+      "plural": null,
+      "separable": false,
+      "example_de": "Der Zugverkehr ist heute normal."
+    },
+    {
+      "de": "die Station",
+      "it": "stazione",
+      "gender": "die",
+      "plural": "Stationen",
+      "separable": false,
+      "example_de": "Die Station ist zentral."
+    },
+    {
+      "de": "der Bahnhof",
+      "it": "stazione ferroviaria",
+      "gender": "der",
+      "plural": "Bahnhöfe",
+      "separable": false,
+      "example_de": "Der Bahnhof ist gross."
+    },
+    {
+      "de": "der Perron",
+      "it": "marciapiede (binario)",
+      "gender": "der",
+      "plural": "Perrons",
+      "separable": false,
+      "example_de": "Wir treffen uns auf dem Perron."
+    },
+    {
+      "de": "die Abfahrtstafel",
+      "it": "tabellone partenze",
+      "gender": "die",
+      "plural": "Abfahrtstafeln",
+      "separable": false,
+      "example_de": "Die Abfahrtstafel zeigt alle Züge."
+    },
+    {
+      "de": "das Gleis",
+      "it": "binario",
+      "gender": "das",
+      "plural": "Gleise",
+      "separable": false,
+      "example_de": "Das Gleis ist weit weg."
+    },
+    {
+      "de": "die Fahrzeit",
+      "it": "durata del viaggio",
+      "gender": "die",
+      "plural": "Fahrzeiten",
+      "separable": false,
+      "example_de": "Die Fahrzeit beträgt 20 Minuten."
+    },
+    {
+      "de": "der Umstieg",
+      "it": "cambio",
+      "gender": "der",
+      "plural": "Umstiege",
+      "separable": false,
+      "example_de": "Der Umstieg ist in Zürich."
+    },
+    {
+      "de": "die Verbindung",
+      "it": "collegamento",
+      "gender": "die",
+      "plural": "Verbindungen",
+      "separable": false,
+      "example_de": "Die Verbindung ist gut."
+    },
+    {
+      "de": "das Abo",
+      "it": "abbonamento",
+      "gender": "das",
+      "plural": "Abos",
+      "separable": false,
+      "example_de": "Ich habe ein GA-Abo."
+    },
+    {
+      "de": "das GA",
+      "it": "abbonamento generale",
+      "gender": "das",
+      "plural": null,
+      "separable": false,
+      "example_de": "Mit dem GA fährst du überall."
+    },
+    {
+      "de": "das Halbtax",
+      "it": "mezza tariffa",
+      "gender": "das",
+      "plural": null,
+      "separable": false,
+      "example_de": "Mit Halbtax kostet es weniger."
+    },
+    {
+      "de": "die 1. Klasse",
+      "it": "prima classe",
+      "gender": "die",
+      "plural": null,
+      "separable": false,
+      "example_de": "Ich fahre in der 1. Klasse."
+    },
+    {
+      "de": "die 2. Klasse",
+      "it": "seconda classe",
+      "gender": "die",
+      "plural": null,
+      "separable": false,
+      "example_de": "Die 2. Klasse ist günstiger."
+    },
+    {
+      "de": "der Zuschlag",
+      "it": "supplemento",
+      "gender": "der",
+      "plural": "Zuschläge",
+      "separable": false,
+      "example_de": "Für den Schnellzug gibt es einen Zuschlag."
+    },
+    {
+      "de": "die Reservation",
+      "it": "prenotazione",
+      "gender": "die",
+      "plural": "Reservationen",
+      "separable": false,
+      "example_de": "Die Reservation ist nicht nötig."
+    },
+    {
+      "de": "das Billett kaufen",
+      "it": "comprare il biglietto",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Ich kaufe ein Billett am Automat."
+    },
+    {
+      "de": "umsteigen",
+      "it": "cambiare treno",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "In Zürich musst du umsteigen."
+    },
+    {
+      "de": "abfahren",
+      "it": "partire",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Der Zug fährt pünktlich ab."
+    },
+    {
+      "de": "ankommen",
+      "it": "arrivare",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Wir kommen um 15 Uhr an."
+    },
+    {
+      "de": "gültig sein",
+      "it": "essere valido",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Das Billett ist einen Tag gültig."
+    },
+    {
+      "de": "die Fahrgäste",
+      "it": "passeggeri",
+      "gender": "die",
+      "plural": "Fahrgäste",
+      "separable": false,
+      "example_de": "Die Fahrgäste steigen ein."
+    },
+    {
+      "de": "der Zugführer",
+      "it": "macchinista",
+      "gender": "der",
+      "plural": "Zugführer",
+      "separable": false,
+      "example_de": "Der Zugführer gibt das Signal."
+    },
+    {
+      "de": "die Kontrolle",
+      "it": "controllo biglietti",
+      "gender": "die",
+      "plural": "Kontrollen",
+      "separable": false,
+      "example_de": "Die Kontrolle kommt gleich."
+    },
+    {
+      "de": "der Schaffner",
+      "it": "capotreno",
+      "gender": "der",
+      "plural": "Schaffner",
+      "separable": false,
+      "example_de": "Der Schaffner stempelt das Billett."
+    },
+    {
+      "de": "die Monatskarte",
+      "it": "abbonamento mensile",
+      "gender": "die",
+      "plural": "Monatskarten",
+      "separable": false,
+      "example_de": "Die Monatskarte ist praktisch."
+    },
+    {
+      "de": "die Tageskarte",
+      "it": "biglietto giornaliero",
+      "gender": "die",
+      "plural": "Tageskarten",
+      "separable": false,
+      "example_de": "Die Tageskarte gilt den ganzen Tag."
+    },
+    {
+      "de": "die Strecke",
+      "it": "percorso",
+      "gender": "die",
+      "plural": "Strecken",
+      "separable": false,
+      "example_de": "Die Strecke ist lang."
+    },
+    {
+      "de": "der Fahrplanwechsel",
+      "it": "cambio orario",
+      "gender": "der",
+      "plural": "Fahrplanwechsel",
+      "separable": false,
+      "example_de": "Am Fahrplanwechsel ändern sich die Zeiten."
+    },
+    {
+      "de": "die Bahncard",
+      "it": "carta sconti",
+      "gender": "die",
+      "plural": "Bahncards",
+      "separable": false,
+      "example_de": "Die Bahncard gibt Rabatt."
+    }
+  ],
+  "imprevisti": [
+    "Der Zug hat 15 Minuten Verspätung und du verpasst den Anschluss.",
+    "Der Billettautomat ist defekt und du hast kein Bargeld.",
+    "Du hast dein Billett verloren und die Kontrolle kommt.",
+    "Der Zug ist überfüllt und du findest keinen Sitzplatz.",
+    "Du steigst in den falschen Zug und bist in der falschen Richtung."
+  ],
+  "swiss_variants": [
+    {
+      "standard": "Grüezi, was kann ich für Sie tun?",
+      "swiss": "Grüezi, was chan i für Sie tue?",
+      "it": "Buongiorno, cosa posso fare per lei?"
+    },
+    {
+      "standard": "Haben Sie schon ein Billett?",
+      "swiss": "Händ Sie scho es Billett?",
+      "it": "Ha già un biglietto?"
+    },
+    {
+      "standard": "Wann fährt der Zug ab?",
+      "swiss": "Wänn gönd Sie?",
+      "it": "Quando parte il treno?"
+    }
+  ],
+  "goals": [
+    "Ein Billett kaufen und den richtigen Zug nehmen.",
+    "Nach dem Fahrplan fragen und die Verbindung verstehen.",
+    "Eine Verspätung melden und den Anschluss finden.",
+    "Den Automaten bedienen und das Billett lösen.",
+    "Sich verabschieden und den Tag wünschen."
+  ]
+}

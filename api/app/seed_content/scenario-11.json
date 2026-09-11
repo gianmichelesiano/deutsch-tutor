@@ -1,0 +1,386 @@
+{
+  "slug": "meinungen-und-erzaehlen",
+  "week_number": 11,
+  "role_label": "Freund",
+  "key_phrases": [
+    {
+      "de": "Was hältst du davon?",
+      "it": "Cosa ne pensi?",
+      "example": "Ich habe eine Idee fürs Wochenende. Was hältst du davon?"
+    },
+    {
+      "de": "Ich finde, dass ...",
+      "it": "Penso che ...",
+      "example": "Ich finde, dass wir öfter zusammen kochen sollten."
+    },
+    {
+      "de": "Meiner Meinung nach ...",
+      "it": "Secondo me ...",
+      "example": "Meiner Meinung nach ist Zürich im Sommer am schönsten."
+    },
+    {
+      "de": "Das sehe ich anders.",
+      "it": "La vedo diversamente.",
+      "example": "Du magst Fussball? Das sehe ich anders, ich finde es langweilig."
+    },
+    {
+      "de": "Da hast du recht.",
+      "it": "Hai ragione.",
+      "example": "Da hast du recht, das habe ich nicht bedacht."
+    },
+    {
+      "de": "Erzähl mal, wie war's?",
+      "it": "Racconta, com'è andata?",
+      "example": "Du warst im Ausland? Erzähl mal, wie war's?"
+    },
+    {
+      "de": "Stell dir vor, ...",
+      "it": "Immagina che ...",
+      "example": "Stell dir vor, ich habe gestern einen alten Freund getroffen."
+    },
+    {
+      "de": "Ich bin der Meinung, dass ...",
+      "it": "Sono del parere che ...",
+      "example": "Ich bin der Meinung, dass man mehr Sport machen sollte."
+    },
+    {
+      "de": "Das stimmt, aber ...",
+      "it": "È vero, ma ...",
+      "example": "Das stimmt, aber es gibt auch Nachteile."
+    },
+    {
+      "de": "Was meinst du dazu?",
+      "it": "Cosa ne dici?",
+      "example": "Ich habe vor, nach Bern zu ziehen. Was meinst du dazu?"
+    }
+  ],
+  "imprevisti": [
+    "Dein Gegenüber unterbricht dich ständig.",
+    "Du verstehst ein Wort nicht und musst nachfragen.",
+    "Die Meinungen gehen stark auseinander und es wird hitzig.",
+    "Du erzählst eine Geschichte und verlierst den Faden.",
+    "Jemand erzählt etwas, das du schon kennst, und du musst reagieren."
+  ],
+  "swiss_variants": [
+    {
+      "standard": "Ich bin einverstanden.",
+      "swiss": "Ich bin einverstanden.",
+      "it": "Sono d'accordo."
+    },
+    {
+      "standard": "Das ist mir egal.",
+      "swiss": "Das ist mir Wurst.",
+      "it": "Mi è indifferente."
+    },
+    {
+      "standard": "Ich habe eine andere Meinung.",
+      "swiss": "Ich habe eine andere Meinung.",
+      "it": "Ho un'opinione diversa."
+    }
+  ],
+  "goals": [
+    "Eine eigene Meinung äussern und begründen.",
+    "Auf die Meinung des Gesprächspartners eingehen.",
+    "Eine Erfahrung oder ein Erlebnis erzählen.",
+    "Nachfragen, wenn man etwas nicht versteht.",
+    "Höflich widersprechen."
+  ],
+  "vocab": [
+    {
+      "de": "die Meinung",
+      "it": "l'opinione",
+      "gender": "die",
+      "plural": "die Meinungen",
+      "separable": false,
+      "example_de": "Meiner Meinung nach ist das eine gute Idee."
+    },
+    {
+      "de": "erzählen",
+      "it": "raccontare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Kannst du mir von deinem Wochenende erzählen?"
+    },
+    {
+      "de": "finden",
+      "it": "trovare, pensare (opinione)",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Ich finde den Film spannend."
+    },
+    {
+      "de": "glauben",
+      "it": "credere, pensare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Ich glaube, dass es morgen regnet."
+    },
+    {
+      "de": "denken",
+      "it": "pensare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Was denkst du über dieses Thema?"
+    },
+    {
+      "de": "das Erlebnis",
+      "it": "l'esperienza (vissuta)",
+      "gender": "das",
+      "plural": "die Erlebnisse",
+      "separable": false,
+      "example_de": "Das war ein tolles Erlebnis!"
+    },
+    {
+      "de": "die Erfahrung",
+      "it": "l'esperienza (competenza)",
+      "gender": "die",
+      "plural": "die Erfahrungen",
+      "separable": false,
+      "example_de": "Ich habe viel Erfahrung im Kochen."
+    },
+    {
+      "de": "passieren",
+      "it": "succedere, accadere",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Was ist gestern passiert?"
+    },
+    {
+      "de": "erleben",
+      "it": "vivere, sperimentare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Wir haben viel Schönes erlebt."
+    },
+    {
+      "de": "stattfinden",
+      "it": "aver luogo, svolgersi",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Das Konzert findet am Samstag statt."
+    },
+    {
+      "de": "teilnehmen",
+      "it": "partecipare",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Ich nehme am Kurs teil."
+    },
+    {
+      "de": "erzählen von",
+      "it": "raccontare di",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Er erzählt von seiner Reise."
+    },
+    {
+      "de": "sprechen über",
+      "it": "parlare di",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Wir sprechen über die Ferien."
+    },
+    {
+      "de": "diskutieren",
+      "it": "discutere",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Sie diskutieren über Politik."
+    },
+    {
+      "de": "zustimmen",
+      "it": "essere d'accordo",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Ich stimme dir zu."
+    },
+    {
+      "de": "ablehnen",
+      "it": "rifiutare, respingere",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Er lehnt den Vorschlag ab."
+    },
+    {
+      "de": "der Vorschlag",
+      "it": "la proposta",
+      "gender": "der",
+      "plural": "die Vorschläge",
+      "separable": false,
+      "example_de": "Das ist ein guter Vorschlag."
+    },
+    {
+      "de": "die Ansicht",
+      "it": "l'opinione, il punto di vista",
+      "gender": "die",
+      "plural": "die Ansichten",
+      "separable": false,
+      "example_de": "Meiner Ansicht nach ist das eine gute Idee."
+    },
+    {
+      "de": "der Standpunkt",
+      "it": "il punto di vista",
+      "gender": "der",
+      "plural": "die Standpunkte",
+      "separable": false,
+      "example_de": "Ich verstehe deinen Standpunkt, sehe es aber anders."
+    },
+    {
+      "de": "die Haltung",
+      "it": "l'atteggiamento",
+      "gender": "die",
+      "plural": "die Haltungen",
+      "separable": false,
+      "example_de": "Seine Haltung zu diesem Thema ist klar."
+    },
+    {
+      "de": "die Einstellung",
+      "it": "l'atteggiamento, la mentalità",
+      "gender": "die",
+      "plural": "die Einstellungen",
+      "separable": false,
+      "example_de": "Sie hat eine positive Einstellung zum Leben."
+    },
+    {
+      "de": "die Sicht",
+      "it": "la vista, la prospettiva",
+      "gender": "die",
+      "plural": "die Sichten",
+      "separable": false,
+      "example_de": "Aus meiner Sicht ist das Problem lösbar."
+    },
+    {
+      "de": "die Perspektive",
+      "it": "la prospettiva",
+      "gender": "die",
+      "plural": "die Perspektiven",
+      "separable": false,
+      "example_de": "Aus der Perspektive eines Kindes sieht das anders aus."
+    },
+    {
+      "de": "der Eindruck",
+      "it": "l'impressione",
+      "gender": "der",
+      "plural": "die Eindrücke",
+      "separable": false,
+      "example_de": "Ich habe den Eindruck, dass er nicht zuhört."
+    },
+    {
+      "de": "das Gefühl",
+      "it": "il sentimento, la sensazione",
+      "gender": "das",
+      "plural": "die Gefühle",
+      "separable": false,
+      "example_de": "Ich habe ein gutes Gefühl bei dieser Sache."
+    },
+    {
+      "de": "die Stimmung",
+      "it": "l'umore, l'atmosfera",
+      "gender": "die",
+      "plural": "die Stimmungen",
+      "separable": false,
+      "example_de": "Die Stimmung im Raum war entspannt."
+    },
+    {
+      "de": "die Begeisterung",
+      "it": "l'entusiasmo",
+      "gender": "die",
+      "plural": "die Begeisterungen",
+      "separable": false,
+      "example_de": "Ihre Begeisterung für das Projekt ist ansteckend."
+    },
+    {
+      "de": "das Interesse",
+      "it": "l'interesse",
+      "gender": "das",
+      "plural": "die Interessen",
+      "separable": false,
+      "example_de": "Ich habe grosses Interesse an Sprachen."
+    },
+    {
+      "de": "die Neugier",
+      "it": "la curiosità",
+      "gender": "die",
+      "plural": "die Neugierden",
+      "separable": false,
+      "example_de": "Aus Neugier habe ich das Buch gelesen."
+    },
+    {
+      "de": "der Zweifel",
+      "it": "il dubbio",
+      "gender": "der",
+      "plural": "die Zweifel",
+      "separable": false,
+      "example_de": "Ich habe Zweifel, ob das klappt."
+    },
+    {
+      "de": "die Sorge",
+      "it": "la preoccupazione",
+      "gender": "die",
+      "plural": "die Sorgen",
+      "separable": false,
+      "example_de": "Mach dir keine Sorgen, es wird gut."
+    },
+    {
+      "de": "die Freude",
+      "it": "la gioia",
+      "gender": "die",
+      "plural": "die Freuden",
+      "separable": false,
+      "example_de": "Die Freude über das Geschenk war gross."
+    },
+    {
+      "de": "der Ärger",
+      "it": "il dispiacere, la rabbia",
+      "gender": "der",
+      "plural": "die Ärger",
+      "separable": false,
+      "example_de": "Ich habe Ärger mit dem Vermieter."
+    },
+    {
+      "de": "die Enttäuschung",
+      "it": "la delusione",
+      "gender": "die",
+      "plural": "die Enttäuschungen",
+      "separable": false,
+      "example_de": "Die Enttäuschung war gross, als er absagte."
+    },
+    {
+      "de": "die Überraschung",
+      "it": "la sorpresa",
+      "gender": "die",
+      "plural": "die Überraschungen",
+      "separable": false,
+      "example_de": "Die Party war eine schöne Überraschung."
+    },
+    {
+      "de": "das Erstaunen",
+      "it": "lo stupore",
+      "gender": "das",
+      "plural": "die Erstaunen",
+      "separable": false,
+      "example_de": "Zu meinem Erstaunen hat er zugestimmt."
+    },
+    {
+      "de": "die Bewunderung",
+      "it": "l'ammirazione",
+      "gender": "die",
+      "plural": "die Bewunderungen",
+      "separable": false,
+      "example_de": "Ich habe grosse Bewunderung für ihre Arbeit."
+    }
+  ]
+}

@@ -16,6 +16,11 @@ class RoleplayMessageIn(BaseModel):
     content: str
 
 
+class TestAnswerIn(BaseModel):
+    vocab_item_id: int
+    answer: str
+
+
 class HarvestConfirmIn(BaseModel):
     vocab_item_ids: list[int]
 
@@ -43,6 +48,13 @@ class RoleplayMessageOut(BaseModel):
     requested_words: list[dict] = []
 
 
+class TestAnswerOut(BaseModel):
+    vocab_item_id: int
+    is_correct: bool
+    correct_de: str
+    it: str
+
+
 class WarmupWord(BaseModel):
     vocab_item_id: int
     de: str
@@ -68,7 +80,9 @@ class LessonDetail(BaseModel):
     roleplay_messages: list[dict] = []
     dialogue_closed: bool = False
     harvest_words: list[dict] | None = None
+    harvest_corrections: list[dict] | None = None
     requested_words_count: int = 0
+    test_words: list[dict] | None = None
 
 
 class ReviewQueueItem(BaseModel):

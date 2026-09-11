@@ -8,6 +8,7 @@ Stati: warmup → prep → roleplay → harvest → swiss → completed.
 from __future__ import annotations
 
 PHASES: tuple[str, ...] = ("warmup", "prep", "roleplay", "harvest", "swiss")
+REVIEW_PHASES: tuple[str, ...] = ("warmup", "test", "harvest", "swiss")
 TERMINAL = "completed"
 REPEAT_SCENARIO_THRESHOLD = 6
 
@@ -16,21 +17,27 @@ class InvalidTransition(Exception):
     pass
 
 
-def phase_index(phase: str) -> int:
-    """Indice 0-based della fase (per l'indicatore a 5 barre)."""
-    return PHASES.index(phase)
+def phases_for(lesson_type: str) -> tuple[str, ...]:
+    """Fasi della lezione in base al tipo: ``review`` sostituisce prep+roleplay con ``test``."""
+    return REVIEW_PHASES if lesson_type == "review" else PHASES
 
 
-def advance_phase(current: str, *, skip_swiss: bool = False) -> str:
+def phase_index(phase: str, lesson_type: str = "base") -> int:
+    """Indice 0-based della fase (per l'indicatore a barre)."""
+    return phases_for(lesson_type).index(phase)
+
+
+def advance_phase(current: str, *, lesson_type: str = "base", skip_swiss: bool = False) -> str:
     """Fase successiva. Da ``swiss`` (o da ``harvest`` con ``skip_swiss``) → ``completed``."""
     if current == TERMINAL:
         raise InvalidTransition("lezione già completata")
+    phases = phases_for(lesson_type)
     if current == "swiss":
         return TERMINAL
     if current == "harvest" and skip_swiss:
         return TERMINAL
-    idx = PHASES.index(current)
-    return PHASES[idx + 1]
+    idx = phases.index(current)
+    return phases[idx + 1]
 
 
 def back_phase(current: str) -> str:

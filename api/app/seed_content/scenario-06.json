@@ -1,0 +1,410 @@
+{
+  "slug": "buero-und-small-talk",
+  "week_number": 6,
+  "role_label": "Arbeitskollege",
+  "key_phrases": [
+    {
+      "de": "Grüezi, wie geht's?",
+      "it": "Buongiorno, come va?",
+      "example": "Am Morgen im Büro: «Grüezi, wie geht's?»"
+    },
+    {
+      "de": "Hast du am Wochenende schon etwas vor?",
+      "it": "Hai già programmi per il fine settimana?",
+      "example": "Beim Kaffee in der Pause: «Hast du am Wochenende schon etwas vor?»"
+    },
+    {
+      "de": "Kommen Sie doch rein.",
+      "it": "Entri pure.",
+      "example": "Der Chef öffnet die Tür: «Kommen Sie doch rein.»"
+    },
+    {
+      "de": "Wie war dein Wochenende?",
+      "it": "Com'è andato il tuo fine settimana?",
+      "example": "Am Montagmorgen: «Wie war dein Wochenende?»"
+    },
+    {
+      "de": "Hast du kurz Zeit für einen Kaffee?",
+      "it": "Hai un attimo per un caffè?",
+      "example": "Am Nachmittag: «Hast du kurz Zeit für einen Kaffee?»"
+    },
+    {
+      "de": "Das Wetter ist heute wirklich schön, oder?",
+      "it": "Oggi il tempo è davvero bello, vero?",
+      "example": "Small Talk im Aufzug: «Das Wetter ist heute wirklich schön, oder?»"
+    },
+    {
+      "de": "Entschuldigung, ich muss kurz weg.",
+      "it": "Scusi, devo assentarmi un attimo.",
+      "example": "Man verlässt den Raum: «Entschuldigung, ich muss kurz weg.»"
+    },
+    {
+      "de": "Können wir das später besprechen?",
+      "it": "Possiamo parlarne più tardi?",
+      "example": "Bei Zeitdruck: «Können wir das später besprechen?»"
+    },
+    {
+      "de": "Danke für die Info.",
+      "it": "Grazie per l'informazione.",
+      "example": "Nach einer Mitteilung: «Danke für die Info.»"
+    },
+    {
+      "de": "Bis später!",
+      "it": "A più tardi!",
+      "example": "Beim Verlassen des Büros: «Bis später!»"
+    }
+  ],
+  "imprevisti": [
+    "Der Kaffeeautomat ist kaputt.",
+    "Der Chef kommt unerwartet ins Büro.",
+    "Ein Kollege hat vergessen, die Kaffeetassen zu spülen.",
+    "Das Telefon klingelt mitten im Gespräch.",
+    "Jemand hat den Znüni schon aufgegessen."
+  ],
+  "swiss_variants": [
+    {
+      "standard": "Guten Morgen",
+      "swiss": "Grüezi",
+      "it": "Buongiorno"
+    },
+    {
+      "standard": "Zwischenmahlzeit",
+      "swiss": "Znüni",
+      "it": "Spuntino"
+    },
+    {
+      "standard": "Fahrrad",
+      "swiss": "Velo",
+      "it": "Bicicletta"
+    }
+  ],
+  "goals": [
+    "Sich im Büro höflich begrüssen und verabschieden.",
+    "Small Talk über das Wochenende oder das Wetter führen.",
+    "Nach dem Befinden fragen und darauf antworten.",
+    "Eine kurze Pause vorschlagen.",
+    "Sich für Informationen bedanken."
+  ],
+  "vocab": [
+    {
+      "de": "der Znüni",
+      "it": "la merenda del mattino",
+      "gender": "der",
+      "plural": "die Znüni",
+      "separable": false,
+      "example_de": "Ich mache kurz Znüni, möchtest du auch etwas?"
+    },
+    {
+      "de": "das Velo",
+      "it": "la bicicletta",
+      "gender": "das",
+      "plural": "die Velos",
+      "separable": false,
+      "example_de": "Ich fahre mit dem Velo zur Arbeit."
+    },
+    {
+      "de": "die Kaffeepause",
+      "it": "la pausa caffè",
+      "gender": "die",
+      "plural": "die Kaffeepausen",
+      "separable": false,
+      "example_de": "Lass uns eine Kaffeepause machen."
+    },
+    {
+      "de": "der Kaffee",
+      "it": "il caffè",
+      "gender": "der",
+      "plural": "die Kaffees",
+      "separable": false,
+      "example_de": "Möchtest du einen Kaffee?"
+    },
+    {
+      "de": "der Tee",
+      "it": "il tè",
+      "gender": "der",
+      "plural": "die Tees",
+      "separable": false,
+      "example_de": "Ich trinke lieber Tee."
+    },
+    {
+      "de": "das Wasser",
+      "it": "l'acqua",
+      "gender": "das",
+      "plural": "die Wasser",
+      "separable": false,
+      "example_de": "Ein Glas Wasser, bitte."
+    },
+    {
+      "de": "der Kollege",
+      "it": "il collega",
+      "gender": "der",
+      "plural": "die Kollegen",
+      "separable": false,
+      "example_de": "Mein Kollege ist heute nicht da."
+    },
+    {
+      "de": "die Kollegin",
+      "it": "la collega",
+      "gender": "die",
+      "plural": "die Kolleginnen",
+      "separable": false,
+      "example_de": "Meine Kollegin hilft mir oft."
+    },
+    {
+      "de": "der Chef",
+      "it": "il capo",
+      "gender": "der",
+      "plural": "die Chefs",
+      "separable": false,
+      "example_de": "Der Chef kommt gleich."
+    },
+    {
+      "de": "die Chefin",
+      "it": "la capa",
+      "gender": "die",
+      "plural": "die Chefinnen",
+      "separable": false,
+      "example_de": "Die Chefin hat heute frei."
+    },
+    {
+      "de": "das Büro",
+      "it": "l'ufficio",
+      "gender": "das",
+      "plural": "die Büros",
+      "separable": false,
+      "example_de": "Ich bin im Büro."
+    },
+    {
+      "de": "der Computer",
+      "it": "il computer",
+      "gender": "der",
+      "plural": "die Computer",
+      "separable": false,
+      "example_de": "Mein Computer ist langsam."
+    },
+    {
+      "de": "das Handy",
+      "it": "il cellulare",
+      "gender": "das",
+      "plural": "die Handys",
+      "separable": false,
+      "example_de": "Mein Handy klingelt."
+    },
+    {
+      "de": "die Sitzung",
+      "it": "la riunione",
+      "gender": "die",
+      "plural": "die Sitzungen",
+      "separable": false,
+      "example_de": "Die Sitzung beginnt um zehn."
+    },
+    {
+      "de": "die Pause",
+      "it": "la pausa",
+      "gender": "die",
+      "plural": "die Pausen",
+      "separable": false,
+      "example_de": "Wir machen jetzt eine Pause."
+    },
+    {
+      "de": "der Feierabend",
+      "it": "la fine del lavoro",
+      "gender": "der",
+      "plural": "die Feierabende",
+      "separable": false,
+      "example_de": "Endlich Feierabend!"
+    },
+    {
+      "de": "das Mittagessen",
+      "it": "il pranzo",
+      "gender": "das",
+      "plural": "die Mittagessen",
+      "separable": false,
+      "example_de": "Gehen wir zusammen zum Mittagessen?"
+    },
+    {
+      "de": "der Termin",
+      "it": "l'appuntamento",
+      "gender": "der",
+      "plural": "die Termine",
+      "separable": false,
+      "example_de": "Ich habe einen Termin um zwei."
+    },
+    {
+      "de": "die E-Mail",
+      "it": "l'e-mail",
+      "gender": "die",
+      "plural": "die E-Mails",
+      "separable": false,
+      "example_de": "Ich schicke dir eine E-Mail."
+    },
+    {
+      "de": "das Telefon",
+      "it": "il telefono",
+      "gender": "das",
+      "plural": "die Telefone",
+      "separable": false,
+      "example_de": "Das Telefon läutet."
+    },
+    {
+      "de": "der Kaffeeautomat",
+      "it": "la macchina del caffè",
+      "gender": "der",
+      "plural": "die Kaffeeautomaten",
+      "separable": false,
+      "example_de": "Der Kaffeeautomat ist kaputt, ich hole uns einen Kaffee vom Bäcker."
+    },
+    {
+      "de": "die Kaffeetasse",
+      "it": "la tazza da caffè",
+      "gender": "die",
+      "plural": "die Kaffeetassen",
+      "separable": false,
+      "example_de": "Stell die Kaffeetasse bitte in die Küche zurück."
+    },
+    {
+      "de": "der Pausenraum",
+      "it": "la sala per le pause",
+      "gender": "der",
+      "plural": "die Pausenräume",
+      "separable": false,
+      "example_de": "Im Pausenraum gibt es gratis Obst."
+    },
+    {
+      "de": "die Teeküche",
+      "it": "l'angolo cottura (per il tè)",
+      "gender": "die",
+      "plural": "die Teeküchen",
+      "separable": false,
+      "example_de": "In der Teeküche treffen wir uns um zehn."
+    },
+    {
+      "de": "der Kopierer",
+      "it": "la fotocopiatrice",
+      "gender": "der",
+      "plural": "die Kopierer",
+      "separable": false,
+      "example_de": "Der Kopierer zieht das Papier schief ein."
+    },
+    {
+      "de": "der Drucker",
+      "it": "la stampante",
+      "gender": "der",
+      "plural": "die Drucker",
+      "separable": false,
+      "example_de": "Der Drucker hat schon wieder keinen Toner."
+    },
+    {
+      "de": "das Papier",
+      "it": "la carta",
+      "gender": "das",
+      "plural": "die Papiere",
+      "separable": false,
+      "example_de": "Wir brauchen neues Papier für den Drucker."
+    },
+    {
+      "de": "der Stift",
+      "it": "la penna",
+      "gender": "der",
+      "plural": "die Stifte",
+      "separable": false,
+      "example_de": "Kannst du mir kurz einen Stift ausleihen?"
+    },
+    {
+      "de": "die Mappe",
+      "it": "la cartelletta",
+      "gender": "die",
+      "plural": "die Mappen",
+      "separable": false,
+      "example_de": "Die Mappe mit den Verträgen liegt auf meinem Pult."
+    },
+    {
+      "de": "der Ordner",
+      "it": "il raccoglitore",
+      "gender": "der",
+      "plural": "die Ordner",
+      "separable": false,
+      "example_de": "Stell den Ordner bitte ins Regal zurück."
+    },
+    {
+      "de": "das Regal",
+      "it": "lo scaffale",
+      "gender": "das",
+      "plural": "die Regale",
+      "separable": false,
+      "example_de": "Im Regal neben der Tür findest du die Formulare."
+    },
+    {
+      "de": "der Pult",
+      "it": "la scrivania (elvetica)",
+      "gender": "der",
+      "plural": "die Pulte",
+      "separable": false,
+      "example_de": "Mein Pult ist immer so unordentlich."
+    },
+    {
+      "de": "der Stuhl",
+      "it": "la sedia",
+      "gender": "der",
+      "plural": "die Stühle",
+      "separable": false,
+      "example_de": "Nimm bitte einen Stuhl von nebenan."
+    },
+    {
+      "de": "das Fenster",
+      "it": "la finestra",
+      "gender": "das",
+      "plural": "die Fenster",
+      "separable": false,
+      "example_de": "Mach bitte das Fenster zu, es zieht."
+    },
+    {
+      "de": "die Tür",
+      "it": "la porta",
+      "gender": "die",
+      "plural": "die Türen",
+      "separable": false,
+      "example_de": "Lass die Tür offen, es ist so heiss."
+    },
+    {
+      "de": "das Licht",
+      "it": "la luce",
+      "gender": "das",
+      "plural": "die Lichter",
+      "separable": false,
+      "example_de": "Mach bitte das Licht aus, wenn du gehst."
+    },
+    {
+      "de": "die Heizung",
+      "it": "il riscaldamento",
+      "gender": "die",
+      "plural": "die Heizungen",
+      "separable": false,
+      "example_de": "Die Heizung ist zu stark eingestellt."
+    },
+    {
+      "de": "der Abfall",
+      "it": "la spazzatura",
+      "gender": "der",
+      "plural": "die Abfälle",
+      "separable": false,
+      "example_de": "Wirf den Abfall bitte in den Kübel."
+    },
+    {
+      "de": "die Kaffeemaschine",
+      "it": "la macchina del caffè",
+      "gender": "die",
+      "plural": "die Kaffeemaschinen",
+      "separable": false,
+      "example_de": "Die Kaffeemaschine muss entkalkt werden."
+    },
+    {
+      "de": "der Znünibeutel",
+      "it": "il sacchetto per la merenda",
+      "gender": "der",
+      "plural": "die Znünibeutel",
+      "separable": false,
+      "example_de": "Mein Znünibeutel liegt noch im Kühlschrank."
+    }
+  ]
+}

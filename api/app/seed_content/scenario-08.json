@@ -1,0 +1,330 @@
+{
+  "slug": "feste-einladungen-geschenke",
+  "week_number": 8,
+  "role_label": "Gastgeberin",
+  "key_phrases": [
+    {
+      "de": "Hast du am Samstag schon etwas vor?",
+      "it": "Hai già programmi per sabato?",
+      "example": "Du fragst eine Freundin, ob sie Zeit für deine Party hat."
+    },
+    {
+      "de": "Ich möchte dich zu meinem Geburtstag einladen.",
+      "it": "Vorrei invitarti al mio compleanno.",
+      "example": "Du sprichst eine Einladung aus."
+    },
+    {
+      "de": "Kommst du mit zur Party?",
+      "it": "Vieni alla festa?",
+      "example": "Du fragst einen Kollegen, ob er mitkommt."
+    },
+    {
+      "de": "Was schenken wir ihr zum Geburtstag?",
+      "it": "Cosa le regaliamo per il compleanno?",
+      "example": "Du überlegst mit einem Freund, was ihr schenken könnt."
+    },
+    {
+      "de": "Ich bringe eine Flasche Wein mit.",
+      "it": "Porto una bottiglia di vino.",
+      "example": "Du sagst, was du zur Party mitbringst."
+    },
+    {
+      "de": "Vielen Dank für die Einladung!",
+      "it": "Grazie mille per l'invito!",
+      "example": "Du bedankst dich für die Einladung."
+    },
+    {
+      "de": "Wo findet die Feier statt?",
+      "it": "Dove si svolge la festa?",
+      "example": "Du fragst nach dem Ort der Feier."
+    },
+    {
+      "de": "Soll ich etwas mitbringen?",
+      "it": "Devo portare qualcosa?",
+      "example": "Du fragst die Gastgeberin, ob du etwas mitbringen sollst."
+    },
+    {
+      "de": "Das Geschenk ist super angekommen!",
+      "it": "Il regalo è stato molto apprezzato!",
+      "example": "Du bedankst dich für ein Geschenk."
+    },
+    {
+      "de": "Leider kann ich nicht kommen.",
+      "it": "Purtroppo non posso venire.",
+      "example": "Du sagst ab, weil du keine Zeit hast."
+    }
+  ],
+  "imprevisti": [
+    "Die Gastgeberin hat vergessen, dich einzuladen.",
+    "Du hast das Geschenk zu Hause vergessen.",
+    "Die Party findet doch an einem anderen Ort statt.",
+    "Jemand bringt ein unerwartetes Geschenk mit.",
+    "Das Essen ist ausgegangen, weil mehr Gäste gekommen sind."
+  ],
+  "swiss_variants": [
+    {
+      "standard": "Ich bringe eine Flasche Wein mit.",
+      "swiss": "Ich bringe eine Flasche Wii mit.",
+      "it": "Porto una bottiglia di vino."
+    },
+    {
+      "standard": "Vielen Dank für die Einladung!",
+      "swiss": "Merci für d'Iiladig!",
+      "it": "Grazie mille per l'invito!"
+    },
+    {
+      "standard": "Wo findet die Feier statt?",
+      "swiss": "Wo isch d'Fäscht?",
+      "it": "Dove si svolge la festa?"
+    }
+  ],
+  "goals": [
+    "Jemanden zu einer Feier einladen.",
+    "Eine Einladung annehmen oder ablehnen.",
+    "Über Geschenke sprechen.",
+    "Sich für ein Geschenk bedanken.",
+    "Nach dem Ort und der Zeit der Feier fragen."
+  ],
+  "vocab": [
+    {
+      "de": "die Party",
+      "it": "la festa",
+      "gender": "die",
+      "plural": "die Partys",
+      "separable": false,
+      "example_de": "Am Samstag mache ich eine Party."
+    },
+    {
+      "de": "einladen",
+      "it": "invitare",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Ich lade dich zu meinem Geburtstag ein."
+    },
+    {
+      "de": "die Einladung",
+      "it": "l'invito",
+      "gender": "die",
+      "plural": "die Einladungen",
+      "separable": false,
+      "example_de": "Hast du die Einladung bekommen?"
+    },
+    {
+      "de": "das Geschenk",
+      "it": "il regalo",
+      "gender": "das",
+      "plural": "die Geschenke",
+      "separable": false,
+      "example_de": "Ich habe ein Geschenk für dich."
+    },
+    {
+      "de": "schenken",
+      "it": "regalare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Was schenkst du ihm zum Geburtstag?"
+    },
+    {
+      "de": "der Geburtstag",
+      "it": "il compleanno",
+      "gender": "der",
+      "plural": "die Geburtstage",
+      "separable": false,
+      "example_de": "Mein Geburtstag ist am 5. Mai."
+    },
+    {
+      "de": "Geburtstag haben",
+      "it": "compleanno (avere il compleanno)",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Ich habe nächste Woche Geburtstag."
+    },
+    {
+      "de": "die Geburtstagsparty",
+      "it": "la festa di compleanno",
+      "gender": "die",
+      "plural": "die Geburtstagspartys",
+      "separable": false,
+      "example_de": "Die Geburtstagsparty war super."
+    },
+    {
+      "de": "das Fest",
+      "it": "la festa",
+      "gender": "das",
+      "plural": "die Feste",
+      "separable": false,
+      "example_de": "Das Fest dauert bis Mitternacht."
+    },
+    {
+      "de": "feiern",
+      "it": "festeggiare",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Wir feiern heute Abend."
+    },
+    {
+      "de": "die Feier",
+      "it": "la celebrazione",
+      "gender": "die",
+      "plural": "die Feiern",
+      "separable": false,
+      "example_de": "Die Feier findet im Garten statt."
+    },
+    {
+      "de": "das Gastgeschenk",
+      "it": "il regalo per l'ospite",
+      "gender": "das",
+      "plural": "die Gastgeschenke",
+      "separable": false,
+      "example_de": "Bring bitte ein Gastgeschenk mit."
+    },
+    {
+      "de": "mitbringen",
+      "it": "portare con sé",
+      "gender": null,
+      "plural": null,
+      "separable": true,
+      "example_de": "Kannst du einen Kuchen mitbringen?"
+    },
+    {
+      "de": "die Karte",
+      "it": "il biglietto",
+      "gender": "die",
+      "plural": "die Karten",
+      "separable": false,
+      "example_de": "Ich schreibe eine Karte zum Geburtstag."
+    },
+    {
+      "de": "gratulieren",
+      "it": "congratularsi",
+      "gender": null,
+      "plural": null,
+      "separable": false,
+      "example_de": "Ich gratuliere dir zum Geburtstag!"
+    },
+    {
+      "de": "die Blume",
+      "it": "il fiore",
+      "gender": "die",
+      "plural": "die Blumen",
+      "separable": false,
+      "example_de": "Ich bringe Blumen mit."
+    },
+    {
+      "de": "die Praline",
+      "it": "la pralina",
+      "gender": "die",
+      "plural": "die Pralinen",
+      "separable": false,
+      "example_de": "Pralinen sind ein beliebtes Geschenk."
+    },
+    {
+      "de": "der Gutschein",
+      "it": "il buono regalo",
+      "gender": "der",
+      "plural": "die Gutscheine",
+      "separable": false,
+      "example_de": "Ich schenke ihm einen Gutschein."
+    },
+    {
+      "de": "die Überraschung",
+      "it": "la sorpresa",
+      "gender": "die",
+      "plural": "die Überraschungen",
+      "separable": false,
+      "example_de": "Die Party ist eine Überraschung."
+    },
+    {
+      "de": "das Gastmahl",
+      "it": "il banchetto",
+      "gender": "das",
+      "plural": "die Gastmähler",
+      "separable": false,
+      "example_de": "Wir bereiten ein Gastmahl für die Familie vor."
+    },
+    {
+      "de": "die Tischkarte",
+      "it": "il segnaposto",
+      "gender": "die",
+      "plural": "die Tischkarten",
+      "separable": false,
+      "example_de": "Auf der Tischkarte steht der Name jedes Gastes."
+    },
+    {
+      "de": "der Gastgeber",
+      "it": "il padrone di casa",
+      "gender": "der",
+      "plural": "die Gastgeber",
+      "separable": false,
+      "example_de": "Der Gastgeber begrüsst alle Gäste persönlich."
+    },
+    {
+      "de": "die Gastgeberin",
+      "it": "la padrona di casa",
+      "gender": "die",
+      "plural": "die Gastgeberinnen",
+      "separable": false,
+      "example_de": "Die Gastgeberin hat den Tisch schön gedeckt."
+    },
+    {
+      "de": "der Gast",
+      "it": "l'ospite",
+      "gender": "der",
+      "plural": "die Gäste",
+      "separable": false,
+      "example_de": "Jeder Gast bringt gute Laune mit."
+    },
+    {
+      "de": "die Anwesenheit",
+      "it": "la presenza",
+      "gender": "die",
+      "plural": "die Anwesenheiten",
+      "separable": false,
+      "example_de": "Vielen Dank für deine Anwesenheit an meiner Feier."
+    },
+    {
+      "de": "die Aufmerksamkeit",
+      "it": "il pensierino",
+      "gender": "die",
+      "plural": "die Aufmerksamkeiten",
+      "separable": false,
+      "example_de": "Eine kleine Aufmerksamkeit freut jeden Gast."
+    },
+    {
+      "de": "der Blumenstrauss",
+      "it": "il mazzo di fiori",
+      "gender": "der",
+      "plural": "die Blumensträusse",
+      "separable": false,
+      "example_de": "Ich habe einen Blumenstrauss für die Gastgeberin gekauft."
+    },
+    {
+      "de": "die Schleife",
+      "it": "il fiocco",
+      "gender": "die",
+      "plural": "die Schleifen",
+      "separable": false,
+      "example_de": "Das Geschenk ist mit einer roten Schleife verziert."
+    },
+    {
+      "de": "das Geschenkpapier",
+      "it": "la carta da regalo",
+      "gender": "das",
+      "plural": "die Geschenkpapiere",
+      "separable": false,
+      "example_de": "Ich brauche noch Geschenkpapier für die Überraschung."
+    },
+    {
+      "de": "die Grusskarte",
+      "it": "il biglietto d'auguri",
+      "gender": "die",
+      "plural": "die Grusskarten",
+      "separable": false,
+      "example_de": "Zur Party schicke ich eine Grusskarte."
+    }
+  ]
+}
