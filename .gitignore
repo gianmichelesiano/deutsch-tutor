@@ -20,3 +20,7 @@ web/out/
 
 # Build artifacts
 *.log
+
+# artefatti di next/tsc lanciati sull'host
+web/next-env.d.ts
+web/tsconfig.tsbuildinfo
