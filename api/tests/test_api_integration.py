@@ -121,7 +121,7 @@ async def test_full_lesson_flow(clean_db, mock_llm):
         # 9. endpoint aggregati
         r = await client.get("/api/progress")
         assert r.status_code == 200
-        seeded = len(VOCAB) + sum(len(c["vocab"]) for c in load_seed_content())
+        seeded = len(VOCAB) + sum(len(c.get("vocab", [])) for c in load_seed_content())
         assert r.json()["total_vocab"] == seeded + 1  # curati + generati + 1 richiesta
         assert r.json()["completed_lessons"] == 1
 

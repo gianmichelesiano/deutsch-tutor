@@ -31,18 +31,36 @@ async def test_seed_is_idempotent() -> None:
 
     # Contenuto atteso: 40 scenario 1 + 40 scenario 2 + i JSON generati.
     assert after_first_scenarios == 12
-    generated_vocab = sum(len(c["vocab"]) for c in load_seed_content())
+    generated_vocab = sum(len(c.get("vocab", [])) for c in load_seed_content())
     assert after_first_vocab == 80 + generated_vocab
 
 
-def test_seed_content_files_cover_scenarios_3_to_12() -> None:
-    """I JSON generati devono essere validi e coprire gli scenari 3–12."""
+def _assert_valid_intro(intro: dict, slug: str) -> None:
+    assert 5 <= len(intro["situation"]) <= 8, slug
+    assert 4 <= len(intro["dialog"]) <= 6, slug
+    assert 2 <= len(intro["notes_it"]) <= 3, slug
+    for line in intro["situation"]:
+        assert line["de"].strip() and line["it"].strip(), slug
+    speakers = {t["speaker"] for t in intro["dialog"]}
+    assert "Ich" in speakers and len(speakers) == 2, f"{slug}: speaker {speakers}"
+    for turn in intro["dialog"]:
+        assert turn["de"].strip() and turn["it"].strip(), slug
+    for note in intro["notes_it"]:
+        assert note.strip(), slug
+
+
+def test_seed_content_files_cover_all_scenarios() -> None:
+    """Scenari 1-2: solo intro (vocab e meta sono in seed_data). Scenari 3-12: contenuto completo."""
     contents = load_seed_content()
     slugs = {s["slug"]: s["week_number"] for s in SCENARIOS}
     weeks = sorted(c["week_number"] for c in contents)
-    assert weeks == list(range(3, 13))
+    assert weeks == list(range(1, 13))
     for c in contents:
         assert slugs[c["slug"]] == c["week_number"]
+        _assert_valid_intro(c["intro"], c["slug"])
+        if c["week_number"] <= 2:
+            assert "vocab" not in c and "key_phrases" not in c
+            continue
         assert c["role_label"]
         assert len(c["key_phrases"]) >= 8
         assert len(c["imprevisti"]) >= 3

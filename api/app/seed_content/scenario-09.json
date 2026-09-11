@@ -390,5 +390,74 @@
       "separable": false,
       "example_de": "Wir möchten bitte bezahlen."
     }
-  ]
+  ],
+  "intro": {
+    "situation": [
+      {
+        "de": "Ich bin in Zürich und habe Hunger.",
+        "it": "Sono a Zurigo e ho fame."
+      },
+      {
+        "de": "Ich gehe in ein Restaurant in der Nähe vom Hauptbahnhof.",
+        "it": "Vado in un ristorante vicino alla stazione centrale."
+      },
+      {
+        "de": "Die Kellnerin bringt mir die Speisekarte.",
+        "it": "La cameriera mi porta il menù."
+      },
+      {
+        "de": "Ich möchte etwas Einfaches bestellen, vielleicht ein Cordon bleu mit Pommes.",
+        "it": "Vorrei ordinare qualcosa di semplice, forse un cordon bleu con patatine fritte."
+      },
+      {
+        "de": "Später möchte ich die Rechnung in Franken bezahlen.",
+        "it": "Più tardi vorrei pagare il conto in franchi."
+      },
+      {
+        "de": "Wenn etwas nicht stimmt, sage ich es höflich.",
+        "it": "Se qualcosa non va, lo dico con educazione."
+      },
+      {
+        "de": "In der Schweiz gibt es oft kein Trinkgeld, aber man rundet auf.",
+        "it": "In Svizzera spesso non c'è mancia, ma si arrotonda."
+      }
+    ],
+    "dialog": [
+      {
+        "speaker": "Kellnerin",
+        "de": "Grüezi, was möchten Sie trinken?",
+        "it": "Salve, cosa desidera bere?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Grüezi, ich nehme ein Helles, bitte.",
+        "it": "Salve, prendo una birra chiara, per favore."
+      },
+      {
+        "speaker": "Kellnerin",
+        "de": "Gerne. Und zum Essen?",
+        "it": "Volentieri. E da mangiare?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Ich hätte gern das Cordon bleu mit Pommes.",
+        "it": "Vorrei il cordon bleu con patatine fritte."
+      },
+      {
+        "speaker": "Kellnerin",
+        "de": "Sehr gut. Möchten Sie noch einen Salat dazu?",
+        "it": "Molto bene. Desidera anche un'insalata?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Nein, danke. Aber später bitte die Rechnung.",
+        "it": "No, grazie. Ma più tardi il conto, per favore."
+      }
+    ],
+    "notes_it": [
+      "In Svizzera si usa il 'Sie' con i camerieri, a meno che non siano giovani e l'ambiente sia informale.",
+      "Il personale si aspetta un 'Grüezi' all'arrivo e un 'Danke' o 'Merci' quando si riceve qualcosa.",
+      "Non lasciare mancia obbligatoria: si arrotonda al franco più vicino, massimo 5-10% se il servizio è ottimo."
+    ]
+  }
 }

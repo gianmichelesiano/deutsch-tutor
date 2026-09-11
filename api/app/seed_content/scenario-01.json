@@ -1,0 +1,73 @@
+{
+  "slug": "im-supermarkt",
+  "week_number": 1,
+  "intro": {
+    "situation": [
+      {
+        "de": "Ich bin in einer Migros in Zürich und möchte für das Abendessen einkaufen.",
+        "it": "Sono in una Migros a Zurigo e vorrei fare la spesa per cena."
+      },
+      {
+        "de": "Ich suche frische Tomaten und ein paar Äpfel, aber ich finde sie nicht.",
+        "it": "Cerco pomodori freschi e qualche mela, ma non li trovo."
+      },
+      {
+        "de": "Ich gehe zur Verkäuferin an der Frischtheke und frage höflich nach.",
+        "it": "Mi avvicino alla commessa al banco fresco e chiedo con cortesia."
+      },
+      {
+        "de": "Sie zeigt mir, wo das Gemüse steht, und ich bedanke mich.",
+        "it": "Lei mi indica dove sono le verdure e io la ringrazio."
+      },
+      {
+        "de": "Dann wiege ich die Tomaten an der Waage und klebe das Etikett drauf.",
+        "it": "Poi peso i pomodori alla bilancia e attacco l'etichetta."
+      },
+      {
+        "de": "An der Kasse frage ich, ob ich mit Karte zahlen kann.",
+        "it": "Alla cassa chiedo se posso pagare con la carta."
+      },
+      {
+        "de": "Die Kassiererin sagt Ja und ich bezahle in Franken.",
+        "it": "La cassiera dice di sì e pago in franchi."
+      }
+    ],
+    "dialog": [
+      {
+        "speaker": "Ich",
+        "de": "Grüezi, können Sie mir helfen? Ich finde die Tomaten nicht.",
+        "it": "Buongiorno, può aiutarmi? Non trovo i pomodori."
+      },
+      {
+        "speaker": "Verkäuferin am Supermarkt",
+        "de": "Grüezi, kein Problem. Die Tomaten sind dort hinten, neben den Gurken.",
+        "it": "Buongiorno, nessun problema. I pomodori sono laggiù, accanto ai cetrioli."
+      },
+      {
+        "speaker": "Ich",
+        "de": "Danke vielmal. Muss ich sie noch wiegen?",
+        "it": "Grazie mille. Devo ancora pesarli?"
+      },
+      {
+        "speaker": "Verkäuferin am Supermarkt",
+        "de": "Ja, genau. Die Waage ist gleich neben dem Gemüse. Etikett nicht vergessen!",
+        "it": "Sì, esatto. La bilancia è proprio accanto alle verdure. Non dimenticare l'etichetta!"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Alles klar. Und kann ich an der Kasse mit Karte zahlen?",
+        "it": "Va bene. E posso pagare alla cassa con la carta?"
+      },
+      {
+        "speaker": "Verkäuferin am Supermarkt",
+        "de": "Ja, klar. Sie können mit Karte oder bar in Franken zahlen.",
+        "it": "Sì, certo. Può pagare con la carta o in contanti in franchi."
+      }
+    ],
+    "notes_it": [
+      "In Svizzera nei negozi si usa di solito il 'Sie' con i commessi, anche se sono giovani. 'Grüezi' è il saluto formale tipico; 'Hallo' va bene solo con amici.",
+      "I commessi si aspettano che tu sia breve e gentile: chiedi aiuto con 'Können Sie mir helfen?' e ringrazia con 'Danke vielmal'. Non è maleducato andare subito al punto.",
+      "Alla cassa spesso chiedono se hai la tessera fedeltà (Migros Cumulus o Coop Supercard). Se non ce l'hai, basta dire 'Nein, danke'. I prezzi sono in franchi (CHF), non in euro."
+    ]
+  }
+}

@@ -382,5 +382,74 @@
       "separable": false,
       "example_de": "Ich muss die Kündigung fristgerecht einreichen."
     }
-  ]
+  ],
+  "intro": {
+    "situation": [
+      {
+        "de": "Heute bin ich im Coop beim Bahnhof Enge und schaue mir die Wiederholung der letzten Wochen an.",
+        "it": "Oggi sono al Coop vicino alla stazione di Enge e ripasso le ultime settimane."
+      },
+      {
+        "de": "Ich habe mein Velo vor dem Eingang abgestellt und brauche noch Milch und Brot für das Znüni.",
+        "it": "Ho lasciato la bici davanti all'entrata e mi servono ancora latte e pane per lo spuntino."
+      },
+      {
+        "de": "An der Kasse steht eine freundliche Verkäuferin und fragt, ob ich alles gefunden habe.",
+        "it": "Alla cassa c'è una commessa gentile che mi chiede se ho trovato tutto."
+      },
+      {
+        "de": "Ich möchte mit ihr ein kurzes Gespräch führen und dabei die Sätze aus den früheren Szenarien wiederholen.",
+        "it": "Vorrei fare una breve conversazione con lei e ripassare le frasi degli scenari precedenti."
+      },
+      {
+        "de": "Sie spricht Hochdeutsch mit mir, und ich versuche, ruhig und deutlich zu antworten.",
+        "it": "Lei mi parla in tedesco standard e io cerco di rispondere con calma e in modo chiaro."
+      },
+      {
+        "de": "Später kaufe ich noch ein Billett für die SBB und übe weiter.",
+        "it": "Più tardi compro anche un biglietto per le FFS e continuo a esercitarmi."
+      },
+      {
+        "de": "So kann ich die wichtigsten Redemittel aus den letzten Wochen in einem echten Gespräch anwenden.",
+        "it": "Così posso usare le espressioni più importanti delle ultime settimane in una conversazione reale."
+      }
+    ],
+    "dialog": [
+      {
+        "speaker": "Gesprächspartner",
+        "de": "Grüezi, haben Sie alles gefunden?",
+        "it": "Salve, ha trovato tutto?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Grüezi, ja, danke. Ich brauche noch eine Milch und ein Brot.",
+        "it": "Salve, sì, grazie. Mi serve ancora un latte e un pane."
+      },
+      {
+        "speaker": "Gesprächspartner",
+        "de": "Möchten Sie eine grosse oder eine kleine Milch?",
+        "it": "Desidera un latte grande o piccolo?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Eine kleine, bitte. Und wie viel kostet das Brot?",
+        "it": "Uno piccolo, per favore. E quanto costa il pane?"
+      },
+      {
+        "speaker": "Gesprächspartner",
+        "de": "Das Brot kostet zwei Franken fünfzig. Zusammen sind es vier Franken zwanzig.",
+        "it": "Il pane costa due franchi e cinquanta. In tutto sono quattro franchi e venti."
+      },
+      {
+        "speaker": "Ich",
+        "de": "Gut, ich zahle mit Karte. Danke vielmal!",
+        "it": "Bene, pago con la carta. Grazie mille!"
+      }
+    ],
+    "notes_it": [
+      "In Svizzera nei negozi si usa di solito il 'Sie' con i commessi; il 'du' è comune tra colleghi o giovani, ma all'inizio meglio il 'Sie'.",
+      "I prezzi sono in franchi (Franken) e spesso si paga con carta o TWINT; il contante è ancora accettato ma meno usato.",
+      "Il 'Grüezi' è il saluto standard in tedesco svizzero; la risposta è di solito 'Grüezi' o 'Hallo', non 'Guten Tag' tra privati."
+    ]
+  }
 }

@@ -33,7 +33,7 @@ CONTENT_FIELDS = (
     "goals",
 )
 # Campi forniti dai JSON generati (non toccano titoli/descrizione del seed).
-GENERATED_FIELDS = ("role_label", "key_phrases", "swiss_variants", "imprevisti", "goals")
+GENERATED_FIELDS = ("role_label", "key_phrases", "swiss_variants", "imprevisti", "goals", "intro")
 
 SEED_CONTENT_DIR = Path(__file__).parent / "seed_content"
 
@@ -45,9 +45,6 @@ def load_seed_content(directory: Path = SEED_CONTENT_DIR) -> list[dict]:
         for path in sorted(directory.glob("scenario-*.json"))
     ]
 
-
-def _has_content(scenario: Scenario) -> bool:
-    return bool(scenario.key_phrases or scenario.goals or scenario.imprevisti)
 
 
 async def run_seed(
@@ -76,17 +73,23 @@ async def run_seed(
                 updated_scenarios += 1
         await session.commit()
 
-        # Contenuti generati (scenari 3–12): applicati se lo scenario è ancora vuoto
-        # oppure con --update.
+        # Contenuti generati (scenari 1-12): ogni campo presente nel JSON viene applicato
+        # se lo scenario non lo ha ancora, oppure sempre con --update. I vocaboli (solo
+        # scenari 3-12) si aggiungono alla lista da inserire.
         generated = load_seed_content()
         vocab_rows = list(VOCAB)
         for content in generated:
             scenario = await session.scalar(select(Scenario).where(Scenario.slug == content["slug"]))
             if scenario is None:
                 continue
-            if update or not _has_content(scenario):
-                for field in GENERATED_FIELDS:
-                    setattr(scenario, field, content.get(field))
+            touched = False
+            for field in GENERATED_FIELDS:
+                if field not in content:
+                    continue
+                if update or not getattr(scenario, field):
+                    setattr(scenario, field, content[field])
+                    touched = True
+            if touched:
                 updated_scenarios += 1
             vocab_rows.extend({"scenario_slug": content["slug"], **v} for v in content.get("vocab", []))
         await session.commit()

@@ -1,0 +1,73 @@
+{
+  "slug": "zuhause-und-nachbarn",
+  "week_number": 2,
+  "intro": {
+    "situation": [
+      {
+        "de": "Ich wohne seit drei Monaten in einer 2-Zimmer-Wohnung in Zürich-Wiedikon.",
+        "it": "Vivo da tre mesi in un appartamento di due locali a Zurigo-Wiedikon."
+      },
+      {
+        "de": "Am Samstagmorgen gehe ich schnell zur Migros, um Znüni und Brot zu kaufen.",
+        "it": "Il sabato mattina vado velocemente alla Migros a comprare la merenda e il pane."
+      },
+      {
+        "de": "Im Treppenhaus treffe ich meine Nachbarin Frau Meier, die schon seit zwanzig Jahren hier wohnt.",
+        "it": "Nelle scale incontro la mia vicina, la signora Meier, che abita qui da vent'anni."
+      },
+      {
+        "de": "Sie fragt mich, wie es mir in der neuen Wohnung gefalle und ob die Heizung funktioniere.",
+        "it": "Mi chiede come mi trovo nel nuovo appartamento e se il riscaldamento funziona."
+      },
+      {
+        "de": "Ich erzähle ihr, dass die Wohnung ruhig ist und ich die SBB-Verbindung in die Stadt sehr praktisch finde.",
+        "it": "Le racconto che l'appartamento è tranquillo e che trovo molto comoda la coincidenza SBB per il centro."
+      },
+      {
+        "de": "Sie lädt mich auf einen Kaffee ein und wir reden über den Quartierladen und die Kehrichtabfuhr.",
+        "it": "Mi invita a prendere un caffè e parliamo del negozio del quartiere e della raccolta dei rifiuti."
+      },
+      {
+        "de": "Am Ende sage ich ihr, dass sie bei Fragen einfach bei mir klopfen kann.",
+        "it": "Alla fine le dico che se ha domande può semplicemente bussare da me."
+      }
+    ],
+    "dialog": [
+      {
+        "speaker": "Nachbarin",
+        "de": "Grüezi, sind Sie die Neue aus dem dritten Stock?",
+        "it": "Buongiorno, lei è la nuova del terzo piano?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Grüezi Frau Meier, ja, genau. Ich bin vor drei Monaten eingezogen.",
+        "it": "Buongiorno signora Meier, sì, esatto. Mi sono trasferito tre mesi fa."
+      },
+      {
+        "speaker": "Nachbarin",
+        "de": "Und wie gefällt es Ihnen bei uns im Haus?",
+        "it": "E come si trova nella nostra casa?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Sehr gut, danke. Die Wohnung ist hell und die Nachbarn sind freundlich.",
+        "it": "Molto bene, grazie. L'appartamento è luminoso e i vicini sono gentili."
+      },
+      {
+        "speaker": "Nachbarin",
+        "de": "Wunderbar. Wenn Sie etwas brauchen, klopfen Sie einfach bei mir an.",
+        "it": "Perfetto. Se ha bisogno di qualcosa, bussi pure da me."
+      },
+      {
+        "speaker": "Ich",
+        "de": "Danke vielmal, das mache ich gern. Auf einen Kaffee komme ich sicher einmal vorbei.",
+        "it": "Grazie mille, lo farò volentieri. Per un caffè passerò di sicuro."
+      }
+    ],
+    "notes_it": [
+      "In Svizzera con i vicini si usa di solito il Sie, anche se siete alla stessa età: aspettate che sia lei a proporti il du.",
+      "I vicini apprezzano la cortesia concreta: un saluto in scale, un piccolo favore, il rispetto delle ore di silenzio dopo le 22.",
+      "Non stupirti se ti offrono un caffè o un dolcetto: è un modo normale di fare conoscenza, ma non è un invito a entrare in casa senza essere invitato."
+    ]
+  }
+}

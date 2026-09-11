@@ -382,5 +382,74 @@
       "separable": false,
       "example_de": "Ich habe grosse Bewunderung für ihre Arbeit."
     }
-  ]
+  ],
+  "intro": {
+    "situation": [
+      {
+        "de": "Ich sitze mit meinem Freund Luca in einem Café an der Langstrasse in Zürich.",
+        "it": "Sono seduto con il mio amico Luca in un caffè alla Langstrasse a Zurigo."
+      },
+      {
+        "de": "Wir haben gerade zwei Kaffee und ein Gipfeli bestellt und bezahlen mit Franken.",
+        "it": "Abbiamo appena ordinato due caffè e un cornetto e paghiamo in franchi."
+      },
+      {
+        "de": "Luca fragt mich, wie mir die Stadt gefällt und was ich am Wochenende gemacht habe.",
+        "it": "Luca mi chiede come mi piace la città e cosa ho fatto nel fine settimana."
+      },
+      {
+        "de": "Ich möchte meine Meinung sagen und von meinem Ausflug auf den Uetliberg erzählen.",
+        "it": "Voglio dire la mia opinione e raccontare della mia gita sull'Uetliberg."
+      },
+      {
+        "de": "Ich bin ein bisschen nervös, weil ich auf Deutsch nicht so fliessend spreche.",
+        "it": "Sono un po' nervoso perché non parlo tedesco molto fluentemente."
+      },
+      {
+        "de": "Luca hört geduldig zu und stellt mir ab und zu eine Frage.",
+        "it": "Luca ascolta con pazienza e ogni tanto mi fa una domanda."
+      },
+      {
+        "de": "So übe ich, meine Gedanken auf Deutsch auszudrücken.",
+        "it": "Così mi esercito a esprimere i miei pensieri in tedesco."
+      }
+    ],
+    "dialog": [
+      {
+        "speaker": "Freund",
+        "de": "Grüezi! Wie gefällt dir Zürich bis jetzt?",
+        "it": "Ciao! Come ti piace Zurigo finora?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Es gefällt mir sehr gut. Die Stadt ist sauber und die Leute sind freundlich.",
+        "it": "Mi piace molto. La città è pulita e le persone sono gentili."
+      },
+      {
+        "speaker": "Freund",
+        "de": "Und was hast du am Wochenende gemacht?",
+        "it": "E cosa hai fatto nel fine settimana?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Ich bin mit der SBB auf den Uetliberg gefahren. Die Aussicht war super!",
+        "it": "Sono andato sull'Uetliberg con le FFS. La vista era fantastica!"
+      },
+      {
+        "speaker": "Freund",
+        "de": "Schön! Und was hältst du vom Schweizer Wetter?",
+        "it": "Bello! E cosa pensi del tempo svizzero?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Manchmal regnet es, aber ich finde es okay. Ich mag die frische Luft.",
+        "it": "A volte piove, ma per me va bene. Mi piace l'aria fresca."
+      }
+    ],
+    "notes_it": [
+      "In Svizzera tedesca, con un amico si usa il 'du'; con i negozianti o persone anziane è meglio il 'Sie'.",
+      "I svizzeri apprezzano la puntualità e i piccoli gesti di cortesia, come offrire un caffè o dire 'Grüezi' quando si entra in un locale.",
+      "Quando racconti qualcosa, aspettati domande di follow-up: mostra interesse e fai domande anche tu."
+    ]
+  }
 }

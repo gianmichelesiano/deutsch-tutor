@@ -398,5 +398,74 @@
       "separable": false,
       "example_de": "Der Anschlusszug wartet nicht immer."
     }
-  ]
+  ],
+  "intro": {
+    "situation": [
+      {
+        "de": "Ich stehe am Hauptbahnhof Zürich und schaue auf die grosse Abfahrtstafel.",
+        "it": "Sono alla stazione centrale di Zurigo e guardo il grande tabellone delle partenze."
+      },
+      {
+        "de": "Ich möchte ein Billett nach Luzern kaufen und den nächsten Zug nehmen.",
+        "it": "Vorrei comprare un biglietto per Lucerna e prendere il prossimo treno."
+      },
+      {
+        "de": "Am Automaten ist eine lange Schlange, darum gehe ich zum SBB-Schalter.",
+        "it": "Alla macchinetta c'è una lunga fila, quindi vado allo sportello SBB."
+      },
+      {
+        "de": "Hinter dem Schalter steht ein SBB-Mitarbeiter und schaut mich freundlich an.",
+        "it": "Dietro lo sportello c'è un impiegato SBB che mi guarda gentilmente."
+      },
+      {
+        "de": "Ich habe noch Fragen zur Verbindung und zur Gleisnummer.",
+        "it": "Ho ancora domande sul collegamento e sul numero del binario."
+      },
+      {
+        "de": "Ich bezahle mit der Karte, denn ich habe nur wenig Bargeld dabei.",
+        "it": "Pago con la carta, perché ho con me pochi contanti."
+      },
+      {
+        "de": "Nach dem Kauf bedanke ich mich und gehe schnell zum Perron.",
+        "it": "Dopo l'acquisto ringrazio e vado velocemente al binario."
+      }
+    ],
+    "dialog": [
+      {
+        "speaker": "Ich",
+        "de": "Grüezi, ich möchte bitte ein Billett nach Luzern.",
+        "it": "Buongiorno, vorrei un biglietto per Lucerna, per favore."
+      },
+      {
+        "speaker": "SBB-Mitarbeiter",
+        "de": "Grüezi. Einfach oder hin und zurück?",
+        "it": "Buongiorno. Solo andata o andata e ritorno?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Einfach, bitte. Wann fährt der nächste Zug?",
+        "it": "Solo andata, per favore. Quando parte il prossimo treno?"
+      },
+      {
+        "speaker": "SBB-Mitarbeiter",
+        "de": "In zwölf Minuten, Gleis sieben. Sie müssen sich beeilen.",
+        "it": "Tra dodici minuti, binario sette. Deve sbrigarsi."
+      },
+      {
+        "speaker": "Ich",
+        "de": "Danke. Kostet es mit Halbtax weniger?",
+        "it": "Grazie. Costa meno con il metà-prezzo?"
+      },
+      {
+        "speaker": "SBB-Mitarbeiter",
+        "de": "Ja, genau. Mit Halbtax sind es zwölf Franken fünfzig.",
+        "it": "Sì, esatto. Con il metà-prezzo sono dodici franchi e cinquanta."
+      }
+    ],
+    "notes_it": [
+      "In Svizzera si usa di solito il 'Sie' con i dipendenti SBB; il 'du' è comune solo tra giovani o in contesti informali.",
+      "Alla cassa o allo sportello è normale salutare con 'Grüezi' e ringraziare con 'Merci' o 'Danke'; la coda è ordinata e silenziosa.",
+      "L'impiegato si aspetta che tu dica subito destinazione, tipo di biglietto (semplice o andata/ritorno) e se hai abbonamenti come Halbtax."
+    ]
+  }
 }

@@ -406,5 +406,74 @@
       "separable": false,
       "example_de": "Die Decke ist undicht."
     }
-  ]
+  ],
+  "intro": {
+    "situation": [
+      {
+        "de": "Ich wohne seit drei Monaten in einer Mietwohnung in Zürich-Wiedikon.",
+        "it": "Vivo da tre mesi in un appartamento in affitto a Zurigo-Wiedikon."
+      },
+      {
+        "de": "In der Küche tropft ein Wasserhahn und die Heizung wird nicht richtig warm.",
+        "it": "In cucina un rubinetto gocciola e il riscaldamento non scalda bene."
+      },
+      {
+        "de": "Ich habe schon zweimal eine E-Mail an die Hausverwaltung geschrieben, aber keine Antwort bekommen.",
+        "it": "Ho già scritto due volte un'e-mail all'amministrazione, ma non ho ricevuto risposta."
+      },
+      {
+        "de": "Heute rufe ich an und verlange eine Reparatur.",
+        "it": "Oggi telefono e chiedo una riparazione."
+      },
+      {
+        "de": "Am Telefon ist die Verwaltung freundlich, aber sie will alles genau wissen.",
+        "it": "Al telefono l'amministrazione è gentile, ma vuole sapere tutto con precisione."
+      },
+      {
+        "de": "Ich muss den Schaden beschreiben, einen Termin finden und vielleicht eine Mietzinsreduktion verlangen.",
+        "it": "Devo descrivere il danno, fissare un appuntamento e forse chiedere una riduzione dell'affitto."
+      },
+      {
+        "de": "Zum Glück habe ich Fotos auf dem Handy und die Mietvertragsnummer parat.",
+        "it": "Per fortuna ho le foto sul cellulare e il numero del contratto d'affitto a portata di mano."
+      }
+    ],
+    "dialog": [
+      {
+        "speaker": "Ich",
+        "de": "Grüezi, hier spricht Anna Rossi, Wohnung 3B an der Kalkbreitestrasse 12.",
+        "it": "Buongiorno, sono Anna Rossi, appartamento 3B in Kalkbreitestrasse 12."
+      },
+      {
+        "speaker": "Hausverwaltung",
+        "de": "Grüezi Frau Rossi, was kann ich für Sie tun?",
+        "it": "Buongiorno signora Rossi, come posso aiutarla?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Ich habe ein Problem: Der Wasserhahn in der Küche tropft und die Heizung im Wohnzimmer wird nicht warm.",
+        "it": "Ho un problema: il rubinetto in cucina gocciola e il riscaldamento in soggiorno non scalda."
+      },
+      {
+        "speaker": "Hausverwaltung",
+        "de": "Das tut mir leid. Seit wann haben Sie diese Probleme?",
+        "it": "Mi dispiace. Da quando ha questi problemi?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Seit etwa zwei Wochen. Ich habe Ihnen am Montag auch eine E-Mail mit Fotos geschickt.",
+        "it": "Da circa due settimane. Lunedì le ho anche inviato un'e-mail con le foto."
+      },
+      {
+        "speaker": "Hausverwaltung",
+        "de": "Danke, ich schaue gleich nach. Wir schicken Ihnen einen Handwerker, wahrscheinlich am Donnerstagmorgen. Passt Ihnen das?",
+        "it": "Grazie, controllo subito. Le mandiamo un artigiano, probabilmente giovedì mattina. Le va bene?"
+      }
+    ],
+    "notes_it": [
+      "In Svizzera si usa quasi sempre il 'Sie' con l'amministrazione: mantienilo anche se ti sembrano gentili.",
+      "Gli svizzeri apprezzano precisione: indica date, orari e numeri di riferimento (appartamento, contratto).",
+      "Se il danno non viene riparato in tempo, puoi chiedere una riduzione dell'affitto (Mietzinsreduktion): menzionala con calma e per iscritto."
+    ]
+  }
 }

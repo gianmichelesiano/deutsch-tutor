@@ -406,5 +406,74 @@
       "separable": false,
       "example_de": "Der Verband muss täglich gewechselt werden."
     }
-  ]
+  ],
+  "intro": {
+    "situation": [
+      {
+        "de": "Ich fühle mich seit zwei Tagen nicht gut und habe Halsschmerzen.",
+        "it": "Non mi sento bene da due giorni e ho mal di gola."
+      },
+      {
+        "de": "Heute Morgen habe ich 38,2 Grad Fieber gemessen.",
+        "it": "Stamattina ho misurato 38,2 gradi di febbre."
+      },
+      {
+        "de": "Ich rufe die Arztpraxis in Zürich an und frage nach einem Termin.",
+        "it": "Chiamo lo studio medico a Zurigo e chiedo un appuntamento."
+      },
+      {
+        "de": "Die Praxis ist in der Nähe vom Bahnhof Enge, ich fahre mit dem Tram.",
+        "it": "Lo studio è vicino alla stazione di Enge, vado con il tram."
+      },
+      {
+        "de": "Im Wartezimmer sitzen noch andere Patienten, ich warte etwa zwanzig Minuten.",
+        "it": "In sala d'attesa ci sono altri pazienti, aspetto circa venti minuti."
+      },
+      {
+        "de": "Die Ärztin untersucht meinen Hals und hört meine Lunge ab.",
+        "it": "La dottoressa mi visita la gola e mi ascolta i polmoni."
+      },
+      {
+        "de": "Danach gehe ich in die Apotheke und kaufe die verschriebenen Medikamente.",
+        "it": "Poi vado in farmacia e compro le medicine prescritte."
+      }
+    ],
+    "dialog": [
+      {
+        "speaker": "Ärztin",
+        "de": "Grüezi, nehmen Sie doch Platz. Was fehlt Ihnen?",
+        "it": "Buongiorno, si accomodi. Che disturbo ha?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Grüezi Frau Doktor. Ich habe Halsschmerzen und Fieber, seit zwei Tagen.",
+        "it": "Buongiorno dottoressa. Ho mal di gola e febbre da due giorni."
+      },
+      {
+        "speaker": "Ärztin",
+        "de": "Haben Sie auch Husten oder Kopfschmerzen?",
+        "it": "Ha anche tosse o mal di testa?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Ja, ein wenig Husten, aber keine Kopfschmerzen.",
+        "it": "Sì, un po' di tosse, ma niente mal di testa."
+      },
+      {
+        "speaker": "Ärztin",
+        "de": "Ich verschreibe Ihnen ein Antibiotikum. Nehmen Sie es dreimal täglich nach dem Essen.",
+        "it": "Le prescrivo un antibiotico. Lo prenda tre volte al giorno dopo i pasti."
+      },
+      {
+        "speaker": "Ich",
+        "de": "Danke vielmal. Kann ich das Rezept in der Apotheke am Bellevue einlösen?",
+        "it": "Grazie mille. Posso usare la ricetta in farmacia al Bellevue?"
+      }
+    ],
+    "notes_it": [
+      "In Svizzera si usa di solito il 'Sie' con il medico; il 'du' è riservato ad amici e colleghi stretti.",
+      "È normale arrivare puntuali e aspettare in sala d'attesa; porta con te la tessera dell'assicurazione malattia.",
+      "La dottoressa si aspetta che tu descriva i sintomi in modo chiaro e breve, senza troppi dettagli inutili."
+    ]
+  }
 }

@@ -398,5 +398,74 @@
       "separable": false,
       "example_de": "Wir spielen ein Spiel zusammen."
     }
-  ]
+  ],
+  "intro": {
+    "situation": [
+      {
+        "de": "Es ist Donnerstagabend und ich sitze in meiner Wohnung in Zürich.",
+        "it": "È giovedì sera e sono seduto nel mio appartamento a Zurigo."
+      },
+      {
+        "de": "Ich möchte das Wochenende mit Freunden planen.",
+        "it": "Voglio organizzare il fine settimana con gli amici."
+      },
+      {
+        "de": "Mein Freund Luca hat mir eine Nachricht geschrieben.",
+        "it": "Il mio amico Luca mi ha scritto un messaggio."
+      },
+      {
+        "de": "Er fragt, ob wir am Samstag etwas zusammen machen wollen.",
+        "it": "Mi chiede se sabato vogliamo fare qualcosa insieme."
+      },
+      {
+        "de": "Ich rufe ihn zurück, um die Details zu besprechen.",
+        "it": "Lo richiamo per discutere i dettagli."
+      },
+      {
+        "de": "Wir überlegen, ob wir in die Berge fahren oder in der Stadt bleiben.",
+        "it": "Valutiamo se andare in montagna o restare in città."
+      },
+      {
+        "de": "Vielleicht treffen wir uns am Samstagmorgen am Hauptbahnhof.",
+        "it": "Forse ci vediamo sabato mattina alla stazione centrale."
+      }
+    ],
+    "dialog": [
+      {
+        "speaker": "Ich",
+        "de": "Hallo Luca, wie geht's? Was hast du am Wochenende vor?",
+        "it": "Ciao Luca, come va? Cosa hai in programma per il fine settimana?"
+      },
+      {
+        "speaker": "Freund",
+        "de": "Hey! Mir geht's gut. Ich habe noch nichts vor. Hast du eine Idee?",
+        "it": "Ehi! Sto bene. Non ho ancora niente in programma. Hai un'idea?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Ja, vielleicht könnten wir am Samstag in die Berge fahren. Das Wetter soll schön werden.",
+        "it": "Sì, forse sabato potremmo andare in montagna. Dovrebbe esserci bel tempo."
+      },
+      {
+        "speaker": "Freund",
+        "de": "Das klingt super! Sollen wir mit der SBB fahren?",
+        "it": "Suona bene! Andiamo con le FFS?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Ja, gerne. Treffen wir uns um acht am Hauptbahnhof?",
+        "it": "Sì, volentieri. Ci vediamo alle otto alla stazione centrale?"
+      },
+      {
+        "speaker": "Freund",
+        "de": "Perfekt, ich freue mich! Bis Samstag!",
+        "it": "Perfetto, non vedo l'ora! A sabato!"
+      }
+    ],
+    "notes_it": [
+      "In Svizzera si usa spesso 'Grüezi' come saluto formale, ma tra amici 'Hallo' o 'Hi' vanno benissimo.",
+      "I giovani si danno del 'du' quasi subito; non serve passare al 'Sie' a meno che non sia una persona molto più grande o in un contesto formale.",
+      "Gli svizzeri sono puntuali: se dite alle otto, meglio arrivare cinque minuti prima. E portate contanti, molti posti accettano solo contanti o TWINT."
+    ]
+  }
 }

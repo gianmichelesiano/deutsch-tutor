@@ -326,5 +326,74 @@
       "separable": false,
       "example_de": "Zur Party schicke ich eine Grusskarte."
     }
-  ]
+  ],
+  "intro": {
+    "situation": [
+      {
+        "de": "Ich bin bei einer Kollegin in Zürich eingeladen, sie hat Geburtstag.",
+        "it": "Sono invitato a casa di una collega a Zurigo, è il suo compleanno."
+      },
+      {
+        "de": "Vorher gehe ich noch schnell zur Migros und kaufe ein Geschenk und eine Karte.",
+        "it": "Prima passo velocemente alla Migros a comprare un regalo e un biglietto."
+      },
+      {
+        "de": "Ich habe etwa 30 Franken eingeplant, das ist hier üblich.",
+        "it": "Ho previsto circa 30 franchi, qui è la norma."
+      },
+      {
+        "de": "Mit der SBB fahre ich bis Zürich HB und dann mit dem Tram weiter.",
+        "it": "Con le FFS vado fino a Zurigo HB e poi proseguo con il tram."
+      },
+      {
+        "de": "An der Tür begrüsst mich die Gastgeberin mit einem Lächeln.",
+        "it": "Alla porta la padrona di casa mi accoglie con un sorriso."
+      },
+      {
+        "de": "Ich übergebe das Geschenk und sage ein paar nette Worte.",
+        "it": "Consegno il regalo e dico qualche parola gentile."
+      },
+      {
+        "de": "Dann setzen wir uns an den Tisch und essen zusammen.",
+        "it": "Poi ci sediamo a tavola e mangiamo insieme."
+      }
+    ],
+    "dialog": [
+      {
+        "speaker": "Gastgeberin",
+        "de": "Grüezi! Schön, dass du gekommen bist. Komm doch rein.",
+        "it": "Salve! Bello che tu sia venuto. Entra pure."
+      },
+      {
+        "speaker": "Ich",
+        "de": "Danke für die Einladung. Alles Gute zum Geburtstag! Hier, ein kleines Geschenk.",
+        "it": "Grazie per l'invito. Buon compleanno! Ecco, un piccolo regalo."
+      },
+      {
+        "speaker": "Gastgeberin",
+        "de": "Oh, wie lieb! Das wäre doch nicht nötig gewesen. Darf ich gleich auspacken?",
+        "it": "Oh, che carino! Non era necessario. Posso aprirlo subito?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Ja, klar. Ich hoffe, es gefällt dir. Es ist aus der Migros.",
+        "it": "Sì, certo. Spero ti piaccia. È della Migros."
+      },
+      {
+        "speaker": "Gastgeberin",
+        "de": "Sehr schön, vielen Dank! Möchtest du etwas trinken? Wir haben Rivella oder Apfelsaft.",
+        "it": "Molto bello, grazie mille! Vuoi bere qualcosa? Abbiamo Rivella o succo di mela."
+      },
+      {
+        "speaker": "Ich",
+        "de": "Gerne ein Rivella, danke. Soll ich dir helfen?",
+        "it": "Volentieri un Rivella, grazie. Ti aiuto?"
+      }
+    ],
+    "notes_it": [
+      "In Svizzera si usa spesso il 'Sie' con i colleghi o le persone appena conosciute; con gli amici e i giovani si passa al 'du'. Osserva come ti parla la padrona di casa.",
+      "Portare un piccolo regalo (vino, cioccolato, fiori) è molto apprezzato. Anche un biglietto scritto a mano fa piacere.",
+      "Gli svizzeri sono puntuali: arrivare in orario è segno di rispetto. Se sei in ritardo, avvisa con un messaggio."
+    ]
+  }
 }

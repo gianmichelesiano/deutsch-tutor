@@ -390,5 +390,70 @@
       "separable": false,
       "example_de": "Die Schulsozialarbeit unterstützt Schüler bei Problemen."
     }
-  ]
+  ],
+  "intro": {
+    "situation": [
+      {
+        "de": "Ich stehe vor dem Schulhaus in Zürich und suche das Zimmer für den Elternabend.",
+        "it": "Sono davanti alla scuola a Zurigo e cerco l'aula per il colloquio genitori-insegnanti."
+      },
+      {
+        "de": "Ich habe einen Termin bei der Klassenlehrerin meines Sohnes.",
+        "it": "Ho un appuntamento con la maestra di classe di mio figlio."
+      },
+      {
+        "de": "Im Schulhaus hängen Plakate und ein Plan mit den Zimmernummern.",
+        "it": "Nel corridoio ci sono cartelli e una piantina con i numeri delle aule."
+      },
+      {
+        "de": "Ich möchte wissen, wie mein Kind in der Schule mitkommt.",
+        "it": "Vorrei sapere come va mio figlio a scuola."
+      },
+      {
+        "de": "Die Lehrerin erwartet mich und wir setzen uns an einen Tisch.",
+        "it": "L'insegnante mi aspetta e ci sediamo a un tavolo."
+      },
+      {
+        "de": "Nach dem Gespräch kaufe ich bei Coop noch einen Znüni für morgen.",
+        "it": "Dopo il colloquio compro ancora uno spuntino da Coop per domani."
+      }
+    ],
+    "dialog": [
+      {
+        "speaker": "Ich",
+        "de": "Grüezi Frau Meier, ich bin der Vater von Luca. Danke, dass Sie Zeit haben.",
+        "it": "Buongiorno signora Meier, sono il papà di Luca. Grazie per il tempo che mi dedica."
+      },
+      {
+        "speaker": "Lehrperson",
+        "de": "Grüezi, kommen Sie doch rein. Setzen Sie sich. Möchten Sie etwas trinken?",
+        "it": "Buongiorno, entri pure. Si sieda. Vuole bere qualcosa?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Danke, nichts. Wie geht es Luca im Unterricht? Ist er gut dabei?",
+        "it": "Grazie, niente. Come va Luca in classe? Partecipa bene?"
+      },
+      {
+        "speaker": "Lehrperson",
+        "de": "Ja, er macht gut mit. In Mathematik ist er stark, aber beim Lesen braucht er noch Übung.",
+        "it": "Sì, partecipa volentieri. In matematica è bravo, ma nella lettura ha ancora bisogno di esercizio."
+      },
+      {
+        "speaker": "Ich",
+        "de": "Was können wir zu Hause machen? Sollen wir mehr Deutsch lesen?",
+        "it": "Cosa possiamo fare a casa? Dobbiamo leggere di più in tedesco?"
+      },
+      {
+        "speaker": "Lehrperson",
+        "de": "Ja, zehn Minuten am Abend reichen. Und bitte schauen Sie, dass er die Hausaufgaben macht.",
+        "it": "Sì, dieci minuti la sera bastano. E per favore controlli che faccia i compiti."
+      }
+    ],
+    "notes_it": [
+      "In Svizzera si usa di solito il 'Sie' con gli insegnanti, anche se si è più giovani. Il 'du' si usa solo se l'insegnante lo propone.",
+      "Gli insegnanti svizzeri apprezzano puntualità e un tono calmo e concreto. Meglio fare domande brevi e ascoltare.",
+      "Portare un piccolo quaderno per gli appunti è normale e visto bene. Alla fine si saluta con 'Auf Wiedersehen' o 'Grüezi'."
+    ]
+  }
 }

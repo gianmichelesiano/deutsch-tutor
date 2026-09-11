@@ -406,5 +406,74 @@
       "separable": false,
       "example_de": "Mein Znünibeutel liegt noch im Kühlschrank."
     }
-  ]
+  ],
+  "intro": {
+    "situation": [
+      {
+        "de": "Es ist Montagmorgen, ich komme mit dem Velo ins Büro in Zürich.",
+        "it": "È lunedì mattina, arrivo in ufficio a Zurigo con la bici."
+      },
+      {
+        "de": "In der Küche steht schon ein Kollege und macht Kaffee.",
+        "it": "In cucina c'è già un collega che prepara il caffè."
+      },
+      {
+        "de": "Ich möchte kurz Hallo sagen und ein bisschen Small Talk machen.",
+        "it": "Vorrei salutare e fare un po' di small talk."
+      },
+      {
+        "de": "Am Empfang liegt die neue Migros-Zeitung, und ich habe am Wochenende Znüni für alle mitgebracht.",
+        "it": "Alla reception c'è il nuovo giornale della Migros e ho portato lo Znüni per tutti."
+      },
+      {
+        "de": "Der Kollege fragt mich, wie mein Wochenende war.",
+        "it": "Il collega mi chiede com'è andato il mio fine settimana."
+      },
+      {
+        "de": "Wir reden über das Wetter, die SBB und den neuen Coop im Quartier.",
+        "it": "Parliamo del tempo, delle FFS e del nuovo Coop nel quartiere."
+      },
+      {
+        "de": "Nach fünf Minuten gehen wir zurück an unsere Arbeitsplätze.",
+        "it": "Dopo cinque minuti torniamo ai nostri posti di lavoro."
+      }
+    ],
+    "dialog": [
+      {
+        "speaker": "Arbeitskollege",
+        "de": "Grüezi! Schon so früh unterwegs?",
+        "it": "Buongiorno! Già in giro così presto?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Grüezi! Ja, mit dem Velo war es angenehm. Und du?",
+        "it": "Buongiorno! Sì, in bici è stato piacevole. E tu?"
+      },
+      {
+        "speaker": "Arbeitskollege",
+        "de": "Gut, danke. Ich habe am Wochenende meine Familie in Winterthur besucht.",
+        "it": "Bene, grazie. Nel fine settimana ho visitato la mia famiglia a Winterthur."
+      },
+      {
+        "speaker": "Ich",
+        "de": "Schön! Ich war am Zürichsee und habe ein Znüni im Coop gekauft.",
+        "it": "Bello! Io ero al lago di Zurigo e ho comprato uno Znüni al Coop."
+      },
+      {
+        "speaker": "Arbeitskollege",
+        "de": "Klingt gut. Möchtest du auch einen Kaffee?",
+        "it": "Sembra bello. Vuoi anche un caffè?"
+      },
+      {
+        "speaker": "Ich",
+        "de": "Ja, gerne. Danke!",
+        "it": "Sì, volentieri. Grazie!"
+      }
+    ],
+    "notes_it": [
+      "In ufficio a Zurigo si usa spesso il 'Sie' con i colleghi che non conosci bene, ma tra colleghi giovani o alla pari si passa rapidamente al 'du'. Osserva come ti parla l'altro e adattati.",
+      "Lo small talk in Svizzera è breve e concreto: si parla di meteo, fine settimana, trasporti (SBB) e supermercati (Migros, Coop). Evita argomenti personali o politici.",
+      "Portare qualcosa da condividere (per esempio uno Znüni) è un gesto apprezzato e un buon modo per iniziare una conversazione informale."
+    ]
+  }
 }
