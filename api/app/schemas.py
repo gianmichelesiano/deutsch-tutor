@@ -76,6 +76,8 @@ class LessonDetail(BaseModel):
     ended_at: datetime | None
     key_phrases: list[dict]
     swiss_variants: list[dict]
+    intro: dict | None = None
+    intro_collapsed: bool = False
     warmup_words: list[WarmupWord] | None = None
     roleplay_messages: list[dict] = []
     dialogue_closed: bool = False

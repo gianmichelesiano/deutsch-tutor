@@ -618,6 +618,16 @@ async def gather_planner_data(session: AsyncSession, lesson_id: int) -> dict:
     }
 
 
+async def scenario_has_completed_lesson(session: AsyncSession, scenario_id: int) -> bool:
+    """Vero se esiste almeno una lezione completata per lo scenario (l'Einstieg si comprime)."""
+    found = await session.scalar(
+        select(Lesson.id)
+        .where(Lesson.scenario_id == scenario_id, Lesson.status == LessonStatus.completed)
+        .limit(1)
+    )
+    return found is not None
+
+
 async def build_lesson_detail(session: AsyncSession, lesson: Lesson) -> dict:
     scenario = await session.get(Scenario, lesson.scenario_id)
     messages = (
@@ -656,6 +666,8 @@ async def build_lesson_detail(session: AsyncSession, lesson: Lesson) -> dict:
         "ended_at": lesson.ended_at,
         "key_phrases": scenario.key_phrases or [],
         "swiss_variants": scenario.swiss_variants or [],
+        "intro": scenario.intro,
+        "intro_collapsed": await scenario_has_completed_lesson(session, scenario.id),
         "warmup_words": warmup_words,
         "roleplay_messages": roleplay_messages,
         "dialogue_closed": dialogue_closed,

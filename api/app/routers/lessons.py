@@ -53,7 +53,7 @@ async def create_lesson(session: AsyncSession = Depends(get_session)):
         scenario_id=scenario.id,
         lesson_type=lesson_type,
         status=LessonStatus.in_progress,
-        current_phase=LessonPhase.warmup,
+        current_phase=LessonPhase(lesson_state.first_phase(lesson_type.value)),
         summary={},
     )
     session.add(lesson)

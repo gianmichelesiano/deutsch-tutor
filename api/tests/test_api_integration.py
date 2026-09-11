@@ -52,18 +52,33 @@ def _client():
 @pytest.mark.asyncio
 async def test_full_lesson_flow(clean_db, mock_llm):
     async with _client() as client:
-        # 1. crea lezione
+        # 1. crea lezione: parte dall'Einstieg (intro), prima lezione dello scenario → completa
         r = await client.post("/api/lessons")
         assert r.status_code == 200
         lesson = r.json()
         lesson_id = lesson["id"]
-        assert lesson["current_phase"] == "warmup"
+        assert lesson["current_phase"] == "intro"
         assert lesson["status"] == "in_progress"
-        assert len(lesson["warmup_words"]) == 8
+        assert lesson["intro"] is not None
+        assert len(lesson["intro"]["situation"]) >= 5
+        assert lesson["intro_collapsed"] is False
+        assert lesson["warmup_words"] is None
 
         # una sola lezione in_progress alla volta
         r2 = await client.post("/api/lessons")
         assert r2.json()["id"] == lesson_id
+
+        # 1b. avanti → warmup, indietro → intro, avanti → warmup
+        r = await client.post(f"/api/lessons/{lesson_id}/advance", json={})
+        lesson = r.json()
+        assert lesson["current_phase"] == "warmup"
+        assert len(lesson["warmup_words"]) == 8
+        r = await client.post(f"/api/lessons/{lesson_id}/back", json={})
+        assert r.json()["current_phase"] == "intro"
+        r = await client.post(f"/api/lessons/{lesson_id}/advance", json={})
+        lesson = r.json()
+        assert lesson["current_phase"] == "warmup"
+        assert len(lesson["warmup_words"]) == 8
 
         # 2. warmup: 8 risposte (il mock le valuta corrette)
         for w in lesson["warmup_words"]:
@@ -132,6 +147,14 @@ async def test_full_lesson_flow(clean_db, mock_llm):
         r = await client.get("/api/vocab")
         assert r.status_code == 200
         assert len(r.json()) == seeded + 1
+
+        # 10. seconda lezione dello stesso scenario: intro compressa
+        r = await client.post("/api/lessons")
+        assert r.status_code == 200
+        second = r.json()
+        assert second["scenario_id"] == lesson["scenario_id"]
+        assert second["current_phase"] == "intro"
+        assert second["intro_collapsed"] is True
 
         # 10. flashcard review sulla parola richiesta (ora "seen" e dovuta)
         queue = (await client.get("/api/vocab/review-queue")).json()
@@ -216,6 +239,7 @@ async def test_placeholder_not_confirmable_nor_queued(clean_db):
         async with _client() as client:
             r = await client.post("/api/lessons")
             lesson_id = r.json()["id"]
+            r = await client.post(f"/api/lessons/{lesson_id}/advance", json={})  # intro → warmup
             for w in r.json()["warmup_words"]:
                 await client.post(
                     f"/api/lessons/{lesson_id}/warmup/answer",
