@@ -22,6 +22,23 @@ export interface SwissVariant {
   it: string;
 }
 
+export interface IntroLine {
+  de: string;
+  it: string;
+}
+
+export interface IntroTurn {
+  speaker: string;
+  de: string;
+  it: string;
+}
+
+export interface LessonIntro {
+  situation: IntroLine[];
+  dialog: IntroTurn[];
+  notes_it: string[];
+}
+
 export interface RoleplayMessage {
   role: "user" | "agent";
   content: string;
@@ -56,9 +73,11 @@ export interface LessonDetail {
   role_label: string | null;
   lesson_type: string;
   status: string;
-  current_phase: "warmup" | "prep" | "roleplay" | "harvest" | "swiss" | "test" | null;
+  current_phase: "intro" | "warmup" | "prep" | "roleplay" | "harvest" | "swiss" | "test" | null;
   key_phrases: KeyPhrase[];
   swiss_variants: SwissVariant[];
+  intro: LessonIntro | null;
+  intro_collapsed: boolean;
   warmup_words: WarmupWord[] | null;
   roleplay_messages: RoleplayMessage[];
   dialogue_closed: boolean;
@@ -167,8 +186,9 @@ export const api = {
   back: (id: number) => request<LessonDetail>(`/api/lessons/${id}/back`, { method: "POST" }),
 };
 
-export const PHASES = ["warmup", "prep", "roleplay", "harvest", "swiss"] as const;
+export const PHASES = ["intro", "warmup", "prep", "roleplay", "harvest", "swiss"] as const;
 export const PHASE_LABELS: Record<string, string> = {
+  intro: "Einstieg",
   warmup: "Aufwärmen",
   prep: "Vorbereitung",
   roleplay: "Rollenspiel",
