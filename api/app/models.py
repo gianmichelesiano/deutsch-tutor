@@ -53,6 +53,7 @@ class LessonStatus(str, enum.Enum):
 
 
 class LessonPhase(str, enum.Enum):
+    intro = "intro"
     warmup = "warmup"
     prep = "prep"
     roleplay = "roleplay"
@@ -81,6 +82,7 @@ class Scenario(Base):
     swiss_variants: Mapped[list] = mapped_column(JSONB, default=list, server_default=text("'[]'::jsonb"))
     imprevisti: Mapped[list] = mapped_column(JSONB, default=list, server_default=text("'[]'::jsonb"))
     goals: Mapped[list] = mapped_column(JSONB, default=list, server_default=text("'[]'::jsonb"))
+    intro: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
 
 
 class VocabItem(Base):
