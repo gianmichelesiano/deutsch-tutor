@@ -132,3 +132,13 @@ def test_prompts_allow_colloquial_forms():
         assert "bar zahlen" in text
         assert "im Angebot" in text
         assert "Konjunktiv II" in text
+
+
+def test_content_gen_intro_messages_mention_scenario_and_role():
+    sc = _scenario()
+    msgs = agents.build_content_gen_intro_messages(sc)
+    assert msgs[0]["role"] == "system"
+    assert sc.title_de in msgs[0]["content"]
+    assert "Verkäuferin am Supermarkt" in msgs[0]["content"]
+    assert "hochdeutsch" in msgs[0]["content"].lower()
+    assert msgs[-1]["role"] == "user"

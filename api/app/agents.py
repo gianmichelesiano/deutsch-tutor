@@ -89,6 +89,23 @@ class ContentGenVocabChunk(BaseModel):
     vocab: list[ContentGenItem] = []
 
 
+class IntroLine(BaseModel):
+    de: str
+    it: str
+
+
+class IntroTurn(BaseModel):
+    speaker: str
+    de: str
+    it: str
+
+
+class ContentGenIntro(BaseModel):
+    situation: list[IntroLine]
+    dialog: list[IntroTurn]
+    notes_it: list[str]
+
+
 def _level() -> str:
     return LEVEL
 
@@ -240,6 +257,22 @@ def build_content_gen_meta_messages(scenario: object) -> list[dict]:
     return [
         {"role": "system", "content": system},
         {"role": "user", "content": user},
+    ]
+
+
+def build_content_gen_intro_messages(scenario: object) -> list[dict]:
+    """Messaggi per il generatore di contenuti: parte "Einstieg" (situazione, dialogo, note)."""
+    system = prompts.render(
+        "content_gen_intro.md",
+        level=_level(),
+        title_de=scenario.title_de,
+        title_it=scenario.title_it,
+        description=scenario.description,
+        role=scenario.role_label or "Gesprächspartner",
+    )
+    return [
+        {"role": "system", "content": system},
+        {"role": "user", "content": "Erzeuge den Einstieg des Szenarios."},
     ]
 
 

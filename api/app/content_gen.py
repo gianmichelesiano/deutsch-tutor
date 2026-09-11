@@ -32,7 +32,7 @@ META_ATTEMPTS = 3
 # Marcatori tipici di Schweizerdeutsch: se compaiono nei campi in Hochdeutsch la
 # risposta viene scartata e rigenerata (il modello tende a scivolare nel dialetto).
 _DIALECT = re.compile(
-    r"(?<![\w'])(isch|hesch|häsch|het|hät|händ|chömed|chunnsch|chunnt|chönd|chasch|"
+    r"(?<![\w'])(isch|bi|bisch|hesch|häsch|het|hät|händ|chömed|chunnsch|chunnt|chönd|chasch|"
     r"gaht|gah|öppis|nöd|nid|nüt|hüt|nonig|scho|zäme|mir\s+mached|mir\s+händ|luege|"
     r"eifach|susch|gsi|gha|cho|acho|au|d'|s'|z')(?!\w)",
     re.IGNORECASE,
@@ -40,28 +40,36 @@ _DIALECT = re.compile(
 
 
 def dialect_hits(content: dict) -> list[str]:
-    """Frasi con marcatori dialettali nei campi che devono essere Hochdeutsch."""
-    texts: list[str] = [content.get("role_label") or ""]
-    texts += [kp.get("de", "") for kp in content.get("key_phrases", [])]
-    texts += list(content.get("imprevisti", []))
-    texts += list(content.get("goals", []))
+    """Frasi con marcatori dialettali nei campi che devono essere Hochdeutsch.
+
+    Accetta sia il contenuto completo di uno scenario (con eventuale chiave
+    ``intro``) sia un intro da solo (``situation``/``dialog``/``notes_it``).
+    """
+    texts: list[str] = []
+    if "situation" in content or "dialog" in content:
+        intro = content
+    else:
+        intro = content.get("intro") or {}
+        texts.append(content.get("role_label") or "")
+        texts += [kp.get("de", "") for kp in content.get("key_phrases", [])]
+        texts += list(content.get("imprevisti", []))
+        texts += list(content.get("goals", []))
+    texts += [line.get("de", "") for line in intro.get("situation", [])]
+    texts += [turn.get("de", "") for turn in intro.get("dialog", [])]
     return [t for t in texts if _DIALECT.search(t)]
 
 
-async def generate_meta(client: RoutingLlmClient, scenario: dict) -> dict:
-    """Meta (role_label, key_phrases, imprevisti, swiss_variants, goals) con retry
-    finché il risultato è in Hochdeutsch (max ``META_ATTEMPTS``)."""
-    s = SimpleNamespace(**scenario)
-    messages = agents.build_content_gen_meta_messages(s)
+async def _generate_hochdeutsch(
+    client: RoutingLlmClient, messages: list[dict], schema: type, label: str
+) -> dict:
+    """Chiama il modello finché il risultato passa ``dialect_hits`` (max META_ATTEMPTS),
+    ripassando al modello le frasi in dialetto."""
     last: dict = {}
     for _ in range(META_ATTEMPTS):
-        last = await client.complete(
-            "content_gen", messages, schema=agents.ContentGenMeta, max_tokens=4096
-        )
+        last = await client.complete("content_gen", messages, schema=schema, max_tokens=4096)
         hits = dialect_hits(last)
         if not hits:
             return last
-        # retry con feedback esplicito: il modello vede cosa ha sbagliato
         messages = messages + [
             {"role": "assistant", "content": json.dumps(last, ensure_ascii=False)},
             {
@@ -69,14 +77,32 @@ async def generate_meta(client: RoutingLlmClient, scenario: dict) -> dict:
                 "content": (
                     "Diese Sätze sind Schweizerdeutsch, nicht Hochdeutsch: "
                     + " · ".join(f"„{h}“" for h in hits)
-                    + ". Schreibe das GANZE JSON neu, alle Felder ausser "
+                    + ". Schreibe das GANZE JSON neu, alle deutschen Felder ausser "
                     "swiss_variants.swiss auf Hochdeutsch (z.B. „wie geht's“ statt „wie gaht's“)."
                 ),
             },
         ]
     raise RuntimeError(
-        f"meta di «{scenario['title_de']}» ancora in dialetto dopo {META_ATTEMPTS} tentativi: "
-        f"{dialect_hits(last)[:3]}"
+        f"{label} ancora in dialetto dopo {META_ATTEMPTS} tentativi: {dialect_hits(last)[:3]}"
+    )
+
+
+async def generate_meta(client: RoutingLlmClient, scenario: dict) -> dict:
+    """Meta (role_label, key_phrases, imprevisti, swiss_variants, goals) in Hochdeutsch."""
+    s = SimpleNamespace(**scenario)
+    return await _generate_hochdeutsch(
+        client, agents.build_content_gen_meta_messages(s), agents.ContentGenMeta,
+        f"meta di «{scenario['title_de']}»",
+    )
+
+
+async def generate_intro(client: RoutingLlmClient, scenario: dict) -> dict:
+    """Einstieg (situation, dialog, notes_it) in Hochdeutsch. ``scenario`` deve avere
+    ``role_label`` (usa quello generato dalla meta se il seed non lo ha)."""
+    s = SimpleNamespace(**scenario)
+    return await _generate_hochdeutsch(
+        client, agents.build_content_gen_intro_messages(s), agents.ContentGenIntro,
+        f"intro di «{scenario['title_de']}»",
     )
 
 
@@ -84,6 +110,7 @@ async def generate(client: RoutingLlmClient, scenario: dict) -> dict:
     """Genera il contenuto in più chiamate piccole (meno errori di JSON sul locale)."""
     s = SimpleNamespace(**scenario)
     meta = await generate_meta(client, scenario)
+    meta["intro"] = await generate_intro(client, {**scenario, "role_label": meta.get("role_label")})
     vocab: list[dict] = []
     exclude: list[str] = []
     seen: set[str] = set()
@@ -120,6 +147,7 @@ async def write_to_db(scenario: dict, content: dict) -> dict[str, int]:
         sc.swiss_variants = content.get("swiss_variants", [])
         sc.imprevisti = content.get("imprevisti", [])
         sc.goals = content.get("goals", [])
+        sc.intro = content.get("intro")
 
         created = 0
         for v in content.get("vocab", []):

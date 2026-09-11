@@ -30,3 +30,17 @@ def test_dialect_hits_accepts_hochdeutsch_with_helvetisms():
         "goals": ["Einen Tisch reservieren."],
     }
     assert dialect_hits(content) == []
+
+
+def test_dialect_hits_covers_intro_fields():
+    intro = {
+        "situation": [{"de": "Ich bin im Coop.", "it": "Sono alla Coop."}, {"de": "Ich bi im Coop.", "it": "x"}],
+        "dialog": [{"speaker": "Ich", "de": "Grüezi, wie gaht's?", "it": "x"}],
+        "notes_it": ["Si usa il Sie."],
+    }
+    hits = dialect_hits(intro)
+    assert "Ich bi im Coop." in hits
+    assert "Grüezi, wie gaht's?" in hits
+    assert "Ich bin im Coop." not in hits
+    # anche quando l'intro è annidato in un contenuto completo
+    assert dialect_hits({"role_label": "Kellnerin", "key_phrases": [], "imprevisti": [], "goals": [], "intro": intro}) == hits
