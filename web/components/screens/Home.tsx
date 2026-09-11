@@ -1,5 +1,7 @@
 "use client";
 
+import { PHASES, REVIEW_PHASES } from "@/lib/api";
+
 import { Card } from "@/components/ui";
 import type { HomeData } from "@/lib/api";
 
@@ -35,7 +37,9 @@ export function HomeScreen({
         <div className="mt-0.5 text-sm text-[#C7BFAD]">{data.next_scenario.title_it}</div>
         <div className="mt-4 flex gap-2">
           <div className="rounded-[10px] bg-surface/10 px-2.5 py-1.5 text-xs">30 minuti</div>
-          <div className="rounded-[10px] bg-surface/10 px-2.5 py-1.5 text-xs">5 fasi</div>
+          <div className="rounded-[10px] bg-surface/10 px-2.5 py-1.5 text-xs">
+            {(data.lesson_type === "review" ? REVIEW_PHASES : PHASES).length} fasi
+          </div>
         </div>
         <button
           onClick={onStart}

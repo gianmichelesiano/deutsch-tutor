@@ -10,6 +10,7 @@ import { RoleplayPhase } from "./lesson/RoleplayPhase";
 import { HarvestPhase } from "./lesson/HarvestPhase";
 import { SwissPhase } from "./lesson/SwissPhase";
 import { KeyPhraseCard } from "./lesson/KeyPhraseCard";
+import { IntroPhase } from "./lesson/IntroPhase";
 
 export function LessonScreen({ onExit }: { onExit: () => void }) {
   const [lesson, setLesson] = useState<LessonDetail | null>(null);
@@ -62,13 +63,13 @@ export function LessonScreen({ onExit }: { onExit: () => void }) {
     api.abandon(lesson.id).then(() => onExit()).catch(() => onExit());
   };
 
-  const isFirstPhase = phase === "warmup";
+  const isFirstPhase = phase === "intro" || (isReview && phase === "warmup");
   const isLastPhase = phase === "swiss";
 
   return (
     <div>
       <div className="mb-3.5 flex items-center gap-2.5">
-        {phase === "warmup" && (
+        {(phase === "intro" || phase === "warmup") && (
           <button onClick={() => setConfirmAbandon(true)} className="flex p-1.5">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -99,6 +100,7 @@ export function LessonScreen({ onExit }: { onExit: () => void }) {
         <PhaseIndicator phase={phase} lessonType={lesson.lesson_type} />
       </div>
 
+      {phase === "intro" && <IntroPhase lesson={lesson} />}
       {phase === "warmup" && <WarmupPhase lesson={lesson} onAnswered={setWarmupAnswered} />}
       {phase === "test" && <TestPhase lesson={lesson} onAnswered={setTestAnswered} />}
       {phase === "prep" && <PrepPhase lesson={lesson} />}
@@ -115,7 +117,7 @@ export function LessonScreen({ onExit }: { onExit: () => void }) {
         </div>
       ) : (
         <div className="mt-6 flex gap-2.5">
-          {phase === "roleplay" ? (
+          {phase === "roleplay" || (phase === "warmup" && !isReview) ? (
             <button onClick={goBack} className="flex-1 rounded-btn border border-border bg-card py-3 text-sm font-semibold text-primary">
               Indietro
             </button>

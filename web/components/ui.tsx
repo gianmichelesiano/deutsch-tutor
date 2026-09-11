@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { PHASES, PHASE_LABELS, REVIEW_PHASES, REVIEW_PHASE_LABELS } from "@/lib/api";
 
 export const VOCAB_BADGE: Record<string, { bg: string; text: string; label: string }> = {
   new: { bg: "bg-vocab-new-bg", text: "text-vocab-new", label: "Nuovo" },
@@ -68,24 +69,22 @@ export function PrimaryButton({
 
 export function PhaseIndicator({ phase, lessonType = "base" }: { phase: string | null; lessonType?: string }) {
   const isReview = lessonType === "review";
-  const phases: readonly string[] = isReview
-    ? ["warmup", "test", "harvest", "swiss"]
-    : ["warmup", "prep", "roleplay", "harvest", "swiss"];
-  const labels: readonly string[] = isReview
-    ? ["Aufwärmen", "Test", "Ernte", "Schweiz"]
-    : ["Aufwärmen", "Vorbereitung", "Rollenspiel", "Ernte", "Schweiz"];
+  const phases: readonly string[] = isReview ? REVIEW_PHASES : PHASES;
+  const labels: Record<string, string> = isReview ? REVIEW_PHASE_LABELS : PHASE_LABELS;
   const idx = phase ? phases.indexOf(phase) : -1;
+  const dense = phases.length >= 6;
   return (
     <div className="flex gap-1.5">
       {phases.map((key, i) => {
-        const label = labels[i];
         const barColor = i === idx ? "bg-accent" : i < idx ? "bg-ink" : "bg-border";
         const textColor = i === idx ? "text-primary" : "text-faint";
         const weight = i === idx ? "font-semibold" : "font-medium";
         return (
-          <div key={key} className="flex-1">
+          <div key={key} className="min-w-0 flex-1">
             <div className={`h-1.5 rounded ${barColor}`} />
-            <div className={`mt-1.5 text-center text-[10px] ${textColor} ${weight}`}>{label}</div>
+            <div className={`mt-1.5 truncate text-center ${dense ? "text-[9px]" : "text-[10px]"} ${textColor} ${weight}`}>
+              {labels[key]}
+            </div>
           </div>
         );
       })}
