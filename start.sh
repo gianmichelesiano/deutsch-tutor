@@ -27,13 +27,14 @@ if [ ! -f .env ]; then
 fi
 
 WEB_PORT=$(grep -E '^WEB_PORT=' .env | cut -d= -f2 || true); WEB_PORT=${WEB_PORT:-3100}
+API_PORT=$(grep -E '^API_PORT=' .env | cut -d= -f2 || true); API_PORT=${API_PORT:-8118}
 
 echo "→ avvio container (db, api, web)"
 "${COMPOSE[@]}" up -d $BUILD
 
-echo "→ attendo il backend (http://localhost:8000/api/health)"
+echo "→ attendo il backend (http://localhost:${API_PORT}/api/health)"
 for i in $(seq 1 60); do
-  if curl -fs http://localhost:8000/api/health >/dev/null 2>&1; then break; fi
+  if curl -fs "http://localhost:${API_PORT}/api/health" >/dev/null 2>&1; then break; fi
   sleep 2
   [ "$i" -eq 60 ] && { echo "backend non risponde, log:"; "${COMPOSE[@]}" logs api --tail 30; exit 1; }
 done
@@ -56,7 +57,7 @@ fi
 echo
 echo "✔ Deutsch-Tutor pronto"
 echo "  frontend  http://localhost:${WEB_PORT}"
-echo "  backend   http://localhost:8000/api/health"
+echo "  backend   http://localhost:${API_PORT}/api/health"
 echo "  stop      docker compose down"
 [ "$LOGS" -eq 1 ] && "${COMPOSE[@]}" logs -f
 exit 0

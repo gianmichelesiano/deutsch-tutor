@@ -26,7 +26,7 @@ docs/    piano, schema DB, report di fase
 ## Avvio rapido
 
 ```bash
-./start.sh                   # avvia db + api (:8000) + web (:3100), migra, seeda, attende i servizi
+./start.sh                   # avvia db + api (:8118) + web (:3100), migra, seeda, attende i servizi
 ```
 
 Opzioni: `--build` (rebuild immagini), `--logs` (segue i log), `--prod` (senza override dev).
@@ -34,7 +34,7 @@ Equivalente manuale:
 
 ```bash
 cp infra/.env.example .env   # opzionale: i default coprono lo sviluppo locale
-make up                      # build + avvio di web (:3100), api (:8000), db
+make up                      # build + avvio di web (:3100), api (:8118), db
 make migrate                 # applica le migrazioni Alembic
 make seed                    # popola il DB (idempotente)
 ```
@@ -42,7 +42,7 @@ make seed                    # popola il DB (idempotente)
 Verifiche:
 
 - Frontend: http://localhost:3100
-- API health: `curl http://localhost:8000/api/health` → `{"status":"ok"}`
+- API health: `curl http://localhost:8118/api/health` → `{"status":"ok"}`
 - DB: `make ps` (il servizio `db` deve risultare healthy)
 
 ## Comandi
@@ -88,6 +88,7 @@ lo sviluppo locale.
 - `POSTGRES_USER` / `POSTGRES_PASSWORD` / `POSTGRES_DB` — credenziali del DB
 - `POSTGRES_PORT` — porta host del DB (default `5433`, per non collidere con un Postgres locale)
 - `WEB_PORT` — porta host del frontend (default `3100`, la `3000` è usata da un altro progetto)
+- `API_PORT` — porta host del backend (default `8118`, la `8000` è troppo comune)
 - `DATABASE_URL` — usata dall'API (composta automaticamente in Docker)
 
 ### LLM
