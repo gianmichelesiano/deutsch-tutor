@@ -738,6 +738,7 @@ async def compute_progress(session: AsyncSession, now: datetime) -> dict:
     path = [
         {
             "week": sc.week_number,
+            "id": sc.id,
             "title": sc.title_de,
             "subtitle": sc.title_it,
             "completed": sc.id in completed_scenario_ids,

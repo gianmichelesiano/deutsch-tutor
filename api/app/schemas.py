@@ -33,6 +33,12 @@ class AdvanceIn(BaseModel):
     skip_swiss: bool = False
 
 
+class LessonCreateIn(BaseModel):
+    # se presente, salta il Planer e avvia una lezione "base" su questo scenario
+    # (selezione manuale dal Percorso, tutti gli scenari sono sbloccati)
+    scenario_id: int | None = None
+
+
 # --- Risposte ---
 class WarmupAnswerOut(BaseModel):
     vocab_item_id: int

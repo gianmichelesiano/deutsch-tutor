@@ -11,13 +11,27 @@ import { ErrorBanner, LoadingDots } from "@/components/ui";
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>("home");
+  const [startScenarioId, setStartScenarioId] = useState<number | undefined>(undefined);
 
   return (
     <Shell screen={screen} onNavigate={(s) => setScreen(s)}>
       {screen === "home" && <HomeRoute onStart={() => setScreen("lesson")} />}
-      {screen === "lesson" && <LessonScreen onExit={() => setScreen("home")} />}
+      {screen === "lesson" && (
+        <LessonScreen
+          onExit={() => setScreen("home")}
+          startScenarioId={startScenarioId}
+          onConsumeStart={() => setStartScenarioId(undefined)}
+        />
+      )}
       {screen === "vocab" && <VocabScreen />}
-      {screen === "progress" && <ProgressRoute />}
+      {screen === "progress" && (
+        <ProgressRoute
+          onSelectScenario={(id) => {
+            setStartScenarioId(id);
+            setScreen("lesson");
+          }}
+        />
+      )}
     </Shell>
   );
 }
@@ -35,7 +49,7 @@ function HomeRoute({ onStart }: { onStart: () => void }) {
   return <HomeScreen data={data} onStart={onStart} />;
 }
 
-function ProgressRoute() {
+function ProgressRoute({ onSelectScenario }: { onSelectScenario: (scenarioId: number) => void }) {
   const [data, setData] = useState<ProgressData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const load = () => {
@@ -45,5 +59,5 @@ function ProgressRoute() {
   useEffect(load, []);
   if (error) return <ErrorBanner message={error} onRetry={load} />;
   if (data === null) return <LoadingDots />;
-  return <ProgressScreen data={data} />;
+  return <ProgressScreen data={data} onSelectScenario={onSelectScenario} />;
 }

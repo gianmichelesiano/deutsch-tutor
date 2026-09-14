@@ -103,7 +103,7 @@ export interface ProgressData {
   completed_lessons: number;
   streak: number;
   current_scenario: { id: number; title_de: string; title_it: string; week_number: number } | null;
-  path: { week: number; title: string; subtitle: string; completed: boolean; current: boolean }[];
+  path: { week: number; id: number; title: string; subtitle: string; completed: boolean; current: boolean }[];
 }
 
 export interface ReviewQueueItem {
@@ -158,7 +158,11 @@ export const api = {
       body: JSON.stringify({ result }),
     }),
   currentLesson: () => request<{ lesson: LessonDetail | null }>("/api/lessons/current"),
-  createLesson: () => request<LessonDetail>("/api/lessons", { method: "POST" }),
+  createLesson: (scenarioId?: number) =>
+    request<LessonDetail>("/api/lessons", {
+      method: "POST",
+      body: JSON.stringify(scenarioId ? { scenario_id: scenarioId } : {}),
+    }),
   getLesson: (id: number) => request<LessonDetail>(`/api/lessons/${id}`),
   advance: (id: number, skipSwiss = false) =>
     request<LessonDetail>(`/api/lessons/${id}/advance`, { method: "POST", body: JSON.stringify({ skip_swiss: skipSwiss }) }),

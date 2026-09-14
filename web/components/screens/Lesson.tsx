@@ -12,7 +12,19 @@ import { SwissPhase } from "./lesson/SwissPhase";
 import { KeyPhraseCard } from "./lesson/KeyPhraseCard";
 import { IntroPhase } from "./lesson/IntroPhase";
 
-export function LessonScreen({ onExit }: { onExit: () => void }) {
+export function LessonScreen({
+  onExit,
+  startScenarioId,
+  onConsumeStart,
+}: {
+  onExit: () => void;
+  /** Scenario scelto dal Percorso (Progresso): se non c'è una lezione in corso,
+   * la lezione parte lì invece che dal Planer. */
+  startScenarioId?: number;
+  /** Invocato appena lo scenario scelto è stato usato, per non riproporlo
+   * a un successivo ingresso nella tab Lezione. */
+  onConsumeStart?: () => void;
+}) {
   const [lesson, setLesson] = useState<LessonDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -21,17 +33,18 @@ export function LessonScreen({ onExit }: { onExit: () => void }) {
   const [testAnswered, setTestAnswered] = useState(0);
   const [showPhrases, setShowPhrases] = useState(false);
 
-  const load = (id?: number) => {
+  const load = (id?: number, scenarioId?: number) => {
     setError(null);
-    (id ? api.getLesson(id) : api.createLesson())
+    (id ? api.getLesson(id) : api.createLesson(scenarioId))
       .then(setLesson)
       .catch((e) => setError(String(e.message)));
   };
   useEffect(() => {
+    onConsumeStart?.();
     api
       .currentLesson()
-      .then((r) => (r.lesson ? load(r.lesson.id) : load()))
-      .catch(() => load());
+      .then((r) => (r.lesson ? load(r.lesson.id) : load(undefined, startScenarioId)))
+      .catch(() => load(undefined, startScenarioId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

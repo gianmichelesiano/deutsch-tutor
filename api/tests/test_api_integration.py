@@ -204,6 +204,36 @@ async def test_review_lesson_test_flow(clean_db, mock_llm):
 
 
 @pytest.mark.asyncio
+async def test_create_lesson_with_explicit_scenario_bypasses_planner(clean_db, mock_llm):
+    """Selezione manuale dal Percorso: tutti gli scenari sono sbloccati."""
+    async with _client() as client:
+        r = await client.get("/api/progress")
+        path = r.json()["path"]
+        assert path[0]["week"] == 1
+        target = next(sc for sc in path if sc["week"] == 3)
+
+        r = await client.post("/api/lessons", json={"scenario_id": target["id"]})
+        assert r.status_code == 200
+        lesson = r.json()
+        assert lesson["scenario_id"] == target["id"]
+        assert lesson["lesson_type"] == "base"
+        assert lesson["current_phase"] == "intro"
+
+        # una lezione in corso: una seconda richiesta (anche con scenario diverso) la riprende
+        other = next(sc for sc in path if sc["week"] == 5)
+        r = await client.post("/api/lessons", json={"scenario_id": other["id"]})
+        assert r.json()["id"] == lesson["id"]
+        assert r.json()["scenario_id"] == target["id"]
+
+
+@pytest.mark.asyncio
+async def test_create_lesson_with_unknown_scenario_404s(clean_db, mock_llm):
+    async with _client() as client:
+        r = await client.post("/api/lessons", json={"scenario_id": 999999})
+        assert r.status_code == 404
+
+
+@pytest.mark.asyncio
 async def test_abandon_and_current(clean_db, mock_llm):
     async with _client() as client:
         r = await client.post("/api/lessons")

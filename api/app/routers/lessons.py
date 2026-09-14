@@ -27,6 +27,7 @@ from app.parser import parse_requested_terms
 from app.schemas import (
     AdvanceIn,
     HarvestConfirmIn,
+    LessonCreateIn,
     LessonDetail,
     RoleplayMessageIn,
     RoleplayMessageOut,
@@ -43,12 +44,21 @@ router = APIRouter(prefix=settings.api_prefix, tags=["lessons"])
 
 
 @router.post("/lessons", response_model=LessonDetail)
-async def create_lesson(session: AsyncSession = Depends(get_session)):
+async def create_lesson(
+    body: LessonCreateIn = LessonCreateIn(), session: AsyncSession = Depends(get_session)
+):
     current = await services.get_current_lesson(session)
     if current is not None:
         return await build_lesson_detail(session, current)
 
-    scenario, lesson_type = await services.plan_next_lesson(session)
+    if body.scenario_id is not None:
+        # selezione manuale dal Percorso: tutti gli scenari sono sbloccati, salta il Planer
+        scenario = await session.get(Scenario, body.scenario_id)
+        if scenario is None:
+            raise HTTPException(status_code=404, detail="scenario non trovato")
+        lesson_type = LessonType.base
+    else:
+        scenario, lesson_type = await services.plan_next_lesson(session)
     lesson = Lesson(
         scenario_id=scenario.id,
         lesson_type=lesson_type,
