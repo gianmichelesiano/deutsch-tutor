@@ -26,6 +26,13 @@ docs/    piano, schema DB, report di fase
 ## Avvio rapido
 
 ```bash
+./start.sh                   # avvia db + api (:8000) + web (:3100), migra, seeda, attende i servizi
+```
+
+Opzioni: `--build` (rebuild immagini), `--logs` (segue i log), `--prod` (senza override dev).
+Equivalente manuale:
+
+```bash
 cp infra/.env.example .env   # opzionale: i default coprono lo sviluppo locale
 make up                      # build + avvio di web (:3100), api (:8000), db
 make migrate                 # applica le migrazioni Alembic
