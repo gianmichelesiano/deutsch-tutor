@@ -1,6 +1,6 @@
 # Deutsch-Tutor
 
-Personal (single-user) web app for learning German (A2→B1) through 30-minute lessons
+Personal (single-user) web app for learning German through 30-minute lessons
 built around roleplay in everyday scenarios. Teaching priority: **vocabulary**.
 
 ## Stack
