@@ -1,111 +1,112 @@
 # Deutsch-Tutor
 
-App web personale (single user) per imparare il tedesco (A2→B1) con lezioni da 30 minuti
-basate su roleplay in scenari quotidiani. Priorità didattica: **vocabolario**.
+Personal (single-user) web app for learning German (A2→B1) through 30-minute lessons
+built around roleplay in everyday scenarios. Teaching priority: **vocabulary**.
 
 ## Stack
 
-| Livello | Tecnologia |
+| Layer | Technology |
 |---|---|
 | Frontend | Next.js (App Router) + Tailwind CSS — `web/` |
 | Backend | FastAPI (Python 3.12) + Pydantic v2 + SQLAlchemy 2 (async) + Alembic — `api/` |
-| DB | PostgreSQL 16 — servizio `db` |
-| Deploy | Docker Compose (compatibile Portainer), accesso via Tailscale |
+| DB | PostgreSQL 16 — `db` service |
+| Deploy | Docker Compose (Portainer-compatible), accessed over Tailscale |
 
-## Struttura
+## Layout
 
 ```
 web/     Next.js App Router
 api/     FastAPI + Alembic + seed
 infra/   .env.example
-docs/    piano, schema DB, report di fase
+docs/    plan, DB schema, phase reports
 ```
 
-`docker-compose.yml` è alla **root** per far funzionare letteralmente `docker compose up`.
+`docker-compose.yml` sits at the **root** so that plain `docker compose up` works.
 
-## Avvio rapido
+## Quick start
 
 ```bash
-./start.sh                   # avvia db + api (:8118) + web (:3100), migra, seeda, attende i servizi
+./start.sh                   # starts db + api (:8118) + web (:3100), migrates, seeds, waits for services
 ```
 
-Opzioni: `--build` (rebuild immagini), `--logs` (segue i log), `--prod` (senza override dev).
-Equivalente manuale:
+Options: `--build` (rebuild images), `--logs` (follow logs), `--prod` (no dev override).
+Manual equivalent:
 
 ```bash
-cp infra/.env.example .env   # opzionale: i default coprono lo sviluppo locale
-make up                      # build + avvio di web (:3100), api (:8118), db
-make migrate                 # applica le migrazioni Alembic
-make seed                    # popola il DB (idempotente)
+cp infra/.env.example .env   # optional: defaults cover local development
+make up                      # build + start web (:3100), api (:8118), db
+make migrate                 # apply Alembic migrations
+make seed                    # populate the DB (idempotent)
 ```
 
-Verifiche:
+Checks:
 
 - Frontend: http://localhost:3100
 - API health: `curl http://localhost:8118/api/health` → `{"status":"ok"}`
-- DB: `make ps` (il servizio `db` deve risultare healthy)
+- DB: `make ps` (the `db` service must be healthy)
 
-## Comandi
+## Commands
 
-| Comando | Descrizione |
+| Command | Description |
 |---|---|
-| `make up` | build + avvio dello stack |
-| `make down` | ferma lo stack |
-| `make migrate` | `alembic upgrade head` nel container `api` |
-| `make seed` | seed idempotente del DB |
-| `make seed-update` | seed + sovrascrive i contenuti degli scenari esistenti (per il Planer) |
-| `make test` | test unitari (senza DB) |
-| `make test-integration` | test su DB reale (richiede `make migrate`) |
-| `make reset` | ricostruisce da zero, **cancellando i dati** (volume) |
-| `make logs` | segue i log |
+| `make up` | build + start the stack |
+| `make down` | stop the stack |
+| `make migrate` | `alembic upgrade head` in the `api` container |
+| `make seed` | idempotent DB seed |
+| `make seed-update` | seed + overwrite the content of existing scenarios (for the Planer) |
+| `make test` | unit tests (no DB) |
+| `make test-integration` | tests against a real DB (requires `make migrate`) |
+| `make reset` | rebuild from scratch, **deleting the data** (volume) |
+| `make logs` | follow logs |
 
-### Sviluppo
+### Development
 
-- Con `docker-compose.override.yml` presente (default in locale), `docker compose up -d` monta il codice:
-  `api/app` gira con `uvicorn --reload`, `web` con `next dev`. Le modifiche si vedono senza rebuild.
-- Produzione, senza override: `docker compose -f docker-compose.yml up -d --build`.
-- Test: `docker compose exec -T api python -m pytest -q`. Girano sul DB `deutsch_tutor_test`,
-  creato, migrato e seedato automaticamente da `api/tests/conftest.py`. Mai sul DB dell'app.
+- With `docker-compose.override.yml` present (the local default), `docker compose up -d` mounts the code:
+  `api/app` runs under `uvicorn --reload`, `web` under `next dev`. Changes show up without a rebuild.
+- Production, without the override: `docker compose -f docker-compose.yml up -d --build`.
+- Tests: `docker compose exec -T api python -m pytest -q`. They run against the `deutsch_tutor_test` DB,
+  which `api/tests/conftest.py` creates, migrates and seeds automatically. Never against the app DB.
 
-### Contenuti degli scenari
+### Scenario content
 
-I contenuti degli scenari 3–12 (e l'Einstieg di tutti) vivono in `api/app/seed_content/scenario-NN.json`
-e vengono applicati dal seed. Per rigenerarli con il modello configurato:
+The content of scenarios 3–12 (and the Einstieg of all of them) lives in `api/app/seed_content/scenario-NN.json`
+and is applied by the seed. To regenerate it with the configured model:
 
 ```bash
-docker compose exec -T api python -m app.content_gen --scenario N   # meta + vocab + intro, stampa JSON
-docker compose exec -T api python -m app.gen_intro [--scenario N]   # solo Einstieg, scrive il JSON
-docker compose exec -T api python -m app.seed --update              # applica al DB
+docker compose exec -T api python -m app.content_gen --scenario N   # meta + vocab + intro, prints JSON
+docker compose exec -T api python -m app.gen_intro [--scenario N]   # Einstieg only, writes the JSON
+docker compose exec -T api python -m app.seed --update              # apply to the DB
 ```
 
-Il generatore rifiuta e rigenera i testi in Schweizerdeutsch: il dialetto va solo in `swiss_variants.swiss`.
+The generator rejects and regenerates texts written in Schweizerdeutsch: the dialect belongs only in
+`swiss_variants.swiss`.
 
-## Configurazione
+## Configuration
 
-Le variabili vivono in `.env` alla root (copia da `infra/.env.example`). I default coprono
-lo sviluppo locale.
+Variables live in `.env` at the root (copy from `infra/.env.example`). The defaults cover
+local development.
 
-- `POSTGRES_USER` / `POSTGRES_PASSWORD` / `POSTGRES_DB` — credenziali del DB
-- `POSTGRES_PORT` — porta host del DB (default `5433`, per non collidere con un Postgres locale)
-- `WEB_PORT` — porta host del frontend (default `3100`, la `3000` è usata da un altro progetto)
-- `API_PORT` — porta host del backend (default `8118`, la `8000` è troppo comune)
-- `DATABASE_URL` — usata dall'API (composta automaticamente in Docker)
+- `POSTGRES_USER` / `POSTGRES_PASSWORD` / `POSTGRES_DB` — DB credentials
+- `POSTGRES_PORT` — host port for the DB (default `5433`, to avoid clashing with a local Postgres)
+- `WEB_PORT` — host port for the frontend (default `3100`; `3000` is taken by another project)
+- `API_PORT` — host port for the backend (default `8118`; `8000` is too common)
+- `DATABASE_URL` — used by the API (composed automatically in Docker)
 
 ### LLM
 
-Il provider "local" è un endpoint OpenAI-compatibile: di default DeepSeek remoto, in alternativa
-llama.cpp in locale.
+The "local" provider is an OpenAI-compatible endpoint: remote DeepSeek by default, llama.cpp
+running locally as an alternative.
 
-- `LOCAL_LLM_BASE_URL` — default `https://api.deepseek.com`; per llama.cpp es. `http://host.docker.internal:8008/v1`
-- `LOCAL_LLM_API_KEY` — chiave DeepSeek (https://platform.deepseek.com/api_keys); vuota per llama.cpp
+- `LOCAL_LLM_BASE_URL` — default `https://api.deepseek.com`; for llama.cpp e.g. `http://host.docker.internal:8008/v1`
+- `LOCAL_LLM_API_KEY` — DeepSeek key (https://platform.deepseek.com/api_keys); empty for llama.cpp
 - `LOCAL_LLM_MODEL` — default `deepseek-flash`
-- `LOCAL_LLM_THINKING_DISABLED` — `true` (default): niente reasoning nel roleplay
-- `LOCAL_LLM_REPEAT_PENALTY` — solo llama.cpp (>1 penalizza); `0` = non inviata
-- `ANTHROPIC_API_KEY` / `ANTHROPIC_MODEL` — cloud Anthropic (fallback in modalità `auto`)
+- `LOCAL_LLM_THINKING_DISABLED` — `true` (default): no reasoning during roleplay
+- `LOCAL_LLM_REPEAT_PENALTY` — llama.cpp only (>1 penalizes); `0` = not sent
+- `ANTHROPIC_API_KEY` / `ANTHROPIC_MODEL` — Anthropic cloud (fallback in `auto` mode)
 - `LLM_PROVIDER_MODE` — `auto` | `local-only` | `cloud-only` | `mock`
 
-## Riferimenti
+## References
 
-- Piano di implementazione: `docs/deutsch-tutor-implementation-plan.md`
-- Design di riferimento: `design/Deutsch-Tutor.dc.html`
-- Schema DB (ERD): `docs/schema.md`
+- Implementation plan: `docs/deutsch-tutor-implementation-plan.md`
+- Reference design: `design/Deutsch-Tutor.dc.html`
+- DB schema (ERD): `docs/schema.md`
