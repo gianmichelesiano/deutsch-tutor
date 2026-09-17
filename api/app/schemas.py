@@ -69,6 +69,17 @@ class WarmupWord(BaseModel):
     state: str
 
 
+class ReviewQueueItem(BaseModel):
+    id: int
+    de: str
+    it: str
+    state: str
+    gender: str | None
+    plural: str | None
+    separable: bool
+    example_de: str
+
+
 class LessonDetail(BaseModel):
     id: int
     scenario_id: int
@@ -91,17 +102,7 @@ class LessonDetail(BaseModel):
     harvest_corrections: list[dict] | None = None
     requested_words_count: int = 0
     test_words: list[dict] | None = None
-
-
-class ReviewQueueItem(BaseModel):
-    id: int
-    de: str
-    it: str
-    state: str
-    gender: str | None
-    plural: str | None
-    separable: bool
-    example_de: str
+    karten_words: list[ReviewQueueItem] | None = None
 
 
 class VocabItemOut(BaseModel):

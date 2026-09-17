@@ -13,18 +13,28 @@ from app.lesson_state import (
 
 def test_full_forward_sequence() -> None:
     current = PHASES[0]
-    for expected in ("warmup", "prep", "roleplay", "harvest", "swiss", "completed"):
+    for expected in ("warmup", "prep", "roleplay", "harvest", "swiss", "karten", "completed"):
         current = advance_phase(current)
         assert current == expected
 
 
-def test_swiss_goes_to_completed() -> None:
-    assert advance_phase("swiss") == "completed"
+def test_swiss_goes_to_karten() -> None:
+    assert advance_phase("swiss") == "karten"
+
+
+def test_karten_goes_to_completed() -> None:
+    assert advance_phase("karten") == "completed"
 
 
 def test_harvest_skip_swiss() -> None:
-    assert advance_phase("harvest", skip_swiss=True) == "completed"
+    # skip_swiss salta solo la Svizzera: le carte restano
+    assert advance_phase("harvest", skip_swiss=True) == "karten"
     assert advance_phase("harvest") == "swiss"
+
+
+def test_karten_in_review_lessons() -> None:
+    assert advance_phase("harvest", lesson_type="review", skip_swiss=True) == "karten"
+    assert advance_phase("swiss", lesson_type="review") == "karten"
 
 
 def test_advance_from_completed_raises() -> None:
@@ -38,7 +48,7 @@ def test_back_allowed_transitions() -> None:
 
 
 def test_back_from_other_phases_raises() -> None:
-    for phase in ("intro", "prep", "harvest", "swiss", "completed"):
+    for phase in ("intro", "prep", "harvest", "swiss", "karten", "completed"):
         with pytest.raises(InvalidTransition):
             back_phase(phase)
 
@@ -57,5 +67,5 @@ def test_repeat_scenario_rule() -> None:
 
 
 def test_phase_order() -> None:
-    assert PHASES == ("intro", "warmup", "prep", "roleplay", "harvest", "swiss")
-    assert REVIEW_PHASES == ("warmup", "test", "harvest", "swiss")
+    assert PHASES == ("intro", "warmup", "prep", "roleplay", "harvest", "swiss", "karten")
+    assert REVIEW_PHASES == ("warmup", "test", "harvest", "swiss", "karten")

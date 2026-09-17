@@ -73,7 +73,7 @@ export interface LessonDetail {
   role_label: string | null;
   lesson_type: string;
   status: string;
-  current_phase: "intro" | "warmup" | "prep" | "roleplay" | "harvest" | "swiss" | "test" | null;
+  current_phase: "intro" | "warmup" | "prep" | "roleplay" | "harvest" | "swiss" | "karten" | "test" | null;
   key_phrases: KeyPhrase[];
   swiss_variants: SwissVariant[];
   intro: LessonIntro | null;
@@ -84,6 +84,7 @@ export interface LessonDetail {
   harvest_words: HarvestWord[] | null;
   harvest_corrections: HarvestCorrection[] | null;
   test_words: TestWord[] | null;
+  karten_words: ReviewQueueItem[] | null;
 }
 
 export interface HomeData {
@@ -190,7 +191,7 @@ export const api = {
   back: (id: number) => request<LessonDetail>(`/api/lessons/${id}/back`, { method: "POST" }),
 };
 
-export const PHASES = ["intro", "warmup", "prep", "roleplay", "harvest", "swiss"] as const;
+export const PHASES = ["intro", "warmup", "prep", "roleplay", "harvest", "swiss", "karten"] as const;
 export const PHASE_LABELS: Record<string, string> = {
   intro: "Einstieg",
   warmup: "Aufwärmen",
@@ -198,14 +199,16 @@ export const PHASE_LABELS: Record<string, string> = {
   roleplay: "Rollenspiel",
   harvest: "Ernte",
   swiss: "Schweiz",
+  karten: "Karten",
 };
 
-export const REVIEW_PHASES = ["warmup", "test", "harvest", "swiss"] as const;
+export const REVIEW_PHASES = ["warmup", "test", "harvest", "swiss", "karten"] as const;
 export const REVIEW_PHASE_LABELS: Record<string, string> = {
   warmup: "Aufwärmen",
   test: "Test",
   harvest: "Ernte",
   swiss: "Schweiz",
+  karten: "Karten",
 };
 
 export const LESSON_TYPE_LABELS: Record<string, string> = {

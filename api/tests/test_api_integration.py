@@ -81,6 +81,7 @@ async def test_full_lesson_flow(clean_db, mock_llm):
         assert len(lesson["warmup_words"]) == 8
 
         # 2. warmup: 8 risposte (il mock le valuta corrette)
+        warmup_ids = [w["vocab_item_id"] for w in lesson["warmup_words"]]
         for w in lesson["warmup_words"]:
             r = await client.post(
                 f"/api/lessons/{lesson_id}/warmup/answer",
@@ -122,9 +123,17 @@ async def test_full_lesson_flow(clean_db, mock_llm):
         assert r.status_code == 200
         assert r.json()["confirmed"] == 1
 
-        # 7. advance → swiss → completed
+        # 7. advance → swiss → karten → completed
         r = await client.post(f"/api/lessons/{lesson_id}/advance", json={})
         assert r.json()["current_phase"] == "swiss"
+        r = await client.post(f"/api/lessons/{lesson_id}/advance", json={})
+        assert r.json()["current_phase"] == "karten"
+        # il mazzo parte dalle parole usate in questa lezione (ordine di uso), poi le dovute
+        deck = r.json()["karten_words"]
+        assert isinstance(deck, list)
+        assert len(deck) <= 12
+        assert [c["id"] for c in deck][: len(warmup_ids)] == warmup_ids
+        assert all(c["id"] != c["de"] for c in deck)  # niente placeholder
         r = await client.post(f"/api/lessons/{lesson_id}/advance", json={})
         assert r.json()["status"] == "completed"
         assert r.json()["current_phase"] is None

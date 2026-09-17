@@ -9,6 +9,7 @@ import { PrepPhase } from "./lesson/PrepPhase";
 import { RoleplayPhase } from "./lesson/RoleplayPhase";
 import { HarvestPhase } from "./lesson/HarvestPhase";
 import { SwissPhase } from "./lesson/SwissPhase";
+import { KartenPhase } from "./lesson/KartenPhase";
 import { KeyPhraseCard } from "./lesson/KeyPhraseCard";
 import { IntroPhase } from "./lesson/IntroPhase";
 
@@ -77,7 +78,8 @@ export function LessonScreen({
   };
 
   const isFirstPhase = phase === "intro" || (isReview && phase === "warmup");
-  const isLastPhase = phase === "swiss";
+  // karten è la tappa finale: lì compare "Termina lezione"
+  const isLastPhase = phase === "karten";
 
   return (
     <div>
@@ -120,6 +122,7 @@ export function LessonScreen({
       {phase === "roleplay" && <RoleplayPhase lesson={lesson} onUpdated={setLesson} />}
       {phase === "harvest" && <HarvestPhase lesson={lesson} onUpdated={setLesson} />}
       {phase === "swiss" && <SwissPhase lesson={lesson} />}
+      {phase === "karten" && <KartenPhase lesson={lesson} />}
 
       {lesson.status === "completed" ? (
         <div className="mt-6 flex flex-col items-center gap-3">

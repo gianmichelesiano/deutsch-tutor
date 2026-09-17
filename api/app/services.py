@@ -32,6 +32,10 @@ from app.models import (
 from app.srs import Candidate, Progress, apply_review, pick_due
 
 
+# Carte di ripasso a fine lezione (fase ``karten``).
+KARTEN_LIMIT = 12
+
+
 def utcnow() -> datetime:
     return datetime.now(timezone.utc)
 
@@ -295,27 +299,33 @@ async def pick_flashcard_queue(
     limit: int = 20,
     now: datetime | None = None,
     rng: random.Random | None = None,
+    scenario_id: int | None = None,
 ) -> list[dict]:
     """Coda flashcard: parole viste/usate con ``next_review_at`` scaduto + ripescaggio
-    casuale delle consolidate, per priorità."""
+    casuale delle consolidate, per priorità.
+
+    ``scenario_id`` restringe la coda a un solo scenario (mazzo di fine lezione);
+    ``None`` = tutti gli scenari.
+    """
     now = now or utcnow()
-    rows = (
-        await session.execute(
-            select(VocabItem, VocabProgress)
-            .join(VocabProgress, VocabProgress.vocab_item_id == VocabItem.id)
-            .where(
-                VocabItem.de != VocabItem.it,  # esclude i placeholder
-                or_(
-                    and_(
-                        VocabProgress.state.in_([VocabState.seen, VocabState.used]),
-                        VocabProgress.next_review_at.is_not(None),
-                        VocabProgress.next_review_at <= now,
-                    ),
-                    VocabProgress.state == VocabState.consolidated,
+    stmt = (
+        select(VocabItem, VocabProgress)
+        .join(VocabProgress, VocabProgress.vocab_item_id == VocabItem.id)
+        .where(
+            VocabItem.de != VocabItem.it,  # esclude i placeholder
+            or_(
+                and_(
+                    VocabProgress.state.in_([VocabState.seen, VocabState.used]),
+                    VocabProgress.next_review_at.is_not(None),
+                    VocabProgress.next_review_at <= now,
                 ),
-            )
+                VocabProgress.state == VocabState.consolidated,
+            ),
         )
-    ).all()
+    )
+    if scenario_id is not None:
+        stmt = stmt.where(VocabItem.scenario_id == scenario_id)
+    rows = (await session.execute(stmt)).all()
     candidates = [
         Candidate(
             id=vi.id,
@@ -342,6 +352,81 @@ async def pick_flashcard_queue(
         }
         for c in picked
     ]
+
+
+async def get_cards_by_ids(session: AsyncSession, ids: list[int]) -> list[dict]:
+    """Carte (stesso formato di ``ReviewQueueItem``) per id, nell'ordine richiesto."""
+    if not ids:
+        return []
+    rows = (
+        await session.execute(
+            select(VocabItem, VocabProgress)
+            .join(VocabProgress, VocabProgress.vocab_item_id == VocabItem.id)
+            .where(VocabItem.id.in_(ids))
+        )
+    ).all()
+    by_id = {vi.id: (vi, vp) for vi, vp in rows}
+    cards: list[dict] = []
+    for vocab_id in ids:
+        if vocab_id not in by_id:
+            continue
+        vi, vp = by_id[vocab_id]
+        cards.append(
+            {
+                "id": vi.id,
+                "de": vi.de,
+                "it": vi.it,
+                "state": vp.state.value,
+                "gender": vi.gender,
+                "plural": vi.plural,
+                "separable": vi.separable,
+                "example_de": vi.example_de,
+            }
+        )
+    return cards
+
+
+async def pick_karten_words(
+    session: AsyncSession,
+    lesson: Lesson,
+    limit: int = KARTEN_LIMIT,
+    now: datetime | None = None,
+    rng: random.Random | None = None,
+) -> list[dict]:
+    """Mazzo dell'ultima fase (``karten``), in ordine di priorità:
+
+    1. le parole usate in **questa** lezione, anche se non ancora dovute (chiude il
+       cerchio su quello che l'utente ha appena fatto);
+    2. le parole dovute dello **stesso scenario**;
+    3. le altre parole dovute, di qualunque scenario, fino a ``limit`` carte.
+    """
+    now = now or utcnow()
+    used_ids = list(
+        dict.fromkeys(
+            (
+                await session.scalars(
+                    select(ReviewEvent.vocab_item_id)
+                    .join(VocabItem, VocabItem.id == ReviewEvent.vocab_item_id)
+                    .where(
+                        ReviewEvent.lesson_id == lesson.id,
+                        ReviewEvent.source != ReviewSource.flashcard,
+                        VocabItem.de != VocabItem.it,  # esclude i placeholder
+                    )
+                    .order_by(ReviewEvent.id)
+                )
+            ).all()
+        )
+    )
+    ordered: list[int] = used_ids[:limit]
+    if len(ordered) < limit:
+        same_scenario = await pick_flashcard_queue(
+            session, limit=limit, now=now, rng=rng, scenario_id=lesson.scenario_id
+        )
+        ordered += [w["id"] for w in same_scenario if w["id"] not in ordered]
+    if len(ordered) < limit:
+        global_due = await pick_flashcard_queue(session, limit=limit, now=now, rng=rng)
+        ordered += [w["id"] for w in global_due if w["id"] not in ordered]
+    return await get_cards_by_ids(session, ordered[:limit])
 
 
 async def pick_test_words(
@@ -644,6 +729,10 @@ async def build_lesson_detail(session: AsyncSession, lesson: Lesson) -> dict:
     test_words = None
     if lesson.lesson_type == LessonType.review and lesson.current_phase == LessonPhase.test:
         test_words = await pick_test_words(session, lesson.scenario_id)
+    # fase finale: flashcard delle parole dovute oggi (stessa coda della tab Vocabolario)
+    karten_words = None
+    if lesson.current_phase == LessonPhase.karten:
+        karten_words = await pick_karten_words(session, lesson, limit=KARTEN_LIMIT)
     harvest_words = None
     harvest_corrections = None
     if lesson.current_phase == LessonPhase.harvest:
@@ -675,6 +764,7 @@ async def build_lesson_detail(session: AsyncSession, lesson: Lesson) -> dict:
         "harvest_corrections": harvest_corrections,
         "requested_words_count": await count_requested_words(session, lesson.id),
         "test_words": test_words,
+        "karten_words": karten_words,
     }
 
 

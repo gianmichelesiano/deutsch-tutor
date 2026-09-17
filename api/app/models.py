@@ -59,6 +59,7 @@ class LessonPhase(str, enum.Enum):
     roleplay = "roleplay"
     harvest = "harvest"
     swiss = "swiss"
+    karten = "karten"
     test = "test"
 
 
