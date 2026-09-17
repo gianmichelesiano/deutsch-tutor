@@ -30,3 +30,21 @@ Verificato che il server ds4 accetta entrambi; scelto `repeat_penalty` (convenzi
 - `Lesson.tsx` spezzato in `components/screens/lesson/` (un file per fase).
 - Overlay dev anche per `web` (`next dev` con mount): niente rebuild per le modifiche frontend.
 - Spec: `docs/superpowers/specs/2026-09-11-einstieg-intro-phase-design.md` · Piano: `docs/superpowers/plans/2026-09-11-einstieg-intro-phase.md`.
+
+## 2026-09-17 — Fase Karten (flashcard di fine lezione)
+
+- Nuova settima fase `karten`, ultima di `PHASES` e di `REVIEW_PHASES`; `harvest` + `skip_swiss`
+  porta a `karten` (si salta la Svizzera, non il ripasso). Migrazione `0006`, stesso pattern di
+  `0005` per `intro`: `ALTER TYPE ... ADD VALUE IF NOT EXISTS`, nessun backfill.
+- Mazzo **ibrido** e non solo "dovute oggi": prima le parole usate in questa lezione (chiude il
+  cerchio su quello che si è appena fatto, anche se non sono ancora dovute), poi le dovute dello
+  scenario, poi le altre dovute globali, fino a 12. Motivo: la coda globale da sola lascia
+  crescere l'arretrato di altri scenari dentro la lezione, una coda solo-per-lezione lascia
+  crescere il backlog che poi si ripulisce solo dalla tab Vocabolario.
+- Il voto resta `source=flashcard` / `counts_for_consolidation=False`, come nella tab Vocabolario:
+  un'unica semantica per l'autovalutazione, evitando che il ripasso a fine lezione gonfi
+  `correct_uses` e consolidi parole che l'utente non ha mai usato in frase.
+- Carta estratta in `web/components/Flashcard.tsx` e helper in `web/lib/vocab.ts`: prima la stessa
+  carta e lo stesso `blankExample` erano duplicati in tre punti.
+- `KARTEN_LIMIT = 12` in `services.py` (costante di modulo, non variabile d'ambiente): il numero
+  di carte è una scelta di prodotto, non una configurazione di deployment.
