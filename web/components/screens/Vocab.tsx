@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { api, type ReviewQueueItem, type VocabDetail, type VocabItem } from "@/lib/api";
 import { Badge, BottomSheet, ErrorBanner, LoadingDots } from "@/components/ui";
+import { Flashcard } from "@/components/Flashcard";
 
 const FILTERS = [
   { key: "all", label: "Tutte" },
@@ -76,7 +77,6 @@ function ReviewTab() {
   }
 
   const card = queue[index];
-  const blankExample = card.example_de.replace(new RegExp(escapeRegex(card.de.replace(/^(der|die|das)\s+/, "")), "i"), "____");
 
   const answer = (result: "correct" | "wrong") => {
     api.review(card.id, result).catch(() => {});
@@ -95,22 +95,13 @@ function ReviewTab() {
       <div className="mb-4 h-1.5 overflow-hidden rounded bg-vocab-new-bg">
         <div className="h-full rounded bg-accent" style={{ width: `${(index / queue.length) * 100}%` }} />
       </div>
-      <div className="mb-[18px] cursor-pointer [perspective:1200px]" onClick={() => setFlipped((f) => !f)}>
-        <div
-          className="relative min-h-[220px] [transform-style:preserve-3d] transition-transform duration-500"
-          style={{ transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
-        >
-          <div className="absolute inset-0 flex flex-col items-center justify-center rounded-[18px] border border-border bg-card p-6 text-center [backface-visibility:hidden]">
-            <div className="font-serif text-[26px] font-semibold text-secondary">{card.it}</div>
-            <div className="mt-4 font-serif text-[15px] italic text-muted">„{blankExample}"</div>
-            <div className="mt-4 text-xs text-faint">Tocca per girare</div>
-          </div>
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2.5 rounded-[18px] bg-primary p-6 text-center text-surface [backface-visibility:hidden] [transform:rotateY(180deg)]">
-            <div className="font-serif text-[26px] font-semibold">{card.de}</div>
-            <div className="font-serif text-[13px] italic text-[#C7BFAD]">„{card.example_de}"</div>
-          </div>
-        </div>
-      </div>
+      <Flashcard
+        de={card.de}
+        it={card.it}
+        example_de={card.example_de}
+        flipped={flipped}
+        onFlip={() => setFlipped((f) => !f)}
+      />
       {flipped && (
         <div className="flex gap-2.5">
           <button onClick={() => answer("wrong")} className="flex-1 rounded-btn bg-src-error-bg py-3.5 text-sm font-semibold text-src-error">
@@ -123,10 +114,6 @@ function ReviewTab() {
       )}
     </div>
   );
-}
-
-function escapeRegex(s: string) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function ListTab() {
