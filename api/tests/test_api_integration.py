@@ -234,6 +234,28 @@ async def test_create_lesson_with_explicit_scenario_bypasses_planner(clean_db, m
         assert r.json()["id"] == lesson["id"]
         assert r.json()["scenario_id"] == target["id"]
 
+        # con replace_in_progress (conferma dal Percorso) quella aperta viene
+        # abbandonata e parte lo scenario scelto
+        r = await client.post(
+            "/api/lessons", json={"scenario_id": other["id"], "replace_in_progress": True}
+        )
+        assert r.status_code == 200
+        switched = r.json()
+        assert switched["id"] != lesson["id"]
+        assert switched["scenario_id"] == other["id"]
+        assert switched["lesson_type"] == "base"
+        assert switched["status"] == "in_progress"
+
+        r = await client.get(f"/api/lessons/{lesson['id']}")
+        assert r.json()["status"] == "abandoned"
+
+        r = await client.get("/api/lessons/current")
+        assert r.json()["lesson"]["id"] == switched["id"]
+
+        # il flag da solo (senza scenario) non tocca la lezione in corso
+        r = await client.post("/api/lessons", json={"replace_in_progress": True})
+        assert r.json()["id"] == switched["id"]
+
 
 @pytest.mark.asyncio
 async def test_create_lesson_with_unknown_scenario_404s(clean_db, mock_llm):

@@ -70,6 +70,13 @@ async def get_current_lesson(session: AsyncSession) -> Lesson | None:
     )
 
 
+async def abandon_lesson(session: AsyncSession, lesson: Lesson) -> None:
+    """Chiude una lezione aperta. ``review_events`` già registrati restano."""
+    lesson.status = LessonStatus.abandoned
+    lesson.ended_at = utcnow()
+    lesson.current_phase = None
+
+
 async def count_requested_words(session: AsyncSession, lesson_id: int) -> int:
     rows = (
         await session.scalars(

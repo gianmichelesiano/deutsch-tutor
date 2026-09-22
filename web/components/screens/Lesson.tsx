@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { api, type LessonDetail } from "@/lib/api";
+import { api, type LessonDetail, type PathScenario } from "@/lib/api";
 import { BottomSheet, ErrorBanner, LoadingDots, PhaseIndicator } from "@/components/ui";
 import { WarmupPhase } from "./lesson/WarmupPhase";
 import { TestPhase } from "./lesson/TestPhase";
@@ -15,13 +15,14 @@ import { IntroPhase } from "./lesson/IntroPhase";
 
 export function LessonScreen({
   onExit,
-  startScenarioId,
+  startScenario,
   onConsumeStart,
 }: {
   onExit: () => void;
-  /** Scenario scelto dal Percorso (Progresso): se non c'è una lezione in corso,
-   * la lezione parte lì invece che dal Planer. */
-  startScenarioId?: number;
+  /** Scenario scelto dal Percorso (Progresso): se non c'è una lezione in corso
+   * la lezione parte lì invece che dal Planer. Se ce n'è un'altra aperta su un
+   * altro scenario, prima di sostituirla si chiede conferma. */
+  startScenario?: PathScenario;
   /** Invocato appena lo scenario scelto è stato usato, per non riproporlo
    * a un successivo ingresso nella tab Lezione. */
   onConsumeStart?: () => void;
@@ -30,6 +31,9 @@ export function LessonScreen({
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [confirmAbandon, setConfirmAbandon] = useState(false);
+  /** Lezione aperta su un altro scenario + scenario richiesto dal Percorso:
+   * si decide se abbandonare o riprendere. */
+  const [switchTo, setSwitchTo] = useState<{ current: LessonDetail; target: PathScenario } | null>(null);
   const [warmupAnswered, setWarmupAnswered] = useState(0);
   const [testAnswered, setTestAnswered] = useState(0);
   const [showPhrases, setShowPhrases] = useState(false);
@@ -40,16 +44,68 @@ export function LessonScreen({
       .then(setLesson)
       .catch((e) => setError(String(e.message)));
   };
+
+  /** Abbandona la lezione aperta e parte con lo scenario scelto dal Percorso. */
+  const startSelectedScenario = () => {
+    const target = switchTo?.target;
+    setSwitchTo(null);
+    if (!target) return;
+    setBusy(true);
+    api
+      .createLesson(target.id, true)
+      .then(setLesson)
+      .catch((e) => setError(String(e.message)))
+      .finally(() => setBusy(false));
+  };
+
   useEffect(() => {
     onConsumeStart?.();
+    const target = startScenario;
     api
       .currentLesson()
-      .then((r) => (r.lesson ? load(r.lesson.id) : load(undefined, startScenarioId)))
-      .catch(() => load(undefined, startScenarioId));
+      .then((r) => {
+        // nessuna lezione aperta → parte lo scenario scelto (o il Planer)
+        if (!r.lesson) return load(undefined, target?.id);
+        // stesso scenario → riprende senza attriti
+        if (!target || r.lesson.scenario_id === target.id) return load(r.lesson.id);
+        setSwitchTo({ current: r.lesson, target });
+      })
+      .catch(() => load(undefined, target?.id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (error) return <div className="p-2"><ErrorBanner message={error} onRetry={() => load()} /></div>;
+  if (switchTo)
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-6">
+        <div className="w-full rounded-card bg-card p-5 text-center">
+          <div className="mb-2 font-serif text-lg font-semibold">Cambiare lezione?</div>
+          <div className="mb-4 text-sm text-muted">
+            Hai una lezione in corso: {switchTo.current.scenario_title_it}. Iniziando {switchTo.target.subtitle},{" "}
+            quella aperta viene abbandonata e i progressi di quella lezione andranno persi.
+          </div>
+          <div className="flex gap-2.5">
+            <button
+              onClick={() => {
+                const id = switchTo.current.id;
+                setSwitchTo(null);
+                load(id);
+              }}
+              className="flex-1 rounded-btn border border-border py-3 text-sm font-semibold"
+            >
+              Riprendi quella in corso
+            </button>
+            <button
+              onClick={startSelectedScenario}
+              disabled={busy}
+              className="flex-1 rounded-btn bg-accent py-3 text-sm font-semibold text-surface disabled:opacity-40"
+            >
+              Abbandona e inizia
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   if (lesson === null) return <LoadingDots />;
 
   const phase = lesson.current_phase;

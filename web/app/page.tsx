@@ -6,12 +6,12 @@ import { HomeScreen } from "@/components/screens/Home";
 import { ProgressScreen } from "@/components/screens/Progress";
 import { VocabScreen } from "@/components/screens/Vocab";
 import { LessonScreen } from "@/components/screens/Lesson";
-import { api, type HomeData, type ProgressData } from "@/lib/api";
+import { api, type HomeData, type PathScenario, type ProgressData } from "@/lib/api";
 import { ErrorBanner, LoadingDots } from "@/components/ui";
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>("home");
-  const [startScenarioId, setStartScenarioId] = useState<number | undefined>(undefined);
+  const [startScenario, setStartScenario] = useState<PathScenario | undefined>(undefined);
 
   return (
     <Shell screen={screen} onNavigate={(s) => setScreen(s)}>
@@ -19,15 +19,15 @@ export default function App() {
       {screen === "lesson" && (
         <LessonScreen
           onExit={() => setScreen("home")}
-          startScenarioId={startScenarioId}
-          onConsumeStart={() => setStartScenarioId(undefined)}
+          startScenario={startScenario}
+          onConsumeStart={() => setStartScenario(undefined)}
         />
       )}
       {screen === "vocab" && <VocabScreen />}
       {screen === "progress" && (
         <ProgressRoute
-          onSelectScenario={(id) => {
-            setStartScenarioId(id);
+          onSelectScenario={(scenario) => {
+            setStartScenario(scenario);
             setScreen("lesson");
           }}
         />
@@ -49,7 +49,7 @@ function HomeRoute({ onStart }: { onStart: () => void }) {
   return <HomeScreen data={data} onStart={onStart} />;
 }
 
-function ProgressRoute({ onSelectScenario }: { onSelectScenario: (scenarioId: number) => void }) {
+function ProgressRoute({ onSelectScenario }: { onSelectScenario: (scenario: PathScenario) => void }) {
   const [data, setData] = useState<ProgressData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const load = () => {

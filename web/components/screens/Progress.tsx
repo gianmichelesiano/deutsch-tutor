@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "@/components/ui";
-import type { ProgressData } from "@/lib/api";
+import type { PathScenario, ProgressData } from "@/lib/api";
 
 const STATE_META: Record<string, { color: string; label: string }> = {
   new: { color: "#C99A3E", label: "Nuovo" },
@@ -10,7 +10,7 @@ const STATE_META: Record<string, { color: string; label: string }> = {
   consolidated: { color: "#2A3324", label: "Consolidato" },
 };
 
-export function ProgressScreen({ data, onSelectScenario }: { data: ProgressData; onSelectScenario: (scenarioId: number) => void }) {
+export function ProgressScreen({ data, onSelectScenario }: { data: ProgressData; onSelectScenario: (scenario: PathScenario) => void }) {
   const total = data.total_vocab || 1;
   const pct = (n: number) => Math.round((n / total) * 1000) / 10;
   return (
@@ -51,7 +51,7 @@ export function ProgressScreen({ data, onSelectScenario }: { data: ProgressData;
         {data.path.map((sc) => (
           <button
             key={sc.week}
-            onClick={() => onSelectScenario(sc.id)}
+            onClick={() => onSelectScenario(sc)}
             className="flex items-center gap-3 rounded-xl border border-border bg-card px-3 py-2.5 text-left transition-colors active:bg-vocab-new-bg"
           >
             <div

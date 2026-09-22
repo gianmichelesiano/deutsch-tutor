@@ -37,6 +37,10 @@ class LessonCreateIn(BaseModel):
     # se presente, salta il Planer e avvia una lezione "base" su questo scenario
     # (selezione manuale dal Percorso, tutti gli scenari sono sbloccati)
     scenario_id: int | None = None
+    # scelta esplicita di un altro scenario dal Percorso mentre una lezione è
+    # aperta: abbandona quella in corso invece di riprenderla (senza questo
+    # flag la POST resta "riprendi la lezione corrente")
+    replace_in_progress: bool = False
 
 
 # --- Risposte ---
