@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 # --- Richieste ---
@@ -120,3 +120,40 @@ class ReviewOut(BaseModel):
     id: int
     state: str
     next_review_at: datetime | None
+
+
+# --- Mazzo ---
+class DeckAnswerIn(BaseModel):
+    rating: int = Field(ge=1, le=4)  # 1 Ancora · 2 Difficile · 3 Bene · 4 Facile
+
+
+class DeckCardOut(BaseModel):
+    id: int
+    direction: str  # de_it | it_de
+    state: str
+    de: str
+    it: str
+    theme: str
+    example_de: str
+    example_it: str
+
+
+class DeckCounts(BaseModel):
+    new: int
+    learning: int
+    review: int
+
+
+class DeckNextOut(BaseModel):
+    card: DeckCardOut | None
+    counts: DeckCounts
+    previews: list[str]  # etichette dei 4 pulsanti; vuota se card è None
+
+
+class DeckSummaryOut(BaseModel):
+    total_notes: int
+    cards: dict[str, int]  # per stato: new | learning | review | relearning
+    reviewed_today: int
+    notes_started: int
+    next_due: datetime | None
+    new_per_day: int

@@ -6,7 +6,20 @@ Alembic ``0001_initial``.
 import enum
 from datetime import datetime
 
-from sqlalchemy import Boolean, DateTime, Enum, ForeignKey, Integer, String, Text, func, text
+from sqlalchemy import (
+    Boolean,
+    DateTime,
+    Enum,
+    Float,
+    ForeignKey,
+    Integer,
+    SmallInteger,
+    String,
+    Text,
+    UniqueConstraint,
+    func,
+    text,
+)
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -66,6 +79,18 @@ class MessageRole(str, enum.Enum):
     user = "user"
     agent = "agent"
     system = "system"
+
+
+class DeckDirection(str, enum.Enum):
+    de_it = "de_it"
+    it_de = "it_de"
+
+
+class DeckCardState(str, enum.Enum):
+    new = "new"
+    learning = "learning"
+    review = "review"
+    relearning = "relearning"
 
 
 class Scenario(Base):
@@ -208,3 +233,58 @@ class LlmCall(Base):
     ok: Mapped[bool] = mapped_column(Boolean, default=True, server_default=text("true"))
     error: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
+# --- Mazzo (flashcard stile Anki, separato dal vocabolario delle lezioni) ---
+
+
+class DeckNote(Base):
+    """Una voce della Wortliste: genera due carte (DE→IT e IT→DE)."""
+
+    __tablename__ = "deck_notes"
+    __table_args__ = (UniqueConstraint("de", "it", name="uq_deck_notes_de_it"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    de: Mapped[str] = mapped_column(Text)
+    it: Mapped[str] = mapped_column(Text)
+    theme: Mapped[str] = mapped_column(Text, default="", server_default=text("''"))
+    example_de: Mapped[str] = mapped_column(Text, default="", server_default=text("''"))
+    example_it: Mapped[str] = mapped_column(Text, default="", server_default=text("''"))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
+class DeckCard(Base):
+    __tablename__ = "deck_cards"
+    __table_args__ = (UniqueConstraint("note_id", "direction", name="uq_deck_cards_note_direction"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    note_id: Mapped[int] = mapped_column(ForeignKey("deck_notes.id", ondelete="CASCADE"), index=True)
+    direction: Mapped[DeckDirection] = mapped_column(
+        Enum(DeckDirection, name="deck_direction_enum", native_enum=True)
+    )
+    state: Mapped[DeckCardState] = mapped_column(
+        Enum(DeckCardState, name="deck_card_state_enum", native_enum=True),
+        default=DeckCardState.new,
+        server_default=text("'new'"),
+    )
+    due: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True, index=True)
+    interval_days: Mapped[int] = mapped_column(Integer, default=0, server_default=text("0"))
+    ease: Mapped[float] = mapped_column(Float, default=2.5, server_default=text("2.5"))
+    step: Mapped[int] = mapped_column(Integer, default=0, server_default=text("0"))
+    reps: Mapped[int] = mapped_column(Integer, default=0, server_default=text("0"))
+    lapses: Mapped[int] = mapped_column(Integer, default=0, server_default=text("0"))
+    last_reviewed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+
+class DeckReview(Base):
+    __tablename__ = "deck_reviews"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    card_id: Mapped[int] = mapped_column(ForeignKey("deck_cards.id", ondelete="CASCADE"), index=True)
+    rating: Mapped[int] = mapped_column(SmallInteger)  # 1 Ancora · 2 Difficile · 3 Bene · 4 Facile
+    state_before: Mapped[DeckCardState] = mapped_column(
+        Enum(DeckCardState, name="deck_card_state_enum", native_enum=True)
+    )
+    interval_after: Mapped[int] = mapped_column(Integer)
+    ease_after: Mapped[float] = mapped_column(Float)
+    reviewed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), index=True)

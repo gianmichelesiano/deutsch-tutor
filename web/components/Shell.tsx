@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 
-export type Screen = "home" | "lesson" | "vocab" | "progress";
+export type Screen = "home" | "lesson" | "vocab" | "deck" | "progress";
 
 const NAV: { key: Screen; label: string; icon: ReactNode }[] = [
   {
@@ -36,6 +36,16 @@ const NAV: { key: Screen; label: string; icon: ReactNode }[] = [
         <line x1="3" y1="6" x2="3.01" y2="6" />
         <line x1="3" y1="12" x2="3.01" y2="12" />
         <line x1="3" y1="18" x2="3.01" y2="18" />
+      </svg>
+    ),
+  },
+  {
+    key: "deck",
+    label: "Mazzo",
+    icon: (
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="7" y="3" width="13" height="17" rx="2" />
+        <path d="M4 7v12a2 2 0 0 0 2 2h9" />
       </svg>
     ),
   },

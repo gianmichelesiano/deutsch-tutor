@@ -8,6 +8,8 @@ class Settings(BaseSettings):
     api_prefix: str = "/api"
     timezone: str = "Europe/Zurich"
     user_name: str = "Gianmichele"
+    # Mazzo: carte nuove introdotte al giorno (conta le carte, non le parole)
+    deck_new_per_day: int = 20
 
     # --- LLM: provider "local" = endpoint OpenAI-compatibile (DeepSeek remoto,
     # oppure llama.cpp/ds4 in locale) / cloud (Anthropic) ---

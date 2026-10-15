@@ -134,6 +134,32 @@ export interface VocabDetail {
   user_sentences: { sentence: string; is_correct: boolean; feedback: string }[];
 }
 
+export interface DeckCard {
+  id: number;
+  direction: "de_it" | "it_de";
+  state: "new" | "learning" | "review" | "relearning";
+  de: string;
+  it: string;
+  theme: string;
+  example_de: string;
+  example_it: string;
+}
+
+export interface DeckNext {
+  card: DeckCard | null;
+  counts: { new: number; learning: number; review: number };
+  previews: string[]; // etichette dei 4 pulsanti (Ancora, Difficile, Bene, Facile)
+}
+
+export interface DeckSummary {
+  total_notes: number;
+  cards: Record<"new" | "learning" | "review" | "relearning", number>;
+  reviewed_today: number;
+  notes_started: number;
+  next_due: string | null;
+  new_per_day: number;
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(path, {
     ...init,
@@ -157,6 +183,10 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ result }),
     }),
+  deckNext: () => request<DeckNext>("/api/deck/next"),
+  deckAnswer: (cardId: number, rating: number) =>
+    request<DeckNext>(`/api/deck/cards/${cardId}/answer`, { method: "POST", body: JSON.stringify({ rating }) }),
+  deckSummary: () => request<DeckSummary>("/api/deck/summary"),
   currentLesson: () => request<{ lesson: LessonDetail | null }>("/api/lessons/current"),
   createLesson: (scenarioId?: number) =>
     request<LessonDetail>("/api/lessons", {

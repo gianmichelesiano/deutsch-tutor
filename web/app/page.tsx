@@ -5,6 +5,7 @@ import { Shell, type Screen } from "@/components/Shell";
 import { HomeScreen } from "@/components/screens/Home";
 import { ProgressScreen } from "@/components/screens/Progress";
 import { VocabScreen } from "@/components/screens/Vocab";
+import { DeckScreen } from "@/components/screens/Deck";
 import { LessonScreen } from "@/components/screens/Lesson";
 import { api, type HomeData, type ProgressData } from "@/lib/api";
 import { ErrorBanner, LoadingDots } from "@/components/ui";
@@ -24,6 +25,7 @@ export default function App() {
         />
       )}
       {screen === "vocab" && <VocabScreen />}
+      {screen === "deck" && <DeckScreen />}
       {screen === "progress" && (
         <ProgressRoute
           onSelectScenario={(id) => {
