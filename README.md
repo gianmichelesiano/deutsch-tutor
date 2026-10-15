@@ -81,6 +81,26 @@ docker compose exec -T api python -m app.seed --update              # apply to t
 The generator rejects and regenerates texts written in Schweizerdeutsch: the dialect belongs only in
 `swiss_variants.swiss`.
 
+### Deck (flashcards)
+
+The **Mazzo** tab is an Anki-style deck (SM-2) built from the Goethe B1 Wortliste: two cards per
+word (DE→IT and IT→DE), new cards ordered by word frequency. The word list itself is **not in the
+repo** (Goethe-Institut material, this repo is public): keep your `.tsv`/`.apkg` locally. The data
+lives in Postgres, so every new installation (or `make reset`) starts with an empty deck.
+
+To fill the deck on a new machine/server:
+
+```bash
+make migrate                                      # creates the deck tables
+scp wortliste_b1_it.tsv user@server:~/            # from your Mac: copy the word list once
+make deck-import FILE=~/wortliste_b1_it.tsv       # on the server: idempotent, keeps progress
+make deck-rank                                    # order new cards by frequency
+```
+
+Re-importing the same file adds nothing; changed sentences/themes are updated in place. Run
+`make deck-rank` again after every import, otherwise new words go to the end of the queue.
+Study progress is per database: it is not synced between machines.
+
 ## Configuration
 
 Variables live in `.env` at the root (copy from `infra/.env.example`). The defaults cover
@@ -91,6 +111,7 @@ local development.
 - `WEB_PORT` — host port for the frontend (default `3100`; `3000` is taken by another project)
 - `API_PORT` — host port for the backend (default `8118`; `8000` is too common)
 - `DATABASE_URL` — used by the API (composed automatically in Docker)
+- `DECK_NEW_PER_DAY` — new deck cards introduced per day (default `20`; counts cards, not words)
 
 ### LLM
 
@@ -110,3 +131,5 @@ running locally as an alternative.
 - Implementation plan: `docs/deutsch-tutor-implementation-plan.md`
 - Reference design: `design/Deutsch-Tutor.dc.html`
 - DB schema (ERD): `docs/schema.md`
+- Word frequencies: `api/app/seed_content/de_50k.txt` from
+  [FrequencyWords](https://github.com/hermitdave/FrequencyWords) (OpenSubtitles 2018), CC BY-SA 4.0

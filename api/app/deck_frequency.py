@@ -5,8 +5,7 @@ conteggio`` (es. FrequencyWords ``de_50k.txt``, sottotitoli OpenSubtitles) e si
 scrive ``deck_notes.freq_rank`` (1 = più usata). Il progresso delle carte non
 viene toccato; si può rilanciare dopo ogni import.
 
-    curl -sSfLO https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/de/de_50k.txt
-    docker compose exec -T api python -m app.deck_frequency < de_50k.txt
+    make deck-rank   # usa api/app/seed_content/de_50k.txt (FrequencyWords, CC BY-SA 4.0)
 """
 from __future__ import annotations
 
