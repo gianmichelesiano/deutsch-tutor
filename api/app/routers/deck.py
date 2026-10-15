@@ -1,7 +1,8 @@
 """Mazzo flashcard stile Anki: una carta alla volta, SM-2 (``app/deck_srs.py``).
 
 Ordine della coda: learning/relearning scadute → review dovute oggi → nuove
-(entro ``deck_new_per_day``) → learning entro 20 minuti. Le carte gemelle
+(entro ``deck_new_per_day``, per ``freq_rank``: più usate prima) → learning
+entro 20 minuti. Le carte gemelle
 (stessa nota, altra direzione) slittano a domani se una delle due è già stata
 vista oggi; le carte in learning sono escluse da questa regola.
 """
@@ -81,7 +82,12 @@ async def _next(session: AsyncSession, now: datetime) -> DeckNextOut:
         select(DeckCard).where(review_due).order_by(DeckCard.due),
     ]
     if new_left:
-        queries.append(select(DeckCard).where(new_ok).order_by(DeckCard.note_id, DeckCard.direction))
+        queries.append(
+            select(DeckCard)
+            .join(DeckNote, DeckNote.id == DeckCard.note_id)
+            .where(new_ok)
+            .order_by(DeckNote.freq_rank.asc().nulls_last(), DeckCard.note_id, DeckCard.direction)
+        )
     queries.append(select(DeckCard).where(learn_ahead).order_by(DeckCard.due))
 
     card = None

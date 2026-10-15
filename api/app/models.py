@@ -250,6 +250,8 @@ class DeckNote(Base):
     theme: Mapped[str] = mapped_column(Text, default="", server_default=text("''"))
     example_de: Mapped[str] = mapped_column(Text, default="", server_default=text("''"))
     example_it: Mapped[str] = mapped_column(Text, default="", server_default=text("''"))
+    # 1 = più usata (app.deck_frequency); null = non ancora classificata, va in coda
+    freq_rank: Mapped[int | None] = mapped_column(Integer, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
 

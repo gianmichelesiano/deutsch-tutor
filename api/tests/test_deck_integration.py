@@ -112,3 +112,18 @@ async def test_answer_validation(deck):
     async with _client() as client:
         assert (await client.post("/api/deck/cards/1/answer", json={"rating": 5})).status_code == 422
         assert (await client.post("/api/deck/cards/9999/answer", json={"rating": 3})).status_code == 404
+
+
+@pytest.mark.asyncio
+async def test_new_cards_follow_frequency_rank(deck):
+    # Ziel più usata, Baby seconda, Band senza rank → in coda
+    async with engine.begin() as conn:
+        await conn.execute(text("UPDATE deck_notes SET freq_rank = 1 WHERE de = 'das Ziel, -e'"))
+        await conn.execute(text("UPDATE deck_notes SET freq_rank = 2 WHERE de = 'das Baby, -s'"))
+    async with _client() as client:
+        seen = []
+        nxt = (await client.get("/api/deck/next")).json()
+        for _ in range(3):
+            seen.append(nxt["card"]["de"])
+            nxt = await _answer(client, nxt["card"]["id"], EASY)
+    assert seen == ["das Ziel, -e", "das Baby, -s", "die Band, -s"]
