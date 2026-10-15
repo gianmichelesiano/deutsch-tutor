@@ -2,20 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { api, type LessonDetail, type TestWord } from "@/lib/api";
+import { blankExample } from "@/lib/vocab";
 
 interface TestState {
   sending: boolean;
   is_correct?: boolean;
   correct_de?: string;
-}
-
-function escapeRegex(s: string) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
-function blankExample(example: string, de: string): string {
-  const lemma = de.replace(/^(der|die|das)\s+/i, "").trim();
-  return example.replace(new RegExp(escapeRegex(lemma), "i"), "____");
 }
 
 export function TestPhase({ lesson, onAnswered }: { lesson: LessonDetail; onAnswered: (n: number) => void }) {

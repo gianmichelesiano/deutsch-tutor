@@ -73,7 +73,7 @@ export interface LessonDetail {
   role_label: string | null;
   lesson_type: string;
   status: string;
-  current_phase: "intro" | "warmup" | "prep" | "roleplay" | "harvest" | "swiss" | "test" | null;
+  current_phase: "intro" | "warmup" | "prep" | "roleplay" | "harvest" | "swiss" | "karten" | "test" | null;
   key_phrases: KeyPhrase[];
   swiss_variants: SwissVariant[];
   intro: LessonIntro | null;
@@ -84,6 +84,7 @@ export interface LessonDetail {
   harvest_words: HarvestWord[] | null;
   harvest_corrections: HarvestCorrection[] | null;
   test_words: TestWord[] | null;
+  karten_words: ReviewQueueItem[] | null;
 }
 
 export interface HomeData {
@@ -97,13 +98,22 @@ export interface HomeData {
   current_week: number;
 }
 
+export interface PathScenario {
+  week: number;
+  id: number;
+  title: string;
+  subtitle: string;
+  completed: boolean;
+  current: boolean;
+}
+
 export interface ProgressData {
   total_vocab: number;
   counts: Record<VocabState, number>;
   completed_lessons: number;
   streak: number;
   current_scenario: { id: number; title_de: string; title_it: string; week_number: number } | null;
-  path: { week: number; id: number; title: string; subtitle: string; completed: boolean; current: boolean }[];
+  path: PathScenario[];
 }
 
 export interface ReviewQueueItem {
@@ -188,10 +198,13 @@ export const api = {
     request<DeckNext>(`/api/deck/cards/${cardId}/answer`, { method: "POST", body: JSON.stringify({ rating }) }),
   deckSummary: () => request<DeckSummary>("/api/deck/summary"),
   currentLesson: () => request<{ lesson: LessonDetail | null }>("/api/lessons/current"),
-  createLesson: (scenarioId?: number) =>
+  createLesson: (scenarioId?: number, replaceInProgress = false) =>
     request<LessonDetail>("/api/lessons", {
       method: "POST",
-      body: JSON.stringify(scenarioId ? { scenario_id: scenarioId } : {}),
+      body: JSON.stringify({
+        ...(scenarioId ? { scenario_id: scenarioId } : {}),
+        ...(replaceInProgress ? { replace_in_progress: true } : {}),
+      }),
     }),
   getLesson: (id: number) => request<LessonDetail>(`/api/lessons/${id}`),
   advance: (id: number, skipSwiss = false) =>
@@ -220,7 +233,7 @@ export const api = {
   back: (id: number) => request<LessonDetail>(`/api/lessons/${id}/back`, { method: "POST" }),
 };
 
-export const PHASES = ["intro", "warmup", "prep", "roleplay", "harvest", "swiss"] as const;
+export const PHASES = ["intro", "warmup", "prep", "roleplay", "harvest", "swiss", "karten"] as const;
 export const PHASE_LABELS: Record<string, string> = {
   intro: "Einstieg",
   warmup: "Aufwärmen",
@@ -228,14 +241,16 @@ export const PHASE_LABELS: Record<string, string> = {
   roleplay: "Rollenspiel",
   harvest: "Ernte",
   swiss: "Schweiz",
+  karten: "Karten",
 };
 
-export const REVIEW_PHASES = ["warmup", "test", "harvest", "swiss"] as const;
+export const REVIEW_PHASES = ["warmup", "test", "harvest", "swiss", "karten"] as const;
 export const REVIEW_PHASE_LABELS: Record<string, string> = {
   warmup: "Aufwärmen",
   test: "Test",
   harvest: "Ernte",
   swiss: "Schweiz",
+  karten: "Karten",
 };
 
 export const LESSON_TYPE_LABELS: Record<string, string> = {

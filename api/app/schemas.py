@@ -37,6 +37,10 @@ class LessonCreateIn(BaseModel):
     # se presente, salta il Planer e avvia una lezione "base" su questo scenario
     # (selezione manuale dal Percorso, tutti gli scenari sono sbloccati)
     scenario_id: int | None = None
+    # scelta esplicita di un altro scenario dal Percorso mentre una lezione è
+    # aperta: abbandona quella in corso invece di riprenderla (senza questo
+    # flag la POST resta "riprendi la lezione corrente")
+    replace_in_progress: bool = False
 
 
 # --- Risposte ---
@@ -69,6 +73,17 @@ class WarmupWord(BaseModel):
     state: str
 
 
+class ReviewQueueItem(BaseModel):
+    id: int
+    de: str
+    it: str
+    state: str
+    gender: str | None
+    plural: str | None
+    separable: bool
+    example_de: str
+
+
 class LessonDetail(BaseModel):
     id: int
     scenario_id: int
@@ -91,17 +106,7 @@ class LessonDetail(BaseModel):
     harvest_corrections: list[dict] | None = None
     requested_words_count: int = 0
     test_words: list[dict] | None = None
-
-
-class ReviewQueueItem(BaseModel):
-    id: int
-    de: str
-    it: str
-    state: str
-    gender: str | None
-    plural: str | None
-    separable: bool
-    example_de: str
+    karten_words: list[ReviewQueueItem] | None = None
 
 
 class VocabItemOut(BaseModel):

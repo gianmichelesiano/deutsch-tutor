@@ -49,7 +49,12 @@ async def create_lesson(
 ):
     current = await services.get_current_lesson(session)
     if current is not None:
-        return await build_lesson_detail(session, current)
+        # dal Percorso si può scegliere un altro scenario: in quel caso la lezione
+        # aperta viene abbandonata, altrimenti la POST resta "riprendi quella corrente"
+        if not (body.replace_in_progress and body.scenario_id is not None):
+            return await build_lesson_detail(session, current)
+        await services.abandon_lesson(session, current)
+        await session.flush()
 
     if body.scenario_id is not None:
         # selezione manuale dal Percorso: tutti gli scenari sono sbloccati, salta il Planer
@@ -382,9 +387,7 @@ async def abandon_lesson(lesson_id: int, session: AsyncSession = Depends(get_ses
     lesson = await services.get_lesson_or_404(session, lesson_id)
     if lesson.status == LessonStatus.completed:
         raise HTTPException(status_code=400, detail="lezione già completata")
-    lesson.status = LessonStatus.abandoned
-    lesson.ended_at = utcnow()
-    lesson.current_phase = None
+    await services.abandon_lesson(session, lesson)
     await session.commit()
     return {"status": "abandoned"}
 
