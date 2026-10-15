@@ -25,6 +25,8 @@ FUZZ_RATIO = 0.05
 FUZZ_MIN_DAYS = 3
 DAY_CUTOFF_HOUR = 4  # la giornata di studio inizia alle 04:00 locali, come in Anki
 LEARN_AHEAD = timedelta(minutes=20)
+MATURE_DAYS = 21  # da questo intervallo una carta è "imparata" (mature in Anki)
+LEECH_LAPSES = 3  # errori dopo i quali una carta è "difficile"
 
 
 @dataclass(frozen=True)

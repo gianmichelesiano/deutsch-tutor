@@ -1,4 +1,4 @@
-from datetime import UTC, datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 import pytest
 from httpx import ASGITransport, AsyncClient
@@ -127,3 +127,38 @@ async def test_new_cards_follow_frequency_rank(deck):
             seen.append(nxt["card"]["de"])
             nxt = await _answer(client, nxt["card"]["id"], EASY)
     assert seen == ["das Ziel, -e", "das Baby, -s", "die Band, -s"]
+
+
+@pytest.mark.asyncio
+async def test_notes_list_filters_search_and_counts(deck):
+    async with _client() as client:
+        r = (await client.get("/api/deck/notes")).json()
+        assert r["notes"] == [] and r["total"] == 0  # default: solo parole iniziate
+        assert r["counts"] == {"new": 6, "learning": 0, "review": 0, "mature": 0}
+
+        nxt = (await client.get("/api/deck/next")).json()  # Baby DE→IT
+        nxt = await _answer(client, nxt["card"]["id"], EASY)  # → review 4g
+        await _answer(client, nxt["card"]["id"], AGAIN)  # Band DE→IT → learning
+    async with engine.begin() as conn:  # Ziel: matura e "difficile"
+        await conn.execute(
+            text(
+                "UPDATE deck_cards SET state = 'review', interval_days = 30, lapses = 3, "
+                "due = now() + interval '30 days' WHERE note_id = 3 AND direction = 'de_it'"
+            )
+        )
+
+    async with _client() as client:
+        r = (await client.get("/api/deck/notes")).json()
+        assert r["total"] == 3
+        assert r["counts"] == {"new": 3, "learning": 1, "review": 1, "mature": 1}
+        band = next(n for n in r["notes"] if n["de"] == "die Band, -s")
+        assert [(c["direction"], c["status"]) for c in band["cards"]] == [("de_it", "learning"), ("it_de", "new")]
+
+        async def des(params: str) -> list[str]:
+            return [n["de"] for n in (await client.get(f"/api/deck/notes?{params}")).json()["notes"]]
+
+        assert await des("filter=learning") == ["die Band, -s"]
+        assert await des("filter=review") == ["das Baby, -s"]
+        assert await des("filter=mature") == await des("filter=leech") == ["das Ziel, -e"]
+        assert await des("filter=all&q=OBIETT") == ["das Ziel, -e"]
+        assert (await client.get("/api/deck/notes?filter=boh")).status_code == 422

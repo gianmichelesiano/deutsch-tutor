@@ -155,6 +155,29 @@ class DeckNextOut(BaseModel):
     previews: list[str]  # etichette dei 4 pulsanti; vuota se card è None
 
 
+class DeckNoteCardOut(BaseModel):
+    direction: str  # de_it | it_de
+    status: str  # new | learning | review | mature
+    interval_days: int
+    lapses: int
+    due: datetime | None
+
+
+class DeckNoteOut(BaseModel):
+    id: int
+    de: str
+    it: str
+    theme: str
+    cards: list[DeckNoteCardOut]
+    next_due: datetime | None
+
+
+class DeckNotesOut(BaseModel):
+    counts: dict[str, int]  # carte per stato: new | learning | review | mature
+    total: int  # parole che rispettano filtro e ricerca (l'elenco ne mostra al massimo 200)
+    notes: list[DeckNoteOut]
+
+
 class DeckSummaryOut(BaseModel):
     total_notes: int
     cards: dict[str, int]  # per stato: new | learning | review | relearning

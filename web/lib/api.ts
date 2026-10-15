@@ -170,6 +170,23 @@ export interface DeckSummary {
   new_per_day: number;
 }
 
+export type DeckStatus = "new" | "learning" | "review" | "mature";
+
+export interface DeckNote {
+  id: number;
+  de: string;
+  it: string;
+  theme: string;
+  cards: { direction: "de_it" | "it_de"; status: DeckStatus; interval_days: number; lapses: number; due: string | null }[];
+  next_due: string | null;
+}
+
+export interface DeckNotes {
+  counts: Record<DeckStatus, number>; // carte per stato
+  total: number; // parole che rispettano filtro e ricerca (l'elenco ne mostra al massimo 200)
+  notes: DeckNote[];
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(path, {
     ...init,
@@ -197,6 +214,8 @@ export const api = {
   deckAnswer: (cardId: number, rating: number) =>
     request<DeckNext>(`/api/deck/cards/${cardId}/answer`, { method: "POST", body: JSON.stringify({ rating }) }),
   deckSummary: () => request<DeckSummary>("/api/deck/summary"),
+  deckNotes: (filter: string, q: string) =>
+    request<DeckNotes>(`/api/deck/notes?${new URLSearchParams({ filter, q })}`),
   currentLesson: () => request<{ lesson: LessonDetail | null }>("/api/lessons/current"),
   createLesson: (scenarioId?: number, replaceInProgress = false) =>
     request<LessonDetail>("/api/lessons", {

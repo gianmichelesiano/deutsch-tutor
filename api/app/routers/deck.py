@@ -7,11 +7,12 @@ entro 20 minuti. Le carte gemelle
 vista oggi; le carte in learning sono escluse da questa regola.
 """
 import random
+from collections import defaultdict
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy import and_, distinct, exists, func, select
+from fastapi import APIRouter, Depends, HTTPException, Query
+from sqlalchemy import and_, case, distinct, exists, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import aliased
 
@@ -24,6 +25,9 @@ from app.schemas import (
     DeckCardOut,
     DeckCounts,
     DeckNextOut,
+    DeckNoteCardOut,
+    DeckNoteOut,
+    DeckNotesOut,
     DeckSummaryOut,
 )
 from app.services import utcnow
@@ -32,6 +36,23 @@ router = APIRouter(prefix=settings.api_prefix, tags=["deck"])
 
 _rng = random.Random()
 LEARNING = (DeckCardState.learning, DeckCardState.relearning)
+NOTES_LIMIT = 200
+
+# Stato mostrato nell'elenco parole (relearning conta come learning)
+_IS_REVIEW = DeckCard.state == DeckCardState.review
+STATUS = case(
+    (DeckCard.state.in_(LEARNING), "learning"),
+    (and_(_IS_REVIEW, DeckCard.interval_days >= deck_srs.MATURE_DAYS), "mature"),
+    (_IS_REVIEW, "review"),
+    else_="new",
+)
+NOTE_FILTERS = {
+    "started": DeckCard.state != DeckCardState.new,
+    "learning": STATUS == "learning",
+    "review": STATUS == "review",
+    "mature": STATUS == "mature",
+    "leech": DeckCard.lapses >= deck_srs.LEECH_LAPSES,
+}
 
 
 def _state(card: DeckCard) -> deck_srs.CardState:
@@ -175,4 +196,64 @@ async def summary(session: AsyncSession = Depends(get_session)):
             select(func.min(DeckCard.due)).where(DeckCard.state != DeckCardState.new, DeckCard.due > now)
         ),
         new_per_day=settings.deck_new_per_day,
+    )
+
+
+@router.get("/deck/notes", response_model=DeckNotesOut)
+async def list_notes(
+    kind: str = Query("started", alias="filter"),  # started | learning | review | mature | leech | all
+    q: str = "",
+    session: AsyncSession = Depends(get_session),
+):
+    """Elenco parole con lo stato delle due carte: le viste di recente prima."""
+    if kind != "all" and kind not in NOTE_FILTERS:
+        raise HTTPException(status_code=422, detail=f"filtro sconosciuto: {kind}")
+    where = []
+    if kind != "all":
+        where.append(exists().where(DeckCard.note_id == DeckNote.id, NOTE_FILTERS[kind]))
+    if q.strip():
+        pattern = f"%{q.strip()}%"
+        where.append(or_(DeckNote.de.ilike(pattern), DeckNote.it.ilike(pattern)))
+    last_seen = (
+        select(func.max(DeckCard.last_reviewed_at)).where(DeckCard.note_id == DeckNote.id).scalar_subquery()
+    )
+    notes = (
+        await session.scalars(
+            select(DeckNote)
+            .where(*where)
+            .order_by(last_seen.desc().nulls_last(), DeckNote.freq_rank.asc().nulls_last(), DeckNote.id)
+            .limit(NOTES_LIMIT)
+        )
+    ).all()
+    cards = defaultdict(list)
+    rows = await session.execute(
+        select(DeckCard, STATUS)
+        .where(DeckCard.note_id.in_([n.id for n in notes]))
+        .order_by(DeckCard.note_id, DeckCard.direction)
+    )
+    for card, status in rows:
+        cards[card.note_id].append(
+            DeckNoteCardOut(
+                direction=card.direction.value,
+                status=status,
+                interval_days=card.interval_days,
+                lapses=card.lapses,
+                due=card.due,
+            )
+        )
+    counts = dict((await session.execute(select(STATUS, func.count()).group_by(STATUS))).all())
+    return DeckNotesOut(
+        counts={s: counts.get(s, 0) for s in ("new", "learning", "review", "mature")},
+        total=await session.scalar(select(func.count()).select_from(DeckNote).where(*where)),
+        notes=[
+            DeckNoteOut(
+                id=n.id,
+                de=n.de,
+                it=n.it,
+                theme=n.theme,
+                cards=cards[n.id],
+                next_due=min((c.due for c in cards[n.id] if c.status != "new" and c.due), default=None),
+            )
+            for n in notes
+        ],
     )

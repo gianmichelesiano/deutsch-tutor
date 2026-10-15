@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { api, type DeckCard, type DeckNext, type DeckSummary } from "@/lib/api";
+import { api, type DeckCard, type DeckNext, type DeckNotes, type DeckStatus, type DeckSummary } from "@/lib/api";
 import { ErrorBanner, LoadingDots } from "@/components/ui";
 
 const RATINGS = [
@@ -12,6 +12,34 @@ const RATINGS = [
 ];
 
 export function DeckScreen() {
+  const [tab, setTab] = useState<"study" | "words">("study");
+  return (
+    <div>
+      <div className="mb-3.5 font-serif text-2xl font-semibold">Mazzo</div>
+      <div className="mb-[18px] flex rounded-btn bg-vocab-new-bg p-1">
+        {(
+          [
+            { key: "study", label: "Studia" },
+            { key: "words", label: "Parole" },
+          ] as const
+        ).map((t) => (
+          <button
+            key={t.key}
+            onClick={() => setTab(t.key)}
+            className={`flex-1 rounded-[9px] py-2 text-[13px] font-semibold ${
+              tab === t.key ? "bg-card text-primary" : "text-muted"
+            }`}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+      {tab === "study" ? <StudyTab /> : <WordsTab />}
+    </div>
+  );
+}
+
+function StudyTab() {
   const [data, setData] = useState<DeckNext | null>(null);
   const [flipped, setFlipped] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -59,8 +87,8 @@ export function DeckScreen() {
 
   return (
     <div>
-      <div className="mb-3.5 flex items-baseline justify-between">
-        <div className="font-serif text-2xl font-semibold">Mazzo</div>
+      <div className="mb-3 flex items-baseline justify-between text-xs text-muted">
+        <div>Oggi</div>
         <div className="flex gap-3 text-sm font-semibold tabular-nums">
           <span className="text-vocab-new" title="Nuove">{data.counts.new}</span>
           <span className="text-src-error" title="In apprendimento">{data.counts.learning}</span>
@@ -178,6 +206,128 @@ function DoneForToday() {
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+const STATUS: Record<DeckStatus, { label: string; cls: string }> = {
+  new: { label: "Nuova", cls: "bg-vocab-new-bg text-vocab-new" },
+  learning: { label: "In apprendimento", cls: "bg-src-error-bg text-src-error" },
+  review: { label: "In ripasso", cls: "bg-vocab-used-bg text-vocab-used" },
+  mature: { label: "Imparata", cls: "bg-vocab-consolidated-bg text-vocab-consolidated" },
+};
+
+const WORD_FILTERS = [
+  { key: "started", label: "Iniziate" },
+  { key: "learning", label: "In apprendimento" },
+  { key: "review", label: "In ripasso" },
+  { key: "mature", label: "Imparate" },
+  { key: "leech", label: "Difficili" },
+  { key: "all", label: "Tutte" },
+];
+
+function WordsTab() {
+  const [filter, setFilter] = useState("started");
+  const [q, setQ] = useState("");
+  const [data, setData] = useState<DeckNotes | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [reload, setReload] = useState(0);
+  const searching = q.trim() !== "";
+
+  useEffect(() => {
+    let alive = true; // ignora risposte superate da una ricerca più recente
+    const t = setTimeout(
+      () =>
+        api
+          .deckNotes(searching ? "all" : filter, q.trim())
+          .then((d) => alive && setData(d))
+          .catch((e) => alive && setError(String(e.message))),
+      searching ? 250 : 0,
+    );
+    return () => {
+      alive = false;
+      clearTimeout(t);
+    };
+  }, [filter, q, searching, reload]);
+
+  const retry = () => {
+    setError(null);
+    setReload((n) => n + 1);
+  };
+  if (error) return <ErrorBanner message={error} onRetry={retry} />;
+  if (data === null) return <LoadingDots />;
+
+  return (
+    <div>
+      <div className="mb-4 grid grid-cols-4 gap-2">
+        {(Object.keys(STATUS) as DeckStatus[]).map((s) => (
+          <div key={s} className={`rounded-[12px] px-2 py-2 text-center ${STATUS[s].cls}`}>
+            <div className="font-serif text-lg font-semibold tabular-nums">{data.counts[s]}</div>
+            <div className="text-[10px] font-semibold leading-tight">{STATUS[s].label}</div>
+          </div>
+        ))}
+      </div>
+      <input
+        type="text"
+        value={q}
+        onChange={(e) => setQ(e.target.value)}
+        placeholder="Cerca tra tutte le parole..."
+        className="mb-3.5 w-full rounded-btn border border-border bg-card px-3.5 py-3 text-sm"
+      />
+      <div className={`mb-4 flex gap-2 overflow-x-auto pb-1 ${searching ? "opacity-40" : ""}`}>
+        {WORD_FILTERS.map((f) => (
+          <button
+            key={f.key}
+            onClick={() => {
+              setQ("");
+              setFilter(f.key);
+            }}
+            className={`whitespace-nowrap rounded-pill px-3.5 py-2 text-[13px] font-semibold ${
+              filter === f.key && !searching ? "bg-ink text-surface" : "bg-card text-secondary"
+            }`}
+          >
+            {f.label}
+          </button>
+        ))}
+      </div>
+      {data.notes.length === 0 ? (
+        <div className="rounded-card border border-dashed border-border-strong bg-card px-7 py-10 text-center text-[13px] text-muted">
+          {searching ? "Nessuna parola trovata." : "Nessuna parola qui: studia qualche carta nel tab Studia."}
+        </div>
+      ) : (
+        <div className="flex flex-col gap-2">
+          {data.notes.map((n) => (
+            <div key={n.id} className="rounded-[14px] border border-border bg-card px-3.5 py-3">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <div className="font-serif text-[15px] font-semibold">{n.de}</div>
+                  <div className="text-xs text-muted">{n.it}</div>
+                </div>
+                {n.next_due && (
+                  <div className="shrink-0 text-right text-[11px] text-faint">
+                    prossimo
+                    <br />
+                    {new Date(n.next_due).toLocaleDateString("it-CH", { day: "numeric", month: "short" })}
+                  </div>
+                )}
+              </div>
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {n.cards.map((c) => (
+                  <span key={c.direction} className={`rounded-lg px-2 py-0.5 text-[11px] font-semibold ${STATUS[c.status].cls}`}>
+                    {c.direction === "de_it" ? "DE→IT" : "IT→DE"} · {STATUS[c.status].label}
+                    {c.lapses > 0 && ` · ${c.lapses} ${c.lapses === 1 ? "errore" : "errori"}`}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+          {data.total > data.notes.length && (
+            <div className="py-2 text-center text-xs text-faint">
+              Mostrate {data.notes.length} di {data.total}: usa la ricerca per trovare le altre.
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
