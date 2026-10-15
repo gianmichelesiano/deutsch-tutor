@@ -32,6 +32,7 @@ services:
       ANTHROPIC_MODEL: ${ANTHROPIC_MODEL:-claude-sonnet-4-5}
       LLM_PROVIDER_MODE: ${LLM_PROVIDER_MODE:-auto}
       USER_NAME: ${USER_NAME:-Gianmichele}
+      DECK_NEW_PER_DAY: ${DECK_NEW_PER_DAY:-20}
     depends_on:
       db:
         condition: service_healthy
