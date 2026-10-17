@@ -1,7 +1,7 @@
 """Mazzo flashcard stile Anki: una carta alla volta, SM-2 (``app/deck_srs.py``).
 
 Ordine della coda: learning/relearning scadute → review dovute oggi → nuove
-(entro ``deck_new_per_day``, per ``freq_rank``: più usate prima) → learning
+(entro ``deck_new_per_day`` + ``extra``, per ``freq_rank``: più usate prima) → learning
 entro 20 minuti. Le carte gemelle
 (stessa nota, altra direzione) slittano a domani se una delle due è già stata
 vista oggi; le carte in learning sono escluse da questa regola.
@@ -12,7 +12,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 from fastapi import APIRouter, Depends, HTTPException, Query
-from sqlalchemy import and_, case, distinct, exists, func, or_, select
+from sqlalchemy import and_, case, distinct, exists, func, or_, select, true
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import aliased
 
@@ -29,6 +29,7 @@ from app.schemas import (
     DeckNoteOut,
     DeckNotesOut,
     DeckSummaryOut,
+    DeckThemeOut,
 )
 from app.services import utcnow
 
@@ -81,22 +82,42 @@ async def _count(session: AsyncSession, *where) -> int:
     return await session.scalar(select(func.count()).select_from(DeckCard).where(*where))
 
 
-async def _next(session: AsyncSession, now: datetime) -> DeckNextOut:
+def _in_theme(theme: str):
+    """Filtro per tema della nota; tema vuoto = tutto il mazzo."""
+    if not theme:
+        return true()
+    return DeckCard.note_id.in_(select(DeckNote.id).where(DeckNote.theme == theme))
+
+
+def _card_out(card: DeckCard, note: DeckNote) -> DeckCardOut:
+    return DeckCardOut(
+        id=card.id,
+        direction=card.direction.value,
+        state=card.state.value,
+        de=note.de,
+        it=note.it,
+        theme=note.theme,
+        example_de=note.example_de,
+        example_it=note.example_it,
+    )
+
+
+async def _next(session: AsyncSession, now: datetime, extra: int = 0, theme: str = "") -> DeckNextOut:
     tz = ZoneInfo(settings.timezone)
     start, end = deck_srs.day_start(now, tz), deck_srs.next_day_start(now, tz)
-    not_buried = ~_sibling_seen_since(start)
+    not_buried = and_(~_sibling_seen_since(start), _in_theme(theme))
 
     new_today = await session.scalar(
         select(func.count())
         .select_from(DeckReview)
         .where(DeckReview.state_before == DeckCardState.new, DeckReview.reviewed_at >= start)
     )
-    new_left = max(0, settings.deck_new_per_day - new_today)
+    new_left = max(0, settings.deck_new_per_day + extra - new_today)
 
-    learn_due = and_(DeckCard.state.in_(LEARNING), DeckCard.due <= now)
+    learn_due = and_(DeckCard.state.in_(LEARNING), DeckCard.due <= now, _in_theme(theme))
     review_due = and_(DeckCard.state == DeckCardState.review, DeckCard.due < end, not_buried)
     new_ok = and_(DeckCard.state == DeckCardState.new, not_buried)
-    learn_ahead = and_(DeckCard.state.in_(LEARNING), DeckCard.due <= now + deck_srs.LEARN_AHEAD)
+    learn_ahead = and_(DeckCard.state.in_(LEARNING), DeckCard.due <= now + deck_srs.LEARN_AHEAD, _in_theme(theme))
 
     queries = [
         select(DeckCard).where(learn_due).order_by(DeckCard.due),
@@ -126,28 +147,29 @@ async def _next(session: AsyncSession, now: datetime) -> DeckNextOut:
         return DeckNextOut(card=None, counts=counts, previews=[])
     note = await session.get(DeckNote, card.note_id)
     return DeckNextOut(
-        card=DeckCardOut(
-            id=card.id,
-            direction=card.direction.value,
-            state=card.state.value,
-            de=note.de,
-            it=note.it,
-            theme=note.theme,
-            example_de=note.example_de,
-            example_it=note.example_it,
-        ),
+        card=_card_out(card, note),
         counts=counts,
         previews=deck_srs.previews(_state(card), now),
     )
 
 
 @router.get("/deck/next", response_model=DeckNextOut)
-async def next_card(session: AsyncSession = Depends(get_session)):
-    return await _next(session, utcnow())
+async def next_card(
+    extra: int = Query(0, ge=0),  # carte nuove in più oggi, scelte dall'utente oltre il limite
+    theme: str = "",  # studia solo questo tema (il limite di nuove al giorno resta unico)
+    session: AsyncSession = Depends(get_session),
+):
+    return await _next(session, utcnow(), extra, theme)
 
 
 @router.post("/deck/cards/{card_id}/answer", response_model=DeckNextOut)
-async def answer_card(card_id: int, body: DeckAnswerIn, session: AsyncSession = Depends(get_session)):
+async def answer_card(
+    card_id: int,
+    body: DeckAnswerIn,
+    extra: int = Query(0, ge=0),
+    theme: str = "",
+    session: AsyncSession = Depends(get_session),
+):
     card = await session.get(DeckCard, card_id)
     if card is None:
         raise HTTPException(status_code=404, detail="carta non trovata")
@@ -173,7 +195,7 @@ async def answer_card(card_id: int, body: DeckAnswerIn, session: AsyncSession = 
         )
     )
     await session.commit()
-    return await _next(session, now)
+    return await _next(session, now, extra, theme)
 
 
 @router.get("/deck/summary", response_model=DeckSummaryOut)
@@ -257,3 +279,39 @@ async def list_notes(
             for n in notes
         ],
     )
+
+
+@router.get("/deck/themes", response_model=list[DeckThemeOut])
+async def list_themes(session: AsyncSession = Depends(get_session)):
+    """Temi del mazzo con il numero di parole, i più piccoli (più mirati) prima."""
+    rows = await session.execute(
+        select(DeckNote.theme, func.count()).where(DeckNote.theme != "").group_by(DeckNote.theme).order_by(func.count(), DeckNote.theme)
+    )
+    return [DeckThemeOut(theme=t, notes=n) for t, n in rows]
+
+
+# Fasce di frequenza per il ripasso libero (freq_rank: 1 = più usata)
+FREQ_BANDS = {"top": (1, 1000), "mid": (1001, 2000), "rare": (2001, None)}
+
+
+@router.get("/deck/practice", response_model=list[DeckCardOut])
+async def practice(
+    n: int = Query(20, ge=1, le=100),
+    mode: str = Query("random", pattern="^(random|hard)$"),  # hard = carte sbagliate almeno una volta
+    theme: str = "",
+    freq: str = Query("all", pattern="^(all|top|mid|rare)$"),
+    session: AsyncSession = Depends(get_session),
+):
+    """Ripasso libero: carte in ordine casuale, anche mai viste. Non tocca l'SRS."""
+    where = [_in_theme(theme)]
+    if mode == "hard":
+        where.append(DeckCard.lapses > 0)
+    if freq in FREQ_BANDS:
+        lo, hi = FREQ_BANDS[freq]
+        where.append(DeckNote.freq_rank >= lo)
+        if hi:
+            where.append(DeckNote.freq_rank <= hi)
+    rows = await session.execute(
+        select(DeckCard, DeckNote).join(DeckNote, DeckNote.id == DeckCard.note_id).where(*where).order_by(func.random()).limit(n)
+    )
+    return [_card_out(card, note) for card, note in rows]

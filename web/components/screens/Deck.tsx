@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { api, type DeckCard, type DeckNext, type DeckNotes, type DeckStatus, type DeckSummary } from "@/lib/api";
+import { api, type DeckCard, type DeckNext, type DeckNotes, type DeckStatus, type DeckSummary, type DeckTheme } from "@/lib/api";
 import { ErrorBanner, LoadingDots } from "@/components/ui";
 
 const RATINGS = [
@@ -12,7 +12,7 @@ const RATINGS = [
 ];
 
 export function DeckScreen() {
-  const [tab, setTab] = useState<"study" | "words">("study");
+  const [tab, setTab] = useState<"study" | "practice" | "words">("study");
   return (
     <div>
       <div className="mb-3.5 font-serif text-2xl font-semibold">Mazzo</div>
@@ -20,6 +20,7 @@ export function DeckScreen() {
         {(
           [
             { key: "study", label: "Studia" },
+            { key: "practice", label: "Ripasso libero" },
             { key: "words", label: "Parole" },
           ] as const
         ).map((t) => (
@@ -34,31 +35,95 @@ export function DeckScreen() {
           </button>
         ))}
       </div>
-      {tab === "study" ? <StudyTab /> : <WordsTab />}
+      {tab === "study" ? <StudyTab /> : tab === "practice" ? <PracticeTab /> : <WordsTab />}
     </div>
   );
 }
 
+// Carte nuove in più scelte oggi: salvate per giornata di studio (inizia alle 04:00, come sul server)
+const EXTRA_KEY = "deck-extra";
+const studyDay = () => new Date(Date.now() - 4 * 3600_000).toDateString();
+function loadExtra(): number {
+  try {
+    const v = JSON.parse(localStorage.getItem(EXTRA_KEY) ?? "null");
+    return v?.day === studyDay() ? v.extra : 0;
+  } catch {
+    return 0;
+  }
+}
+function saveExtra(extra: number) {
+  try {
+    localStorage.setItem(EXTRA_KEY, JSON.stringify({ day: studyDay(), extra }));
+  } catch {}
+}
+
+function useThemes() {
+  const [themes, setThemes] = useState<DeckTheme[]>([]);
+  useEffect(() => {
+    api.deckThemes().then(setThemes).catch(() => {});
+  }, []);
+  return themes;
+}
+
+function ThemeSelect({ value, onChange }: { value: string; onChange: (theme: string) => void }) {
+  const themes = useThemes();
+  return (
+    <select
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="w-full rounded-btn border border-border bg-card px-3.5 py-3 text-sm"
+    >
+      <option value="">Tutti i temi</option>
+      {themes.map((t) => (
+        <option key={t.theme} value={t.theme}>
+          {t.theme} ({t.notes})
+        </option>
+      ))}
+    </select>
+  );
+}
+
 function StudyTab() {
+  const [extra, setExtra] = useState(0);
+  const [theme, setTheme] = useState("");
   const [data, setData] = useState<DeckNext | null>(null);
   const [flipped, setFlipped] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const load = () => {
+  const load = (ex = extra, th = theme) => {
     setError(null);
     api
-      .deckNext()
+      .deckNext(ex, th)
       .then(setData)
       .catch((e) => setError(String(e.message)));
   };
-  useEffect(load, []);
+  useEffect(() => {
+    const ex = loadExtra();
+    setExtra(ex);
+    load(ex);
+  }, []);
+
+  const more = (n: number) => {
+    const ex = extra + n;
+    setExtra(ex);
+    saveExtra(ex);
+    setData(null);
+    load(ex);
+  };
+
+  const pickTheme = (th: string) => {
+    setTheme(th);
+    setFlipped(false);
+    setData(null);
+    load(extra, th);
+  };
 
   const answer = (rating: number) => {
     if (!data?.card || busy) return;
     setBusy(true);
     api
-      .deckAnswer(data.card.id, rating)
+      .deckAnswer(data.card.id, rating, extra, theme)
       .then((next) => {
         setFlipped(false);
         setData(next);
@@ -82,11 +147,14 @@ function StudyTab() {
     return () => window.removeEventListener("keydown", onKey);
   });
 
-  if (error) return <ErrorBanner message={error} onRetry={load} />;
+  if (error) return <ErrorBanner message={error} onRetry={() => load()} />;
   if (data === null) return <LoadingDots />;
 
   return (
     <div>
+      <div className="mb-3.5">
+        <ThemeSelect value={theme} onChange={pickTheme} />
+      </div>
       <div className="mb-3 flex items-baseline justify-between text-xs text-muted">
         <div>Oggi</div>
         <div className="flex gap-3 text-sm font-semibold tabular-nums">
@@ -96,7 +164,7 @@ function StudyTab() {
         </div>
       </div>
       {data.card === null ? (
-        <DoneForToday />
+        <DoneForToday theme={theme} onMore={more} onAllThemes={() => pickTheme("")} />
       ) : (
         <div>
           <FlipCard key={data.card.id} card={data.card} flipped={flipped} onFlip={() => setFlipped(true)} />
@@ -165,7 +233,15 @@ function FlipCard({ card, flipped, onFlip }: { card: DeckCard; flipped: boolean;
   );
 }
 
-function DoneForToday() {
+function DoneForToday({
+  theme,
+  onMore,
+  onAllThemes,
+}: {
+  theme: string;
+  onMore: (n: number) => void;
+  onAllThemes: () => void;
+}) {
   const [s, setS] = useState<DeckSummary | null>(null);
   useEffect(() => {
     api.deckSummary().then(setS).catch(() => {});
@@ -178,6 +254,25 @@ function DoneForToday() {
         <div className="font-serif text-lg font-semibold">Mazzo vuoto</div>
         <div className="mt-1.5 text-[13px] text-muted">
           Importa la Wortliste (.apkg o .tsv) con <code>python -m app.deck_import</code>.
+        </div>
+      </div>
+    );
+  }
+
+  if (theme) {
+    return (
+      <div className="rounded-card border border-border bg-card px-5 py-8 text-center">
+        <div className="mb-1 font-serif text-xl font-semibold">Niente da studiare in «{theme}»</div>
+        <div className="mb-5 text-[13px] text-muted">
+          Nessuna carta in scadenza per questo tema. Le carte nuove contano nel limite di {s.new_per_day} al giorno.
+        </div>
+        <div className="flex flex-col gap-2">
+          <button onClick={() => onMore(s.new_per_day)} className="w-full rounded-btn bg-ink py-3.5 text-sm font-semibold text-surface">
+            Studia altre {s.new_per_day} carte nuove del tema
+          </button>
+          <button onClick={onAllThemes} className="w-full rounded-btn bg-surface py-3.5 text-sm font-semibold text-secondary">
+            Torna a tutti i temi
+          </button>
         </div>
       </div>
     );
@@ -197,7 +292,17 @@ function DoneForToday() {
   return (
     <div className="rounded-card border border-border bg-card px-5 py-8 text-center">
       <div className="mb-1 font-serif text-xl font-semibold">Fatto per oggi</div>
-      <div className="mb-5 text-[13px] text-muted">Torna domani: {s.new_per_day} carte nuove al giorno.</div>
+      <div className="mb-5 text-[13px] text-muted">
+        I progressi sono salvati. Torna domani: {s.new_per_day} carte nuove al giorno.
+      </div>
+      {s.cards.new > 0 && (
+        <button
+          onClick={() => onMore(s.new_per_day)}
+          className="mb-5 w-full rounded-btn bg-ink py-3.5 text-sm font-semibold text-surface"
+        >
+          Studia altre {Math.min(s.new_per_day, s.cards.new)} carte nuove
+        </button>
+      )}
       <div className="grid grid-cols-2 gap-2.5 text-left">
         {stats.map((st) => (
           <div key={st.label} className="rounded-[12px] bg-surface px-3 py-2.5">
@@ -206,6 +311,161 @@ function DoneForToday() {
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+// Ripasso libero: carte mescolate, anche mai viste. Solo giusto/sbagliato, l'SRS non cambia.
+function PracticeTab() {
+  const [mode, setMode] = useState<"random" | "hard">("random");
+  const [theme, setTheme] = useState("");
+  const [n, setN] = useState(20);
+  const [freq, setFreq] = useState("all");
+  const [cards, setCards] = useState<DeckCard[] | null>(null);
+  const [i, setI] = useState(0);
+  const [wrong, setWrong] = useState<DeckCard[]>([]);
+  const [flipped, setFlipped] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const startWith = (list: DeckCard[]) => {
+    setCards(list);
+    setI(0);
+    setWrong([]);
+    setFlipped(false);
+  };
+  const start = () => {
+    setError(null);
+    setLoading(true);
+    api
+      .deckPractice(n, mode, theme, freq)
+      .then(startWith)
+      .catch((e) => setError(String(e.message)))
+      .finally(() => setLoading(false));
+  };
+  const mark = (ok: boolean) => {
+    if (!cards) return;
+    if (!ok) setWrong((w) => [...w, cards[i]]);
+    setFlipped(false);
+    setI(i + 1);
+  };
+
+  const card = cards?.[i];
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (!card) return;
+      if (e.code === "Space") {
+        e.preventDefault();
+        setFlipped(true);
+      } else if (flipped && (e.key === "1" || e.key === "2")) {
+        mark(e.key === "2");
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  });
+
+  if (error) return <ErrorBanner message={error} onRetry={start} />;
+  if (loading) return <LoadingDots />;
+
+  if (cards === null) {
+    const pill = (active: boolean) =>
+      `flex-1 rounded-pill px-3.5 py-2 text-[13px] font-semibold ${active ? "bg-ink text-surface" : "bg-card text-secondary"}`;
+    return (
+      <div className="flex flex-col gap-3.5">
+        <div className="text-[13px] text-muted">
+          Un giro extra in ordine casuale, anche su parole mai viste. Non cambia le date di ripasso.
+        </div>
+        <div className="flex gap-2">
+          <button onClick={() => setMode("random")} className={pill(mode === "random")}>Casuali</button>
+          <button onClick={() => setMode("hard")} className={pill(mode === "hard")}>Sbagliate almeno una volta</button>
+        </div>
+        <ThemeSelect value={theme} onChange={setTheme} />
+        <div className="grid grid-cols-4 gap-2">
+          {[
+            { key: "all", label: "Tutte" },
+            { key: "top", label: "Molto usate" },
+            { key: "mid", label: "Medie" },
+            { key: "rare", label: "Meno usate" },
+          ].map((f) => (
+            <button key={f.key} onClick={() => setFreq(f.key)} className={pill(freq === f.key)}>
+              {f.label}
+            </button>
+          ))}
+        </div>
+        <div className="flex gap-2">
+          {[10, 20, 50].map((k) => (
+            <button key={k} onClick={() => setN(k)} className={pill(n === k)}>
+              {k} carte
+            </button>
+          ))}
+        </div>
+        <button onClick={start} className="w-full rounded-btn bg-ink py-3.5 text-sm font-semibold text-surface">
+          Inizia
+        </button>
+      </div>
+    );
+  }
+
+  if (cards.length === 0) {
+    return (
+      <div className="rounded-card border border-dashed border-border-strong bg-card px-7 py-10 text-center text-[13px] text-muted">
+        Nessuna carta con questi filtri.
+        <button onClick={() => setCards(null)} className="mt-4 block w-full rounded-btn bg-ink py-3 text-sm font-semibold text-surface">
+          Cambia filtri
+        </button>
+      </div>
+    );
+  }
+
+  if (!card) {
+    return (
+      <div className="rounded-card border border-border bg-card px-5 py-8 text-center">
+        <div className="mb-1 font-serif text-xl font-semibold">
+          {cards.length - wrong.length} / {cards.length} giuste
+        </div>
+        <div className="mb-5 text-[13px] text-muted">Ripasso libero finito.</div>
+        <div className="flex flex-col gap-2">
+          {wrong.length > 0 && (
+            <button onClick={() => startWith(wrong)} className="w-full rounded-btn bg-ink py-3.5 text-sm font-semibold text-surface">
+              Ripeti le {wrong.length} sbagliate
+            </button>
+          )}
+          <button onClick={start} className="w-full rounded-btn bg-surface py-3.5 text-sm font-semibold text-secondary">
+            Nuovo giro
+          </button>
+          <button onClick={() => setCards(null)} className="w-full rounded-btn bg-surface py-3.5 text-sm font-semibold text-secondary">
+            Cambia filtri
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div className="mb-3 flex items-baseline justify-between text-xs text-muted">
+        <button onClick={() => setCards(null)}>← Filtri</button>
+        <div className="tabular-nums">
+          {i + 1} / {cards.length}
+        </div>
+      </div>
+      <FlipCard key={`${i}-${card.id}`} card={card} flipped={flipped} onFlip={() => setFlipped(true)} />
+      {flipped ? (
+        <div className="grid grid-cols-2 gap-2">
+          <button onClick={() => mark(false)} className="rounded-btn bg-src-error-bg py-3.5 text-sm font-semibold text-src-error">
+            Sbagliata
+          </button>
+          <button onClick={() => mark(true)} className="rounded-btn bg-vocab-used-bg py-3.5 text-sm font-semibold text-vocab-used">
+            Giusta
+          </button>
+        </div>
+      ) : (
+        <button onClick={() => setFlipped(true)} className="w-full rounded-btn bg-ink py-3.5 text-sm font-semibold text-surface">
+          Mostra risposta
+        </button>
+      )}
+      <div className="mt-3 hidden text-center text-[11px] text-faint sm:block">Spazio: gira · 1: sbagliata · 2: giusta</div>
     </div>
   );
 }

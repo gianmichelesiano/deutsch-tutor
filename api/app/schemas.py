@@ -178,6 +178,11 @@ class DeckNotesOut(BaseModel):
     notes: list[DeckNoteOut]
 
 
+class DeckThemeOut(BaseModel):
+    theme: str
+    notes: int
+
+
 class DeckSummaryOut(BaseModel):
     total_notes: int
     cards: dict[str, int]  # per stato: new | learning | review | relearning

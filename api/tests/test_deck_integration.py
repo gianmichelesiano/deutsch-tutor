@@ -105,6 +105,9 @@ async def test_new_per_day_limit(deck, monkeypatch):
         assert nxt["counts"]["new"] == 1
         nxt = await _answer(client, nxt["card"]["id"], EASY)
         assert nxt == {"card": None, "counts": {"new": 0, "learning": 0, "review": 0}, "previews": []}
+        # l'utente sceglie un altro mazzo: +1 nuova oltre il limite
+        nxt = (await client.get("/api/deck/next", params={"extra": 1})).json()
+        assert nxt["counts"]["new"] == 1 and nxt["card"]["state"] == "new"
 
 
 @pytest.mark.asyncio
@@ -162,3 +165,23 @@ async def test_notes_list_filters_search_and_counts(deck):
         assert await des("filter=mature") == await des("filter=leech") == ["das Ziel, -e"]
         assert await des("filter=all&q=OBIETT") == ["das Ziel, -e"]
         assert (await client.get("/api/deck/notes?filter=boh")).status_code == 422
+
+
+@pytest.mark.asyncio
+async def test_theme_filter_themes_and_practice(deck):
+    async with _client() as client:
+        themes = (await client.get("/api/deck/themes")).json()
+        assert themes == [{"theme": "Wortschatz", "notes": 1}, {"theme": "Anglicismi", "notes": 2}]
+
+        nxt = (await client.get("/api/deck/next", params={"theme": "Wortschatz"})).json()
+        assert nxt["card"]["de"] == "das Ziel, -e" and nxt["counts"]["new"] == 2
+
+        # ripasso libero: anche carte mai viste, e non cambia lo stato SRS
+        assert len((await client.get("/api/deck/practice")).json()) == 6
+        await client.post(f"/api/deck/cards/{nxt['card']['id']}/answer", params={"theme": "Wortschatz"}, json={"rating": AGAIN})
+        practice = (await client.get("/api/deck/practice", params={"mode": "hard"})).json()
+        assert practice == []  # nessun errore in review ancora
+        practice = (await client.get("/api/deck/practice", params={"theme": "Wortschatz"})).json()
+        assert {c["de"] for c in practice} == {"das Ziel, -e"} and len(practice) == 2
+        # fasce di frequenza: senza freq_rank nessuna carta cade in una fascia
+        assert (await client.get("/api/deck/practice", params={"freq": "top"})).json() == []

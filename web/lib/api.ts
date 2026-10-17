@@ -170,6 +170,11 @@ export interface DeckSummary {
   new_per_day: number;
 }
 
+export interface DeckTheme {
+  theme: string;
+  notes: number;
+}
+
 export type DeckStatus = "new" | "learning" | "review" | "mature";
 
 export interface DeckNote {
@@ -210,10 +215,18 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ result }),
     }),
-  deckNext: () => request<DeckNext>("/api/deck/next"),
-  deckAnswer: (cardId: number, rating: number) =>
-    request<DeckNext>(`/api/deck/cards/${cardId}/answer`, { method: "POST", body: JSON.stringify({ rating }) }),
+  // extra: carte nuove in più oggi, oltre il limite giornaliero
+  deckNext: (extra = 0, theme = "") =>
+    request<DeckNext>(`/api/deck/next?${new URLSearchParams({ extra: String(extra), theme })}`),
+  deckAnswer: (cardId: number, rating: number, extra = 0, theme = "") =>
+    request<DeckNext>(`/api/deck/cards/${cardId}/answer?${new URLSearchParams({ extra: String(extra), theme })}`, {
+      method: "POST",
+      body: JSON.stringify({ rating }),
+    }),
   deckSummary: () => request<DeckSummary>("/api/deck/summary"),
+  deckThemes: () => request<DeckTheme[]>("/api/deck/themes"),
+  deckPractice: (n: number, mode: "random" | "hard", theme: string, freq: string) =>
+    request<DeckCard[]>(`/api/deck/practice?${new URLSearchParams({ n: String(n), mode, theme, freq })}`),
   deckNotes: (filter: string, q: string) =>
     request<DeckNotes>(`/api/deck/notes?${new URLSearchParams({ filter, q })}`),
   currentLesson: () => request<{ lesson: LessonDetail | null }>("/api/lessons/current"),
