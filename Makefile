@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 COMPOSE := docker compose
 
-.PHONY: up down build logs migrate seed test test-integration ps reset deck-import deck-rank
+.PHONY: up down build logs migrate seed test test-integration ps reset deck-import deck-import-a1 deck-rank
 
 up: ## Avvia lo stack (build + up -d)
 	$(COMPOSE) up -d --build
@@ -26,6 +26,9 @@ seed-update: ## Seed + sovrascrive i contenuti degli scenari esistenti
 
 deck-import: ## Importa la Wortliste nel mazzo: make deck-import FILE=wortliste_b1_it.tsv (.tsv o .apkg; DECK=a1 per la Wortliste A1)
 	$(COMPOSE) exec -T api python -m app.deck_import --deck $(or $(DECK),b1) < $(FILE)
+
+deck-import-a1: ## Importa la Wortliste A1 inclusa nel repo (api/app/seed_content/A1_wortliste_it.tsv)
+	$(COMPOSE) exec -T api python -m app.deck_import --deck a1 < api/app/seed_content/A1_wortliste_it.tsv
 
 deck-rank: ## Ordina le carte nuove del mazzo per frequenza (rilanciare dopo ogni import)
 	$(COMPOSE) exec -T api python -m app.deck_frequency < api/app/seed_content/de_50k.txt

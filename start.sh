@@ -42,6 +42,8 @@ done
 echo "→ migrazioni + seed"
 "${COMPOSE[@]}" exec -T api alembic upgrade head 2>&1 | grep -v "^INFO" || true
 "${COMPOSE[@]}" exec -T api python -m app.seed
+echo "→ mazzo A1 (idempotente, non tocca i progressi)"
+"${COMPOSE[@]}" exec -T api python -m app.deck_import --deck a1 < api/app/seed_content/A1_wortliste_it.tsv
 
 echo "→ attendo il frontend (http://localhost:${WEB_PORT})"
 for i in $(seq 1 60); do

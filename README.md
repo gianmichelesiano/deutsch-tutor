@@ -102,11 +102,13 @@ Re-importing the same file adds nothing; changed sentences/themes are updated in
 Study progress is per database: it is not synced between machines.
 
 The **A1** tab is a separate deck (Goethe A1 Wortliste, Start Deutsch 1): one DE→IT card per word,
-always in random order, no SRS. Same rule: the `.tsv` stays out of the repo. Import it with
-`DECK=a1` (multiple sentences per word are separated by a literal `\n` in the TSV):
+always in random order, no SRS. Its word list **is in the repo**
+(`api/app/seed_content/A1_wortliste_it.tsv`, multiple sentences per word separated by a literal `\n`)
+and `./start.sh` imports it on every start (idempotent). After a `git pull` on another machine,
+`./start.sh` is enough; with `make`:
 
 ```bash
-make deck-import FILE=~/A1_wortliste_it.tsv DECK=a1
+make migrate && make deck-import-a1
 ```
 
 Audio: the speaker buttons read German with the browser's own voice (`speechSynthesis`, `de-DE`),
