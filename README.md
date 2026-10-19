@@ -101,6 +101,17 @@ Re-importing the same file adds nothing; changed sentences/themes are updated in
 `make deck-rank` again after every import, otherwise new words go to the end of the queue.
 Study progress is per database: it is not synced between machines.
 
+The **A1** tab is a separate deck (Goethe A1 Wortliste, Start Deutsch 1): one DE→IT card per word,
+always in random order, no SRS. Same rule: the `.tsv` stays out of the repo. Import it with
+`DECK=a1` (multiple sentences per word are separated by a literal `\n` in the TSV):
+
+```bash
+make deck-import FILE=~/A1_wortliste_it.tsv DECK=a1
+```
+
+Audio: the speaker buttons read German with the browser's own voice (`speechSynthesis`, `de-DE`),
+only on tap. No server or API key; voice quality depends on the device.
+
 ## Configuration
 
 Variables live in `.env` at the root (copy from `infra/.env.example`). The defaults cover
