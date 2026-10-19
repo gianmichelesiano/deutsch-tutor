@@ -225,8 +225,8 @@ export const api = {
     }),
   deckSummary: () => request<DeckSummary>("/api/deck/summary"),
   deckThemes: () => request<DeckTheme[]>("/api/deck/themes"),
-  deckPractice: (n: number, mode: "random" | "hard", theme: string, freq: string) =>
-    request<DeckCard[]>(`/api/deck/practice?${new URLSearchParams({ n: String(n), mode, theme, freq })}`),
+  deckPractice: (n: number, mode: "random" | "hard", theme: string, freq: string, deck: "a1" | "b1" = "b1") =>
+    request<DeckCard[]>(`/api/deck/practice?${new URLSearchParams({ n: String(n), mode, theme, freq, deck })}`),
   deckNotes: (filter: string, q: string) =>
     request<DeckNotes>(`/api/deck/notes?${new URLSearchParams({ filter, q })}`),
   currentLesson: () => request<{ lesson: LessonDetail | null }>("/api/lessons/current"),

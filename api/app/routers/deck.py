@@ -5,6 +5,9 @@ Ordine della coda: learning/relearning scadute → review dovute oggi → nuove
 entro 20 minuti. Le carte gemelle
 (stessa nota, altra direzione) slittano a domani se una delle due è già stata
 vista oggi; le carte in learning sono escluse da questa regola.
+
+Tutto questo vale per il mazzo B1. Il mazzo A1 (``deck_notes.deck = 'a1'``) non ha
+SRS: si usa solo con ``/deck/practice?deck=a1``, in ordine casuale.
 """
 import random
 from collections import defaultdict
@@ -12,7 +15,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 from fastapi import APIRouter, Depends, HTTPException, Query
-from sqlalchemy import and_, case, distinct, exists, func, or_, select, true
+from sqlalchemy import and_, case, distinct, exists, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import aliased
 
@@ -82,11 +85,12 @@ async def _count(session: AsyncSession, *where) -> int:
     return await session.scalar(select(func.count()).select_from(DeckCard).where(*where))
 
 
-def _in_theme(theme: str):
-    """Filtro per tema della nota; tema vuoto = tutto il mazzo."""
-    if not theme:
-        return true()
-    return DeckCard.note_id.in_(select(DeckNote.id).where(DeckNote.theme == theme))
+def _in_theme(theme: str, deck: str = "b1"):
+    """Carte di un mazzo (b1 | a1), solo di un tema se ``theme`` non è vuoto."""
+    notes = select(DeckNote.id).where(DeckNote.deck == deck)
+    if theme:
+        notes = notes.where(DeckNote.theme == theme)
+    return DeckCard.note_id.in_(notes)
 
 
 def _card_out(card: DeckCard, note: DeckNote) -> DeckCardOut:
@@ -203,19 +207,19 @@ async def summary(session: AsyncSession = Depends(get_session)):
     now = utcnow()
     start = deck_srs.day_start(now, ZoneInfo(settings.timezone))
     by_state = dict(
-        (await session.execute(select(DeckCard.state, func.count()).group_by(DeckCard.state))).all()
+        (await session.execute(select(DeckCard.state, func.count()).where(_in_theme("")).group_by(DeckCard.state))).all()
     )
     return DeckSummaryOut(
-        total_notes=await session.scalar(select(func.count()).select_from(DeckNote)),
+        total_notes=await session.scalar(select(func.count()).select_from(DeckNote).where(DeckNote.deck == "b1")),
         cards={s.value: by_state.get(s, 0) for s in DeckCardState},
         reviewed_today=await session.scalar(
             select(func.count()).select_from(DeckReview).where(DeckReview.reviewed_at >= start)
         ),
         notes_started=await session.scalar(
-            select(func.count(distinct(DeckCard.note_id))).where(DeckCard.state != DeckCardState.new)
+            select(func.count(distinct(DeckCard.note_id))).where(DeckCard.state != DeckCardState.new, _in_theme(""))
         ),
         next_due=await session.scalar(
-            select(func.min(DeckCard.due)).where(DeckCard.state != DeckCardState.new, DeckCard.due > now)
+            select(func.min(DeckCard.due)).where(DeckCard.state != DeckCardState.new, DeckCard.due > now, _in_theme(""))
         ),
         new_per_day=settings.deck_new_per_day,
     )
@@ -230,7 +234,7 @@ async def list_notes(
     """Elenco parole con lo stato delle due carte: le viste di recente prima."""
     if kind != "all" and kind not in NOTE_FILTERS:
         raise HTTPException(status_code=422, detail=f"filtro sconosciuto: {kind}")
-    where = []
+    where = [DeckNote.deck == "b1"]
     if kind != "all":
         where.append(exists().where(DeckCard.note_id == DeckNote.id, NOTE_FILTERS[kind]))
     if q.strip():
@@ -263,7 +267,7 @@ async def list_notes(
                 due=card.due,
             )
         )
-    counts = dict((await session.execute(select(STATUS, func.count()).group_by(STATUS))).all())
+    counts = dict((await session.execute(select(STATUS, func.count()).where(_in_theme("")).group_by(STATUS))).all())
     return DeckNotesOut(
         counts={s: counts.get(s, 0) for s in ("new", "learning", "review", "mature")},
         total=await session.scalar(select(func.count()).select_from(DeckNote).where(*where)),
@@ -285,7 +289,10 @@ async def list_notes(
 async def list_themes(session: AsyncSession = Depends(get_session)):
     """Temi del mazzo con il numero di parole, i più piccoli (più mirati) prima."""
     rows = await session.execute(
-        select(DeckNote.theme, func.count()).where(DeckNote.theme != "").group_by(DeckNote.theme).order_by(func.count(), DeckNote.theme)
+        select(DeckNote.theme, func.count())
+        .where(DeckNote.theme != "", DeckNote.deck == "b1")
+        .group_by(DeckNote.theme)
+        .order_by(func.count(), DeckNote.theme)
     )
     return [DeckThemeOut(theme=t, notes=n) for t, n in rows]
 
@@ -300,10 +307,11 @@ async def practice(
     mode: str = Query("random", pattern="^(random|hard)$"),  # hard = carte sbagliate almeno una volta
     theme: str = "",
     freq: str = Query("all", pattern="^(all|top|mid|rare)$"),
+    deck: str = Query("b1", pattern="^(a1|b1)$"),  # a1 = Wortliste A1, solo così (niente SRS)
     session: AsyncSession = Depends(get_session),
 ):
     """Ripasso libero: carte in ordine casuale, anche mai viste. Non tocca l'SRS."""
-    where = [_in_theme(theme)]
+    where = [_in_theme(theme, deck)]
     if mode == "hard":
         where.append(DeckCard.lapses > 0)
     if freq in FREQ_BANDS:

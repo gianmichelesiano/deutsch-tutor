@@ -3,17 +3,22 @@
 Uso (il file arriva da stdin, così non deve stare nel container):
 
     docker compose exec -T api python -m app.deck_import < Wortliste_B1_blocco01_200.apkg
+    docker compose exec -T api python -m app.deck_import --deck a1 < A1_wortliste_it.tsv
 
 Entrambi i formati hanno 5 colonne nell'ordine del TSV:
 ``tedesco, italiano, tema, frase DE, frase IT``. Nei ``.apkg`` generati il modello
 dichiara un ordine diverso (FraseDE, FraseIT, Tema) ma i dati seguono quello del
-TSV: i campi si leggono quindi per posizione e il tema viene validato.
+TSV: i campi si leggono quindi per posizione e il tema viene validato. Più frasi
+per voce: separate da ``\\n`` (letterale) nelle due colonne delle frasi, nello stesso ordine.
 
-Idempotente: chiave ``(de, it)``; le note esistenti aggiornano tema e frasi, il
+``--deck a1``: mazzo separato (Wortliste A1), una sola carta DE→IT per nota.
+
+Idempotente: chiave ``(deck, de, it)``; le note esistenti aggiornano tema e frasi, il
 progresso delle carte non viene toccato.
 """
 from __future__ import annotations
 
+import argparse
 import asyncio
 import html
 import io
@@ -95,6 +100,7 @@ def parse(data: bytes) -> Parsed:
         if not f[0] or not f[1]:
             skipped += 1
             continue
+        f[3], f[4] = f[3].replace("\\n", "\n"), f[4].replace("\\n", "\n")
         rows.append(Row(*f[:5]))
     bad = [r.de for r in rows if not _looks_like_theme(r.theme)]
     if bad:
@@ -103,17 +109,18 @@ def parse(data: bytes) -> Parsed:
     return Parsed(rows=rows, skipped=skipped)
 
 
-async def import_rows(session: AsyncSession, rows: list[Row]) -> dict[str, int]:
-    """Crea le note mancanti (+ 2 carte nuove ciascuna), aggiorna le esistenti."""
-    existing = {(n.de, n.it): n for n in (await session.scalars(select(DeckNote))).all()}
+async def import_rows(session: AsyncSession, rows: list[Row], deck: str = "b1") -> dict[str, int]:
+    """Crea le note mancanti (+ 2 carte nuove ciascuna, 1 nel mazzo A1), aggiorna le esistenti."""
+    existing = {(n.de, n.it): n for n in (await session.scalars(select(DeckNote).where(DeckNote.deck == deck))).all()}
+    directions = [DeckDirection.de_it] if deck == "a1" else list(DeckDirection)
     created = updated = 0
     for r in rows:
         note = existing.get((r.de, r.it))
         if note is None:
-            note = DeckNote(de=r.de, it=r.it, theme=r.theme, example_de=r.example_de, example_it=r.example_it)
+            note = DeckNote(deck=deck, de=r.de, it=r.it, theme=r.theme, example_de=r.example_de, example_it=r.example_it)
             session.add(note)
             await session.flush()  # id in ordine di file: è l'ordine di introduzione delle nuove
-            session.add_all([DeckCard(note_id=note.id, direction=d) for d in DeckDirection])
+            session.add_all([DeckCard(note_id=note.id, direction=d) for d in directions])
             existing[(r.de, r.it)] = note
             created += 1
         elif (note.theme, note.example_de, note.example_it) != (r.theme, r.example_de, r.example_it):
@@ -123,10 +130,10 @@ async def import_rows(session: AsyncSession, rows: list[Row]) -> dict[str, int]:
     return {"created": created, "updated": updated}
 
 
-async def _main(data: bytes) -> None:
+async def _main(data: bytes, deck: str) -> None:
     parsed = parse(data)
     async with SessionLocal() as session:
-        counts = await import_rows(session, parsed.rows)
+        counts = await import_rows(session, parsed.rows, deck)
     print(
         f"note create: {counts['created']} · aggiornate: {counts['updated']} · "
         f"invariate: {len(parsed.rows) - counts['created'] - counts['updated']} · "
@@ -135,7 +142,9 @@ async def _main(data: bytes) -> None:
 
 
 if __name__ == "__main__":
+    ap = argparse.ArgumentParser(description="Import del mazzo da stdin (.apkg o .tsv)")
+    ap.add_argument("--deck", choices=["b1", "a1"], default="b1")
     try:
-        asyncio.run(_main(sys.stdin.buffer.read()))
+        asyncio.run(_main(sys.stdin.buffer.read(), ap.parse_args().deck))
     except ValueError as e:
         sys.exit(f"import annullato: {e}")

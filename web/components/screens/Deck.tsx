@@ -12,7 +12,7 @@ const RATINGS = [
 ];
 
 export function DeckScreen() {
-  const [tab, setTab] = useState<"study" | "practice" | "words">("study");
+  const [tab, setTab] = useState<"study" | "practice" | "words" | "a1">("study");
   return (
     <div>
       <div className="mb-3.5 font-serif text-2xl font-semibold">Mazzo</div>
@@ -22,6 +22,7 @@ export function DeckScreen() {
             { key: "study", label: "Studia" },
             { key: "practice", label: "Ripasso libero" },
             { key: "words", label: "Parole" },
+            { key: "a1", label: "A1" },
           ] as const
         ).map((t) => (
           <button
@@ -35,7 +36,15 @@ export function DeckScreen() {
           </button>
         ))}
       </div>
-      {tab === "study" ? <StudyTab /> : tab === "practice" ? <PracticeTab /> : <WordsTab />}
+      {tab === "study" ? (
+        <StudyTab />
+      ) : tab === "practice" ? (
+        <PracticeTab />
+      ) : tab === "words" ? (
+        <WordsTab />
+      ) : (
+        <PracticeTab key="a1" deck="a1" />
+      )}
     </div>
   );
 }
@@ -259,26 +268,32 @@ function Say({ text }: { text: string }) {
   );
 }
 
-function FlipCard({ card, flipped, onFlip }: { card: DeckCard; flipped: boolean; onFlip: () => void }) {
+// a1: layout Wortliste A1 (sempre DE→IT, più frasi per voce separate da "\n")
+function FlipCard({ card, flipped, onFlip, a1 = false }: { card: DeckCard; flipped: boolean; onFlip: () => void; a1?: boolean }) {
   const deIt = card.direction === "de_it";
   const front = deIt ? card.de : card.it;
   const back = deIt ? card.it : card.de;
   // la frase nella lingua del fronte per prima, poi la traduzione
   const [example, exampleTr] = deIt ? [card.example_de, card.example_it] : [card.example_it, card.example_de];
   const word = sayable(card.de);
+  const sentencesDe = card.example_de ? card.example_de.split("\n") : [];
+  const sentencesIt = card.example_it ? card.example_it.split("\n") : [];
   const [autoSpeak, setAutoSpeak] = useState(loadAutoSpeak);
 
-  // Legge il tedesco appena compare: la parola sul fronte (DE→IT), il resto quando la carta si gira
+  // Legge il tedesco appena compare: la parola sul fronte (DE→IT), il resto quando la carta si gira.
+  // A1: parola e prima frase sul fronte; il retro ripete il tedesco, si riascolta con i bottoni.
   useEffect(() => {
     if (autoSpeak) {
-      if (!flipped) {
+      if (a1) {
+        if (!flipped) speakDe(word, card.example_de.split("\n")[0]);
+      } else if (!flipped) {
         if (deIt) speakDe(word);
       } else {
         speakDe(deIt ? "" : word, card.example_de);
       }
     }
     return () => window.speechSynthesis?.cancel();
-  }, [autoSpeak, flipped, deIt, word, card.example_de]);
+  }, [a1, autoSpeak, flipped, deIt, word, card.example_de]);
 
   const toggleAutoSpeak = () => {
     setAutoSpeak(!autoSpeak);
@@ -316,31 +331,66 @@ function FlipCard({ card, flipped, onFlip }: { card: DeckCard; flipped: boolean;
               {front}
               {deIt && <Say text={word} />}
             </div>
+            {a1 && sentencesDe.length > 0 && (
+              <div className="mt-3 flex flex-col gap-1.5">
+                {sentencesDe.map((sd, k) => (
+                  <div key={k} className="font-serif text-[15px] italic text-secondary">
+                    {sd}
+                    <Say text={sd} />
+                  </div>
+                ))}
+              </div>
+            )}
             <div className="mt-4 text-xs text-faint">Tocca per girare</div>
           </div>
           <div
             className={`flex min-h-[240px] flex-col items-center justify-center gap-2.5 rounded-[18px] bg-primary p-6 text-center text-surface [backface-visibility:hidden] [grid-area:1/1] [transform:rotateY(180deg)] ${flipped ? "" : "pointer-events-none"}`}
           >
-            <div className="text-[13px] text-[#C7BFAD]">
-              {front}
-              {deIt && <Say text={word} />}
-            </div>
-            <div className="font-serif text-[26px] font-semibold">
-              {back}
-              {!deIt && <Say text={word} />}
-            </div>
-            {example && (
+            {a1 ? (
+              <>
+                <div>
+                  <div className="font-serif text-[26px] font-semibold">{card.it}</div>
+                  <div className="text-[13px] text-[#C7BFAD]">
+                    {card.de}
+                    <Say text={word} />
+                  </div>
+                </div>
+                {sentencesIt.map((si, k) => (
+                  <div key={k}>
+                    <div className="text-[15px]">{si}</div>
+                    {sentencesDe[k] && (
+                      <div className="font-serif text-[13px] italic text-[#C7BFAD]">
+                        {sentencesDe[k]}
+                        <Say text={sentencesDe[k]} />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </>
+            ) : (
+              <>
+                <div className="text-[13px] text-[#C7BFAD]">
+                  {front}
+                  {deIt && <Say text={word} />}
+                </div>
+                <div className="font-serif text-[26px] font-semibold">
+                  {back}
+                  {!deIt && <Say text={word} />}
+                </div>
+              </>
+            )}
+            {!a1 && example && (
               <div className="font-serif text-[14px] italic text-[#C7BFAD]">
                 „{example}"{deIt && <Say text={example} />}
               </div>
             )}
-            {exampleTr && (
+            {!a1 && exampleTr && (
               <div className="text-[13px] text-[#C7BFAD]">
                 {exampleTr}
                 {!deIt && <Say text={exampleTr} />}
               </div>
             )}
-            {card.theme && (
+            {!a1 && card.theme && (
               <div className="mt-1 rounded-lg bg-surface/10 px-2 py-0.5 text-[11px] text-[#C7BFAD]">{card.theme}</div>
             )}
           </div>
@@ -433,7 +483,9 @@ function DoneForToday({
 }
 
 // Ripasso libero: carte mescolate, anche mai viste. Solo giusto/sbagliato, l'SRS non cambia.
-function PracticeTab() {
+// deck="a1": Wortliste A1, sempre a caso e senza filtri: parte subito con un giro.
+function PracticeTab({ deck = "b1" }: { deck?: "a1" | "b1" }) {
+  const a1 = deck === "a1";
   const [mode, setMode] = useState<"random" | "hard">("random");
   const [theme, setTheme] = useState("");
   const [n, setN] = useState(20);
@@ -455,7 +507,7 @@ function PracticeTab() {
     setError(null);
     setLoading(true);
     api
-      .deckPractice(n, mode, theme, freq)
+      .deckPractice(n, mode, theme, freq, deck)
       .then(startWith)
       .catch((e) => setError(String(e.message)))
       .finally(() => setLoading(false));
@@ -466,6 +518,10 @@ function PracticeTab() {
     setFlipped(false);
     setI(i + 1);
   };
+
+  useEffect(() => {
+    if (a1) start();
+  }, []);
 
   const card = cards?.[i];
   useEffect(() => {
@@ -483,7 +539,7 @@ function PracticeTab() {
   });
 
   if (error) return <ErrorBanner message={error} onRetry={start} />;
-  if (loading) return <LoadingDots />;
+  if (loading || (a1 && cards === null)) return <LoadingDots />;
 
   if (cards === null) {
     const pill = (active: boolean) =>
@@ -527,10 +583,18 @@ function PracticeTab() {
   if (cards.length === 0) {
     return (
       <div className="rounded-card border border-dashed border-border-strong bg-card px-7 py-10 text-center text-[13px] text-muted">
-        Nessuna carta con questi filtri.
-        <button onClick={() => setCards(null)} className="mt-4 block w-full rounded-btn bg-ink py-3 text-sm font-semibold text-surface">
-          Cambia filtri
-        </button>
+        {a1 ? (
+          <>
+            Mazzo A1 vuoto: importalo con <code>make deck-import FILE=… DECK=a1</code>.
+          </>
+        ) : (
+          <>
+            Nessuna carta con questi filtri.
+            <button onClick={() => setCards(null)} className="mt-4 block w-full rounded-btn bg-ink py-3 text-sm font-semibold text-surface">
+              Cambia filtri
+            </button>
+          </>
+        )}
       </div>
     );
   }
@@ -541,7 +605,7 @@ function PracticeTab() {
         <div className="mb-1 font-serif text-xl font-semibold">
           {cards.length - wrong.length} / {cards.length} giuste
         </div>
-        <div className="mb-5 text-[13px] text-muted">Ripasso libero finito.</div>
+        <div className="mb-5 text-[13px] text-muted">{a1 ? "Giro A1 finito." : "Ripasso libero finito."}</div>
         <div className="flex flex-col gap-2">
           {wrong.length > 0 && (
             <button onClick={() => startWith(wrong)} className="w-full rounded-btn bg-ink py-3.5 text-sm font-semibold text-surface">
@@ -551,9 +615,11 @@ function PracticeTab() {
           <button onClick={start} className="w-full rounded-btn bg-surface py-3.5 text-sm font-semibold text-secondary">
             Nuovo giro
           </button>
-          <button onClick={() => setCards(null)} className="w-full rounded-btn bg-surface py-3.5 text-sm font-semibold text-secondary">
-            Cambia filtri
-          </button>
+          {!a1 && (
+            <button onClick={() => setCards(null)} className="w-full rounded-btn bg-surface py-3.5 text-sm font-semibold text-secondary">
+              Cambia filtri
+            </button>
+          )}
         </div>
       </div>
     );
@@ -562,12 +628,12 @@ function PracticeTab() {
   return (
     <div>
       <div className="mb-3 flex items-baseline justify-between text-xs text-muted">
-        <button onClick={() => setCards(null)}>← Filtri</button>
+        {a1 ? <div>Wortliste A1 · a caso</div> : <button onClick={() => setCards(null)}>← Filtri</button>}
         <div className="tabular-nums">
           {i + 1} / {cards.length}
         </div>
       </div>
-      <FlipCard key={`${i}-${card.id}`} card={card} flipped={flipped} onFlip={() => setFlipped(true)} />
+      <FlipCard key={`${i}-${card.id}`} card={card} flipped={flipped} onFlip={() => setFlipped(true)} a1={a1} />
       {flipped ? (
         <div className="grid grid-cols-2 gap-2">
           <button onClick={() => mark(false)} className="rounded-btn bg-src-error-bg py-3.5 text-sm font-semibold text-src-error">

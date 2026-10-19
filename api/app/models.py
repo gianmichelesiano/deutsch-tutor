@@ -240,12 +240,14 @@ class LlmCall(Base):
 
 
 class DeckNote(Base):
-    """Una voce della Wortliste: genera due carte (DE→IT e IT→DE)."""
+    """Una voce della Wortliste: genera due carte (DE→IT e IT→DE); nel mazzo A1 solo DE→IT."""
 
     __tablename__ = "deck_notes"
-    __table_args__ = (UniqueConstraint("de", "it", name="uq_deck_notes_de_it"),)
+    __table_args__ = (UniqueConstraint("deck", "de", "it", name="uq_deck_notes_deck_de_it"),)
 
     id: Mapped[int] = mapped_column(primary_key=True)
+    # b1 = Wortliste B1 (Studia con SRS), a1 = Wortliste A1 (solo in ordine casuale)
+    deck: Mapped[str] = mapped_column(Text, default="b1", server_default=text("'b1'"))
     de: Mapped[str] = mapped_column(Text)
     it: Mapped[str] = mapped_column(Text)
     theme: Mapped[str] = mapped_column(Text, default="", server_default=text("''"))

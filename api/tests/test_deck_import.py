@@ -67,3 +67,10 @@ def test_misaligned_columns_abort_the_import() -> None:
         parse(data)
     with pytest.raises(ValueError, match="tema"):
         parse(make_apkg([["das Baby, -s", "il bebè", "", "", "Anglicismi"]]))
+
+
+def test_tsv_multiple_sentences_split_on_literal_newline() -> None:
+    data = "alt\tvecchio\tA1 Wortliste\tWie alt sind Sie?\\nKöln ist alt.\tQuanti anni ha?\\nColonia è vecchia.\n"
+    (row,) = parse(data.encode()).rows
+    assert row.example_de.split("\n") == ["Wie alt sind Sie?", "Köln ist alt."]
+    assert row.example_it.split("\n") == ["Quanti anni ha?", "Colonia è vecchia."]

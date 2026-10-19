@@ -24,8 +24,8 @@ seed: ## Popola il DB (idempotente)
 seed-update: ## Seed + sovrascrive i contenuti degli scenari esistenti
 	$(COMPOSE) exec api python -m app.seed --update
 
-deck-import: ## Importa la Wortliste nel mazzo: make deck-import FILE=wortliste_b1_it.tsv (.tsv o .apkg)
-	$(COMPOSE) exec -T api python -m app.deck_import < $(FILE)
+deck-import: ## Importa la Wortliste nel mazzo: make deck-import FILE=wortliste_b1_it.tsv (.tsv o .apkg; DECK=a1 per la Wortliste A1)
+	$(COMPOSE) exec -T api python -m app.deck_import --deck $(or $(DECK),b1) < $(FILE)
 
 deck-rank: ## Ordina le carte nuove del mazzo per frequenza (rilanciare dopo ogni import)
 	$(COMPOSE) exec -T api python -m app.deck_frequency < api/app/seed_content/de_50k.txt

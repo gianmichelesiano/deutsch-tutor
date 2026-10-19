@@ -185,3 +185,28 @@ async def test_theme_filter_themes_and_practice(deck):
         assert {c["de"] for c in practice} == {"das Ziel, -e"} and len(practice) == 2
         # fasce di frequenza: senza freq_rank nessuna carta cade in una fascia
         assert (await client.get("/api/deck/practice", params={"freq": "top"})).json() == []
+
+
+@pytest.mark.asyncio
+async def test_a1_deck_is_separate_and_only_in_practice(deck):
+    # stessa coppia (de, it) di una nota B1: nel mazzo A1 è una nota a parte, con la sola carta DE→IT
+    a1 = [Row("das Baby, -s", "il bebè", "A1 Wortliste", "Mein Kind ist noch ein Baby.", "Mio figlio è ancora un bebè.")]
+    async with SessionLocal() as session:
+        assert await import_rows(session, a1, deck="a1") == {"created": 1, "updated": 0}
+        cards = (await session.scalars(select(DeckCard).order_by(DeckCard.id))).all()
+    assert len(cards) == 7 and cards[-1].direction.value == "de_it"
+
+    async with _client() as client:
+        # Studia, riepilogo, temi, parole e ripasso libero B1 non vedono l'A1
+        assert (await client.get("/api/deck/next")).json()["counts"]["new"] == 6
+        summary = (await client.get("/api/deck/summary")).json()
+        assert summary["total_notes"] == 3 and summary["cards"]["new"] == 6
+        assert [t["theme"] for t in (await client.get("/api/deck/themes")).json()] == ["Wortschatz", "Anglicismi"]
+        assert (await client.get("/api/deck/notes", params={"filter": "all"})).json()["total"] == 3
+        assert len((await client.get("/api/deck/practice")).json()) == 6
+
+        a1_cards = (await client.get("/api/deck/practice", params={"deck": "a1"})).json()
+        assert [(c["de"], c["direction"], c["example_de"]) for c in a1_cards] == [
+            ("das Baby, -s", "de_it", "Mein Kind ist noch ein Baby.")
+        ]
+        assert (await client.get("/api/deck/practice", params={"deck": "c2"})).status_code == 422
