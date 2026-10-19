@@ -199,34 +199,151 @@ function StudyTab() {
   );
 }
 
+// Pronuncia con la voce del browser (nessun server): la qualità dipende dal dispositivo
+const AUTOSPEAK_KEY = "deck-autospeak";
+const SPEECH_RATE = 0.9; // un po' più lenta del normale, per chi impara
+
+// "der Vorname, -n" → "der Vorname": la voce non legge le desinenze del plurale (né "(A)", "(D, CH)")
+const sayable = (de: string) => de.replace(/,\s*¨?-[a-zäöüß]*(\s*\([A-Z, ]+\))?/g, "").trim();
+
+function speakDe(...texts: string[]) {
+  const synth = window.speechSynthesis;
+  if (!synth) return;
+  synth.cancel();
+  const voice = synth.getVoices().find((v) => /^de/i.test(v.lang));
+  for (const text of texts) {
+    if (!text) continue;
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "de-DE";
+    u.rate = SPEECH_RATE;
+    if (voice) u.voice = voice;
+    synth.speak(u);
+  }
+}
+
+function loadAutoSpeak(): boolean {
+  try {
+    return localStorage.getItem(AUTOSPEAK_KEY) !== "off";
+  } catch {
+    return true;
+  }
+}
+
+function SpeakerIcon({ muted = false }: { muted?: boolean }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M11 5 6 9H2v6h4l5 4V5z" />
+      {muted ? (
+        <path d="m22 9-6 6M16 9l6 6" />
+      ) : (
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" />
+      )}
+    </svg>
+  );
+}
+
+// Bottone "ascolta" accanto a un testo tedesco: non gira la carta
+function Say({ text }: { text: string }) {
+  return (
+    <button
+      type="button"
+      aria-label={`Ascolta: ${text}`}
+      onClick={(e) => {
+        e.stopPropagation();
+        speakDe(text);
+      }}
+      className="ml-1.5 inline-flex h-7 w-7 items-center justify-center rounded-full align-middle opacity-60 hover:opacity-100"
+    >
+      <SpeakerIcon />
+    </button>
+  );
+}
+
 function FlipCard({ card, flipped, onFlip }: { card: DeckCard; flipped: boolean; onFlip: () => void }) {
   const deIt = card.direction === "de_it";
   const front = deIt ? card.de : card.it;
   const back = deIt ? card.it : card.de;
   // la frase nella lingua del fronte per prima, poi la traduzione
   const [example, exampleTr] = deIt ? [card.example_de, card.example_it] : [card.example_it, card.example_de];
+  const word = sayable(card.de);
+  const [autoSpeak, setAutoSpeak] = useState(loadAutoSpeak);
+
+  // Legge il tedesco appena compare: la parola sul fronte (DE→IT), il resto quando la carta si gira
+  useEffect(() => {
+    if (autoSpeak) {
+      if (!flipped) {
+        if (deIt) speakDe(word);
+      } else {
+        speakDe(deIt ? "" : word, card.example_de);
+      }
+    }
+    return () => window.speechSynthesis?.cancel();
+  }, [autoSpeak, flipped, deIt, word, card.example_de]);
+
+  const toggleAutoSpeak = () => {
+    setAutoSpeak(!autoSpeak);
+    try {
+      localStorage.setItem(AUTOSPEAK_KEY, autoSpeak ? "off" : "on");
+    } catch {}
+  };
 
   return (
-    <div className="mb-[18px] cursor-pointer [perspective:1200px]" onClick={onFlip}>
-      <div
-        className="grid [transform-style:preserve-3d] transition-transform duration-500"
-        style={{ transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
-      >
-        <div className="flex min-h-[240px] flex-col items-center justify-center rounded-[18px] border border-border bg-card p-6 text-center [backface-visibility:hidden] [grid-area:1/1]">
-          <div className="mb-3 text-[11px] font-semibold uppercase tracking-wide text-faint">
-            {deIt ? "→ italiano" : "→ tedesco"}
+    <div className="mb-[18px]">
+      <div className="mb-2 flex justify-end">
+        <button
+          type="button"
+          onClick={toggleAutoSpeak}
+          aria-pressed={autoSpeak}
+          className="flex items-center gap-1.5 text-xs text-muted"
+        >
+          <SpeakerIcon muted={!autoSpeak} />
+          {autoSpeak ? "Lettura automatica" : "Lettura automatica spenta"}
+        </button>
+      </div>
+      <div className="cursor-pointer [perspective:1200px]" onClick={onFlip}>
+        <div
+          className="grid [transform-style:preserve-3d] transition-transform duration-500"
+          style={{ transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
+        >
+          {/* pointer-events solo sulla faccia visibile: i bottoni della faccia nascosta non rubano i tocchi */}
+          <div
+            className={`flex min-h-[240px] flex-col items-center justify-center rounded-[18px] border border-border bg-card p-6 text-center [backface-visibility:hidden] [grid-area:1/1] ${flipped ? "pointer-events-none" : ""}`}
+          >
+            <div className="mb-3 text-[11px] font-semibold uppercase tracking-wide text-faint">
+              {deIt ? "→ italiano" : "→ tedesco"}
+            </div>
+            <div className="font-serif text-[26px] font-semibold text-secondary">
+              {front}
+              {deIt && <Say text={word} />}
+            </div>
+            <div className="mt-4 text-xs text-faint">Tocca per girare</div>
           </div>
-          <div className="font-serif text-[26px] font-semibold text-secondary">{front}</div>
-          <div className="mt-4 text-xs text-faint">Tocca per girare</div>
-        </div>
-        <div className="flex min-h-[240px] flex-col items-center justify-center gap-2.5 rounded-[18px] bg-primary p-6 text-center text-surface [backface-visibility:hidden] [grid-area:1/1] [transform:rotateY(180deg)]">
-          <div className="text-[13px] text-[#C7BFAD]">{front}</div>
-          <div className="font-serif text-[26px] font-semibold">{back}</div>
-          {example && <div className="font-serif text-[14px] italic text-[#C7BFAD]">„{example}"</div>}
-          {exampleTr && <div className="text-[13px] text-[#C7BFAD]">{exampleTr}</div>}
-          {card.theme && (
-            <div className="mt-1 rounded-lg bg-surface/10 px-2 py-0.5 text-[11px] text-[#C7BFAD]">{card.theme}</div>
-          )}
+          <div
+            className={`flex min-h-[240px] flex-col items-center justify-center gap-2.5 rounded-[18px] bg-primary p-6 text-center text-surface [backface-visibility:hidden] [grid-area:1/1] [transform:rotateY(180deg)] ${flipped ? "" : "pointer-events-none"}`}
+          >
+            <div className="text-[13px] text-[#C7BFAD]">
+              {front}
+              {deIt && <Say text={word} />}
+            </div>
+            <div className="font-serif text-[26px] font-semibold">
+              {back}
+              {!deIt && <Say text={word} />}
+            </div>
+            {example && (
+              <div className="font-serif text-[14px] italic text-[#C7BFAD]">
+                „{example}"{deIt && <Say text={example} />}
+              </div>
+            )}
+            {exampleTr && (
+              <div className="text-[13px] text-[#C7BFAD]">
+                {exampleTr}
+                {!deIt && <Say text={exampleTr} />}
+              </div>
+            )}
+            {card.theme && (
+              <div className="mt-1 rounded-lg bg-surface/10 px-2 py-0.5 text-[11px] text-[#C7BFAD]">{card.theme}</div>
+            )}
+          </div>
         </div>
       </div>
     </div>
